@@ -16,12 +16,6 @@
 });*/
 Route::get('/registro_usuarios', 'UserController@create');
 Auth::routes();
+Route::get('/','HomeController@index')->name('home');
 
-<<<<<<< HEAD
-Route::get('/home', 'HomeController@index')->name('home');
-Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');
-=======
-Route::get('/', 'HomeController@index')->name('home');
-
-Route::get('/catalogue/{user?}',['middleware'=> 'adminCatalogue','uses' =>'catalogueController@index']);
->>>>>>> f0b74310e4529393751b792bd79ab9b25213fed3
+//Route::get('logout', '\App\Http\Controllers\Auth\LoginController@logout');

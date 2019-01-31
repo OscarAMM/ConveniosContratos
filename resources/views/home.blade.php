@@ -15,10 +15,6 @@
                     @endif
                    
                     @if(Auth::user()->hasRole('admin'))
-<<<<<<< HEAD
-                        <div>Acceso como administrador</div>
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
-=======
                         <div class = "blockquote">{{(Auth::user()->name)}}
                         <p class= "text-muted">Administrador Maestro</p> </div>
                         <!-- INICIO DE CATALOGOS -->
@@ -63,7 +59,6 @@
                             <a href="#" class="btn btn-primary">IR A REPORTES</a>
                         </div>
                         </div>
->>>>>>> f0b74310e4529393751b792bd79ab9b25213fed3
                         </div>
                     @else
                     <div class = "blockquote">{{(Auth::user()->name)}}
