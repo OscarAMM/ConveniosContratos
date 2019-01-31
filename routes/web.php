@@ -11,10 +11,12 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
+});*/
 Route::get('/registro_usuarios', 'UserController@create');
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::get('/catalogue/{user?}',['middleware'=> 'adminCatalogue','uses' =>'catalogueController@index']);

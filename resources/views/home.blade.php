@@ -13,12 +13,68 @@
                             {{ session('status') }}
                         </div>
                     @endif
+                   
                     @if(Auth::user()->hasRole('admin'))
-                        <div>Acceso como administrador</div>
+                        <div class = "blockquote">{{(Auth::user()->name)}}
+                        <p class= "text-muted">Administrador Maestro</p> </div>
+                        <!-- INICIO DE CATALOGOS -->
+                        <div class="row">
+                        <div class="col-sm-6">
+                        <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">CONVENIO</h5>
+                            <p class="card-text">Se administra los Convenios</p>
+                            <a href="#" class="btn btn-primary">IR CONVENIO</a>
+                         </div>
+                         </div>
+                         </div>
+                         <!--CONTRATO-->
+                         <div class="col-sm-6">
+                        <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">CONTRATO</h5>
+                            <p class="card-text">Se administra los Contratos</p>
+                            <a href="#" class="btn btn-primary">IR CONTRATO</a>
+                         </div>
+                         </div>
+                         </div>
+                        </div>
+                        <!--INSTITUCION/DEPENDENCIA-->
+                        <div class= "row">
+                        <div class = "col-sm-6">
+                        <div class= "card mb-3">
+                        <div class="card-body">
+                            <h5 class= "card-title">INSTITUCION/DEPENDENCIA</h5>
+                            <p class="card-text">Se administran las Instituciones & Dependencias</p>
+                            <a href="#"class="btn btn-primary">IR A DEPENDENCIAS</a>
+                        </div>
+                        </div>
+                        </div>
+                        <!--REPORTES-->
+                        <div class = "col-sm-6">
+                        <div class = "card mb-3">
+                        <div class = "card-body">
+                            <h5 class = "card-title">REPORTES</h5>
+                            <p class = "card-text">Se generan los reportes semestrales/anuales</p>
+                            <a href="#" class="btn btn-primary">IR A REPORTES</a>
+                        </div>
+                        </div>
+                        </div>
                     @else
-                        <div>Acceso usuario</div>
+                    <div class = "blockquote">{{(Auth::user()->name)}}
+                            <p class= "text-muted">Usuario</p> </div>
+                        <div class="card" style="width: 30rem center">
+                        <div class="card-body">
+                        <h5 class="card-title">Vistas Públicas</h5>
+                        <p class="card-text">Se despliega todos los convenios que se tiene firmado entre la UADY y otra dependencia. </p>
+                         <a href="#" class="btn btn-primary">Ir a Vista Públicas</a>
+                     </div>
                     @endif 
-                    You are logged in!
+                
+                    
+                  
+                </div>
+                    <a href="/catalogue/index.blade.php">Catalogo</a>
                 </div>
             </div>
         </div>
