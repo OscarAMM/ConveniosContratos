@@ -14,8 +14,9 @@
                         </div>
                     @endif
                     @if(Auth::user()->hasRole('admin'))
-                        <div>Acceso como administrador</div>
-                        <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div>Administrador</div>
+                        <div>
+                        
                         </div>
                     @else
                         <div>Acceso usuario</div>
