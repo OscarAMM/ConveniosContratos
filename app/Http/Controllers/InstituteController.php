@@ -4,14 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class InstitucionController extends Controller
+class InstituteController extends Controller
 {
+    //Accion para generar vista
     public function index(){
-        $instituciones = Institucion::get();
-        return view('institute.index');
+        return view('Institutes.index');
     }
-    public function create(){
-        return view('institute.create');
-    }
-    
 }

@@ -17,6 +17,5 @@
 //Route::get('/registro_usuarios', 'UserController@create');
 Auth::routes();
 Route::get('/','HomeController@index')->name('home');
-
-Route::resource('instituciones', 'InstituteController@create');
+Route::get('/Institutes','InstituteController@index');
 
