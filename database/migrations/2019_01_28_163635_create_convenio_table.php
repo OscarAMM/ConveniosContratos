@@ -14,7 +14,7 @@ class CreateConvenioTable extends Migration
     public function up()
     {
         Schema::create('convenio', function (Blueprint $table) {
-            $table->increments('clavecontrato');
+            $table->increments('claveconvenio');
             $table->string('nombre');
             $table->string('recepcion');
             $table->string('objetivo');
