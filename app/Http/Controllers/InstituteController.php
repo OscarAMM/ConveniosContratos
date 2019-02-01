@@ -8,10 +8,10 @@ class InstitucionController extends Controller
 {
     public function index(){
         $instituciones = Institucion::get();
-        return view('instituciones.index');
+        return view('institute.index');
     }
     public function create(){
-        return view('instituciones.create');
+        return view('institute.create');
     }
     
 }
