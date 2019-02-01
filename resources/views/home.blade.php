@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <h5 class= "card-title">INSTITUCION/DEPENDENCIA</h5>
                             <p class="card-text">Se administran las Instituciones & Dependencias</p>
-                            <a href="#"class="btn btn-primary">IR A DEPENDENCIAS</a>
+                            <a href="{{action('InstituteController@index')}}"class="btn btn-primary">IR A DEPENDENCIAS</a>
                         </div>
                         </div>
                         </div>
@@ -70,12 +70,6 @@
                          <a href="#" class="btn btn-primary">Ir a Vista Públicas</a>
                      </div>
                     @endif 
-                
-                    
-                  
-                </div>
-                    <a href="/catalogue/index.blade.php">Catalogo</a>
-                </div>
             </div>
         </div>
     </div>
