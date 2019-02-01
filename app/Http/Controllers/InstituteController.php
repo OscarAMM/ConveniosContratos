@@ -8,6 +8,6 @@ class InstituteController extends Controller
 {
     //Accion para generar vista
     public function index(){
-        return view('Institutes.index');
+        return view('Institutes.indexInstitute');
     }
 }
