@@ -3,9 +3,9 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header"><h3>CATALOGO</h3></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -29,7 +29,7 @@
                          </div>
                          </div>
                          <!--CONTRATO-->
-                         <div class="col-sm-6">
+                        <div class="col-sm-6">
                         <div class="card mb-3">
                         <div class="card-body">
                             <h5 class="card-title">CONTRATO</h5>
