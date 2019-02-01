@@ -14,15 +14,13 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-<<<<<<< HEAD
-=======
 //Route::get('/registro_usuarios', 'UserController@create');
->>>>>>> b2c39b695ebf3048e3623f05d2ebd39ce4fbc44e
 Auth::routes();
 Route::get('/','HomeController@index')->name('home');
 Route::get('/Institutes','InstituteController@index');
+//Route::get('/registerAdmin','RegisterAdminController@create');
+Route::get('/registerAdmin','RegisterAdminController@index');
+Route::post('/registerAdminCreate','RegisterAdminController@create');
 
-<<<<<<< HEAD
 
-=======
->>>>>>> b2c39b695ebf3048e3623f05d2ebd39ce4fbc44e
+

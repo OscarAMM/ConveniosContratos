@@ -50,16 +50,19 @@
                         </div>
                         </div>
                         </div>
-                        <!--REPORTES-->
+                        <!--REGISTRO ADMINISTRADORES-->
                         <div class = "col-sm-6">
                         <div class = "card mb-3">
                         <div class = "card-body">
-                            <h5 class = "card-title">REPORTES</h5>
-                            <p class = "card-text">Se generan los reportes semestrales/anuales</p>
-                            <a href="#" class="btn btn-primary">IR A REPORTES</a>
+                            <h5 class = "card-title">REGISTRO DE ADMINISTRADORES</h5>
+                            <p class = "card-text">Se registran nuevos usuarios del tipo Administrador</p>
+                            <a href="{{action('RegisterAdminController@index')}}"class="btn btn-primary">IR A DEPENDENCIAS</a>
                         </div>
                         </div>
                         </div>
+
+
+
                     @else
                     <div class = "blockquote">{{(Auth::user()->name)}}
                             <p class= "text-muted">Usuario</p> </div>
