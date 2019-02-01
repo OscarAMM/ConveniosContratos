@@ -20,3 +20,4 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
 Route::get('/catalogue/{user?}',['middleware'=> 'adminCatalogue','uses' =>'catalogueController@index']);
+Route::resource('instituciones', 'InstitucionController');
