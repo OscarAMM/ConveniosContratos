@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
-                <div class="card-header"><h3>CATALOGO</h3></div>
+                <div class="card-header"><h4 class= "text-muted">INICIO</h4></div>
 
                 <div class="card-body">
                     @if (session('status'))
@@ -16,7 +16,7 @@
                    
                     @if(Auth::user()->hasRole('admin'))
                         <div class = "blockquote">{{(Auth::user()->name)}}
-                        <p class= "text-muted">Administrador Maestro</p> </div>
+                        <h6>Administrador maestro</h6></div>
                         <!-- INICIO DE CATALOGOS -->
                         <div class="row">
                         <div class="col-sm-6">
@@ -24,7 +24,7 @@
                         <div class="card-body">
                             <h5 class="card-title">CONVENIO</h5>
                             <p class="card-text">Se administra los Convenios</p>
-                            <a href="#" class="btn btn-primary">IR CONVENIO</a>
+                            <a href="#" class="btn btn-primary">ADMINISTRAR</a>
                          </div>
                          </div>
                          </div>
@@ -34,7 +34,7 @@
                         <div class="card-body">
                             <h5 class="card-title">CONTRATO</h5>
                             <p class="card-text">Se administra los Contratos</p>
-                            <a href="#" class="btn btn-primary">IR CONTRATO</a>
+                            <a href="#" class="btn btn-primary">ADMINISTRAR</a>
                          </div>
                          </div>
                          </div>
@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <h5 class= "card-title">INSTITUCION/DEPENDENCIA</h5>
                             <p class="card-text">Se administran las Instituciones & Dependencias</p>
-                            <a href="{{action('InstituteController@index')}}"class="btn btn-primary">IR A DEPENDENCIAS</a>
+                            <a href="{{action('InstituteController@index')}}"class="btn btn-primary">ADMINISTRAR</a>
                         </div>
                         </div>
                         </div>
