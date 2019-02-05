@@ -13,15 +13,32 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                    @if(Auth::user()->hasRole('admin'))
-                        <div>Administrador</div>
-                        <div>
-                        
-                        </div>
-                    @else
-                        <div>Acceso usuario</div>
-                    @endif 
-                    You are logged in!
+                    <div>
+                    <table>
+        <thead>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>User</th>
+        <th>Admin</th>
+
+        <th></th>
+        </thead>
+        <tbody>
+        @foreach($users as $user)
+            <tr>
+                <form action="{{ action('RegisterAdminController@postAdminAssignRoles') }}" method="post">
+                    <td>{{ $user->name }}</td>
+                    <td>{{ $user->email }} <input type="hidden" name="email" value="{{ $user->email }}"></td>
+                    <td><input type="checkbox" name="role_user" {{ $user->hasRole('user') ? 'checked' : '' }} ></td>
+                    <td><input type="checkbox" name="role_admin" {{ $user->hasRole('admin') ? 'checked' : '' }} ></td>
+                    {{ csrf_field() }}
+                    <td><button type="submit">Assign Roles</button></td>
+                </form>
+            </tr>
+        @endforeach
+        </tbody>
+    </table>
+                    </div>
                 </div>
             </div>
         </div>

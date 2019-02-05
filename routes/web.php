@@ -19,10 +19,13 @@ Route::get('/Institutes','InstituteController@index');
 Route::get('/RegisterInstitutes','InstituteController@registerInstitute');
 Route::POST('/Institutes','InstituteController@create');
 
-
-//Route::get('/registerAdmin','RegisterAdminController@create');
+//RUTAS DE ADMIN
 Route::get('/registerAdmin','RegisterAdminController@index');
 Route::post('/registerAdminCreate','RegisterAdminController@create');
+//RUTAS DE ROLES
+Route::get('/registerAdminRoles','RegisterAdminController@change_roles');
+Route::post('/registerAdminRolesChange','RegisterAdminController@postAdminAssignRoles');
+
 
 
 

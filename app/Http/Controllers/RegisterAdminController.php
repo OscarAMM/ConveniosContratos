@@ -73,6 +73,28 @@ class RegisterAdminController extends Controller
             $user
             ->roles()
             ->attach(Role::where('name', 'admin')->first());
-            return redirect($redirectTo);
+            return redirect("/");
+    }
+
+    public function change_roles(Request $request)
+    {
+        $users = User::all();
+        //$users = User::with('roles')->first();
+
+        //return $user->toArray();
+        return view('change_roles', ['users' => $users]);
+    }
+    public function postAdminAssignRoles(Request $request)
+    {
+        $user = User::where('email', $request['email'])->first();
+        
+        $user->roles()->detach();
+        if ($request['role_user']) {
+            $user->roles()->attach(Role::where('name', 'user')->first());
+        }
+        if ($request['role_admin']) {
+            $user->roles()->attach(Role::where('name', 'admin')->first());
+        }
+        return redirect("/");
     }
 }
