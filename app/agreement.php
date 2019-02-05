@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class agreement extends Model
+class Agreement extends Model
 {
     protected $table=convenio;
     protected $primaryKey='claveconvenio';

@@ -4,8 +4,17 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Institucion extends Model
+class Institute extends Model
 {
-    //
-    protected $table = 'institutions';
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $table = 'instituciones';
+    protected $primaryKey='claveinstituciones';
+    protected $fillable = [
+        'nombre', 'siglas', 'pais',
+    ];
+
 }

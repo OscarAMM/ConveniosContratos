@@ -11,13 +11,15 @@
 |
 */
 
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
-//Route::get('/registro_usuarios', 'UserController@create');
+
 Auth::routes();
 Route::get('/','HomeController@index')->name('home');
+//RUTAS DE INSTITUCIONES
 Route::get('/Institutes','InstituteController@index');
+Route::get('/RegisterInstitutes','InstituteController@registerInstitute');
+Route::POST('/Institutes','InstituteController@create');
+
+
 //Route::get('/registerAdmin','RegisterAdminController@create');
 Route::get('/registerAdmin','RegisterAdminController@index');
 Route::post('/registerAdminCreate','RegisterAdminController@create');

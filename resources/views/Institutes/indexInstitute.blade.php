@@ -22,7 +22,7 @@
                         <div class="card-body">
                             <h5 class="card-title">REGISTRO DE INSTITUCIONES</h5>
                             <p class="card-text">Se registran los datos de las instituciones Y dependencias participantes                    </p>
-                            <a href="#" class="btn btn-primary">IR REGISTRO</a>
+                            <a href="{{action('InstituteController@registerInstitute')}}" class="btn btn-primary">IR REGISTRO</a>
                         </div>
                         </div>
                         </div>
