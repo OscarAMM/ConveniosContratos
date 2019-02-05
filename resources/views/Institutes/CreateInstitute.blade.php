@@ -5,14 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Registro de Instituciones') }}</div>
+                <div class="card-header"><H5 class = "text-muted">{{ __('Registro de Instituciones') }}</H5></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{action('InstituteController@create')}}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Institucion') }}</label>
 
                             <div class="col-md-6">
                                 <input id="name" type="text" class="form-control" name="nombre" value="{{ old('name') }}" required autofocus>
