@@ -18,6 +18,7 @@ Route::get('/','HomeController@index')->name('home');
 Route::get('/Institutes','InstituteController@index');
 Route::get('/RegisterInstitutes','InstituteController@registerInstitute');
 Route::POST('/Institutes','InstituteController@create');
+Route::get ('/Consulta','InstituteController@consult');
 
 
 //Route::get('/registerAdmin','RegisterAdminController@create');

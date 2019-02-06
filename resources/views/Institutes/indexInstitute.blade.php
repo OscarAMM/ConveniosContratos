@@ -32,7 +32,7 @@
                         <div class="card-body">
                             <h5 class="card-title">CONSULTA DE INSTITUCIONES</h5>
                             <p class="card-text">Se realiza una consulta sobre todos las intituciones registradas</p>
-                            <a href="#" class="btn btn-primary">CONSULTAR</a>
+                            <a href="{{action ('InstituteController@consult')}}" class="btn btn-primary">CONSULTAR</a>
                         </div>
                         </div>
                         </div>

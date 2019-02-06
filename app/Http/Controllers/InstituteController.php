@@ -45,4 +45,9 @@ class InstituteController extends Controller
             return redirect()->action('InstituteController@index');
     }
 
+   protected function consult(){
+       $institutes = \DB::table('instituciones') ->select('nombre','pais')->get();
+       return view ("Institutes.Consult", compact('institutes'));
+   }
+
 }
