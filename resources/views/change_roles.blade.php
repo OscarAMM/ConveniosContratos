@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -12,14 +10,18 @@
         <title>DataTables</title>
     </head>
     <body>
-    <p>
         <div class="container">
+<<<<<<< HEAD
             <table id="users" class = "table">
+=======
+            <table id="users" class="table">
+>>>>>>> f4651d132b3f0704bf54e0e02772298b14ac7c8a
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
+                        <th width="120px">&nbsp;</th>
                     </tr>
                 </thead>
             </table>
@@ -33,6 +35,7 @@
             $(document).ready(function() {
                 $('#users').DataTable({
                     "serverSide": true,
+<<<<<<< HEAD
                     "ajax": "{{ url ('api/users') }}",
                     "columns":[
                         {data:'id'},
@@ -40,9 +43,42 @@
                         {data:'email'},
 
                     ]
+=======
+                    "ajax": "{{ url('api/users') }}",
+                    "columns": [
+                        {data: 'id'},
+                        {data: 'name'},
+                        {data: 'email'},
+                        {data: 'btn'},
+                    ],
+                    "language": {
+                        "info": "_TOTAL_ registros",
+                        "search": "Buscar",
+                        "paginate": {
+                            "next": "Siguiente",
+                            "previous": "Anterior",
+                        },
+                        "lengthMenu": 'Mostrar <select >'+
+                                    '<option value="10">10</option>'+
+                                    '<option value="30">30</option>'+
+                                    '<option value="-1">Todos</option>'+
+                                    '</select> registros',
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "emptyTable": "No hay datos",
+                        "zeroRecords": "No hay coincidencias", 
+                        "infoEmpty": "",
+                        "infoFiltered": ""
+                    }
+>>>>>>> f4651d132b3f0704bf54e0e02772298b14ac7c8a
                 });
             });
         </script>
     </body>
 </html>
+
+
+
+
+
 
