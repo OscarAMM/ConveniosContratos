@@ -26,8 +26,9 @@ Route::post('/registerAdminCreate','RegisterAdminController@create');
 //RUTAS DE ROLES
 Route::get('/registerAdminRoles','RegisterAdminController@change_roles');
 Route::post('/registerAdminRolesChange','RegisterAdminController@AdminAssignRoles');
+;
 
-Route::resource('/registerAdminRolesChange', 'UserController');
+Route::resource('users', 'UserController');
 
 
 

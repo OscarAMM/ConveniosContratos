@@ -14,24 +14,14 @@
     <body>
     <p>
         <div class="container">
-            <table id="users">
+            <table id="users" class = "table">
                 <thead>
                     <tr>
-                        <th width="10px">ID</th>
+                        <th>ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
                     </tr>
                 </thead>
-                    <tbody>
-                    @foreach($users as $user)
-                    <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
-
-                    </tr>
-                    @endforeach
-                    </tbody>
             </table>
         </div>
 
@@ -41,7 +31,16 @@
 
         <script>
             $(document).ready(function() {
-                $('#users').DataTable();
+                $('#users').DataTable({
+                    "serverSide": true,
+                    "ajax": "{{ url ('api/users') }}",
+                    "columns":[
+                        {data:'id'},
+                        {data:'name'},
+                        {data:'email'},
+
+                    ]
+                });
             });
         </script>
     </body>
