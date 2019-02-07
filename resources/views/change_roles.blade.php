@@ -1,5 +1,3 @@
-
-
 <!doctype html>
 <html lang="{{ app()->getLocale() }}">
     <head>
@@ -12,26 +10,16 @@
         <title>DataTables</title>
     </head>
     <body>
-    <p>
         <div class="container">
-            <table id="users">
+            <table id="users" class="table">
                 <thead>
                     <tr>
                         <th width="10px">ID</th>
                         <th>Nombre</th>
                         <th>Email</th>
+                        <th width="120px">&nbsp;</th>
                     </tr>
                 </thead>
-                    <tbody>
-                    @foreach($users as $user)
-                    <tr>
-                        <td>{{$user->id}}</td>
-                        <td>{{$user->name}}</td>
-                        <td>{{$user->email}}</td>
-
-                    </tr>
-                    @endforeach
-                    </tbody>
             </table>
         </div>
 
@@ -41,9 +29,42 @@
 
         <script>
             $(document).ready(function() {
-                $('#users').DataTable();
+                $('#users').DataTable({
+                    "serverSide": true,
+                    "ajax": "{{ url('api/users') }}",
+                    "columns": [
+                        {data: 'id'},
+                        {data: 'name'},
+                        {data: 'email'},
+                        {data: 'btn'},
+                    ],
+                    "language": {
+                        "info": "_TOTAL_ registros",
+                        "search": "Buscar",
+                        "paginate": {
+                            "next": "Siguiente",
+                            "previous": "Anterior",
+                        },
+                        "lengthMenu": 'Mostrar <select >'+
+                                    '<option value="10">10</option>'+
+                                    '<option value="30">30</option>'+
+                                    '<option value="-1">Todos</option>'+
+                                    '</select> registros',
+                        "loadingRecords": "Cargando...",
+                        "processing": "Procesando...",
+                        "emptyTable": "No hay datos",
+                        "zeroRecords": "No hay coincidencias", 
+                        "infoEmpty": "",
+                        "infoFiltered": ""
+                    }
+                });
             });
         </script>
     </body>
 </html>
+
+
+
+
+
 
