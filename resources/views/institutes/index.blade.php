@@ -6,7 +6,7 @@
     <h2 class="font-weight-bold text-center"> INSTITUCIONES
     <a href="{{route('Institute.create')}}" class ="btn btn-primary pull-right">Nuevo</a>
     </h2>
-    
+    @include('institutes.fragment.info')
     <table class= "table">
         <thead class= "thead-dark">
         <tr>
@@ -23,8 +23,15 @@
                 <td>{{$institute->country}}</td>
                 <td>
                 <a href="{{route('Institute.show', $institute ->id)}}" class="btn btn-success">Ver</a> </td>
-                <td>Editar</td>
-                <td>Eliminar</td>
+                <td>
+                <a href="{{route('Institute.edit', $institute ->id)}}" class="btn btn-warning">Editar</a></td>
+                <td>
+                <form action="{{route('Institute.destroy', $institute->id)}}" method="POST">
+                    {{csrf_field()}}
+                    <input type="hidden" name = "_method" value ="DELETE">
+                    <button class = "btn btn-danger">Eliminar</button>
+                </form>
+                </td>
             </tr>
             @endforeach
         </tbody>

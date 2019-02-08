@@ -15,4 +15,10 @@ class InstituteController extends Controller
        $institutions = Institute::find($id);
        return view('institutes.show', compact('institutions'));
    }
+   public function destroy($id){
+        $institutions = Institute::find($id);
+        $institutions->delete();
+
+        return back()->with('info','La institucion ha sido eliminada');
+   }
 }
