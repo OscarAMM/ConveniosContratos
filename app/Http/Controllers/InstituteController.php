@@ -1,48 +1,24 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Institute;
+
 use Illuminate\Http\Request;
+use App\Institute;
 
 class InstituteController extends Controller
 {
-    //Accion para generar vista index de Instituto/Dependencias
-    public function index(){
-        return view('Institutes.indexInstitute');
-    }
-   public function registerInstitute(){
-        return view('Institutes.CreateInstitute');
-    }
+   public function index(){
+       $institutions = Institute::orderBy('id','DESC')->paginate();
+       return view('institutes.index', compact('institutions'));
+   }
+   public function show($id){
+       $institutions = Institute::find($id);
+       return view('institutes.show', compact('institutions'));
+   }
+   public function destroy($id){
+        $institutions = Institute::find($id);
+        $institutions->delete();
 
-
-     /**
-     * Get a validator for an incoming registration request.
-     *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
-     */
-    protected function validator(array $data)
-    {
-        return Validator::make($data, [
-            'nombre' => ['required', 'string', 'max:255'],
-            'siglas' => ['required', 'string', 'max:10'],
-            'pais' => ['required', 'string', 'max:100'],
-        ]);
-    }
-     /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return \App\Institute
-     */
-    protected function create(Request $request)
-    { 
-            $institute = new Institute;
-            $institute->nombre = $request->input('nombre');
-            $institute->siglas = $request->input('siglas');
-            $institute->pais = $request->input('pais');
-            $institute->save();
-            return redirect()->action('InstituteController@index');
-    }
-
+        return back()->with('info','La institucion ha sido eliminada');
+   }
 }

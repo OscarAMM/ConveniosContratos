@@ -14,16 +14,21 @@
 
 Auth::routes();
 Route::get('/','HomeController@index')->name('home');
-//RUTAS DE INSTITUCIONES
-Route::get('/Institutes','InstituteController@index');
-Route::get('/RegisterInstitutes','InstituteController@registerInstitute');
-Route::POST('/Institutes','InstituteController@create');
+//Ruta Institute
+Route::resource('Institute','InstituteController');
+
+
+
+
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin','RegisterAdminController@index');
 Route::post('/registerAdminCreate','RegisterAdminController@create');
 //RUTAS DE ROLES
 Route::get('/registerAdminRoles','RegisterAdminController@change_roles');
+Route::post('/registerAdminRolesChange','RegisterAdminController@AdminAssignRoles');
+
+
 //Route::post('/registerAdminRolesChange7{{$id}}','RegisterAdminController@AdminAssignRoles');
 //Route::get('/usersview/{id}',["as" => "users.view","uses" => "RegisterAdminController@AdminAssignRoles"]);
 Route::resource('users', 'UserController');

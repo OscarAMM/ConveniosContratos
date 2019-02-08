@@ -46,7 +46,7 @@
                         <div class="card-body">
                             <h5 class= "card-title">INSTITUCION/DEPENDENCIA</h5>
                             <p class="card-text">Se administran las Instituciones & Dependencias</p>
-                            <a href="{{action('InstituteController@index')}}"class="btn btn-primary">ADMINISTRAR</a>
+                            <a href="{{route('Institute.index')}}" class="btn btn-primary">ADMINISTRAR</a>
                         </div>
                         </div>
                         </div>
