@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInstitucionesTable extends Migration
+class CreateInstitutesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateInstitucionesTable extends Migration
      */
     public function up()
     {
-        Schema::create('instituciones', function (Blueprint $table) {
-            $table->increments('claveinstituciones');
-            $table->string('nombre');
-            $table->string('siglas');
-            $table->string('pais');
+        Schema::create('institutes', function (Blueprint $table) {
+            $table->increments('id');
+
+            $table->string('name');
+            $table->string('acronym');
+            $table->string('country');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateInstitucionesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('instituciones');
+        Schema::dropIfExists('institutes');
     }
 }

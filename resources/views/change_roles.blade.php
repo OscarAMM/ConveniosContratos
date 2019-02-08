@@ -7,15 +7,11 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
-        <title>DataTables</title>
+        <title>Usuarios</title>
     </head>
     <body>
         <div class="container">
-<<<<<<< HEAD
-            <table id="users" class = "table">
-=======
             <table id="users" class="table">
->>>>>>> f4651d132b3f0704bf54e0e02772298b14ac7c8a
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -35,15 +31,6 @@
             $(document).ready(function() {
                 $('#users').DataTable({
                     "serverSide": true,
-<<<<<<< HEAD
-                    "ajax": "{{ url ('api/users') }}",
-                    "columns":[
-                        {data:'id'},
-                        {data:'name'},
-                        {data:'email'},
-
-                    ]
-=======
                     "ajax": "{{ url('api/users') }}",
                     "columns": [
                         {data: 'id'},
@@ -70,7 +57,6 @@
                         "infoEmpty": "",
                         "infoFiltered": ""
                     }
->>>>>>> f4651d132b3f0704bf54e0e02772298b14ac7c8a
                 });
             });
         </script>

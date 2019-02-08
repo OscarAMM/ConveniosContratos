@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Seeder;
-
-class InstitucionTableSeeder extends Seeder
+use App\Institute;
+class InstituteTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,6 +11,6 @@ class InstitucionTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(Institute::class,10)->create();
     }
 }
