@@ -21,7 +21,8 @@
                 <td>{{$institute->name}}</td>
                 <td>{{$institute->acronym}}</td>
                 <td>{{$institute->country}}</td>
-                <td>Ver</td>
+                <td>
+                <a href="{{route('Institute.show', $institute ->id)}}" class="btn btn-success">Ver</a> </td>
                 <td>Editar</td>
                 <td>Eliminar</td>
             </tr>
