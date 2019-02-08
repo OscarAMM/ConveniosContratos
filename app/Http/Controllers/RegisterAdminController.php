@@ -81,22 +81,15 @@ class RegisterAdminController extends Controller
         $users = User::all();
         return view('change_roles', ['users' => $users]);
     }
-    public function AdminAssignRoles(Request $request)
+    public function AdminAssignRoles(String $id)
     {
         
-        $user = User::where('email', $request['email'])->first();
+        $user = User::where('id', $id)->first();
+        return view('show_users', ['user' => $user]);
+
+       // $user->roles()->detach();
         
-        $user->roles()->detach();
-        if ($request['role_user']) {
-            DB::table('role_user')
-            ->where('user_id',$request['id'] )
-            ->update(['role_id' => 1]);
-        }
-        if ($request['role_admin']) {
-            DB::table('role_user')
-            ->where('user_id',$request['id'] )
-            ->update(['role_id' => 2]);
-        }
-        return redirect("/");
+        
+       // return redirect("/");
     }
 }

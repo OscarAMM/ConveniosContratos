@@ -7,10 +7,15 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css">
 
+<<<<<<< HEAD
         <title>Usuarios</title>
+=======
+        <title>Tabla de usuarios</title>
+>>>>>>> 0d8c05a553f39f01da1d8fbc6890401c74a5dfcd
     </head>
     <body>
         <div class="container">
+        <br>
             <table id="users" class="table">
                 <thead>
                     <tr>
@@ -19,6 +24,7 @@
                         <th>Email</th>
                         <th width="120px">&nbsp;</th>
                     </tr>
+
                 </thead>
             </table>
         </div>
@@ -36,6 +42,7 @@
                         {data: 'id'},
                         {data: 'name'},
                         {data: 'email'},
+                        
                         {data: 'btn'},
                     ],
                     "language": {
