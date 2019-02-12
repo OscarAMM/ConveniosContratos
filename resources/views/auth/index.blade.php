@@ -1,41 +1,37 @@
 @extends('layouts.app')
 
 @section('content')
-<div class = "container">
 
-    <h2 class="font-weight-bold text-center"> USUARIOS
+
+  <!--  <h2 class="font-weight-bold text-center"> USUARIOS
     <a href="{{ route('admin.index') }}" class ="btn btn-primary pull-right">Nuevo</a>
-    </h2>
+    </h2> -->
     @include('auth.fragment.info')
-        <div class="row">
-            <div class="col-md-12">
-                <div class="page-header">
-                    <h1>
-                        Busqueda de usuarios
-                        {{Form::open(['route'=>'users.index','method'=>'GET','class'=>'form-inline pull-right'])}}
+
+    <div class="card">
+            <div class="card-header">
+                            {{Form::open(['route'=>'users.index','method'=>'GET','class'=>'form-inline'])}}
+                            <h4 class="text-muted font-weight-bold" style="margin-right:150px">CONSULTA DE USUARIOS</h4>
+                            <div class="form-group">
+                                {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
+                            </div>
                             <div class="form-group">
                                 {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
                             </div>
                             <div class="form-group">
                                 {{Form::text('email',null,['class'=>'form-control','placeholder'=>'Email'])}}
                             </div>
+                           
                             <div class="form-group">
-                                {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-default">
-                                    <span class="glyphicon glyphicon-search"></span>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-search">BUSCAR</span>
                                 </button>
                             </div>
                         {{Form::close()}}
-                    </h1>
                 </div>
             </div>
-        </div>
-
-    <div class="col-md-8">
-
-    <table class= "table table-hover table-striped ">
+    <div class= "card-body">
+    <table class= "table ">
         <thead class= "thead-dark">
         <tr>
             <th>Nombre</th>
@@ -65,8 +61,11 @@
         </tbody>
         </thead>
     </table>
-    </div>
+    
     {!!$users->render()!!}
-</div>
+    </div>
+   
+    </div>
+   
 
 @endsection
