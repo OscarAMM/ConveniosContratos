@@ -12,6 +12,7 @@
     <h3 class="text-muted text-center">AGREGAR NUEVA INSTITUCIÓN</h3>
     </div>
     <div class="card-body">
+    @include('institutes.fragment.error')
     {!!Form::open( ['route' =>'Institute.store']) !!}
         @include('institutes.fragment.form')
     {!!Form::close()!!}

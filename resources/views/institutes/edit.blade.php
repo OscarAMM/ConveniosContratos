@@ -12,6 +12,7 @@
     <h3 class="text-muted text-center">EDITAR INSTITUCIÓN</h3>
     </div>
     <div class="card-body">
+    @include('institutes.fragment.error')
     {!!Form::model($institute, ['route' =>['Institute.update', $institute->id],'method' =>'PUT']) !!}
         @include('institutes.fragment.form')
     {!!Form::close()!!}
