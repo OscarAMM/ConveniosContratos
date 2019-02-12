@@ -17,7 +17,6 @@ Route::get('/','HomeController@index')->name('home');
 //Ruta Institute
 Route::resource('Institute','InstituteController');
 
-
 //RUTAS DE ADMIN
 Route::get('/registerAdmin','RegisterAdminController@index');
 Route::post('/registerAdminCreate','RegisterAdminController@create');
