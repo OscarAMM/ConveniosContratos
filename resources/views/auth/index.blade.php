@@ -34,9 +34,9 @@
     <table class= "table ">
         <thead class= "thead-dark">
         <tr>
+            <th>ID</th>
             <th>Nombre</th>
             <th>Email</th>
-            <th>Rol</th>
             <th colspan="3">&nbsp;</th>
         </tr>
         <tbody>
