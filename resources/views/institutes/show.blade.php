@@ -5,8 +5,8 @@
 <div class= "row justify-content-center">
 <div class ="col-md-10">
 <div class="card">
-    <div class="card-header text-muted">
-    <h3 class= "card-title text-center font-weight-bold">Institución</h3>
+    <div class="card-header">
+    <h4 class= " text-center font-weight-bold text-muted">INSTITUCIÓN</h4>
     </div>
     <div class="card-body">
         <li class= "list-group-item">
@@ -18,8 +18,9 @@
         <li class= "list-group-item">
         <h5 class="card-title font-weight-bold">País</h5>
         {{$institutions ->country}}</li>
-        <li class="list-group-item"><a href="{{route('Institute.index')}}" class="btn btn-info pull-center">Regresar</a>
-    <a href="{{route('Institute.edit', $institutions->id)}}" class="btn btn-warning"> Editar</a></li>
+        <li class="list-group-item text-center">
+        <a href="{{route('Institute.index')}}" class="btn btn-secondary">Regresar</a>
+    <a href="{{route('Institute.edit', $institutions->id)}}" class="btn btn-primary"> Editar</a></li>
     </ul>
     </div>
     <div>
