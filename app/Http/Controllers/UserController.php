@@ -7,6 +7,19 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    public function index(Request $request){
+        $name  =$request->get('name');
+        $email =$request->get('email');
+        $id    =$request->get('id');
+
+        $users = User::orderBy('id','ASC')
+        ->name($name)
+        ->email($email)
+        ->id($id)
+        ->paginate();
+        return view('auth.index', compact('users'));
+
+    }
     public function create(){
         $note=DB::table('usuarios')->insert(array(
             'nombre'=>$request->input('nombre')
@@ -21,7 +34,7 @@ class UserController extends Controller
     {
         $user = User::where('id', $id)->first();
         $rol= $user->roles()->first()->name;
-        return view('show_users', ['user' => $user],['rol'=>$rol]);
+        return view('auth.show_users', ['user' => $user],['rol'=>$rol]);
     }
     public function edit(String $id){
         $user = User::where('id', $id)->first();
