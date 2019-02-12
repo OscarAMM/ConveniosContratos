@@ -8,7 +8,7 @@ use App\Institute;
 class InstituteController extends Controller
 {
    public function index(){
-       $institutions = Institute::orderBy('id','DESC')->paginate();
+       $institutions = Institute::orderBy('id','ASC')->paginate();
        return view('institutes.index', compact('institutions'));
    }
    public function show($id){
@@ -20,5 +20,12 @@ class InstituteController extends Controller
         $institutions->delete();
 
         return back()->with('info','La institucion ha sido eliminada');
+   }
+   public function create(){
+        return view('institutes.create');
+   }
+   public function edit($id){
+    $institute = Institute::find($id);
+    return view('institutes.edit', compact('institute'));
    }
 }
