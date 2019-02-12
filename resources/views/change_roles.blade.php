@@ -38,7 +38,6 @@
                         {data: 'id'},
                         {data: 'name'},
                         {data: 'email'},
-                        
                         {data: 'btn'},
                     ],
                     "language": {

@@ -18,8 +18,8 @@ Route::get('/','HomeController@index')->name('home');
 Route::resource('Institute','InstituteController');
 
 //RUTAS DE ADMIN
-Route::get('/registerAdmin','RegisterAdminController@index');
-Route::post('/registerAdminCreate','RegisterAdminController@create');
+Route::get('/registerAdmin',["as"=>"admin.index","uses"=>'RegisterAdminController@index']);
+Route::post('/registerAdminCreate',["as"=>"admin.create","uses"=>'RegisterAdminController@create']);
 //RUTAS DE ROLES
 Route::get('/registerAdminRoles','RegisterAdminController@change_roles');
 Route::post('/registerAdminRolesChange','RegisterAdminController@AdminAssignRoles');

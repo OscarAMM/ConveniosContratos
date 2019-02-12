@@ -226,9 +226,16 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'DataTables' => Yajra\DataTables\Facades\DataTables::class,
+<<<<<<< HEAD
+        'Form'=> Collective\Html\FormFacade::class,
+        'Html'=> Collective\Html\HtmlFacade::class,
+
+
+=======
         
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+>>>>>>> 723f172451c4d39ff515992c95ba05d458c7d01b
 
     ],
 

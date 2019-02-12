@@ -56,8 +56,8 @@
                         <div class = "card-body">
                             <h5 class = "card-title">REGISTRO DE ADMINISTRADORES</h5>
                             <p class = "card-text">Se registran nuevos usuarios del tipo Administrador</p>
-                            <a href="{{action('RegisterAdminController@index')}}"class="btn btn-primary">IR A REGISTRO</a>
-                            <a href="{{action('RegisterAdminController@change_roles')}}"class="btn btn-primary">IR A CONSULTA</a>
+                            <a href="{{route('admin.index')}}"class="btn btn-primary">IR A REGISTRO</a>
+                            <a href="{{route('users.index')}}"class="btn btn-primary">IR A CONSULTA</a>
                         </div>
                         </div>
                         </div>
