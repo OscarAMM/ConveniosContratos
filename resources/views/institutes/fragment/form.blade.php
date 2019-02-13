@@ -14,7 +14,8 @@
     {!!Form::text('country', null, ['class' => 'form-control'])!!}
 </div>
 
-<div class="form-group">
+<div class="form-group text-center">
+    <a href="{{route('Institute.index')}}" class="btn btn-secondary">Regresar</a> </h2>
     {!!Form::submit('GUARDAR',['class' => 'btn btn-primary'])!!}
 </div>
 </div>

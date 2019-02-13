@@ -20,6 +20,8 @@
         <li class= "list-group-item">
         <h5 class="card-title font-weight-bold">Rol</h5>
         {{$rol}}</li>
+        <br>
+        <a href="{{route('users.index')}}" class="btn btn-secondary">Regresar</a>
     </ul>
     </div>
     <div>
