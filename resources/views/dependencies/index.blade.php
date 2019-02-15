@@ -2,7 +2,32 @@
 
 @section('content')
 <h2 class="font-weight-bold text-center "> DEPENDENCIAS <a href="{{route('Dependence.create')}}" class ="btn btn-primary">Nuevo</a> </h2>
-    
+    @include('dependencies.fragment.info')
+    <div class="card">
+            <div class="card-header">
+                            {{Form::open(['route'=>'Dependence.index','method'=>'GET','class'=>'form-inline'])}}
+                            <h4 class="text-muted font-weight-bold" style="margin-right:150px">CONSULTA DE DEPENDENCIAS</h4>
+                            <div class="form-group">
+                                {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
+                            </div>
+                            <div class="form-group">
+                                {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
+                            </div>
+                            <div class="form-group">
+                                {{Form::text('acronym',null,['class'=>'form-control','placeholder'=>'Siglas'])}}
+                            </div>
+                            <div class= "form-group">
+                                {{Form::text('country',null,['class' =>'form-control','placeholder'=>'Pais'])}}
+                            </div>
+                           
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="glyphicon glyphicon-search">BUSCAR</span>
+                                </button>
+                            </div>
+                        {{Form::close()}}
+                </div>
+            </div>
 
 <table class= "table">
     <thead class= "thead-dark">
