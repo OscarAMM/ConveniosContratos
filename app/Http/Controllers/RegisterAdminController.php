@@ -69,11 +69,16 @@ class RegisterAdminController extends Controller
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = bcrypt( $request->input('password') );
-            $user->save();
-            $user
-            ->roles()
-            ->attach(Role::where('name', 'admin')->first());
-            return redirect("/");
+            if(User::where('email', $user->email)->exists()){
+                return back()->with('info','El usuario ya existe');
+            }else{
+                $user->save();
+                $user
+                ->roles()
+                ->attach(Role::where('name', 'admin')->first());
+                return redirect("/");
+            }
+            
     }
 
     public function change_roles(Request $request)

@@ -5,7 +5,6 @@
 <div class="container">
 <div class = "column-sm-8">
     <h2 class="text-right">
-    <a href="{{route('Institute.index')}}" class="btn btn-secondary">Regresar</a> </h2>
     </div>
     <div class ="card">
     <div class="card-header">
