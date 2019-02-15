@@ -16,6 +16,8 @@ Auth::routes();
 Route::get('/','HomeController@index')->name('home');
 //Ruta Institute
 Route::resource('Institute','InstituteController');
+//Ruta DEPENDENCIA
+Route::resource('Dependence', 'DependenceController');
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin',["as"=>"admin.index","uses"=>'RegisterAdminController@index']);

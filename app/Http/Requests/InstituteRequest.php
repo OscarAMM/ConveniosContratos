@@ -24,9 +24,9 @@ class InstituteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required',
-            'acronym' => 'required',
-            'country' => 'required'
+            'name' => 'required | unique:institutes,name',
+            'acronym' => 'required ',
+            'country' => 'required '
         ];
     }
 }
