@@ -7,6 +7,7 @@
             <div class="card">
                 <div class="card-header"><h5 class="text-muted">{{ __('Registro') }}</h5></div>
 
+                @include('institutes.fragment.info')
                 <div class="card-body">
                     <form method="POST" action="{{action('RegisterAdminController@create')}}">
                         @csrf

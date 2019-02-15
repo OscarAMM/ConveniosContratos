@@ -38,6 +38,7 @@ class UserController extends Controller
     }
     public function edit(String $id){
         $user = User::where('id', $id)->first();
+        
         return view('auth.editUSer', ['user' => $user]);
     }
     public function edited(Request $request,String $id){
@@ -49,12 +50,14 @@ class UserController extends Controller
         if ($request['rol']=="admin") {
             $user->roles()->attach(Role::where('name', 'admin')->first());
         }
+        //return back()->with('info','El usuario ha sido editado');
         return redirect()->back();
     }
     public function destroy(String $id){
         $user=User::find($id);
         $user->roles()->detach();
         $user->delete();
-        return redirect()->back();
+        return back()->with('info','El usuario ha sido eliminado');
+        //return redirect()->back();
     }
 }
