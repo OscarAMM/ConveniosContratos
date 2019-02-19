@@ -1,7 +1,6 @@
 <?php
-
-use Illuminate\Database\Seeder;
 use App\Dependence;
+use Illuminate\Database\Seeder;
 class DependenciesTableSeeder extends Seeder
 {
     /**

@@ -57,19 +57,11 @@
                                     {{ __('Iniciar sesión') }}
                                 </button>
 
-<<<<<<< HEAD
-                                <!--@if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('¿Olvidó su contraseña?') }}
-                                    </a>
-                                @endif-->
-=======
                               <!--  @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('¿Olvidó su contraseña?') }}
                                     </a>
                                 @endif -->
->>>>>>> 9365e75a8096e2e042bc5a0a05ec0a6ad512ee2d
                             </div>
                         </div>
                     </form>

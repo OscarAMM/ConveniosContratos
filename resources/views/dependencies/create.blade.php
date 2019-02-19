@@ -3,9 +3,7 @@
 @section('content')
 <div class="container">
 <div class = "column-sm-8">
-    <h2 class ="text-right">
-        <a href="{{route('Dependence.index')}}" class="btn btn-secondary pull-center">Regresar</a>
-    </h2>
+   
 
     <div class ="card">
     <div class="card-header">

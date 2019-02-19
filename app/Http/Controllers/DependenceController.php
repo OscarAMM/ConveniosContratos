@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Dependence;
+use App\Institute;
 use App\Http\Requests\DependenceRequest;
 
 
@@ -21,8 +22,6 @@ class DependenceController extends Controller
         ->country($country)
         ->id($id)
         ->paginate();
-
-      // $dependence = Dependence::orderBy('id','ASC')->paginate();
         return view('dependencies.index', compact('dependence'));
     }
     public function show($id){
@@ -33,8 +32,10 @@ class DependenceController extends Controller
         $dependence = Dependence::find($id);
         return view('dependencies.edit', compact('dependence'));
        }
-       public function create(){
-        return view('dependencies.create');
+       protected function create( ){
+           $institutes = Institute::all();
+        return view('dependencies.create', compact('institutes'));
+
    }
    public function destroy($id){
     $dependence = Dependence::find($id);
@@ -44,11 +45,18 @@ class DependenceController extends Controller
 }
 public function store(DependenceRequest $request){
     $dependence = new Dependence;
-    $dependence->name = $request->name;
-    $dependence->acronym = $request->acronym;
-    $dependence->country = $request->country;
+        $dependence->name = $request->input('name');
+        $dependence->acronym = $request->input('acronym');
+        $dependence->country =$request->input('country');
+        $dependence->institute_id = $request->input('institute_id');
 
-    $dependence->save();
+        if(Dependence::where('name', $dependence->name)->exists()){
+            return back()->with('info','La dependencia ya existe');
+        }else{
+            $dependence->save();
+            $dependence->institutions()
+            ->attach(Institute::where('id', $request->input('institute_id') )->first());
+        }
     return redirect()->route('Dependence.index')->with('info','La dependencia ha sido agregado');
    }
    public function update(DependenceRequest $request,$id){

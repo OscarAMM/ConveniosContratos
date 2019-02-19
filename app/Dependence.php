@@ -1,13 +1,13 @@
 <?php
 
 namespace App;
-
+use App\Institute;
 use Illuminate\Database\Eloquent\Model;
 
 class Dependence extends Model
 {
     protected $fillable =[
-        'name','acronym','country',
+        'name','acronym','country','institute_id',
     ];
 
     public function scopeName($query,$name){
@@ -31,7 +31,8 @@ class Dependence extends Model
         }
     }
     public function institutions(){
+        
         return $this 
-            ->belongsTo(Institute::class);
+            ->belongsToMany(Institute::class);
     }
 }

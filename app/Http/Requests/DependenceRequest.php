@@ -24,9 +24,11 @@ class DependenceRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | unique:institutes,name',
+            'name' => 'required | unique:dependences,name',
             'acronym' => 'required ',
-            'country' => 'required '
+            'country' => 'required ',
+            'institute_id' => 'required'
+    
         ];
     }
 }
