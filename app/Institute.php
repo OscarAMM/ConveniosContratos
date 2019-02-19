@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Institute extends Model
 {   
     //Rellena los campos para la tabla
-    protected $fillabel = [
+    protected $fillable = [
         'name','acronym','country',
     ];
     //Alcance del buscador
@@ -32,9 +32,7 @@ class Institute extends Model
         }
     }
     //Relacion
-    public function related(){
-        return $this 
-        ->belongsToMany('App\Dependence')
-        ->withTimestamps();
+    public function dependencies(){
+        return $this ->hasMany(Dependence::class);
     }
 }
