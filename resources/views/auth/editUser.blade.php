@@ -66,6 +66,8 @@
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
+                           
+
                                 <a href="{{route('users.index')}}" class="btn btn-secondary">Regresar</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Guardar') }}

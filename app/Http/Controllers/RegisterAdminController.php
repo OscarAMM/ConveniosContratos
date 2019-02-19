@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 
 class RegisterAdminController extends Controller
 {
@@ -63,12 +64,13 @@ class RegisterAdminController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(Request $request)
+    protected function create(UserRequest $request)
     {   
             $user = new User;
             $user->name = $request->input('name');
             $user->email = $request->input('email');
             $user->password = bcrypt( $request->input('password') );
+            
             if(User::where('email', $user->email)->exists()){
                 return back()->with('info','El usuario ya existe');
             }else{

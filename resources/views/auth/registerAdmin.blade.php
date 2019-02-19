@@ -6,10 +6,10 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header"><h5 class="text-muted">{{ __('Registro') }}</h5></div>
-
-                @include('institutes.fragment.info')
+                @include('auth.fragment.error')
+                @include('auth.fragment.info')
                 <div class="card-body">
-                    <form method="POST" action="{{action('RegisterAdminController@create')}}">
+                    <form method="POST" action="{{route('admin.create')}}">
                         @csrf
 
                         <div class="form-group row">
@@ -58,7 +58,7 @@
                             <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar Contraseña') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password_confirm" type="password" class="form-control" name="password_confirmation" required>
                             </div>
                         </div>
 
