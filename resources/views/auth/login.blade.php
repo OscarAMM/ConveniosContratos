@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header"><h5 class="text-muted">{{ __('Login') }}</h5></div>
+                <div class="card-header"><h5 class="text-muted">{{ __('Iniciar sesión') }}</h5></div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -45,7 +45,7 @@
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
-                                        {{ __('Remember Me') }}
+                                        {{ __('Recordar') }}
                                     </label>
                                 </div>
                             </div>
@@ -54,14 +54,22 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Login') }}
+                                    {{ __('Iniciar sesión') }}
                                 </button>
 
+<<<<<<< HEAD
+                                <!--@if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('¿Olvidó su contraseña?') }}
+                                    </a>
+                                @endif-->
+=======
                               <!--  @if (Route::has('password.request'))
                                     <a class="btn btn-link" href="{{ route('password.request') }}">
                                         {{ __('¿Olvidó su contraseña?') }}
                                     </a>
                                 @endif -->
+>>>>>>> 9365e75a8096e2e042bc5a0a05ec0a6ad512ee2d
                             </div>
                         </div>
                     </form>
