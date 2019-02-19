@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateDependenciasTable extends Migration
+class InstituteDependencies extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateDependenciasTable extends Migration
      */
     public function up()
     {
-        Schema::create('dependencias', function (Blueprint $table) {
-            $table->increments('clavedependencias');
-            $table->string('nombre');
-            $table->string('siglas');
-            $table->string('pais');
+        Schema::create('institute_dependence', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('institute_id');
+            $table->integer('dependence_id');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateDependenciasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('dependencias');
+        Schema::dropIfExists('institute_dependence');
     }
 }

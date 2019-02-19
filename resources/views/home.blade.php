@@ -46,7 +46,8 @@
                         <div class="card-body">
                             <h5 class= "card-title">INSTITUCION/DEPENDENCIA</h5>
                             <p class="card-text">Se administran las Instituciones & Dependencias</p>
-                            <a href="{{route('Institute.index')}}" class="btn btn-primary">ADMINISTRAR</a>
+                            <p><a href="{{route('Institute.index')}}" class="btn btn-primary">ADMINISTRAR INSTITUCIONES</a></p>
+                            <a href="{{route('Dependence.index')}}" class="btn btn-primary">ADMINISTRAR DEPENDENCIAS</a>
                         </div>
                         </div>
                         </div>
@@ -56,8 +57,8 @@
                         <div class = "card-body">
                             <h5 class = "card-title">REGISTRO DE ADMINISTRADORES</h5>
                             <p class = "card-text">Se registran nuevos usuarios del tipo Administrador</p>
-                            <a href="{{route('admin.index')}}"class="btn btn-primary">IR A REGISTRO</a>
-                            <a href="{{route('users.index')}}"class="btn btn-primary">IR A CONSULTA</a>
+                            <a href="{{route('admin.index')}}"class="btn btn-primary">REGISTRAR</a>
+                            <a href="{{route('users.index')}}"class="btn btn-primary">CONSULTAR</a>
                         </div>
                         </div>
                         </div>

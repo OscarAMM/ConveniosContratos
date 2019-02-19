@@ -5,9 +5,14 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+<<<<<<< HEAD
                 <div class="card-header"><h5 class="text-muted">{{ __('Registro') }}</h5></div>
                 
                 @include('institutes.fragment.info')
+=======
+                <div class="card-header"><h5 class="text-muted">{{ __('Register') }}</h5></div>
+                
+>>>>>>> 9365e75a8096e2e042bc5a0a05ec0a6ad512ee2d
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
