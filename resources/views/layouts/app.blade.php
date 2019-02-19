@@ -23,6 +23,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
+            <!--<img src="http://www.uady.mx/media/convocatorias/LOGO%20FIRMA_18_02_15.jpg"  width="80" height="70" class="d-inline-block align-top" alt="...">-->
+
                <a href="{{route('home')}}"><h2 class= text-muted>SICC</h2></a> 
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
