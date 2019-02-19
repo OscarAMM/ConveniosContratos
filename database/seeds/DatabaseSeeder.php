@@ -11,11 +11,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        $this->truncateTables([
+            'institutes','dependences',
+        ]);
         $this->call(InstituteTableSeeder::class);
         $this->call(DependenciesTableSeeder::class);
-        // La creación de datos de roles debe ejecutarse primero
         $this->call(RoleTableSeeder::class);
-        // Los usuarios necesitarán los roles previamente generados
         $this->call(UserTableSeeder::class);
+    }
+
+    protected function truncateTables(array $tables){
+        DB::Statement('SET FOREIGN_KEY_CHECKS = 0;');
+        foreach($tables as $table){
+            DB::table($table)->truncate();
+        }
     }
 }

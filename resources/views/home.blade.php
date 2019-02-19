@@ -2,11 +2,9 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-10">
+    
             <div class="card">
                 <div class="card-header"><h4 class= "text-muted">INICIO</h4></div>
-
                 <div class="card-body">
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
@@ -16,13 +14,14 @@
                    
                     @if(Auth::user()->hasRole('admin'))
                         <div class = "blockquote">{{(Auth::user()->name)}}
-                        <h6>Administrador maestro</h6></div>
+                        <h6>Administrador</h6></div>
                         <!-- INICIO DE CATALOGOS -->
                         <div class="row">
                         <div class="col-sm-6">
-                        <div class="card mb-3">
+                        <div class="card mb-6">
+                        <div class= "card-header"> <h5 class="card-title text-muted">CONVENIO</h5></div>
                         <div class="card-body">
-                            <h5 class="card-title">CONVENIO</h5>
+                            
                             <p class="card-text">Se administra los Convenios</p>
                             <a href="#" class="btn btn-primary">ADMINISTRAR</a>
                          </div>
@@ -62,9 +61,6 @@
                         </div>
                         </div>
                         </div>
-
-
-
                     @else
                     <div class = "blockquote">{{(Auth::user()->name)}}
                             <p class= "text-muted">Usuario</p> </div>
@@ -76,7 +72,6 @@
                      </div>
                     @endif 
             </div>
-        </div>
-    </div>
+    
 </div>
 @endsection

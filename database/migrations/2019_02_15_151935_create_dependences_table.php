@@ -18,6 +18,8 @@ class CreateDependencesTable extends Migration
             $table->string('name');
             $table->string('acronym');
             $table->string('country');
+            $table->unsignedInteger('institute_id')->nullable();
+            $table->foreign('institute_id')->references('id')->on('institutes');
             $table->timestamps();
         });
     }

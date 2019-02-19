@@ -91,10 +91,5 @@ class RegisterAdminController extends Controller
         
         $user = User::where('id', $id)->first();
         return view('show_users', ['user' => $user]);
-
-       // $user->roles()->detach();
-        
-        
-       // return redirect("/");
     }
 }

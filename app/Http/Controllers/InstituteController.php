@@ -8,8 +8,18 @@ use App\Http\Requests\InstituteRequest;
 
 class InstituteController extends Controller
 {
-   public function index(){
-       $institutions = Institute::orderBy('id','ASC')->paginate();
+   public function index(Request $request){
+    $id=$request->get('id');
+    $name = $request->get('name');
+    $acronym=$request->get('acronym');
+    $country=$request->get('country');
+    $institutions = Institute::orderBy('id','ASC')
+    ->id($id)
+    ->name($name)
+    ->acronym($acronym)
+    ->country($country)
+    ->paginate();   
+    //$institutions = Institute::orderBy('id','ASC')->paginate();
        return view('institutes.index', compact('institutions'));
    }
    public function show($id){

@@ -30,4 +30,8 @@ class Dependence extends Model
             return $query->where('country','LIKE',"%$country%");
         }
     }
+    public function institutions(){
+        return $this 
+            ->belongsTo(Institute::class);
+    }
 }
