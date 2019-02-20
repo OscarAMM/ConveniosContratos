@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->hasRole('admin'))
+
     @include('dependencies.fragment.info')
     <div class="card">
             <div class="card-header">
@@ -62,7 +64,13 @@
 </table>
 
 </div>
+@else
+    <div class="container">
 
+            <h4>Acceso restringido</h4>
+            <h6>Comuníquese con su administrador</h6>
+    </div>
+@endif
 @endsection
  
    

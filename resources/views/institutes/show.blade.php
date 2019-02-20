@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
+@if(Auth::user()->hasRole('admin'))
 <div class="container">
 <div class= "row justify-content-center">
 <div class ="col-md-10">
@@ -30,7 +31,11 @@
 </div>
 </div>
 </div>
-    
+@else
+    <div class="container">
 
-
+            <h4>Acceso restringido</h4>
+            <h6>Comuníquese con su administrador</h6>
+    </div>
+@endif 
 @endsection

@@ -6,6 +6,8 @@
   <!--  <h2 class="font-weight-bold text-center"> USUARIOS
     <a href="{{ route('admin.index') }}" class ="btn btn-primary pull-right">Nuevo</a>
     </h2> -->
+    @if(Auth::user()->hasRole('admin'))
+     
     @include('auth.fragment.info')
 
     <div class="card">
@@ -66,6 +68,12 @@
     </div>
    
     </div>
-   
+    @else
+    <div class="container">
+
+            <h4>Acceso restringido</h4>
+            <h6>Comuníquese con su administrador</h6>
+    </div>
+    @endif
 
 @endsection
