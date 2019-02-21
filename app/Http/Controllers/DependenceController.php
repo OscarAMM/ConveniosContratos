@@ -30,7 +30,8 @@ class DependenceController extends Controller
     }
     public function edit($id){
         $dependence = Dependence::find($id);
-        return view('dependencies.edit', compact('dependence'));
+        $institutes = Institute::all();
+        return view('dependencies.edit', compact('dependence'), compact('institutes'));
        }
        protected function create( ){
            $institutes = Institute::all();
@@ -64,8 +65,8 @@ public function store(DependenceRequest $request){
     $dependence->name = $request->name;
     $dependence->acronym = $request->acronym;
     $dependence->country = $request->country;
-
-    $dependence->save();
+    $dependence->institute_id = $request->input('institute_id');
+    $dependence->update();
     return redirect()->route('Dependence.index')->with('info','La dependencia ha sido actualizado');
 }
 }
