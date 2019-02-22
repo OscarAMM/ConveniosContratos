@@ -43,47 +43,55 @@
 </div>
 
 
-    <table class="table ">
-        <thead class="thead-dark">
-            <tr>
-                <th>ID</th>
-                <th>Nombre</th>
-                <th>Email</th>
-                <th colspan="3">&nbsp;</th>
-            </tr>
-        <tbody>
-            @foreach($users as $user)
-            <tr>
-                <td>{{$user->id}}</td>
-                <td>{{$user->name}}</td>
-                <td>{{$user->email}}</td>
-                <td>
-                    <a href="{{route('users.show', $user ->id)}}" class="btn btn-success">Ver</a> </td>
-                <td>
-                    <a href="{{route('users.edit', $user ->id)}}" class="btn btn-warning">Editar</a></td>
-                <td>
-                    <form action="{{route('users.destroy', $user->id)}}" method="POST">
-                        {{csrf_field()}}
-                        <input type="hidden" name="_method" value="DELETE">
-                        <button class="btn btn-danger">Eliminar</button>
-                    </form>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-        </thead>
-    </table>
+<table class="table ">
+    <thead class="thead-dark">
+        <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th colspan="3">&nbsp;</th>
+        </tr>
+    <tbody>
+        @foreach($users as $user)
+        <tr>
+            <td>{{$user->id}}</td>
+            <td>{{$user->name}}</td>
+            <td>{{$user->email}}</td>
+            <td>
+                <a href="{{route('users.show', $user ->id)}}" class="btn btn-success">Ver</a> </td>
+            <td>
+                <a href="{{route('users.edit', $user ->id)}}" class="btn btn-warning">Editar</a></td>
+            <td>
+                <form action="{{route('users.destroy', $user->id)}}" method="POST">
+                    {{csrf_field()}}
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button class="btn btn-danger">Eliminar</button>
+                </form>
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+    </thead>
+</table>
 
-    {!!$users->render()!!}
+{!!$users->render()!!}
 </div>
 
 
 @else
 <div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-muted">Acceso restringido</h2>
+        </div>
+        <div class="card-body">
+            <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún cambio.
+            </h4>
+        </div>
 
-    <h4>Acceso restringido</h4>
-    <h6>Comuníquese con su administrador</h6>
+    </div>
 </div>
+
 @endif
 
 @endsection

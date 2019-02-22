@@ -21,10 +21,11 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Convenio</h5>
-                <p class="card-text">Se administran convenios permitiendo agregar, editar, eliminar y observar lo registrado.</p>
-                <a href="#" class="btn btn-primary " >ADMINISTRAR</a>
+                <p class="card-text">Se administran convenios permitiendo agregar, editar, eliminar y observar lo
+                    registrado.</p>
+                <a href="#" class="btn btn-primary ">ADMINISTRAR</a>
             </div>
-           
+
         </div>
     </div>
     <br>
@@ -37,10 +38,11 @@
             </div>
             <div class="card-body">
                 <h5 class="card-title">Contratos</h5>
-                <p class="card-text">Se administran contratos permitiendo agregar, editar, eliminar y observar lo registrado.</p>
-                <a href="#" class="btn btn-primary" >ADMINISTRAR</a>
+                <p class="card-text">Se administran contratos permitiendo agregar, editar, eliminar y observar lo
+                    registrado.</p>
+                <a href="#" class="btn btn-primary">ADMINISTRAR</a>
             </div>
-           
+
         </div>
     </div>
     <br>
@@ -50,46 +52,48 @@
     <div>
         <div class="card text-center ">
             <div class="card-header text-muted">
-               INSTITUCION & DEPENDENCIA
+                INSTITUCION & DEPENDENCIA
             </div>
             <div class="card-body text-center">
                 <h5 class="card-title">Insitucion & Dependencia</h5>
-                <p class="card-text">Se administran instituciones y dependendencias permitiendo agregar, editar, eliminar y observar lo registrado.</p>
+                <p class="card-text">Se administran instituciones y dependendencias permitiendo agregar, editar,
+                    eliminar y observar lo registrado.</p>
                 <a href="{{route('Institute.index')}}" class="btn btn-primary">INSTITUCIONES</a>
-                    <a href="{{route('Dependence.index')}}" class="btn btn-primary">DEPENDENCIAS</a>
+                <a href="{{route('Dependence.index')}}" class="btn btn-primary">DEPENDENCIAS</a>
             </div>
         </div>
     </div>
-<br>
-        <!--FIN INST/DEP-->
-        <!--REGISTRO ADMINISTRADORES-->
-        <!--Inicio ADMINS-->
-        <div>
+    <br>
+    <!--FIN INST/DEP-->
+    <!--REGISTRO ADMINISTRADORES-->
+    <!--Inicio ADMINS-->
+    <div>
         <div class="card text-center ">
             <div class="card-header text-muted">
                 USUARIOS
             </div>
             <div class="card-body">
                 <h5 class="card-title">Usuario & Administrador</h5>
-                <p class="card-text">Se administran usuarios y administradores permitiendo agregar, editar, eliminar y observar lo registrado.</p>
+                <p class="card-text">Se administran usuarios y administradores permitiendo agregar, editar, eliminar y
+                    observar lo registrado.</p>
                 <a href="{{route('admin.index')}}" class="btn btn-primary">REGISTRAR</a>
                 <a href="{{route('users.index')}}" class="btn btn-primary">CONSULTAR</a>
             </div>
-           
+
         </div>
     </div>
-        
-        <!-- Fin ADMINS-->
-        @else
-        <div class="blockquote">{{(Auth::user()->name)}}
-            <p class="text-muted">Usuario</p>
+
+    <!-- Fin ADMINS-->
+    @else
+    <div class="blockquote">{{(Auth::user()->name)}}
+        <p class="text-muted">Usuario</p>
+    </div>
+    <div class="card" style="width: 30rem center">
+        <div class="card-body">
+            <h5 class="card-title">Vistas Públicas</h5>
+            <p class="card-text">Se despliega todos los convenios que se tiene firmado entre la UADY y otra
+                dependencia. </p>
+            <a href="#" class="btn btn-primary">Ir a Vista Públicas</a>
         </div>
-        <div class="card" style="width: 30rem center">
-            <div class="card-body">
-                <h5 class="card-title">Vistas Públicas</h5>
-                <p class="card-text">Se despliega todos los convenios que se tiene firmado entre la UADY y otra
-                    dependencia. </p>
-                <a href="#" class="btn btn-primary">Ir a Vista Públicas</a>
-            </div>
-            @endif
-            @endsection
+        @endif
+        @endsection

@@ -9,13 +9,14 @@
     <h3> Dependencias </h3>
 </div>
 {{Form::open(['route'=>'Dependence.index','method'=>'GET','class'=>'form-inline'])}}
-<p class="text-item-center"><a href="{{route('Dependence.create')}}" class="btn btn-success" style="margin-right:5px">Nuevo</a>
+<p class="text-item-center"><a href="{{route('Dependence.create')}}" class="btn btn-success"
+        style="margin-right:5px">Nuevo</a>
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-        aria-expanded="false" aria-controls="collapseExample" style= "margin-right:15px">
+        aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
         Búsqueda
     </button></p>
 <div class="collapse" id="collapseExample">
-    <div class=" card card-body " style ="margin-bottom:5px">
+    <div class=" card card-body " style="margin-bottom:5px">
         <!-- inicio form busqueda-->
         <div class="form-row">
             <div class="col" style="margin-right:5px">
@@ -76,9 +77,17 @@
 </div>
 @else
 <div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h2 class="text-muted">Acceso restringido</h2>
+        </div>
+        <div class="card-body">
+            <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún cambio.
+            </h4>
+        </div>
 
-    <h4>Acceso restringido</h4>
-    <h6>Comuníquese con su administrador</h6>
+    </div>
 </div>
+
 @endif
 @endsection
