@@ -9,6 +9,7 @@
     <h3 class="text-muted text-center">AGREGAR NUEVA INSTITUCIÓN</h3>
     </div>
     <div class="card-body">
+    @include('institutes.fragment.info')
     @include('institutes.fragment.error')
     <!--Se agrega el formulario que se encuentra en fragment-->
     {!!Form::open( ['route' =>'Institute.store']) !!}
