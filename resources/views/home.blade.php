@@ -13,34 +13,20 @@
         <h6>Administrador</h6>
     </div> -->
     <!-- INICIO DE CATALOGOS -->
-    <!-- Inicio de Convenio-->
-    <div>
-        <div class="card text-center">
-            <div class="card-header text-muted">
-                CONVENIO
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">Convenio</h5>
-                <p class="card-text">Se administran convenios permitiendo agregar, editar, eliminar y observar lo
-                    registrado.</p>
-                <a href="#" class="btn btn-primary ">ADMINISTRAR</a>
-            </div>
-
-        </div>
-    </div>
-    <br>
-    <!--Fin de Convenio-->
+ 
     <!-- Inicio CONTRATO-->
     <div>
         <div class="card text-center">
             <div class="card-header text-muted">
-                CONTRATO
+                CONVENIO - CONTRATO
             </div>
             <div class="card-body">
-                <h5 class="card-title">Contratos</h5>
-                <p class="card-text">Se administran contratos permitiendo agregar, editar, eliminar y observar lo
+                <h5 class="card-title">Convenios & Contratos</h5>
+                <p class="card-text">Se administran los convenios y contratos permitiendo agregar, editar, eliminar y observar lo
                     registrado.</p>
-                <a href="#" class="btn btn-primary">ADMINISTRAR</a>
+                <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
+                <a href="#" class="btn btn-primary">CONVENIOS</a>
+
             </div>
 
         </div>

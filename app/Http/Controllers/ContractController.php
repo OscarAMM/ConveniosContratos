@@ -1,10 +1,14 @@
 <?php
 
-namespace App\Http\Controllers;
+use App\Contract;
+use App\Http\Requests\ContractRequest;
 
-use Illuminate\Http\Request;
+namespace App\Http\Controllers;
 
 class ContractController extends Controller
 {
-    //
+    public function index()
+    {
+        return view('contracts.index');
+    }
 }
