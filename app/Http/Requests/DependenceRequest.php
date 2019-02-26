@@ -35,10 +35,10 @@ class DependenceRequest extends FormRequest
     public function messages()
     {
         return [
-    'name.required' => 'Ingresa nombre de la dependencia',
-    'acronym.required' => 'Ingresa las siglas de la dependencia',
-    'country.required' => 'Ingresa el país de la dependencia',
-    'institute_id.required' => 'Selecciona una institución relacionada',
-  ];
+            'name.required' => 'Ingresa nombre de la dependencia',
+            'acronym.required' => 'Ingresa las siglas de la dependencia',
+            'country.required' => 'Ingresa el país de la dependencia',
+            'institute_id.required' => 'Selecciona una institución relacionada',
+        ];
     }
 }

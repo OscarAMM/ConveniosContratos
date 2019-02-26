@@ -11,4 +11,9 @@ class ContractController extends Controller
     {
         return view('contracts.index');
     }
+
+    public function create(){
+       
+        return view('contracts.create', compact('contracts'));
+    }
 }

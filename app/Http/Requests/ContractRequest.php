@@ -24,6 +24,7 @@ class ContractRequest extends FormRequest
     public function rules()
     {
         return [
+            
         ];
     }
 }

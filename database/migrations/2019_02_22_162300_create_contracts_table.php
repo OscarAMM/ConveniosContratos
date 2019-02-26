@@ -14,10 +14,12 @@ class CreateContractsTable extends Migration
         Schema::create('contracts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->date('recpetion');
+            $table->date('reception');
             $table->string('objective');
             $table->date('contractValidity');
             $table->string('scope');
+         // $table->integer('file_id')->unsigned()->nullable();
+          //$table->foreign('file_id')->references('id')->on('files');
             $table->timestamps();
         });
     }

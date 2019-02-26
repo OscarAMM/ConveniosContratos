@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Dependence;
-use App\Institute;
 use App\Http\Requests\DependenceRequest;
+use App\Institute;
+use Illuminate\Http\Request;
 
 class DependenceController extends Controller
 {
@@ -16,11 +16,11 @@ class DependenceController extends Controller
         $country = $request->get('country');
         $id = $request->get('id');
         $dependence = Dependence::orderBy('id', 'ASC')
-        ->name($name)
-        ->acronym($acronym)
-        ->country($country)
-        ->id($id)
-        ->paginate();
+            ->name($name)
+            ->acronym($acronym)
+            ->country($country)
+            ->id($id)
+            ->paginate();
 
         return view('dependencies.index', compact('dependence'));
     }
@@ -42,7 +42,7 @@ class DependenceController extends Controller
 
     protected function create()
     {
-        $institutes = Institute::all();
+        $institutes = Institute::all(); 
 
         return view('dependencies.create', compact('institutes'));
     }
@@ -68,7 +68,7 @@ class DependenceController extends Controller
         } else {
             $dependence->save();
             $dependence->institutions()
-            ->attach(Institute::where('id', $request->input('institute_id'))->first());
+                ->attach(Institute::where('id', $request->input('institute_id'))->first());
         }
 
         return redirect()->route('Dependence.index')->with('info', 'La dependencia ha sido agregado');

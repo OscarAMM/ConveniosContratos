@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use App\Institute;
 use App\Http\Requests\InstituteRequest;
+use App\Institute;
+use Illuminate\Http\Request;
 
 class InstituteController extends Controller
 {
@@ -15,11 +15,11 @@ class InstituteController extends Controller
         $acronym = $request->get('acronym');
         $country = $request->get('country');
         $institutions = Institute::orderBy('id', 'ASC')
-    ->id($id)
-    ->name($name)
-    ->acronym($acronym)
-    ->country($country)
-    ->paginate();
+            ->id($id)
+            ->name($name)
+            ->acronym($acronym)
+            ->country($country)
+            ->paginate();
 
         return view('institutes.index', compact('institutions'));
     }
