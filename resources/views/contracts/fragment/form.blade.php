@@ -33,13 +33,23 @@
                             <label for="user_id" class=" col-form-label">Asigne usuario</label>
                             <select name="user_id" id="user_id" placeholder="Selecciona el usuario asignado"
                                 class="form-control ">
-                                <!--Integrar for each --></select>
+                                <!--Integrar for each -->
+                                @foreach($users as $user)
+                                @if($user->hasRole('admin'))
+                                        <option value="{{$user->id}}">{{$user->name}}</option> 
+                                @endif
+                                @endforeach
+                            </select>
                         </div>
+                        
                         <div class="col-md-4">
                             <label for="institute_id" class=" col-form-label">Asigne Institucion</label>
-                            <select name="institute_id" id="institute_id"
-                                placeholder="Selecciona la institucion asignado" class="form-control ">
-                                <!--Integrar for each --></select>
+                            <select name="institute_id" id="institute_id" placeholder="Selecciona la institucion asignado" class="form-control" required="required">
+                                <!--Integrar for each -->
+                                @foreach($institutes as $institute)
+                                        <option value="{{$institute->id}}">{{$institute->name}}</option> 
+                                @endforeach
+                            </select>
                         </div>
                         <div class="col-md-4">
                             <label for="file_id" class="col-md-8 col-form-label">Seleccione el archivo</label>

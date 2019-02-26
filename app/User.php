@@ -43,6 +43,7 @@ class User extends Authenticatable
             return $query->where('id','LIKE',"%$id%");
         }
     }
+
     public function roles()
     {
         return $this
