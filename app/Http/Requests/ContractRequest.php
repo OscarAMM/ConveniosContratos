@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ContractRequest extends FormRequest
+class ContractRequest extends FormRequest 
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,11 @@ class ContractRequest extends FormRequest
     public function rules()
     {
         return [
-            
+            'name' => 'required ',
+            'reception'=>'required',
+            'objective'=>'required',
+            'contractValidity'=>'required',
+            'scope'=>'required',
         ];
     }
 }
