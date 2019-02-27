@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Contract;
+use App\Institute;
+use App\User;
 use App\Http\Requests\ContractRequest;
 
 class ContractController extends Controller
@@ -13,10 +15,17 @@ class ContractController extends Controller
         return view('contracts.index', compact('contracts'));
     }
 
+<<<<<<< HEAD
     public function create()
     {
 
         return view('contracts.create');
+=======
+    public function create(){
+        $institutes = Institute::all(); 
+        $users =User::All();
+        return view('contracts.create',compact('institutes'),compact('users'));
+>>>>>>> c6d959a83cca1f40b6b242e2d0b1b089852598c7
     }
     public function store(ContractRequest $request)
     {
