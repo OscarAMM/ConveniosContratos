@@ -29,6 +29,7 @@ class ContractRequest extends FormRequest
             'objective'=>'required',
             'contractValidity'=>'required',
             'scope'=>'required',
+            'users'=>'required',
         ];
     }
 }

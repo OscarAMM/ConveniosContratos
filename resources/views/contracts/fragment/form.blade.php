@@ -30,16 +30,25 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-4">
-                            <label for="user_id" class=" col-form-label">Asigne usuario</label>
-                            <select name="user_id" id="user_id" placeholder="Selecciona el usuario asignado"
-                                class="form-control ">
+                        <label for="user_id" class=" col-form-label">Asigne usuarios</label>
+                            @foreach($users as $user)
+                            @if($user->hasRole('admin'))
+                            <br>
+                            <input type="checkbox" name="users[]" value="{{$user->id}}"> <label>{{$user->name}}</label>
+                            
+                            @endif
+                            @endforeach
+
+                            
+                            <!--<select name="user_id" id="user_id" placeholder="Selecciona el usuario asignado"
+                                class="form-control ">-->
                                 <!--Integrar for each -->
-                                @foreach($users as $user)
+                                <!--@foreach($users as $user)
                                 @if($user->hasRole('admin'))
                                         <option value="{{$user->id}}">{{$user->name}}</option> 
                                 @endif
                                 @endforeach
-                            </select>
+                            </select>-->
                         </div>
                         
                         <div class="col-md-4">

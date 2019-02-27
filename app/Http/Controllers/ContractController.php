@@ -26,13 +26,16 @@ class ContractController extends Controller
         $contract->objective = $request->objective;
         $contract->contractValidity = $request->contractValidity;
         $contract->scope = $request->scope;
-
+        $users=$request->users;
+        foreach($users as $user){
+            echo $user;
+        }
         if (Contract::where('name', $contract->name)->exists()) {
             return back()->with('info', 'El contrato ya existe.');
         } else {
             $contract->save();
         }
 
-        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
+        //return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
 }
