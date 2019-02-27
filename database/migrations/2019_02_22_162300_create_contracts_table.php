@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Schema;
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateContractsTable extends Migration
 {
@@ -18,8 +18,9 @@ class CreateContractsTable extends Migration
             $table->string('objective');
             $table->date('contractValidity');
             $table->string('scope');
-         // $table->integer('file_id')->unsigned()->nullable();
-          //$table->foreign('file_id')->references('id')->on('files');
+            $table->integer('institute_id')->unsigned();
+            
+            $table->foreign('institute_id')->references('id')->on('institutes')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

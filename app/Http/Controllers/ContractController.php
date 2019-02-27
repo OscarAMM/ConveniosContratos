@@ -1,18 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Contract;
 use App\Http\Requests\ContractRequest;
+
 class ContractController extends Controller
 {
     public function index()
-    {   
-        $contracts=Contract::All();
-        return view('contracts.index');
+    {
+        $contracts = Contract::All();
+        return view('contracts.index', compact('contracts'));
     }
 
-    public function create(){
-        
+    public function create()
+    {
+
         return view('contracts.create');
     }
     public function store(ContractRequest $request)
