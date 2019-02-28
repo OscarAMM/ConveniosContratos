@@ -34,21 +34,9 @@
                             @foreach($users as $user)
                             @if($user->hasRole('admin'))
                             <br>
-                            <input type="checkbox" name="users[]" value="{{$user->id}}"> <label>{{$user->name}}</label>
-                            
+                            <input type="checkbox" name="users[]" value="{{$user->id}}"> <label>{{$user->name}}</label>    
                             @endif
                             @endforeach
-
-                            
-                            <!--<select name="user_id" id="user_id" placeholder="Selecciona el usuario asignado"
-                                class="form-control ">-->
-                                <!--Integrar for each -->
-                                <!--@foreach($users as $user)
-                                @if($user->hasRole('admin'))
-                                        <option value="{{$user->id}}">{{$user->name}}</option> 
-                                @endif
-                                @endforeach
-                            </select>-->
                         </div>
                         
                         <div class="col-md-4">

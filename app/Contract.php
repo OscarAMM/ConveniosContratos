@@ -7,6 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     protected $fillable = [
-        'name', 'reception', 'objective', 'contractValidity', 'scope',
+        'name', 'reception', 'objective', 'contractValidity', 'scope','institute_id',
     ];
 }
