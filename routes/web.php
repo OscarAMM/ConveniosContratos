@@ -19,6 +19,7 @@ Route::resource('Institute', 'InstituteController');
 Route::resource('Dependence', 'DependenceController');
 //Ruta contrato
 Route::resource('Contract', 'ContractController');
+//Route::post('Contract', 'ContractController@save');
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);

@@ -13,7 +13,7 @@
             <div class="card-body">
                 @include('auth.fragment.error')
                 @include('auth.fragment.info')
-                {!!Form::open( ['route' =>'Contract.store']) !!}
+                {!!Form::open( ['route' =>'Contract.store', 'files' =>true]) !!}
                 @include('contracts.fragment.form')
                 {!!Form::close()!!}
             </div>

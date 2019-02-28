@@ -2,7 +2,7 @@
     <div class="column-sm-8">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="#">
+                <form method="POST" action="#" enctype="multipart/form-data">
                     <div class="form-group ">
                         <label for="name" class="col-md-4 col-form-label ">Nombre de contrato</label>
                         <input type="text" id="name" name="name" class="form-control " placeholder="Nombre">
@@ -35,7 +35,6 @@
                             @if($user->hasRole('admin'))
                             <br>
                             <input type="checkbox" name="users[]" value="{{$user->id}}"> <label>{{$user->name}}</label>
-
                             @endif
                             @endforeach
                         </div>
@@ -52,8 +51,9 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <label for="file_id" class="col-md-8 col-form-label">Seleccione el archivo</label>
-                            <input type="file" class="form-control-file">
+                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                            <label for="file" class="col-md-8 col-form-label">Seleccione el archivo</label>
+                            <input type="file" class="form-control-file" name="file" id="file">
                         </div>
                     </div>
                 </form>
