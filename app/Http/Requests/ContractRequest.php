@@ -30,6 +30,7 @@ class ContractRequest extends FormRequest
             'contractValidity'=>'required',
             'scope'=>'required',
             'users'=>'required',
+            'institute_id' => 'required'
         ];
     }
 }

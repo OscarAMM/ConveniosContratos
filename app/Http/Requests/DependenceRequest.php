@@ -28,7 +28,6 @@ class DependenceRequest extends FormRequest
             'acronym' => 'required ',
             'country' => 'required ',
             'institute_id' => 'required',
-            // name | unique:dependences,name,'.$id
         ];
     }
 

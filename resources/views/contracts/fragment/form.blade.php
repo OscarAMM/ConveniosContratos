@@ -23,40 +23,31 @@
                     <div class="form-group">
                         <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
                         <select name="scope" id="scope" class="form-control">
-                        <option>Estatal</option>
-                        <option>Nacional</option>
-                        <option>Internacional</option>
+                            <option>Estatal</option>
+                            <option>Nacional</option>
+                            <option>Internacional</option>
                         </select>
                     </div>
                     <div class="form-row">
                         <div class="col-md-4">
-                        <label for="user_id" class=" col-form-label">Asigne usuarios</label>
+                            <label for="user_id" class=" col-form-label">Asigne usuarios</label>
                             @foreach($users as $user)
                             @if($user->hasRole('admin'))
                             <br>
                             <input type="checkbox" name="users[]" value="{{$user->id}}"> <label>{{$user->name}}</label>
-                            
+
                             @endif
                             @endforeach
-
-                            
-                            <!--<select name="user_id" id="user_id" placeholder="Selecciona el usuario asignado"
-                                class="form-control ">-->
-                                <!--Integrar for each -->
-                                <!--@foreach($users as $user)
-                                @if($user->hasRole('admin'))
-                                        <option value="{{$user->id}}">{{$user->name}}</option> 
-                                @endif
-                                @endforeach
-                            </select>-->
                         </div>
-                        
+
                         <div class="col-md-4">
                             <label for="institute_id" class=" col-form-label">Asigne Institucion</label>
-                            <select name="institute_id" id="institute_id" placeholder="Selecciona la institucion asignado" class="form-control" required="required">
+                            <select name="institute_id" id="institute_id"
+                                placeholder="Selecciona la institucion asignado" class="form-control"
+                                required="required">
                                 <!--Integrar for each -->
                                 @foreach($institutes as $institute)
-                                        <option value="{{$institute->id}}">{{$institute->name}}</option> 
+                                <option value="{{$institute->id}}">{{$institute->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -68,10 +59,10 @@
                 </form>
             </div>
         </div>
-    <div class="form-group text-center" style="margin-top:5px">
-    <a href="{{route ('Contract.index')}}" class="btn btn-secondary">Regresar</a>
-    {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
-    </div>
+        <div class="form-group text-center" style="margin-top:5px">
+            <a href="{{route ('Contract.index')}}" class="btn btn-secondary">Regresar</a>
+            {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
+        </div>
     </div>
 
 </div>
