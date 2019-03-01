@@ -24,9 +24,14 @@ class ContractController extends Controller
     }
     public function store(ContractRequest $request)
     {
-        if ($request->hasFile('file')) {
-            $path = Storage::disk('public')->put('files', $request->file('file'));
-           // $contract->fill(['file' => asset($path)]) ->save();
+        /* if ($request->hasFile('file')) {
+        $path = Storage::disk('public')->put('files', $request->file('file'));
+        // $contract->fill(['file' => asset($path)]) ->save();
+        }*/
+        $file = $request->file('file');
+        if ($file) {
+            $file_path = $file->getClientOriginalName();
+            \Storage::disk('public')->put('files/'.$file_path, \File::get($file));
         }
         $contract = new Contract();
         $contract->name = $request->name;
@@ -49,8 +54,8 @@ class ContractController extends Controller
                     ->attach(User::where('id', $user)->first());
             }
         }
-        return $request;
-        //return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
+        
+        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
 
 }
