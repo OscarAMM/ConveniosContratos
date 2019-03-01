@@ -9,7 +9,7 @@
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
+ */
 
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
@@ -19,7 +19,6 @@ Route::resource('Institute', 'InstituteController');
 Route::resource('Dependence', 'DependenceController');
 //Ruta contrato
 Route::resource('Contract', 'ContractController');
-//Route::post('Contract', 'ContractController@save');
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);
@@ -28,8 +27,6 @@ Route::post('/registerAdminCreate', ['as' => 'admin.create', 'uses' => 'Register
 Route::get('/registerAdminRoles', 'RegisterAdminController@change_roles');
 Route::post('/registerAdminRolesChange', 'RegisterAdminController@AdminAssignRoles');
 
-//Route::post('/registerAdminRolesChange7{{$id}}','RegisterAdminController@AdminAssignRoles');
-//Route::get('/usersview/{id}',["as" => "users.view","uses" => "RegisterAdminController@AdminAssignRoles"]);
 Route::resource('users', 'UserController');
 
 Route::post('/usersEdited/{id}', ['as' => 'users.edited', 'uses' => 'UserController@edited']);

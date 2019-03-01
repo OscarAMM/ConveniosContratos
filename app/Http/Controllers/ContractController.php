@@ -6,6 +6,7 @@ use App\Contract;
 use App\Http\Requests\ContractRequest;
 use App\Institute;
 use App\User;
+use Illuminate\Support\Facades\Storage;
 
 class ContractController extends Controller
 {
@@ -23,11 +24,9 @@ class ContractController extends Controller
     }
     public function store(ContractRequest $request)
     {
-        if($request->hasFile('file')){
-            $file = $request->file('file');
-            $fileName = time().$file->getClientOriginalName();
-            $file->move(public_path().'/storage/',$fileName);
-            
+        if ($request->hasFile('file')) {
+            $path = Storage::disk('public')->put('files', $request->file('file'));
+           // $contract->fill(['file' => asset($path)]) ->save();
         }
         $contract = new Contract();
         $contract->name = $request->name;
@@ -53,5 +52,5 @@ class ContractController extends Controller
         return $request;
         //return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
-   
+
 }
