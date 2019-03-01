@@ -71,15 +71,22 @@
 
     <!-- Fin ADMINS-->
     @else
-    <div class="blockquote">{{(Auth::user()->name)}}
-        <p class="text-muted">Usuario</p>
-    </div>
-    <div class="card" style="width: 30rem center">
-        <div class="card-body">
-            <h5 class="card-title">Vistas Públicas</h5>
-            <p class="card-text">Se despliega todos los convenios que se tiene firmado entre la UADY y otra
-                dependencia. </p>
-            <a href="#" class="btn btn-primary">Ir a Vista Públicas</a>
+    <!--{{(Auth::user()->name)}}-->
+    <div>
+        <div class="card text-center ">
+            <div class="card-header text-muted">
+                VISTAS PÚBLICAS
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">VISTAS PÚBLICAS</h5>
+                <p class="card-text">Se despliega todos los convenios que se tiene firmado entre la UADY y otra
+                dependencia.</p>
+                
+                <a href="#" class="btn btn-primary">CONSULTAR</a>
+            </div>
+
         </div>
-        @endif
-        @endsection
+    </div>
+
+    @endif
+    @endsection
