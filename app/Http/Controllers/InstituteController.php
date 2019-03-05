@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\InstituteRequest;
 use App\Institute;
+use App\Dependence;
 use Illuminate\Http\Request;
 
 class InstituteController extends Controller
@@ -27,8 +28,9 @@ class InstituteController extends Controller
     public function show($id)
     {
         $institutions = Institute::find($id);
-
-        return view('institutes.show', compact('institutions'));
+        $dependences = Dependence::find($id);
+       
+        return view('institutes.show', compact('institutions', 'dependences'));
     }
 
     public function destroy($id)

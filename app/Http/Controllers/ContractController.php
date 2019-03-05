@@ -12,7 +12,7 @@ class ContractController extends Controller
 {
     public function index()
     {
-        $contracts = Contract::All();
+        $contracts = Contract::all();
         return view('contracts.index', compact('contracts'));
     }
 
@@ -21,6 +21,26 @@ class ContractController extends Controller
         $institutes = Institute::all();
         $users = User::all();
         return view('contracts.create', compact('institutes'), compact('users'));
+    }
+    public function show($id)
+    {
+        $contracts = Contract::find($id);
+        $institutes = Institute::find($id);
+        $users = User::find($id);
+        return view('contracts.show', compact('contracts', 'users', 'institutes'));
+    }
+    public function edit($id)
+    {
+        $contract = Contract::find($id);
+        return view('contracts.edit', compact('contract'));
+    }
+
+    public function destroy($id)
+    {
+        $contract = Contract::find($id);
+        $contract->delete();
+
+        return back()->with('info', "El contrato ha sido eliminado.");
     }
     public function store(ContractRequest $request)
     {
@@ -31,7 +51,7 @@ class ContractController extends Controller
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
-            \Storage::disk('public')->put('files/'.$file_path, \File::get($file));
+            \Storage::disk('public')->put('files/' . $file_path, \File::get($file));
         }
         $contract = new Contract();
         $contract->name = $request->name;
@@ -54,7 +74,7 @@ class ContractController extends Controller
                     ->attach(User::where('id', $user)->first());
             }
         }
-        
+
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
 
