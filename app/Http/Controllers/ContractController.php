@@ -42,6 +42,21 @@ class ContractController extends Controller
 
         return back()->with('info', "El contrato ha sido eliminado.");
     }
+    public function update(ContractRequest $request, $id){
+        $contract = Contract::find($id);
+        $users = User::find($id);
+        $institute= Institute::find($id);
+
+        $contract->name = $request->name;
+        $contract->reception = $request->reception;
+        $contract->objective = $request->objective;
+        $contract->contractValidity = $request->contractValidity;
+        $contract->scope = $request->scope;
+        $contract->institute_id = $request->input('institute_id');
+        $contract->users = $request->input('users[]');
+        return redirect()->route('Contract.index')->with('info', 'El contrato ha sido actualizado');
+        
+    }
     public function store(ContractRequest $request)
     {
         /* if ($request->hasFile('file')) {
