@@ -25,7 +25,8 @@ class ContractController extends Controller
     public function store(ContractRequest $request)
     {
         if ($request->hasFile('file')) {
-            $path = Storage::disk('public')->put('files', $request->file('file'));
+            //$request->file('file')->getClientOriginalName();
+            $path = Storage::disk('public')->put('files',$request->file('file'));
            // $contract->fill(['file' => asset($path)]) ->save();
         }
         $contract = new Contract();
@@ -36,9 +37,7 @@ class ContractController extends Controller
         $contract->scope = $request->scope;
         $contract->institute_id = $request->institute_id;
         $users = $request->users;
-        foreach ($users as $user) {
-            echo $user;
-        }
+
         if (Contract::where('name', $contract->name)->exists()) {
             return back()->with('info', 'El contrato ya existe.');
         } else {
@@ -51,6 +50,10 @@ class ContractController extends Controller
         }
         return $request;
         //return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
+    }
+    public function show(){
+        $contents = Storage::get('1-s2.0-S0378475415001937-main.pdf');
+        return $contents;
     }
 
 }
