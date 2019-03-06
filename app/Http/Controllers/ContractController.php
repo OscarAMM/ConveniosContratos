@@ -25,9 +25,13 @@ class ContractController extends Controller
     public function show($id)
     {
         $contracts = Contract::find($id);
-        $institutes = Institute::find($id);
-        $users = User::find($id);
-        return view('contracts.show', compact('contracts', 'users', 'institutes'));
+        $institute_id = $contracts->institute_id;
+        $institute = Institute::find($institute_id);
+        foreach ($contracts->getUser as $user) {
+           echo  $user->name;
+        }
+        $users = $contracts->getUser;
+        return view('contracts.show', compact('contracts', 'users', 'institute'));
     }
     public function edit($id)
     {
@@ -76,9 +80,6 @@ class ContractController extends Controller
         $contract->scope = $request->scope;
         $contract->institute_id = $request->institute_id;
         $users = $request->users;
-        foreach ($users as $user) {
-            echo $user;
-        }
         if (Contract::where('name', $contract->name)->exists()) {
             return back()->with('info', 'El contrato ya existe.');
         } else {
@@ -89,7 +90,6 @@ class ContractController extends Controller
                     ->attach(User::where('id', $user)->first());
             }
         }
-
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
 
