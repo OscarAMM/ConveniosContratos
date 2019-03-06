@@ -22,6 +22,10 @@
                         <h5 class="card-title font-weight-bold">País</h5>
                         {{$dependence ->country}}
                     </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Institucion perteneciente</h5>
+                        {{$institute->name}}
+                    </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Dependence.index')}}" class="btn btn-secondary">Regresar</a>
                         <a href="{{route('Dependence.edit', $dependence->id)}}" class="btn btn-primary"> Editar</a></li>

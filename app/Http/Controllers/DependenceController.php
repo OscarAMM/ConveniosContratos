@@ -28,8 +28,9 @@ class DependenceController extends Controller
     public function show($id)
     {
         $dependence = Dependence::find($id);
+        $institute = Institute::find($id);
 
-        return view('dependencies.show', compact('dependence'));
+        return view('dependencies.show', compact('dependence'), compact('institute'));
     }
 
     public function edit($id)
