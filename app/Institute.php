@@ -33,6 +33,7 @@ class Institute extends Model
     }
     //Relacion
     public function dependencies(){
-        return $this ->hasMany(Dependence::class);
+        return $this ->hasMany(Dependence::class)
+        ->withTimestamps();
     }
 }

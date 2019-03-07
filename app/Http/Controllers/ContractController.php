@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contract;
+use App\File;
 use App\Http\Requests\ContractRequest;
 use App\Institute;
 use App\User;
@@ -27,16 +28,17 @@ class ContractController extends Controller
         $contracts = Contract::find($id);
         $institute_id = $contracts->institute_id;
         $institute = Institute::find($institute_id);
-        foreach ($contracts->getUser as $user) {
-           echo  $user->name;
-        }
         $users = $contracts->getUser;
         return view('contracts.show', compact('contracts', 'users', 'institute'));
     }
     public function edit($id)
     {
-        $contract = Contract::find($id);
-        return view('contracts.edit', compact('contract'));
+        $contracts = Contract::find($id);
+        $user = $contracts->getUser;
+        $users = User::all();
+        $institute_id = $contracts->institute_id;
+        $institutes = Institute::all();
+        return view('contracts.edit', compact('contracts', 'users', 'institutes', 'user'));
     }
 
     public function destroy($id)
@@ -46,20 +48,26 @@ class ContractController extends Controller
 
         return back()->with('info', "El contrato ha sido eliminado.");
     }
-    public function update(ContractRequest $request, $id){
+    public function update(ContractRequest $request, $id)
+    {
         $contract = Contract::find($id);
-        $users = User::find($id);
-        $institute= Institute::find($id);
-
         $contract->name = $request->name;
         $contract->reception = $request->reception;
         $contract->objective = $request->objective;
         $contract->contractValidity = $request->contractValidity;
         $contract->scope = $request->scope;
-        $contract->institute_id = $request->input('institute_id');
-        $contract->users = $request->input('users[]');
+        $contract->institute_id = $request->institute_id;
+        $users = $request->users;
+        if (Contract::where('name', $contract->name)->exists()) {
+            return back()->with('info', 'El contrato ya existe.');
+        } else {
+            $contract->update();
+            
+            
+
         return redirect()->route('Contract.index')->with('info', 'El contrato ha sido actualizado');
-        
+        }
+
     }
     public function store(ContractRequest $request)
     {
@@ -72,6 +80,17 @@ class ContractController extends Controller
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('files/' . $file_path, \File::get($file));
         }
+        //Archivo
+        $file_Name = new File();
+        $file_Name->name = $file_path;
+        if (File::where('name', $file_Name->name)->exists()) {
+            return back()->with('info', 'eh morro, ya esta arriba');
+
+        } else {
+            $file_Name->save();
+        }
+
+        //Contrato
         $contract = new Contract();
         $contract->name = $request->name;
         $contract->reception = $request->reception;
@@ -89,6 +108,8 @@ class ContractController extends Controller
                 $contract->users()
                     ->attach(User::where('id', $user)->first());
             }
+            $contract->files()
+                ->attach(File::where('id', $file_Name->id)->first());
         }
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }

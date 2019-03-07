@@ -7,27 +7,31 @@
     <div class="column-sm-8">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="#" enctype="multipart/form-data">
+               <!-- <form method="PUT" action="{{route('Contract.update', $contracts->id)}}" enctype="multipart/form-data"> -->
+               {!!Form::model($contracts, ['route' =>['Contract.update', $contracts->id],'method' =>'PUT']) !!}
                     <div class="form-group ">
                         <label for="name" class="col-md-4 col-form-label ">Nombre de contrato</label>
-                        <input type="text" id="name" name="name" class="form-control " placeholder="Nombre">
+                        <input type="text" id="name" name="name" class="form-control " placeholder="Nombre"
+                            value="{{$contracts->name}}">
                     </div>
                     <div class="form-group ">
                         <label for="reception" class="col-md-4 col-form-label">Recepción</label>
-                        <input type="date" id="reception" name="reception" class="form-control">
+                        <input type="date" id="reception" name="reception" class="form-control"
+                            value="{{$contracts->reception}}">
                     </div>
                     <div class="form-group">
                         <label for="objective" class="col-md-4 col-form-label">Objetivo</label>
                         <textarea name="objective" id="objective" cols="30" rows="5" class="form-control"
-                            placeholder="Describe el objetivo"></textarea>
+                            placeholder="{{$contracts->objective}}" value="{{$contracts->objective}}"></textarea>
                     </div>
                     <div class="form-group">
                         <label for="contractValidity" class="col-md-4 col-form-label">Fecha de fin</label>
-                        <input type="date" id="contractValidity" name="contractValidity" class="form-control">
+                        <input type="date" id="contractValidity" name="contractValidity" class="form-control"
+                            value="{{$contracts->contractValidity}}">
                     </div>
                     <div class="form-group">
                         <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
-                        <select name="scope" id="scope" class="form-control">
+                        <select name="scope" id="scope" class="form-control" value="{{$contracts->scope}}">
                             <option>Estatal</option>
                             <option>Nacional</option>
                             <option>Internacional</option>
@@ -39,7 +43,10 @@
                             @foreach($users as $user)
                             @if($user->hasRole('admin'))
                             <br>
-                            <input type="checkbox" name="users[]" value="{{$user->id}}"> <label>{{$user->name}}</label>
+
+                            <input type="checkbox" name="users[]" value="{{$user->id}}"
+                                {{ $user ->hasContract($contracts->name)?'checked':'' }}> <label>{{$user->name}}</label>
+
                             @endif
                             @endforeach
                         </div>
@@ -61,13 +68,14 @@
                             <input type="file" class="form-control-file" name="file" id="file">
                         </div>
                     </div>
-                </form>
+                    <div class="form-group text-center" style="margin-top:5px">
+                        <a href="{{route ('Contract.index')}}" class="btn btn-secondary">Regresar</a>
+                        <input type="submit" value="Guardar" class ="btn btn-primary">
+                    </div>
+                    {!!Form::close()!!}
             </div>
         </div>
-        <div class="form-group text-center" style="margin-top:5px">
-            <a href="{{route ('Contract.index')}}" class="btn btn-secondary">Regresar</a>
-            {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
-        </div>
+
     </div>
 
 </div>

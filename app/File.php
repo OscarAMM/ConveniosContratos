@@ -13,6 +13,7 @@ class File extends Model
 
     public function contracts(){
         return $this
-        ->hasMany(Contract::class);
+        ->hasMany(Contract::class)
+        ->withTimestamps();
     }
 }

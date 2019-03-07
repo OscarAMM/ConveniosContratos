@@ -15,6 +15,10 @@ class CreateContractFile extends Migration
     {
         Schema::create('contract_file', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('file_id')->unsigned();
+            $table->integer('contract_id')->unsigned();
+            $table->foreign('file_id')->references('id')->on('files')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('contract_id')->references('id')->on('contracts')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
