@@ -35,4 +35,7 @@ class Dependence extends Model
         return $this 
             ->belongsToMany(Institute::class);
     }
+    public function getInstitutes(){
+        return $this ->belongsToMany(Institute::class,'dependence_institute')->withPivot('institute_id','dependence_id'); ;
+    }
 }

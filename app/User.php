@@ -80,7 +80,10 @@ class User extends Authenticatable
         return false;
     }
     public function contracts(){
-        return $this->belongsToMany('App\Contract')
+        return $this->belongsToMany(Contract::class)
         ->withTimeStamps();
+    }
+    public function getContracts(){
+        return $this->belongsToMany(Contract::class,'contract_user','id','id');
     }
 }

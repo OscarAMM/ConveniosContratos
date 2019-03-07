@@ -20,7 +20,10 @@ class Contract extends Model
     }
 
     public function users(){
-        return $this ->belongsToMany('App\User')
+        return $this->belongsToMany(User::class)
         ->withTimeStamps();
+    }
+    public function getUser(){
+        return $this ->belongsToMany(User::class,'contract_user')->withPivot('user_id','contract_id'); ;
     }
 }
