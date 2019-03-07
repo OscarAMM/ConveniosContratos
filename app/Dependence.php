@@ -33,6 +33,7 @@ class Dependence extends Model
     public function institutions(){
         
         return $this 
-            ->belongsToMany(Institute::class);
+            ->belongsToMany(Institute::class)
+            ->withTimestamps();
     }
 }

@@ -83,6 +83,13 @@ class User extends Authenticatable
         return $this->belongsToMany(Contract::class)
         ->withTimeStamps();
     }
+    public function hasContract($name)
+    {
+        if ($this->contracts()->where('name', $name)->first()) {
+            return true;
+        }
+        return false;
+    }
     public function getContracts(){
         return $this->belongsToMany(Contract::class,'contract_user','id','id');
     }

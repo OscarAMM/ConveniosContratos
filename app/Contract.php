@@ -13,10 +13,12 @@ class Contract extends Model
         'name', 'reception', 'objective', 'contractValidity', 'scope','institute_id',
     ];
     public function files(){
-        return $this ->belongsToMany(File::class);
+        return $this ->belongsToMany(File::class)
+        ->withTimestamps();
     }
     public function institutions(){
-        return $this ->belongsToMany(Institute::class);
+        return $this ->belongsToMany(Institute::class)
+        ->withTimestamps();
     }
 
     public function users(){
@@ -24,6 +26,7 @@ class Contract extends Model
         ->withTimeStamps();
     }
     public function getUser(){
-        return $this ->belongsToMany(User::class,'contract_user')->withPivot('user_id','contract_id'); ;
+        return $this ->belongsToMany(User::class,'contract_user')->withPivot('user_id','contract_id')
+        ->withTimestamps();
     }
 }
