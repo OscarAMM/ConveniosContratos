@@ -81,9 +81,11 @@ class DependenceController extends Controller
         $dependence->name = $request->name;
         $dependence->acronym = $request->acronym;
         $dependence->country = $request->country;
-        $dependence->institute_id = $request->input('institute_id');
+        //$dependence->institute_id = $request->input('institute_id');
         $dependence->update();
-
+        $dependence->institutions()->detach();
+        $dependence->institutions()
+                ->attach(Institute::where('id', $request->input('institute_id'))->first());
         return redirect()->route('Dependence.index')->with('info', 'La dependencia ha sido actualizado');
     }
 }

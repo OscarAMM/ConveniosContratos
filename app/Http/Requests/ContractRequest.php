@@ -34,4 +34,16 @@ class ContractRequest extends FormRequest
             
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Ingresa nombre del contrato',
+            'reception.required' => 'Ingresa una fecha de recepción válida',
+            'objective.required' => 'Ingresa el objetivo del contrato',
+            'contractValidity.required' => 'Ingresa una fecha de fin válida',
+            'scope.required' => 'Ingresa el ambito del contrato',
+            'users.required' => 'Asigna un usuario',
+            'institute_id.required' => 'Asigna un instituto',
+        ];
+    }
 }
