@@ -2,7 +2,7 @@
     <div class="column-sm-8">
         <div class="card">
             <div class="card-body">
-                <form method="POST" action="#" enctype="multipart/form-data">
+                <form method="POST" action="#" > 
                     <div class="form-group ">
                         <label for="name" class="col-md-4 col-form-label ">Nombre de contrato</label>
                         <input type="text" id="name" name="name" class="form-control " placeholder="Nombre">
@@ -51,7 +51,7 @@
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                           <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <label for="file" class="col-md-8 col-form-label">Seleccione el archivo</label>
                             <input type="file" class="form-control-file" name="file" id="file">
                         </div>
@@ -62,6 +62,7 @@
         <div class="form-group text-center" style="margin-top:5px">
             <a href="{{route ('Contract.index')}}" class="btn btn-secondary">Regresar</a>
             {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
+            
         </div>
     </div>
 

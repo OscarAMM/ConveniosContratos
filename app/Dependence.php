@@ -36,4 +36,7 @@ class Dependence extends Model
             ->belongsToMany(Institute::class)
             ->withTimestamps();
     }
+    public function getInstitutes(){
+        return $this ->belongsToMany(Institute::class,'dependence_institute')->withPivot('institute_id','dependence_id'); ;
+    }
 }

@@ -114,4 +114,5 @@ class ContractController extends Controller
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
 
+
 }

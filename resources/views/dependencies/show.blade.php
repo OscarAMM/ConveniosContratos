@@ -24,7 +24,9 @@
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Institucion perteneciente</h5>
+                        @foreach($institutes as $institute)
                         {{$institute->name}}
+                      @endforeach
                     </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Dependence.index')}}" class="btn btn-secondary">Regresar</a>
