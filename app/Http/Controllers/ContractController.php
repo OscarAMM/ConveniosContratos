@@ -7,13 +7,23 @@ use App\File;
 use App\Http\Requests\ContractRequest;
 use App\Institute;
 use App\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ContractController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $contracts = Contract::all();
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $reception = $request->get('reception');
+        $scope = $request->get('scope');
+        $contracts = Contract::orderBy('id', 'ASC')
+            ->id($id)
+            ->name($name)
+            ->reception($reception)
+            ->scope($scope)
+            ->paginate();
         return view('contracts.index', compact('contracts'));
     }
 
@@ -21,7 +31,7 @@ class ContractController extends Controller
     {
         $institutes = Institute::all();
         $users = User::all();
-        return view('contracts.create', compact('institutes'), compact('users'));
+        return view('contracts.create', compact('institutes','users'));
     }
     public function show($id)
     {

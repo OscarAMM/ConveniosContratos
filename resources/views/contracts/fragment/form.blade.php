@@ -56,6 +56,7 @@
                             <input type="file" class="form-control-file" name="file" id="file">
                         </div>
                     </div>
+                    {{csrf_field()}}
                 </form>
             </div>
         </div>
