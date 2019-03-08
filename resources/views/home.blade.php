@@ -38,10 +38,10 @@
     <div>
         <div class="card text-center ">
             <div class="card-header text-muted">
-                INSTITUCION & DEPENDENCIA
+                INSTITUCION - DEPENDENCIA
             </div>
             <div class="card-body text-center">
-                <h5 class="card-title">Insitucion & Dependencia</h5>
+                <h5 class="card-title">Institucion - Dependencia</h5>
                 <p class="card-text">Se administran instituciones y dependendencias permitiendo agregar, editar,
                     eliminar y observar lo registrado.</p>
                 <a href="{{route('Institute.index')}}" class="btn btn-primary">INSTITUCIONES</a>
@@ -59,7 +59,7 @@
                 USUARIOS
             </div>
             <div class="card-body">
-                <h5 class="card-title">Usuario & Administrador</h5>
+                <h5 class="card-title">Usuario - Administrador</h5>
                 <p class="card-text">Se administran usuarios y administradores permitiendo agregar, editar, eliminar y
                     observar lo registrado.</p>
                 <a href="{{route('admin.index')}}" class="btn btn-primary">REGISTRAR</a>
