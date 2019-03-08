@@ -97,25 +97,6 @@ class ContractController extends Controller
         
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
 
-
-        /*$contract = Contract::find($id);
-        $contract->name = $request->name;
-        $contract->reception = $request->reception;
-        $contract->objective = $request->objective;
-        $contract->contractValidity = $request->contractValidity;
-        $contract->scope = $request->scope;
-        $contract->institute_id = $request->institute_id;
-        $users = $request->users;
-        if (Contract::where('name', $contract->name)->exists()) {
-            return back()->with('info', 'El contrato ya existe.');
-        } else {
-            $contract->update();
-            
-            
-
-        return redirect()->route('Contract.index')->with('info', 'El contrato ha sido actualizado');
-        }*/
-
     }
     public function store(ContractRequest $request)
     {
