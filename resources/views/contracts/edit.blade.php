@@ -62,11 +62,7 @@
                             @endforeach
                         </select>
                     </div>
-                    <div class="col-md-4">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <label for="file" class="col-md-8 col-form-label">Seleccione el archivo</label>
-                        <input type="file" class="form-control-file" name="file" id="file">
-                    </div>
+                    
                 </div>
                 <div class="form-group text-center" style="margin-top:5px">
                     <a href="{{route ('Contract.index')}}" class="btn btn-secondary">Regresar</a>

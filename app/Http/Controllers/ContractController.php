@@ -95,26 +95,7 @@ class ContractController extends Controller
             /*$contract->files()
                 ->attach(File::where('id', $file_Name->id)->first());*/
         
-        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
-
-
-        /*$contract = Contract::find($id);
-        $contract->name = $request->name;
-        $contract->reception = $request->reception;
-        $contract->objective = $request->objective;
-        $contract->contractValidity = $request->contractValidity;
-        $contract->scope = $request->scope;
-        $contract->institute_id = $request->institute_id;
-        $users = $request->users;
-        if (Contract::where('name', $contract->name)->exists()) {
-            return back()->with('info', 'El contrato ya existe.');
-        } else {
-            $contract->update();
-            
-            
-
-        return redirect()->route('Contract.index')->with('info', 'El contrato ha sido actualizado');
-        }*/
+        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido actualizado');
 
     }
     public function store(ContractRequest $request)
@@ -127,6 +108,8 @@ class ContractController extends Controller
         if ($file) {
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('files/' . $file_path, \File::get($file));
+        }else{
+            return back()->with('info', 'No selecciono un archivo.');
         }
         //Archivo
         $file_Name = new File();

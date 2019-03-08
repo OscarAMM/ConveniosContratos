@@ -31,7 +31,7 @@ class ContractRequest extends FormRequest
             'scope'=>'required',
             'users'=>'required',
             'institute_id'=>'required',
-            'file' =>'required',
+            
         ];
     }
 }
