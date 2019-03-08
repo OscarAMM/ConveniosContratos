@@ -17,6 +17,7 @@
     {!!Form::close()!!}
     </div>
     </div>
+    {{csrf_field()}}
 </div>
 </div>
 @else

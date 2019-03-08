@@ -73,7 +73,7 @@
     </tbody>
     </thead>
 </table>
-
+{{csrf_field()}}
 </div>
 @else
 <div class="container">

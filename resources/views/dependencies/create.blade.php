@@ -15,6 +15,7 @@
                 @include('auth.fragment.info')
                 {!!Form::open( ['route' =>'Dependence.store']) !!}
                 @include('dependencies.fragment.form')
+                {{csrf_field()}}
                 {!!Form::close()!!}
             </div>
         </div>

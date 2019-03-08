@@ -28,9 +28,9 @@ class InstituteController extends Controller
     public function show($id)
     {
         $institutions = Institute::find($id);
-       // $dependences = Dependence::find($id);
+       $dependences =$institutions ->getDependence;
        
-        return view('institutes.show', compact('institutions'));
+        return view('institutes.show', compact('institutions','dependences'));
     }
 
     public function destroy($id)

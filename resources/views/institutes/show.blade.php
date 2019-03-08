@@ -24,7 +24,9 @@
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Dependencias asignadas</h5>
-                         <ul>{{$dependences->name}}</ul>
+                        @foreach($dependences as $dependence)
+                         <ul>{{$dependence->name}}</ul>
+                         @endforeach
                     </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Institute.index')}}" class="btn btn-secondary">Regresar</a>

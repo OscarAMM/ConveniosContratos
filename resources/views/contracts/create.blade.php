@@ -15,6 +15,7 @@
                 @include('auth.fragment.info')
                 {!!Form::open( ['route' =>'Contract.store', 'files' =>true]) !!}
                 @include('contracts.fragment.form')
+                {{csrf_field()}}
                 {!!Form::close()!!}
             </div>
         </div>
