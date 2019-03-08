@@ -3,6 +3,8 @@
 @section('content')
 @if(Auth::user()->hasRole('admin'))
 
+@include('auth.fragment.info')
+@include('auth.fragment.error')
 <div class="container">
     <div class="column-sm-8">
         <div class="card">

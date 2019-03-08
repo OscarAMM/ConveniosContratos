@@ -50,7 +50,45 @@ class ContractController extends Controller
     }
     public function update(ContractRequest $request, $id)
     {
+        /*$file = $request->file('file');
+        if ($file) {
+            $file_path = $file->getClientOriginalName();
+            \Storage::disk('public')->put('files/' . $file_path, \File::get($file));
+        }
+        //Archivo
+        $file_Name = new File();
+        $file_Name->name = time().$file_path;
+        if (File::where('name', $file_Name->name)->exists()) {
+            return back()->with('info', 'eh morro, ya esta arriba');
+        } else {
+            $file_Name->save();
+        }*/
+
+        //Contrato
         $contract = Contract::find($id);
+        $contract->name = $request->name;
+        $contract->reception = $request->reception;
+        $contract->objective = $request->objective;
+        $contract->contractValidity = $request->contractValidity;
+        $contract->scope = $request->scope;
+        $contract->institute_id = $request->institute_id;
+        $users = $request->users;
+        
+            $contract->update();
+            $contract->users()->detach();
+            foreach ($users as $user) {
+                // echo $user;
+                $contract->users()
+                    ->attach(User::where('id', $user)->first());
+            }
+            //$contract->files()->detach();
+            /*$contract->files()
+                ->attach(File::where('id', $file_Name->id)->first());*/
+        
+        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
+
+
+        /*$contract = Contract::find($id);
         $contract->name = $request->name;
         $contract->reception = $request->reception;
         $contract->objective = $request->objective;
@@ -66,7 +104,7 @@ class ContractController extends Controller
             
 
         return redirect()->route('Contract.index')->with('info', 'El contrato ha sido actualizado');
-        }
+        }*/
 
     }
     public function store(ContractRequest $request)
