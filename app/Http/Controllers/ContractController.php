@@ -95,11 +95,7 @@ class ContractController extends Controller
             /*$contract->files()
                 ->attach(File::where('id', $file_Name->id)->first());*/
         
-<<<<<<< HEAD
-        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
-=======
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido actualizado');
->>>>>>> 296ad8765c73ac734717c1df415891e9973c2beb
 
     }
     public function store(ContractRequest $request)
