@@ -93,4 +93,18 @@ class User extends Authenticatable
     public function getContracts(){
         return $this->belongsToMany(Contract::class,'contract_user','id','id');
     }
+    public function agreements(){
+        return $this->belongsToMany(Agreement::class)
+        ->withTimeStamps();
+    }
+    public function hasAgreement($name)
+    {
+        if ($this->agreements()->where('name', $name)->first()) {
+            return true;
+        }
+        return false;
+    }
+    public function getAgreements(){
+        return $this->belongsToMany(Agreement::class,'agreement_user','id','id');
+    }
 }

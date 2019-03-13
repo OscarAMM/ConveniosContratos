@@ -25,7 +25,7 @@
                 <p class="card-text">Se administran los convenios y contratos permitiendo agregar, editar, eliminar y observar lo
                     registrado.</p>
                 <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
-                <a href="#" class="btn btn-primary">CONVENIOS</a>
+                <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>
 
             </div>
 
