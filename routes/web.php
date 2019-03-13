@@ -19,7 +19,12 @@ Route::resource('Institute', 'InstituteController');
 Route::resource('Dependence', 'DependenceController');
 //Ruta contrato
 Route::resource('Contract', 'ContractController');
+<<<<<<< HEAD
 Route::get('/ContractDownloadFile/{id}', ['as' => 'contract.download', 'uses' => 'ContractController@showfile']);
+=======
+//Ruta convenio
+Route::resource('Agreement', 'AgreementController');
+>>>>>>> 3409de81be024355fe15dbc4fc8c47c7b834aef8
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);
