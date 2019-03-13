@@ -21,10 +21,7 @@ class CreateAgreementsTable extends Migration
             $table->date('agreementValidity');
             $table->string('scope');
             $table->boolean('hide');
-            $table->integer('institute_id')->unsigned();
             $table->integer('dependence_id')->unsigned();
-            
-            $table->foreign('institute_id')->references('id')->on('institutes')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('dependence_id')->references('id')->on('dependences')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();

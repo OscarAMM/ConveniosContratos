@@ -45,13 +45,12 @@
                         @endforeach
                     </li>
                     <li class="list-group-item">
-                    <h5 class="card-title font-weight-bold">Archivos</h5>
-                    @foreach($files as $file)
-                    
+                        <h5 class="card-title font-weight-bold">Archivos</h5>
+                        @foreach($files as $file)
                         <ul>
-                        <a href="{{route('contract.download',$file->id)}}">{{$file->name}}</a>
+                            <a href="{{route('contract.download',$file->id)}}">{{$file->name}}</a>
                         </ul>
-                    @endforeach   
+                        @endforeach
                     </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Contract.index')}}" class="btn btn-secondary">Regresar</a>

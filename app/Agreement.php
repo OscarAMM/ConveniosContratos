@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agreement extends Model
 {
     protected $fillable = [
-        'name', 'reception', 'objective', 'agreementValidity', 'scope','institute_id','dependence_id','hide',
+        'name', 'reception', 'objective', 'agreementValidity', 'scope','dependence_id','hide',
     ];
     public function scopeName($query,$name){
         if($name){
@@ -51,7 +51,11 @@ class Agreement extends Model
         ->withTimeStamps();
     }
     public function getUser(){
-        return $this ->belongsToMany(User::class,'agreement')->withPivot('user_id','agreement_id')
+        return $this ->belongsToMany(User::class,'agreement_user')->withPivot('user_id','agreement_id')
+        ->withTimestamps();
+    }
+    public function getFiles(){
+        return $this ->belongsToMany(FileAgreement::class,'agreement_file_agreement')->withPivot('file_agreement_id','agreement_id')
         ->withTimestamps();
     }
 }

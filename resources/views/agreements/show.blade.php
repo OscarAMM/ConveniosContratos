@@ -20,34 +20,42 @@
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Objetivo</h5>
-                      {{$agreements->objective}}
+                        {{$agreements->objective}}
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Convenio válido hasta..</h5>
-                      {{$agreements->agreementValidity}}
+                        {{$agreements->agreementValidity}}
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Ámbito</h5>
-                      {{$agreements->scope}}
+                        {{$agreements->scope}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Institucion perteneciente</h5>
-                        {{$institute->name}}
+                        <h5 class="card-title font-weight-bold">Depenendencia perteneciente</h5>
+                        {{$dependences->name}}
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Usuario(s) asignado(s)</h5>
-                      @foreach($users as $user)
-                      <label for="name">Nombre</label>
+                        @foreach($users as $user)
+                        <label for="name">Nombre</label>
                         <ul>{{$user->name}}
                         </ul>
                         <label for="email">Email</label>
                         <ul>{{$user->email}}</ul>
-                      @endforeach
+                        @endforeach
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Archivos</h5>
+                        @foreach($files as $file)
+                        <ul>
+                            <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
+                        </ul>
+                        @endforeach
                     </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
-                        
-                    </ul>
+
+                        </ul>
                 </div>
                 <div>
 

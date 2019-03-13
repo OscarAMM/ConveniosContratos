@@ -28,6 +28,13 @@
                             <option>Internacional</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                    <label for="hide" class="col-md-4 col-form-label">Estado</label>
+                                <select name="hide" id="hide" class="form-control" required="required">   
+                                    <option value="visible">Visible</option>
+                                    <option value="noVisible">No visible</option> 
+                                </select>
+                    </div>
                     <div class="form-row">
                         <div class="col-md-4">
                             <label for="user_id" class=" col-form-label">Asigne usuarios</label>

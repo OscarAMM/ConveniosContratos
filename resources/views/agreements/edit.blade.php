@@ -40,6 +40,13 @@
                         <option>Internacional</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="hide" class="col-md-4 col-form-label">Estado</label>
+                                <select name="hide" id="hide" class="form-control" required="required">   
+                                    <option value="visible">Visible</option>
+                                    <option value="noVisible">No visible</option> 
+                                </select>
+                    </div>
                 <div class="form-row">
                     <div class="col-md-4">
                         <label for="user_id" class=" col-form-label">Asigne usuarios</label>
@@ -53,12 +60,12 @@
                         @endforeach
                     </div>
                     <div class="col-md-4">
-                        <label for="institute_id" class=" col-form-label">Asigne Institucion</label>
-                        <select name="institute_id" id="institute_id" placeholder="Selecciona la institucion asignado"
+                        <label for="dependence_id" class=" col-form-label">Asigne la dependencia</label>
+                        <select name="dependence_id" id="dependence_id" placeholder="Selecciona la dependencia asignado"
                             class="form-control" required="required">
                             <!--Integrar for each -->
-                            @foreach($institutes as $institute)
-                            <option value="{{$institute->id}}">{{$institute->name}}</option>
+                            @foreach($dependences as $dependence)
+                            <option value="{{$dependence->id}}">{{$dependence->name}}</option>
                             @endforeach
                         </select>
                     </div>
