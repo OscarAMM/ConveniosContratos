@@ -19,6 +19,7 @@ Route::resource('Institute', 'InstituteController');
 Route::resource('Dependence', 'DependenceController');
 //Ruta contrato
 Route::resource('Contract', 'ContractController');
+Route::get('/ContractDownloadFile/{id}', ['as' => 'contract.download', 'uses' => 'ContractController@showfile']);
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);

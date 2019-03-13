@@ -35,11 +35,14 @@ class ContractController extends Controller
     }
     public function show($id)
     {
+        //Show functionality
+        
         $contracts = Contract::find($id);
         $institute_id = $contracts->institute_id;
         $institute = Institute::find($institute_id);
         $users = $contracts->getUser;
-        return view('contracts.show', compact('contracts', 'users', 'institute'));
+        $files=$contracts->getFiles;
+        return view('contracts.show', compact('contracts', 'users', 'institute','files'));
     }
     public function edit($id)
     {
@@ -55,25 +58,10 @@ class ContractController extends Controller
     {
         $contract = Contract::find($id);
         $contract->delete();
-
         return back()->with('info', "El contrato ha sido eliminado.");
     }
     public function update(ContractRequest $request, $id)
     {
-        /*$file = $request->file('file');
-        if ($file) {
-            $file_path = $file->getClientOriginalName();
-            \Storage::disk('public')->put('files/' . $file_path, \File::get($file));
-        }
-        //Archivo
-        $file_Name = new File();
-        $file_Name->name = time().$file_path;
-        if (File::where('name', $file_Name->name)->exists()) {
-            return back()->with('info', 'eh morro, ya esta arriba');
-        } else {
-            $file_Name->save();
-        }*/
-
         //Contrato
         $contract = Contract::find($id);
         $contract->name = $request->name;
@@ -91,19 +79,11 @@ class ContractController extends Controller
                 $contract->users()
                     ->attach(User::where('id', $user)->first());
             }
-            //$contract->files()->detach();
-            /*$contract->files()
-                ->attach(File::where('id', $file_Name->id)->first());*/
-        
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido actualizado');
-
     }
     public function store(ContractRequest $request)
     {
-        /* if ($request->hasFile('file')) {
-        $path = Storage::disk('public')->put('files', $request->file('file'));
-        // $contract->fill(['file' => asset($path)]) ->save();
-        }*/
+      
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
@@ -115,7 +95,7 @@ class ContractController extends Controller
         $file_Name = new File();
         $file_Name->name = $file_path;
         if (File::where('name', $file_Name->name)->exists()) {
-            return back()->with('info', 'eh morro, ya esta arriba');
+            return back()->with('info', 'El archivo ya ha sido registrado.');
 
         } else {
             $file_Name->save();
@@ -144,6 +124,10 @@ class ContractController extends Controller
         }
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
-
-
+    public function showFile($id){
+        $file = File::find($id);
+        $exists = Storage::disk('public')->exists('files/'.$file->name);
+        echo "existe";
+        return Storage::download('/files/'.$file->name);
+    }
 }

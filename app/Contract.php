@@ -49,4 +49,8 @@ class Contract extends Model
         return $this ->belongsToMany(User::class,'contract_user')->withPivot('user_id','contract_id')
         ->withTimestamps();
     }
+    public function getFiles(){
+        return $this ->belongsToMany(File::class,'contract_file')->withPivot('file_id','contract_id')
+        ->withTimestamps();
+    }
 }
