@@ -25,10 +25,10 @@
                 {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
             </div>
             <div class="col" style="margin-right:5px">
-                {{Form::text('reception',null,['class'=>'form-control','placeholder'=>'Recepción'])}}
+                {{Form::date('reception',null,['class'=>'form-control','placeholder'=>'Recepción'])}}
             </div>
             <div>
-            {{Form::text('scope',null,['class'=>'form-control','placeholder'=>'Ámbito'])}}
+                {{Form::text('scope',null,['class'=>'form-control','placeholder'=>'Ámbito'])}}
             </div>
             <div class="col">
                 <button type="submit" class="btn btn-primary">
@@ -47,9 +47,9 @@
             <th>Nombre</th>
             <th>Recepción</th>
             <th>Objetivo</th>
-            <th>Convenio válido</th>
+            <th>Fecha de validez</th>
             <th>Ámbito</th>
-            <th colspan="3">&nbsp;</th> 
+            <th colspan="4">&nbsp;</th>
         </tr>
     <tbody>
         @foreach($agreements as $agreement)
@@ -71,6 +71,8 @@
                     <button class="btn btn-danger">Eliminar</button>
                 </form>
             </td>
+            <td>
+                <a href="{{route('Revision')}}" class="btn btn-success">Revisión</a></td>
         </tr>
         @endforeach
     </tbody>

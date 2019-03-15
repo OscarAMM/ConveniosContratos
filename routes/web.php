@@ -21,8 +21,9 @@ Route::resource('Dependence', 'DependenceController');
 Route::resource('Contract', 'ContractController');
 Route::get('/ContractDownloadFile/{id}', ['as' => 'contract.download', 'uses' => 'ContractController@showfile']);
 Route::get('/AgreementDownloadFile/{id}', ['as' => 'agreement.download', 'uses' => 'AgreementController@showfile']);
-
+//Ruta Convenio
 Route::resource('Agreement', 'AgreementController');
+Route::get('/AgreementRevision',['uses'=>'AgreementController@showRevision','as'=> 'Revision']);
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);

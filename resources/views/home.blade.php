@@ -21,8 +21,8 @@
                 CONVENIO - CONTRATO
             </div>
             <div class="card-body">
-                <h5 class="card-title">Convenios & Contratos</h5>
-                <p class="card-text">Se administran los convenios y contratos permitiendo agregar, editar, eliminar y observar lo
+                <h5 class="card-title">Convenios - Contratos</h5>
+                <p class="card-text">Se administran los convenios y contratos permitiendo agregar, editar, observar y eliminar lo
                     registrado.</p>
                 <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
                 <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>

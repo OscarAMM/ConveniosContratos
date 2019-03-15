@@ -52,13 +52,19 @@
                         </ul>
                         @endforeach
                     </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Visibilidad del documento</h5>
+                        @if($agreements->hide)
+                        <label for="visible">Visible</label>
+                        @else
+                        <label for="NoVisible">No Visible</label>
+                        @endif
+                    </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
-
                         </ul>
                 </div>
                 <div>
-
                 </div>
             </div>
         </div>

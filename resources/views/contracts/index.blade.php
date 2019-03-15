@@ -25,7 +25,7 @@
                 {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
             </div>
             <div class="col" style="margin-right:5px">
-                {{Form::text('reception',null,['class'=>'form-control','placeholder'=>'Recepción'])}}
+                {{Form::date('reception',null,['class'=>'form-control','placeholder'=>'Recepción'])}}
             </div>
             <div>
             {{Form::text('scope',null,['class'=>'form-control','placeholder'=>'Ámbito'])}}

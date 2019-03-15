@@ -75,7 +75,11 @@ class AgreementController extends Controller
        // $agreement->institute_id = $request->institute_id;
         $agreement->dependence_id = $request->dependence_id;
         $users = $request->users;
-        
+        if($request->hide=="visible"){
+            $agreement->hide = true;
+        }else{
+            $agreement->hide = false;
+        }
             $agreement->update();
             $agreement->users()->detach();
             foreach ($users as $user) {
@@ -140,6 +144,9 @@ class AgreementController extends Controller
     public function showFile($id){
         $file = FileAgreement::find($id);
         return Storage::download('/filesAgreements/'.$file->name);
+    }
+    public function showRevision(){
+        return view('agreements.revision');
     }
 
 }

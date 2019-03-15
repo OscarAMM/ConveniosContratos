@@ -130,4 +130,5 @@ class ContractController extends Controller
         echo "existe";
         return Storage::download('/files/'.$file->name);
     }
+  
 }
