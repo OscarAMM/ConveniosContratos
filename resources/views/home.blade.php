@@ -12,8 +12,7 @@
     <!-- <div class="blockquote">{{(Auth::user()->name)}}
         <h6>Administrador</h6>
     </div> -->
-    <!-- INICIO DE CATALOGOS -->
- 
+    <!-- INICIO DE CATALOGOS --> 
     <!-- Inicio CONTRATO-->
     <div>
         <div class="card text-center">
@@ -26,6 +25,7 @@
                     registrado.</p>
                 <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
                 <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>
+                <a href="{{route('Revision')}}" class="btn btn-primary">ASIGNADOS</a>
 
             </div>
 

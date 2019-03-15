@@ -71,8 +71,6 @@
                     <button class="btn btn-danger">Eliminar</button>
                 </form>
             </td>
-            <td>
-                <a href="{{route('Revision')}}" class="btn btn-success">Revisión</a></td>
         </tr>
         @endforeach
     </tbody>

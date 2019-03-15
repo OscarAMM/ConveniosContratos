@@ -91,7 +91,7 @@ class User extends Authenticatable
         return false;
     }
     public function getContracts(){
-        return $this->belongsToMany(Contract::class,'contract_user','id','id');
+        return $this->belongsToMany(Contract::class,'contract_user');
     }
     public function agreements(){
         return $this->belongsToMany(Agreement::class)
@@ -105,6 +105,6 @@ class User extends Authenticatable
         return false;
     }
     public function getAgreements(){
-        return $this->belongsToMany(Agreement::class,'agreement_user','id','id');
+        return $this->belongsToMany(Agreement::class,'agreement_user');
     }
 }
