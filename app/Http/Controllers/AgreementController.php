@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Agreement;
+use App\Dependence;
 use App\FileAgreement;
 use App\Http\Requests\AgreementRequest;
-use App\Institute;
-use App\Dependence;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -32,7 +31,7 @@ class AgreementController extends Controller
     {
         $dependences = Dependence::all();
         $users = User::all();
-        return view('agreements.create', compact('dependences','users'));
+        return view('agreements.create', compact('dependences', 'users'));
     }
     public function show($id)
     {
@@ -40,15 +39,14 @@ class AgreementController extends Controller
         $dependence_id = $agreements->dependence_id;
         $dependences = Dependence::find($dependence_id);
         $users = $agreements->getUser;
-        $files=$agreements->getFiles;
-        return view('agreements.show', compact('agreements', 'users', 'dependences','files'));
+        $files = $agreements->getFiles;
+        return view('agreements.show', compact('agreements', 'users', 'dependences', 'files'));
     }
     public function edit($id)
     {
         $agreements = Agreement::find($id);
         $user = $agreements->getUser;
         $users = User::all();
-        //$institute_id = $agreements->institute_id;
         $dependence_id = $agreements->dependence_id;
         $dependences = Dependence::all();
         //buscar la dependencia y pasarlo a la vista (creo)
@@ -71,23 +69,21 @@ class AgreementController extends Controller
         $agreement->objective = $request->objective;
         $agreement->agreementValidity = $request->agreementValidity;
         $agreement->scope = $request->scope;
-        //$agreement->hide = $request->hide;
-       // $agreement->institute_id = $request->institute_id;
         $agreement->dependence_id = $request->dependence_id;
         $users = $request->users;
-        if($request->hide=="visible"){
+        if ($request->hide == "visible") {
             $agreement->hide = true;
-        }else{
+        } else {
             $agreement->hide = false;
         }
-            $agreement->update();
-            $agreement->users()->detach();
-            foreach ($users as $user) {
-                // echo $user;
-                $agreement->users()
-                    ->attach(User::where('id', $user)->first());
-            }
-        
+        $agreement->update();
+        $agreement->users()->detach();
+        foreach ($users as $user) {
+            // echo $user;
+            $agreement->users()
+                ->attach(User::where('id', $user)->first());
+        }
+
         return redirect()->route('Agreement.index')->with('info', 'El Convenio ha sido actualizado');
 
     }
@@ -98,7 +94,7 @@ class AgreementController extends Controller
         if ($file) {
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('filesAgreements/' . $file_path, \File::get($file));
-        }else{
+        } else {
             return back()->with('info', 'No selecciono un archivo.');
         }
         //Archivo
@@ -118,13 +114,12 @@ class AgreementController extends Controller
         $agreement->objective = $request->objective;
         $agreement->agreementValidity = $request->agreementValidity;
         $agreement->scope = $request->scope;
-        if($request->hide=="visible"){
+        if ($request->hide == "visible") {
             $agreement->hide = true;
-        }else{
+        } else {
             $agreement->hide = false;
         }
-        //$agreement->hide = $request->hide;
-      //  $agreement->institute_id = $request->institute_id;
+
         $agreement->dependence_id = $request->dependence_id;
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
@@ -132,7 +127,6 @@ class AgreementController extends Controller
         } else {
             $agreement->save();
             foreach ($users as $user) {
-                // echo $user;
                 $agreement->users()
                     ->attach(User::where('id', $user)->first());
             }
@@ -141,12 +135,14 @@ class AgreementController extends Controller
         }
         return redirect()->route('Agreement.index')->with('info', 'El Convenio ha sido agregado');
     }
-    public function showFile($id){
+    public function showFile($id)
+    {
         $file = FileAgreement::find($id);
-        return Storage::download('/filesAgreements/'.$file->name);
+        return Storage::download('/filesAgreements/' . $file->name);
     }
-    public function showRevision(){
-        return view('agreements.revision');
+    public function showRevision()
+    {
+        return view('agreements.revision', compact('agreement'));
     }
 
 }

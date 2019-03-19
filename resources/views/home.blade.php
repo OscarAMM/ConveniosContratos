@@ -12,6 +12,7 @@
     <!-- <div class="blockquote">{{(Auth::user()->name)}}
         <h6>Administrador</h6>
     </div> -->
+<<<<<<< HEAD
     @if(count (Auth::user()->getContracts))
     hhhhh
     @endif
@@ -20,6 +21,9 @@
     @endforeach-->
     <!-- INICIO DE CATALOGOS -->
  
+=======
+    <!-- INICIO DE CATALOGOS --> 
+>>>>>>> 6cc757f2c81c9eefdafec4823b48fe511450a14d
     <!-- Inicio CONTRATO-->
     <div>
         <div class="card text-center">
@@ -32,6 +36,7 @@
                     registrado.</p>
                 <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
                 <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>
+                <a href="{{route('Revision')}}" class="btn btn-primary">ASIGNADOS</a>
 
             </div>
 
@@ -70,6 +75,7 @@
                     observar lo registrado.</p>
                 <a href="{{route('admin.index')}}" class="btn btn-primary">REGISTRAR</a>
                 <a href="{{route('users.index')}}" class="btn btn-primary">CONSULTAR</a>
+                <a href="{{route('mail.index')}}" class="btn btn-primary">ENVIAR CORREO</a>
             </div>
 
         </div>
