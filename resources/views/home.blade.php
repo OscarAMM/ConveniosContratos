@@ -64,6 +64,7 @@
                     observar lo registrado.</p>
                 <a href="{{route('admin.index')}}" class="btn btn-primary">REGISTRAR</a>
                 <a href="{{route('users.index')}}" class="btn btn-primary">CONSULTAR</a>
+                <a href="{{route('mail.index')}}" class="btn btn-primary">ENVIAR CORREO</a>
             </div>
 
         </div>

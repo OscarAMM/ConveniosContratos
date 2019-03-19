@@ -29,5 +29,5 @@ Route::resource('users', 'UserController');
 Route::post('/usersEdited/{id}', ['as' => 'users.edited', 'uses' => 'UserController@edited']);
 
 //RUTA MAIL
-Route::get('/mail', 'EmailController@index');
-Route::post('send/mail', 'EmailController@sendEmail');
+Route::get('/mail', ['uses'=> 'EmailController@index' , 'as' => 'mail.index']);
+Route::post('send/sendmail', ['uses'=> 'EmailController@sendEmail' , 'as' => 'SendMail.index']);

@@ -1,9 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-<form method="POST" action="{{ url('/mail') }}">
+<form method="POST" action="{{ route('SendMail.index') }}">
     @csrf
 
+    @if(Session::has("success"))
+    <div class="alert alert-success">¡Tu mensaje ha sido enviado!</div>
+    @endif
     <div class="form-group row">
         <label for="subject" class="col-md-4 col-form-label text-md-right">{{ __('Subject') }}</label>
 

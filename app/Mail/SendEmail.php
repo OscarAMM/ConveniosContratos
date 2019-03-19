@@ -18,6 +18,7 @@ class SendEmail extends Mailable
      */
     public $sub;
     public $mess;
+
     public function __construct($subject , $message)
     {
         $this->sub = $subject;
@@ -33,6 +34,6 @@ class SendEmail extends Mailable
     {
         $e_subject=$this->sub;
         $e_message=$this->mess;
-        return $this->view('view.name');
+        return $this->view('mail.mail', compact("e_message"))->subject($e_subject);
     }
 }
