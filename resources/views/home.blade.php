@@ -12,6 +12,12 @@
     <!-- <div class="blockquote">{{(Auth::user()->name)}}
         <h6>Administrador</h6>
     </div> -->
+    @if(count (Auth::user()->getContracts))
+    hhhhh
+    @endif
+   <!-- @foreach(Auth::user()->getContracts as $contract)
+    <h1{{$contract->name}}</h1>
+    @endforeach-->
     <!-- INICIO DE CATALOGOS -->
  
     <!-- Inicio CONTRATO-->

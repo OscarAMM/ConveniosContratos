@@ -76,14 +76,14 @@ class ContractController extends Controller
             $contract->users()->detach();
             foreach ($users as $user) {
                 // echo $user;
+                //echo User::where('id', $user)->first();
                 $contract->users()
                     ->attach(User::where('id', $user)->first());
-            }
+        }
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido actualizado');
     }
     public function store(ContractRequest $request)
     {
-      
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();

@@ -44,7 +44,7 @@ class AgreementRequest extends FormRequest
             'contractValidity.required' => 'Ingresa una fecha de fin válida',
             'scope.required' => 'Ingresa el ambito del contrato',
             'users.required' => 'Asigna un usuario',
-            'institute_id.required' => 'Asigna un instituto',
+            'dependence_id.required' => 'Asigna una dependencia',
         ];
     }
 }
