@@ -9,6 +9,9 @@ use App\Institute;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Mail;
+use Session;
+use App\Mail\SendEmail;
 
 class ContractController extends Controller
 {
@@ -116,8 +119,16 @@ class ContractController extends Controller
             $contract->save();
             foreach ($users as $user) {
                 // echo $user;
+                $activeUser=User::where('id', $user)->first();
                 $contract->users()
                     ->attach(User::where('id', $user)->first());
+                    $email = $activeUser->email;
+                    $subject = "Asignación de contratos";
+                    $message = "Se le ha asignado el contrato ". $request->name." para revisión";
+
+                    Mail::to($email)->send(new SendEmail($subject, $message));
+                    //Session::flash("success");
+                    //return back();
             }
             $contract->files()
                 ->attach(File::where('id', $file_Name->id)->first());
