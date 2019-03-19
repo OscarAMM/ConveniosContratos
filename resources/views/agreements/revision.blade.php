@@ -23,6 +23,3 @@
     </table>
 </form>
 @endsection
-
-
-<li></li>
