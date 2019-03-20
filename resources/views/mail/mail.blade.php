@@ -11,4 +11,3 @@
 {{$e_message}}
 </body>
 </html>
-
