@@ -12,6 +12,9 @@
     <!-- <div class="blockquote">{{(Auth::user()->name)}}
         <h6>Administrador</h6>
     </div> -->
+    @if(count (Auth::user()->getContracts))
+    hhhhh
+    @endif
     <!-- INICIO DE CATALOGOS --> 
     <!-- Inicio CONTRATO-->
     <div>
