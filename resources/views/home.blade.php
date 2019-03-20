@@ -26,7 +26,7 @@
                     registrado.</p>
                 <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
                 <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>
-                @if(count (Auth::user()->getContracts))
+                @if(count (Auth::user()->getContracts) || count (Auth::user()->getAgreements))
                 <a href="{{route('Revision')}}" class="btn btn-primary">ASIGNADOS</a>
                 @endif
             </div>

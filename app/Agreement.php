@@ -58,4 +58,11 @@ class Agreement extends Model
         return $this ->belongsToMany(FileAgreement::class,'agreement_file_agreement')->withPivot('file_agreement_id','agreement_id')
         ->withTimestamps();
     }
+    public function hasUser($email)
+    {
+        if ($this->users()->where('email', $email)->first()) {
+            return true;
+        }
+        return false;
+    }
 }

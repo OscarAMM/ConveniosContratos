@@ -53,4 +53,11 @@ class Contract extends Model
         return $this ->belongsToMany(File::class,'contract_file')->withPivot('file_id','contract_id')
         ->withTimestamps();
     }
+    public function hasUser($email)
+    {
+        if ($this->users()->where('email', $email)->first()) {
+            return true;
+        }
+        return false;
+    }
 }

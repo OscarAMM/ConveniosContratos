@@ -9,6 +9,9 @@ use App\Http\Requests\AgreementRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Mail;
+use Session;
+use App\Mail\SendEmail;
 
 class AgreementController extends Controller
 {
@@ -79,11 +82,16 @@ class AgreementController extends Controller
         $agreement->update();
         $agreement->users()->detach();
         foreach ($users as $user) {
-            // echo $user;
+            $activeUser=User::where('id', $user)->first();
+                if(!$agreement->hasUser($activeUser->email)){
+                    $email = $activeUser->email;
+                    $subject = "Asignación de convenios";
+                    $message = "Se le ha asignado el convenio ". $request->name." para revisión";
+                    Mail::to($email)->send(new SendEmail($subject, $message));
+                }
             $agreement->users()
                 ->attach(User::where('id', $user)->first());
         }
-
         return redirect()->route('Agreement.index')->with('info', 'El Convenio ha sido actualizado');
 
     }
@@ -127,8 +135,13 @@ class AgreementController extends Controller
         } else {
             $agreement->save();
             foreach ($users as $user) {
-                $agreement->users()
+                    $activeUser=User::where('id', $user)->first();
+                    $agreement->users()
                     ->attach(User::where('id', $user)->first());
+                    $email = $activeUser->email;
+                    $subject = "Asignación de convenios";
+                    $message = "Se le ha asignado el convenio ". $request->name." para revisión";
+                    Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->files()
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
@@ -142,7 +155,7 @@ class AgreementController extends Controller
     }
     public function showRevision()
     {
-        return view('agreements.revision', compact('agreement'));
+        return view('agreements.revision');
     }
 
 }

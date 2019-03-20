@@ -74,14 +74,19 @@ class ContractController extends Controller
         $contract->scope = $request->scope;
         $contract->institute_id = $request->institute_id;
         $users = $request->users;
-        
             $contract->update();
             $contract->users()->detach();
             foreach ($users as $user) {
-                // echo $user;
-                //echo User::where('id', $user)->first();
+                $activeUser=User::where('id', $user)->first();
+                if(!$contract->hasUser($activeUser->email)){
+                    $email = $activeUser->email;
+                    $subject = "Asignación de contratos";
+                    $message = "Se le ha asignado el contrato ". $request->name." para revisión";
+                    Mail::to($email)->send(new SendEmail($subject, $message));
+                }
                 $contract->users()
                     ->attach(User::where('id', $user)->first());
+                
         }
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido actualizado');
     }
@@ -127,8 +132,6 @@ class ContractController extends Controller
                     $message = "Se le ha asignado el contrato ". $request->name." para revisión";
 
                     Mail::to($email)->send(new SendEmail($subject, $message));
-                    //Session::flash("success");
-                    //return back();
             }
             $contract->files()
                 ->attach(File::where('id', $file_Name->id)->first());
