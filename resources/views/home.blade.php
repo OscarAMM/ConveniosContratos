@@ -12,9 +12,7 @@
     <!-- <div class="blockquote">{{(Auth::user()->name)}}
         <h6>Administrador</h6>
     </div> -->
-    @if(count (Auth::user()->getContracts))
-    hhhhh
-    @endif
+    
     <!-- INICIO DE CATALOGOS --> 
     <!-- Inicio CONTRATO-->
     <div>
@@ -28,8 +26,9 @@
                     registrado.</p>
                 <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
                 <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>
+                @if(count (Auth::user()->getContracts))
                 <a href="{{route('Revision')}}" class="btn btn-primary">ASIGNADOS</a>
-
+                @endif
             </div>
 
         </div>
