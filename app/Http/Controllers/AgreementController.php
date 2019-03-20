@@ -142,7 +142,7 @@ class AgreementController extends Controller
     }
     public function showRevision()
     {
-        return view('agreements.revision', compact('agreement'));
+        return view('agreements.revision');
     }
 
 }
