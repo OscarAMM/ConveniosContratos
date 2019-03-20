@@ -16,6 +16,37 @@
     <div class="container">
 
 
+    @if(Auth::user()->hasRole('admin'))
+    <!-- <div class="blockquote">{{(Auth::user()->name)}}
+        <h6>Administrador</h6>
+    </div> -->
+    
+    <!-- INICIO DE CATALOGOS --> 
+    <!-- Inicio CONTRATO-->
+    <div>
+        <div class="card text-center">
+            <div class="card-header text-muted">
+               <h4>Convenio - Contrato</h4> 
+            </div>
+            <div class="card-body">
+                
+                <p class="card-text">Se administran los convenios y contratos permitiendo agregar, editar, observar y eliminar lo
+                    registrado.</p>
+
+                <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
+                <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>
+                @if(count (Auth::user()->getContracts) || count (Auth::user()->getAgreements))
+                <a href="{{route('Revision')}}" class="btn btn-primary">ASIGNADOS</a>
+
+                <a href="{{route('Contract.index')}}" class="btn btn-primary">Contratos</a>
+                <a href="{{route('Agreement.index')}}" class="btn btn-primary">Convenios</a>
+                @if(count (Auth::user()->getContracts))
+                <a href="{{route('Revision')}}" class="btn btn-primary">Asignados</a>
+
+                @endif
+            </div>
+
+
 
         @if (session('status'))
         <div class="alert alert-success" role="alert">
