@@ -18,16 +18,16 @@
     <div>
         <div class="card text-center">
             <div class="card-header text-muted">
-                CONVENIO - CONTRATO
+               <h4>Convenio - Contrato</h4> 
             </div>
             <div class="card-body">
-                <h5 class="card-title">Convenios - Contratos</h5>
+                
                 <p class="card-text">Se administran los convenios y contratos permitiendo agregar, editar, observar y eliminar lo
                     registrado.</p>
-                <a href="{{route('Contract.index')}}" class="btn btn-primary">CONTRATOS</a>
-                <a href="{{route('Agreement.index')}}" class="btn btn-primary">CONVENIOS</a>
+                <a href="{{route('Contract.index')}}" class="btn btn-primary">Contratos</a>
+                <a href="{{route('Agreement.index')}}" class="btn btn-primary">Convenios</a>
                 @if(count (Auth::user()->getContracts))
-                <a href="{{route('Revision')}}" class="btn btn-primary">ASIGNADOS</a>
+                <a href="{{route('Revision')}}" class="btn btn-primary">Asignados</a>
                 @endif
             </div>
 
@@ -40,14 +40,14 @@
     <div>
         <div class="card text-center ">
             <div class="card-header text-muted">
-                INSTITUCION - DEPENDENCIA
+               <h4>Institución - Dependencia</h4> 
             </div>
             <div class="card-body text-center">
-                <h5 class="card-title">Institucion - Dependencia</h5>
+         
                 <p class="card-text">Se administran instituciones y dependendencias permitiendo agregar, editar,
                     eliminar y observar lo registrado.</p>
-                <a href="{{route('Institute.index')}}" class="btn btn-primary">INSTITUCIONES</a>
-                <a href="{{route('Dependence.index')}}" class="btn btn-primary">DEPENDENCIAS</a>
+                <a href="{{route('Institute.index')}}" class="btn btn-primary">Instituciones</a>
+                <a href="{{route('Dependence.index')}}" class="btn btn-primary">Dependencias</a>
             </div>
         </div>
     </div>
@@ -58,15 +58,14 @@
     <div>
         <div class="card text-center ">
             <div class="card-header text-muted">
-                USUARIOS
+                <h4>Usuarios</h4>
             </div>
             <div class="card-body">
-                <h5 class="card-title">Usuario - Administrador</h5>
                 <p class="card-text">Se administran usuarios y administradores permitiendo agregar, editar, eliminar y
                     observar lo registrado.</p>
-                <a href="{{route('admin.index')}}" class="btn btn-primary">REGISTRAR</a>
-                <a href="{{route('users.index')}}" class="btn btn-primary">CONSULTAR</a>
-                <a href="{{route('mail.index')}}" class="btn btn-primary">ENVIAR CORREO</a>
+                <a href="{{route('admin.index')}}" class="btn btn-primary">Registrar</a>
+                <a href="{{route('users.index')}}" class="btn btn-primary">Consultar</a>
+                <a href="{{route('mail.index')}}" class="btn btn-primary">Enviar Correo</a>
             </div>
 
         </div>
