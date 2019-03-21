@@ -25,6 +25,20 @@
                         <h5 class="card-title font-weight-bold">Rol</h5>
                         {{$rol}}
                     </li>
+                    <li class="list-group-item"> 
+                    <h5 class="card-title font-weight-bold">Contratos asignados</h5>
+                    @foreach($user->getContracts as $contract)       
+                        {{$contract->name}}
+                        <br>
+                    @endforeach
+                    </li>
+                    <li class="list-group-item"> 
+                    <h5 class="card-title font-weight-bold">Convenios asignados</h5>
+                    @foreach($user->getAgreements as $agreement)       
+                        {{$agreement->name}}
+                        <br>
+                    @endforeach
+                    </li>
                     <br>
                     <a href="{{route('users.index')}}" class="btn btn-secondary">Regresar</a>
                     </ul>

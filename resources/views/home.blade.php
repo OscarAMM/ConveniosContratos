@@ -33,24 +33,14 @@
                 <h4>Convenio - Contrato</h4>
             </div>
             <div class="card-body">
-<<<<<<< HEAD
-                
-                <p class="card-text">Se administran los convenios y contratos permitiendo agregar, editar, observar y eliminar lo
-                    registrado.</p>
-                <a href="{{route('Contract.index')}}" class="btn btn-primary">Contratos</a>
-                <a href="{{route('Agreement.index')}}" class="btn btn-primary">Convenios</a>
-                @if(count (Auth::user()->getContracts))
-                <a href="{{route('Revision')}}" class="btn btn-primary">Asignados</a>
-=======
                 <p class="text">Se realiza una administración de contratos y convenios.
                     En este apartado podrás agregar, editar, eliminar, observar y dar revisión de los contratos y
                     convenios que se agreguen al sistema.
                 </p>
                 <a href="{{route('Contract.index')}}" class="btn boton">Contratos</a>
                 <a href="{{route('Agreement.index')}}" class="btn boton">Convenios</a>
-                @if(count (Auth::user()->getContracts))
+                @if(count (Auth::user()->getContracts)||count (Auth::user()->getAgreements))
                 <a href="{{route('Revision')}}" class="btn boton">Asignados</a>
->>>>>>> eddacda327fe351663e14aa11343ad4bc52bf000
                 @endif
             </div>
 
