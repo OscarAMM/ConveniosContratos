@@ -1,28 +1,51 @@
 @extends('layouts.app')
 @section('content')
-<div class="card">
-    <div class="card-header">
-        <h2 class="text-center font-weight-bold text-muted">Revisión general del documento</h2>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre del convenio</th>
+                        <th scope="col">Revisión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(Auth::user()->getAgreements as $agreemment)
+                    {!!csrf_field()!!}
+                    <tr>
+                        <th scope="row">{{$agreemment->name}}</th>
+                        <td><a href="#" class="btn btn-primary">Revisión</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+<!-- tabla de contratos-->
+        <div class="col">
+        <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre del contrato</th>
+                        <th scope="col">Revisión</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(Auth::user()->getContracts as $contract)
+                    {!!csrf_field()!!}
+                    <tr>
+                        <th scope="row">{{$contract->name}}</th>
+                        <td><a href="#" class="btn btn-primary">Revisión</a></td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
     </div>
-
-    <form method="Post" action="">
-        {!!csrf_field()!!}
-        <input type="hidden" name="document_id" value="#" required>
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Nombre de Convenio</th>
-                    <th colspan="4">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>@foreach(Auth::user()->getAgreements as $agreemment)
-                <tr>
-                    <td>{{$agreemment->name}}</td>
-                    <td><a href="#" class="btn btn-primary">Revisar</a></td>
-                </tr>@endforeach</tbody>
-
-        </table>
-    </form>
 </div>
+
+
+
+
 
 @endsection

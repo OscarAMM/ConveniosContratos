@@ -74,9 +74,10 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="pb-4">
             @yield('content')
         </main>
     </div>
 </body>
+<footer class="bd-footer text-muted text-center">© Todos los Derechos Reservados, UADY 2019. Esta página puede ser reproducida con fines no lucrativos, siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica, de otro forma requiere permiso previo por escrito de la institución. </footer>
 </html>
