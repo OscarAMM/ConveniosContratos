@@ -29,6 +29,29 @@ class AgreementController extends Controller
             ->paginate();
         return view('agreements.index', compact('agreements'));
     }
+    public function indexPublic(Request $request)
+    {
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $reception = $request->get('reception');
+        $scope = $request->get('scope');
+        $agreements = Agreement::orderBy('id', 'ASC')
+            ->id($id)
+            ->name($name)
+            ->reception($reception)
+            ->scope($scope)
+            ->paginate();
+        return view('public.index', compact('agreements'));
+    }
+    public function showPublic($id)
+    {
+        $agreements = Agreement::find($id);
+        $dependence_id = $agreements->dependence_id;
+        $dependences = Dependence::find($dependence_id);
+        
+        $files = $agreements->getFiles;
+        return view('public.show', compact('agreements', 'dependences', 'files'));
+    }
 
     public function create()
     {

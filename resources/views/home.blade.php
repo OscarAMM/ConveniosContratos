@@ -97,7 +97,7 @@
                 <p class="card-text">Se despliega todos los convenios que se tiene firmado entre la UADY y otra
                     dependencia.</p>
 
-                <a href="#" class="btn btn-primary">CONSULTAR</a>
+                <a href="{{route('public.index')}}" class="btn btn-primary">CONSULTAR</a>
             </div>
 
         </div>

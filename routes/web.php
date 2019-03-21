@@ -17,6 +17,8 @@ Route::get('/AgreementDownloadFile/{id}', ['as' => 'agreement.download', 'uses' 
 //Ruta Convenio
 Route::resource('Agreement', 'AgreementController');
 Route::get('/AgreementRevision', ['uses' => 'AgreementController@showRevision', 'as' => 'Revision']);
+Route::get('/AgreementPublic', ['uses' => 'AgreementController@indexPublic', 'as' => 'public.index']);
+Route::get('/AgreementShow/{id}', ['uses' => 'AgreementController@showPublic', 'as' => 'public.show']);
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);
