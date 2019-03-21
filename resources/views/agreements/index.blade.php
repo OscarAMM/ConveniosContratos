@@ -1,11 +1,12 @@
 @extends('layouts.app')
 @section('content')
+<link rel="stylesheet" href="{{asset('css\proyect.css')}}">
 @if(Auth::user()->hasRole('admin'))
 
 @include('auth.fragment.info')
 
 <div class="card-header text-muted text-center" style="margin-bottom:5px">
-    <h3> Convenios </h3>
+    <h2> Convenios </h2>
 </div>
 {{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
 <p class="text-item-center"><a href="{{route('Agreement.create')}}" class="btn btn-success"
@@ -40,7 +41,7 @@
     {{Form::close()}}
 </div>
 
-<table class="table">
+<table class="table  table-bordered">
     <thead class="thead-dark">
         <tr>
             <th>Id</th>
