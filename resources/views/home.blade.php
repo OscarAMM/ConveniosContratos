@@ -88,19 +88,38 @@
         @else
         <!--{{(Auth::user()->name)}}-->
 
-        <div class="card text-center ">
-            <div class="card-header text-muted">
-                VISTAS PÚBLICAS
+        <div class="card">
+            <div class="card-header text-muted  text-center ">
+                <h4>Vistas públicas</h4>
             </div>
             <div class="card-body">
-                <h5 class="card-title">VISTAS PÚBLICAS</h5>
+                
                 <p class="card-text">Se despliega todos los convenios que se tiene firmado entre la UADY y otra
                     dependencia.</p>
 
-                <a href="{{route('public.index')}}" class="btn btn-primary">CONSULTAR</a>
+                <a href="{{route('public.index')}}" class="btn boton">Consultar</a>
             </div>
 
         </div>
+        <br>
+        @if(count (Auth::user()->getContracts)||count (Auth::user()->getAgreements))
+        <div class="card">
+            <div class="card-header text-muted text-center">
+                <h4>Convenio - Contrato</h4>
+            </div>
+            <div class="card-body">
+                <p class="text">Se realiza una administración de contratos y convenios.
+                    En este apartado podrás dar revisión de los contratos y
+                    convenios que se agreguen al sistema.
+                </p>
+                
+                
+                <a href="{{route('Revision')}}" class="btn boton">Asignados</a>
+                
+            </div>
+
+        </div>
+        @endif
     </div>
 
     @endif

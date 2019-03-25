@@ -43,6 +43,9 @@ class UserController extends Controller
     }
     public function edited(Request $request,String $id){
         $user = User::where('id', $request['id'])->first();
+        $user->name=$request['name'];
+        $user->email=$request['email'];
+        $user->update();
         $user->roles()->detach();
         if ($request['rol']=="user") {
             $user->roles()->attach(Role::where('name', 'user')->first());
