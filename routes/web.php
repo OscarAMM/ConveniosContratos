@@ -33,3 +33,5 @@ Route::post('/usersEdited/{id}', ['as' => 'users.edited', 'uses' => 'UserControl
 //RUTA MAIL
 Route::get('/mail', ['uses'=> 'EmailController@index' , 'as' => 'mail.index']);
 Route::post('send/sendmail', ['uses'=> 'EmailController@sendEmail' , 'as' => 'SendMail.index']);
+//RUTA REVISION FORUM
+Route::get('/RevisionForum',  ['uses'=> 'AgreementController@ForumRevision' , 'as' => 'Forum.Revision']);

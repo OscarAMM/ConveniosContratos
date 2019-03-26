@@ -26,6 +26,17 @@ a.boton:hover{
     color:#ffffff;
     background-color: #D9B153;
 }
+.boton{
+    text-decoration:none;
+    font-weight: 100;
+    font-size: 14px;
+    color:#ffffff;
+    background-color: #BF942D ;
+}
+.boton:hover{
+    color:#ffffff;
+    background-color: #D9B153;
+}
 .text{
     margin-bottom: 24px;
     text-align: justify;

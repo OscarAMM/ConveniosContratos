@@ -1,6 +1,17 @@
 @extends('layouts.app')
 @section('content')
-<div class="container">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
+    <title>Document</title>
+</head>
+<body>
+<br>
+<div class="container col-md-10">
     <div class="row">
         <div class="col">
             <table class="table table-bordered">
@@ -35,7 +46,7 @@
                     {!!csrf_field()!!}
                     <tr>
                         <th scope="row">{{$contract->name}}</th>
-                        <td><a href="#" class="btn btn-primary">Revisión</a></td>
+                        <td><a href="{{route('Forum.Revision')}}" class="btn btn-primary">Revisión</a></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -43,9 +54,7 @@
         </div>
     </div>
 </div>
-
-
-
-
+</body>
+</html>
 
 @endsection
