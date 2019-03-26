@@ -180,5 +180,8 @@ class AgreementController extends Controller
     {
         return view('agreements.revision');
     }
+    public function ForumRevision(){
+        return view('agreements.forum');
+    }
 
 }
