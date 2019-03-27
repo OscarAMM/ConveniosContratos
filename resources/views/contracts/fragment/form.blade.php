@@ -65,8 +65,8 @@
                             <input type="file" class="form-control-file" name="file" id="file">
                         </div>
                         <div class="col-md-4">
-                            <label for="response_id" class=" col-form-label">Asigne responsable</label>
-                            <select name="response_id" id="response_id"
+                            <label for="liable_user" class=" col-form-label">Asigne responsable</label>
+                            <select name="liable_user" id="liable_user"
                                 placeholder="Selecciona el responsable asignado" class="form-control"
                                 required="required">
                                 <!--Integrar for each -->
@@ -80,7 +80,7 @@
                         
                             <script type="text/javascript">
                             
-                                $("#response_id").select2({
+                                $("#liable_user").select2({
                                         placeholder: "Select a Name",
                                         allowClear: true
                                     });

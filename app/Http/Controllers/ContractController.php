@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Controllers\DateTime;
 use App\Contract;
 use App\File;
 use App\Http\Requests\ContractRequest;
@@ -117,6 +117,11 @@ class ContractController extends Controller
         $contract->contractValidity = $request->contractValidity;
         $contract->scope = $request->scope;
         $contract->institute_id = $request->institute_id;
+        $contract->status="Revisión";
+        $contract->liable_user = $request->liable_user;
+        $contract->start_date = $date = date('Y-m-d');
+        $contract->end_date = $date = date('Y-m-d');
+
         $users = $request->users;
         if (Contract::where('name', $contract->name)->exists()) {
             return back()->with('info', 'El contrato ya existe.');
@@ -136,6 +141,14 @@ class ContractController extends Controller
             $contract->files()
                 ->attach(File::where('id', $file_Name->id)->first());
         }
+        /*$date = date('Y-m-d');
+        $ano = substr($date, -10, 4);
+        $mes = substr($date, -5, 2);
+        $dia = substr($date, -2, 2);
+        echo $ano;
+        echo $mes ;
+        echo $dia+5;
+        echo $date;*/
         return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
     }
     public function showFile($id){

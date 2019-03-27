@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agreement extends Model
 {
     protected $fillable = [
-        'name', 'reception', 'objective', 'agreementValidity', 'scope','dependence_id','hide',
+        'name', 'reception', 'objective', 'agreementValidity', 'scope','dependence_id','hide','start_date','end_date','status','liable_user'
     ];
     public function scopeName($query,$name){
         if($name){
