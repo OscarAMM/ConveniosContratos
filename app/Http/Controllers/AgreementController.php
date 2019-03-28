@@ -131,12 +131,9 @@ class AgreementController extends Controller
         //Archivo
         $file_Name = new FileAgreement();
         $file_Name->name = $file_path;
-        if (FileAgreement::where('name', $file_Name->name)->exists()) {
-            return back()->with('info', 'El archivo ya esta registrado');
-
-        } else {
+        
             $file_Name->save();
-        }
+        
 
         //Convenio
         $agreement = new Agreement();
@@ -145,6 +142,10 @@ class AgreementController extends Controller
         $agreement->objective = $request->objective;
         $agreement->agreementValidity = $request->agreementValidity;
         $agreement->scope = $request->scope;
+        $agreement->status="Revisión";
+        $agreement->liable_user = $request->liable_user;
+        $agreement->start_date = $date = date('Y-m-d');
+        $agreement->end_date = $date = date('Y-m-d');
         if ($request->hide == "visible") {
             $agreement->hide = true;
         } else {

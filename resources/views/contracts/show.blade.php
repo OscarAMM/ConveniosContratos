@@ -48,6 +48,7 @@
                         <h5 class="card-title font-weight-bold">Archivos</h5>
                         @foreach($files as $file)
                         <ul>
+                            <li>Fecha de creación: {{$file->created_at}}</li>
                             <a href="{{route('contract.download',$file->id)}}">{{$file->name}}</a>
                         </ul>
                         @endforeach
