@@ -19,7 +19,7 @@
         <div class="container">
             <div class="colum-sm-8">
                 <div class="head">
-                    <h2 class="card card-header text-muted text-center">Revisión de: "{{$agreements->name}}"</h2>
+                    <h2 class="card card-header text-muted text-center">Revisión</h2>
                 </div>
 
                 <div class="form-group">
