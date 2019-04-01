@@ -61,6 +61,10 @@
                         <label for="NoVisible">No Visible</label>
                         @endif
                     </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Estado</h5>
+                        {{$agreements->status}}
+                    </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
                         </ul>

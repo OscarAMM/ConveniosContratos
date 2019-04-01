@@ -12,6 +12,9 @@ use Illuminate\Support\Facades\Storage;
 use Mail;
 use Session;
 use App\Mail\SendEmail;
+use Carbon\Carbon;
+
+
 
 class AgreementController extends Controller
 {
@@ -66,6 +69,11 @@ class AgreementController extends Controller
         $dependences = Dependence::find($dependence_id);
         $users = $agreements->getUser;
         $files = $agreements->getFiles;
+        /*$date= Carbon::now();
+        echo $date->format('Y-m-d');
+        echo $date->addWeekDays(4)->format('Y-m-d');
+        $date2=$date->addWeekDays(4);
+        echo $date->diffInDays($date2->copy());*/
         return view('agreements.show', compact('agreements', 'users', 'dependences', 'files'));
     }
     public function edit($id)
@@ -144,8 +152,8 @@ class AgreementController extends Controller
         $agreement->scope = $request->scope;
         $agreement->status="Revisión";
         $agreement->liable_user = $request->liable_user;
-        $agreement->start_date = $date = date('Y-m-d');
-        $agreement->end_date = $date = date('Y-m-d');
+        $agreement->start_date =  Carbon::now();
+        $agreement->end_date = Carbon::now()->addWeekDays(4);
         if ($request->hide == "visible") {
             $agreement->hide = true;
         } else {
@@ -164,7 +172,7 @@ class AgreementController extends Controller
                     ->attach(User::where('id', $user)->first());
                     $email = $activeUser->email;
                     $subject = "Asignación de convenios";
-                    $message = "Se le ha asignado el convenio ". $request->name." para revisión";
+                    $message = "Se le ha asignado el convenio ". $request->name.", cuenta con 5 días para su revisión, desde ".$agreement->start_date->format('d-m-y')." hasta ".$agreement->end_date->format('d-m-y');
                     Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->files()

@@ -53,6 +53,10 @@
                         </ul>
                         @endforeach
                     </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Estado</h5>
+                        {{$contracts->status}}
+                    </li>
                     <li class="list-group-item text-center">
                         <a href="{{route('Contract.index')}}" class="btn btn-secondary">Regresar</a>
                         </ul>

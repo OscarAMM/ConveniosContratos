@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Mail;
 use Session;
 use App\Mail\SendEmail;
+use Carbon\Carbon;
 
 class ContractController extends Controller
 {
@@ -45,6 +46,7 @@ class ContractController extends Controller
         $institute = Institute::find($institute_id);
         $users = $contracts->getUser;
         $files=$contracts->getFiles;
+        
         return view('contracts.show', compact('contracts', 'users', 'institute','files'));
     }
     public function edit($id)
@@ -119,8 +121,8 @@ class ContractController extends Controller
         $contract->institute_id = $request->institute_id;
         $contract->status="Revisión";
         $contract->liable_user = $request->liable_user;
-        $contract->start_date = $date = date('Y-m-d');
-        $contract->end_date = $date = date('Y-m-d');
+        $contract->start_date =  Carbon::now();
+        $contract->end_date = Carbon::now()->addWeekDays(4);
 
         $users = $request->users;
         if (Contract::where('name', $contract->name)->exists()) {
@@ -134,7 +136,7 @@ class ContractController extends Controller
                     ->attach(User::where('id', $user)->first());
                     $email = $activeUser->email;
                     $subject = "Asignación de contratos";
-                    $message = "Se le ha asignado el contrato ". $request->name." para revisión";
+                    $message = "Se le ha asignado el contrato ". $request->name.", cuenta con 5 días para su revisión, desde ".$contract->start_date->format('d-m-y')." hasta ".$contract->end_date->format('d-m-y');
 
                     Mail::to($email)->send(new SendEmail($subject, $message));
             }
