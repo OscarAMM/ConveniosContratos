@@ -26,7 +26,7 @@
                     {!!csrf_field()!!}
                     <tr>
                         <th scope="row">{{$agreemment->name}}</th>
-                        <td><a href="#" class="btn btn-primary">Revisión</a></td>
+                        <td><a href="{{route('Forum.Agreement', $agreemment->id)}}" class="btn btn-primary">Revisión</a></td>
                     </tr>
                     @endforeach
                 </tbody>
@@ -46,7 +46,7 @@
                     {!!csrf_field()!!}
                     <tr>
                         <th scope="row">{{$contract->name}}</th>
-                        <td><a href="{{route('Forum.Revision')}}" class="btn btn-primary">Revisión</a></td>
+                        <td><a href="{{route('Forum.Contract', $contract->id)}}" class="btn btn-primary">Revisión</a></td>
                     </tr>
                     @endforeach
                 </tbody>

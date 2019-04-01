@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
-    <script type="text/javascript" src="{{asset('js\disable.js')}}"></script>
+    <script  type="text/javascript"  src="{{asset('js\disable.js')}}"></script>
     <title>Forum Revision</title>
 </head>
 
@@ -19,7 +19,7 @@
         <div class="container">
             <div class="colum-sm-8">
                 <div class="head">
-                    <h2 class="card card-header text-muted text-center">Revisión de: "{{$agreements->name}}"</h2>
+                    <h2 class="card card-header text-muted text-center">Revisión</h2>
                 </div>
 
                 <div class="form-group">
@@ -53,10 +53,9 @@
                             <p>Si no está seguro de haber finalizado, no seleccione "Finalizar"</p>
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button"
-                            onClick="alertbutton()">
+                        <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button" onClick="alertbutton()">
                         <input type="button" value="Soy un boton de prueba" id="Button" onClick="alertbutton()">
-
+                        <input type="file" name="file" id="file" class="btn boton" >
                     </div>
 
                 </div>
@@ -68,6 +67,5 @@
 
     </form>
 </body>
-
 </html>
 @endsection

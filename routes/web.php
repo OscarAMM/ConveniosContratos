@@ -16,7 +16,6 @@ Route::get('/AgreementDownloadFile/{id}', ['as' => 'agreement.download', 'uses' 
 
 //Ruta Convenio
 Route::resource('Agreement', 'AgreementController');
-Route::get('/AgreementRevision', ['uses' => 'AgreementController@showRevision', 'as' => 'Revision']);
 Route::get('/AgreementPublic', ['uses' => 'AgreementController@indexPublic', 'as' => 'public.index']);
 Route::get('/AgreementShow/{id}', ['uses' => 'AgreementController@showPublic', 'as' => 'public.show']);
 
@@ -34,4 +33,11 @@ Route::post('/usersEdited/{id}', ['as' => 'users.edited', 'uses' => 'UserControl
 Route::get('/mail', ['uses'=> 'EmailController@index' , 'as' => 'mail.index']);
 Route::post('send/sendmail', ['uses'=> 'EmailController@sendEmail' , 'as' => 'SendMail.index']);
 //RUTA REVISION FORUM
-Route::get('/RevisionForum',  ['uses'=> 'AgreementController@ForumRevision' , 'as' => 'Forum.Revision']);
+Route::get('/RevisionContractForum/{id}',  ['uses'=> 'RevisionController@ForumContract' , 'as' => 'Forum.Contract']);
+Route::get('/RevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@ForumAgreement' , 'as' => 'Forum.Agreement']);
+Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'Revision']);
+
+
+
+//Ruta COMMENT
+Route::resource('Comment', 'CommentController');

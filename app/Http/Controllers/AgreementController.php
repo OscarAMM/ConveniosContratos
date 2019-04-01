@@ -185,12 +185,6 @@ class AgreementController extends Controller
         $file = FileAgreement::find($id);
         return Storage::download('/filesAgreements/' . $file->name);
     }
-    public function showRevision()
-    {
-        return view('agreements.revision');
-    }
-    public function ForumRevision(){
-        return view('agreements.forum');
-    }
+    
 
 }
