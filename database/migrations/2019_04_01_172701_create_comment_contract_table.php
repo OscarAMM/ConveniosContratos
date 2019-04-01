@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentAgreementTable extends Migration
+class CreateCommentContractTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateCommentAgreementTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment_agreement', function (Blueprint $table) {
+        Schema::create('comment_contract', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('comment_id')->unsigned();
-            $table->integer('agreement_id')->unsigned();
+            $table->integer('contract_id')->unsigned();
             $table->foreign('comment_id')->references('id')->on('comments')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('agreement_id')->references('id')->on('agreements')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('contract_id')->references('id')->on('contracts')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +30,6 @@ class CreateCommentAgreementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comment_agreement');
+        Schema::dropIfExists('comment_contract');
     }
 }
