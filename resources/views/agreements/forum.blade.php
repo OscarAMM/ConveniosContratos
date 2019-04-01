@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
-    <script  type="text/javascript"  src="{{asset('js\disable.js')}}"></script>
+    <script type="text/javascript" src="{{asset('js\disable.js')}}"></script>
     <title>Forum Revision</title>
 </head>
 
@@ -34,12 +34,15 @@
                     </div>
                     <div class="form-group">
                         <br>
-                        <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                        <input type="file" name="file" id="file" class="btn boton">
                         <input type="submit" class="btn btn-success" value="Comentar">
                         <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
                             aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
 
                     </div>
+                    <div class="form-group">
+                        <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                        </div>
 
                     <div class="collapse multi-collapse" id="collapseOptions">
                         <div class="card card-body">
@@ -50,9 +53,10 @@
                             <p>Si no está seguro de haber finalizado, no seleccione "Finalizar"</p>
                         </div>
                         <br>
-                        <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button" onClick="alertbutton()">
+                        <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button"
+                            onClick="alertbutton()">
                         <input type="button" value="Soy un boton de prueba" id="Button" onClick="alertbutton()">
-                        <input type="file" name="file" id="file" class="btn boton" >
+
                     </div>
 
                 </div>
@@ -64,5 +68,6 @@
 
     </form>
 </body>
+
 </html>
 @endsection

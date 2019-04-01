@@ -36,3 +36,8 @@ Route::post('send/sendmail', ['uses'=> 'EmailController@sendEmail' , 'as' => 'Se
 Route::get('/RevisionContractForum/{id}',  ['uses'=> 'RevisionController@ForumContract' , 'as' => 'Forum.Contract']);
 Route::get('/RevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@ForumAgreement' , 'as' => 'Forum.Agreement']);
 Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'Revision']);
+
+
+
+//Ruta COMMENT
+Route::resource('Comment', 'CommentController');

@@ -4,6 +4,7 @@ namespace App;
 use App\Institute;
 use App\User;
 use App\File;
+use App\Comment;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -44,6 +45,13 @@ class Contract extends Model
     public function users(){
         return $this->belongsToMany(User::class)
         ->withTimeStamps();
+    }
+    public function comments(){
+        return $this ->belongsToMany(Comment::class)
+        ->withTimestamps();
+    }
+    public function getComments(){
+        return $this ->belongsToMany(Comment::class,'comment_contract');
     }
     public function getUser(){
         return $this ->belongsToMany(User::class,'contract_user')->withPivot('user_id','contract_id')

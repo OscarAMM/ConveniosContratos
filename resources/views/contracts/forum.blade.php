@@ -34,12 +34,15 @@
                     </div>
                     <div class="form-group">
                         <br>
-                        <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                        <input type="file" name="file" id="file" class="btn boton">
                         <input type="submit" class="btn btn-success" value="Comentar">
                         <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
                             aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
 
                     </div>
+                    <div class="form-group">
+                        <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                        </div>
 
                     <div class="collapse multi-collapse" id="collapseOptions">
                         <div class="card card-body">
