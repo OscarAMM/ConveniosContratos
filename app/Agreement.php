@@ -56,7 +56,7 @@ class Agreement extends Model
         ->withTimestamps();
     }
     public function getComments(){
-        return $this ->belongsToMany(Comment::class,'comment_agreement');
+        return $this ->belongsToMany(Comment::class,'agreement_comment');
     }
     public function getUser(){
         return $this ->belongsToMany(User::class,'agreement_user')->withPivot('user_id','agreement_id')

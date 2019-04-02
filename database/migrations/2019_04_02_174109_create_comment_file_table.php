@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCommentAgreementTable extends Migration
+class CreateCommentFileTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateCommentAgreementTable extends Migration
      */
     public function up()
     {
-        Schema::create('agreement_comment', function (Blueprint $table) {
+        Schema::create('comment_file', function (Blueprint $table) {
             $table->increments('id');
+           
             $table->integer('comment_id')->unsigned();
-            $table->integer('agreement_id')->unsigned();
+            
             $table->foreign('comment_id')->references('id')->on('comments')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreign('agreement_id')->references('id')->on('agreements')->onUpdate('cascade')->onDelete('cascade');
+            $table->integer('file_id')->unsigned();
+            $table->foreign('file_id')->references('id')->on('files')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateCommentAgreementTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('agreement_comment');
+        Schema::dropIfExists('comment_file');
     }
 }

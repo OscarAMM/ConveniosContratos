@@ -17,7 +17,7 @@ class CreateAgreementsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->date('reception');
-            $table->string('objective');
+            $table->string('objective', 2000);
             $table->date('agreementValidity');
             $table->string('scope');
             $table->boolean('hide');

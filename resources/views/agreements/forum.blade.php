@@ -14,8 +14,19 @@
 
 <body>
     <br>
-   
-    <form action="{{route('Comment.make', $agreements->id)}}" method="POST">
+
+    @include('auth.fragment.error')
+    @include('auth.fragment.info')
+    <div class="form-group">
+        @foreach($agreements->getComments as $comment)
+        <li>{{$comment->user}}</li>
+        <li>{{$comment->topic}}</li>
+            <li>{{$comment->comment}}</li>
+            
+            
+        @endforeach
+    </div>
+    <form method="POST" action="{{route('Comment.make', $agreements->id)}}">
         {!! csrf_field()!!}
         <div class="container">
             <div class="colum-sm-8">
@@ -26,7 +37,8 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="subject">Asunto</label>
-                        <input name="topic" id="topic" type="text" class="form-control" placeholder="Escriba el asunto de revisión">
+                        <input name="topic" id="topic" type="text" class="form-control"
+                            placeholder="Escriba el asunto de revisión">
                     </div>
                     <div>
                         <label for="comment">Comentario</label>
@@ -35,9 +47,9 @@
                     </div>
                     <div class="form-group">
                         <br>
-                        <input type="file" name="file" id="file" class="btn boton">
+                        <input type="file" name="fileForum" id="fileForum" class="btn boton">
                         <input type="submit" class="btn btn-success" value="Comentar">
-                       <!-- <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
+                        <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
                             aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
 
                     </div>
@@ -57,7 +69,7 @@
                         <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button"
                             onClick="alertbutton()">
                         <input type="button" value="Soy un boton de prueba" id="Button" onClick="alertbutton()">
--->
+
                     </div>
 
                 </div>
