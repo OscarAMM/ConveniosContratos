@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use App\Http\Requests\CommentRequest;
 use App\File;
+use App\User;
+use App\FileAgreement;
+use App\Comment;
+use App\Agreement;
+use App\Contract;
 
 class CommentController extends Controller
 {
-   /* public function store(Request $request){
-        $validate = $this->Validate($request,[
-            'comment' => 'required',
-        ]);
-    }*/
-    public function store(CommentRequest $request)
+    
+    public function commentAgreement(CommentRequest $request, $id)
     {
+        //$user=User::find($idUser);
+        $agreement=Agreement::find($id);
+
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
@@ -22,46 +27,24 @@ class CommentController extends Controller
             return back()->with('info', 'No selecciono un archivo.');
         }
         //Archivo
-        $file_Name = new File();
+        $file_Name = new FileAgreement();
         $file_Name->name = $file_path;
         $file_Name->save();
         
 
-        //Contrato
+        //Comentario
         $comment = new Comment();
         $comment->topic = $request->topic;
-        $comment->comment = $request->comment;/*
-        $agreement=
-        $contract->files()
-                ->attach(File::where('id', $file_Name->id)->first());
-
-        $users = $request->users;
-        if (Contract::where('name', $contract->name)->exists()) {
-            return back()->with('info', 'El contrato ya existe.');
-        } else {
-            $contract->save();
-            foreach ($users as $user) {
-                // echo $user;
-                $activeUser=User::where('id', $user)->first();
-                $contract->users()
-                    ->attach(User::where('id', $user)->first());
-                    $email = $activeUser->email;
-                    $subject = "Asignación de contratos";
-                    $message = "Se le ha asignado el contrato ". $request->name." para revisión";
-
-                    Mail::to($email)->send(new SendEmail($subject, $message));
-            }
-            $contract->files()
-                ->attach(File::where('id', $file_Name->id)->first());
-        }
-        /*$date = date('Y-m-d');
-        $ano = substr($date, -10, 4);
-        $mes = substr($date, -5, 2);
-        $dia = substr($date, -2, 2);
-        echo $ano;
-        echo $mes ;
-        echo $dia+5;
-        echo $date;*/
+        $comment->comment = $request->comment;
+        $comment->user=$id;
+        $comment->save();
+        
+        $agreement->comments()
+                    ->attach(Comment::where('id', $comment->id)->first());
+        $agreement->files()
+                    ->attach(FileAgreement::where('id', $file_Name->id)->first());
+        echo 'exito';
+        
     }
     }
 

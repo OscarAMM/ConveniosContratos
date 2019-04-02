@@ -14,7 +14,8 @@
 
 <body>
     <br>
-    <form action="#" method="POST">
+   
+    <form action="{{route('Comment.make', $agreements->id)}}" method="POST">
         {!! csrf_field()!!}
         <div class="container">
             <div class="colum-sm-8">
@@ -25,7 +26,7 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="subject">Asunto</label>
-                        <input type="text" class="form-control" placeholder="Escriba el asunto de revisión">
+                        <input name="topic" id="topic" type="text" class="form-control" placeholder="Escriba el asunto de revisión">
                     </div>
                     <div>
                         <label for="comment">Comentario</label>
@@ -36,7 +37,7 @@
                         <br>
                         <input type="file" name="file" id="file" class="btn boton">
                         <input type="submit" class="btn btn-success" value="Comentar">
-                        <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
+                       <!-- <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
                             aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
 
                     </div>
@@ -56,7 +57,7 @@
                         <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button"
                             onClick="alertbutton()">
                         <input type="button" value="Soy un boton de prueba" id="Button" onClick="alertbutton()">
-
+-->
                     </div>
 
                 </div>
