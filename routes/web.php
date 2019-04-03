@@ -41,5 +41,6 @@ Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'R
 
 //Ruta COMMENT
 Route::resource('Comment', 'CommentController');
-Route::post('/CommentAgreement/{id}',  ['uses'=> 'CommentController@commentAgreement' , 'as' => 'Comment.make']);
+Route::post('/CommentAgreement/{id}',  ['uses'=> 'CommentController@commentAgreement' , 'as' => 'CommentAgreement.make']);
+Route::post('/CommentContract/{id}',  ['uses'=> 'CommentController@commentContract' , 'as' => 'CommentContract.make']);
 

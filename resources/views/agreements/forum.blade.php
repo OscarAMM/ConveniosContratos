@@ -25,8 +25,15 @@
             </div>
             <div class="collapse multi-collapse" id="CollapseComments">
                 <div class="card card-body">
+                <li>Fecha de creación: {{$comment->created_at}}</li>
                     {{$comment->comment}}
                 </div>
+                @foreach($comment->getFilesAgreements as $file)
+                <div class="card card-body">
+                            
+                            <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
+                </div>
+                @endforeach
             </div>
             <div class="card-footer space">
                 Comentario realizado por:
@@ -35,7 +42,9 @@
         </div>
         @endforeach
 
-        <form method="POST" action="{{route('Comment.make', $agreements->id)}}">
+        
+        {!!Form::open( ['route' =>array('CommentAgreement.make', $agreements->id), 'files' =>true]) !!}
+
             {!! csrf_field()!!}
 
             <div class="colum-sm-8">
@@ -80,7 +89,8 @@
                     </div>
                 </div>
             </div>
-        </form>
+        <!--</form>-->
+        {!!Form::close()!!}
     </div>
 </body>
 
