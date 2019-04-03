@@ -31,7 +31,7 @@ class ContractRequest extends FormRequest
             'scope'=>'required',
             'users'=>'required',
             'institute_id'=>'required',
-            'liable_user'=>'required',
+            
 
         ];
     }
@@ -45,7 +45,7 @@ class ContractRequest extends FormRequest
             'scope.required' => 'Ingresa el ambito del contrato',
             'users.required' => 'Asigna un usuario',
             'institute_id.required' => 'Asigna un instituto',
-            'liable_user.required' => 'Asigna un responsable',
+           
         ];
     }
 }

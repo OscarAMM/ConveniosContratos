@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<link rel="stylesheet" href="{{asset('css\proyect.css')}}">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
@@ -80,17 +81,19 @@
                 </div>
             </div>
         </nav>
-        <main class="pb-4">
+        <main class="pb-4 mb-5">
             @yield('content')
 
         </main>
-        <footer class="bd-footer text-muted text-center ">
-            <hr>
-            <p>© Todos los Derechos Reservados, UADY 2019. Esta página puede ser reproducida con fines no lucrativos,
-                siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica, de otro forma
-                requiere permiso previo por escrito de la institución.</p>
-        </footer>
+
     </div>
+    <footer class="footer text-muted text-center">
+        <div class="container">
+            © Todos los Derechos Reservados, UADY 2019. Esta página puede ser reproducida con fines no lucrativos,
+            siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica, de otro forma
+            requiere permiso previo por escrito de la institución.
+        </div>
+    </footer>
 </body>
 
 </html>

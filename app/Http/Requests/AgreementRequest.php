@@ -32,7 +32,7 @@ class AgreementRequest extends FormRequest
             'users'=>'required',
             'hide'=>'required',
             'dependence_id'=>'required',
-            'liable_user'=>'required',
+    
             
         ];
     }
@@ -46,7 +46,7 @@ class AgreementRequest extends FormRequest
             'scope.required' => 'Ingresa el ambito del contrato',
             'users.required' => 'Asigna un usuario',
             'dependence_id.required' => 'Asigna una dependencia',
-            'liable_user.required' => 'Asigna un responsable',
+            
 
         ];
     }

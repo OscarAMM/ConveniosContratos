@@ -14,21 +14,30 @@
 
 <body>
     <br>
-
-    @include('auth.fragment.error')
-    @include('auth.fragment.info')
-    <div class="form-group">
+    <div class="container">
+        @include('auth.fragment.error')
+        @include('auth.fragment.info')
         @foreach($agreements->getComments as $comment)
-        <li>{{$comment->user}}</li>
-        <li>{{$comment->topic}}</li>
-            <li>{{$comment->comment}}</li>
-            
-            
+        <div class="card">
+            <div class="card-header color-header">
+                <a data-toggle="collapse" href="#CollapseComments" role="button" aria-expanded="false"
+                    aria-controls="CollapseComments">{{$comment->topic}}</a>
+            </div>
+            <div class="collapse multi-collapse" id="CollapseComments">
+                <div class="card card-body">
+                    {{$comment->comment}}
+                </div>
+            </div>
+            <div class="card-footer space">
+                Comentario realizado por:
+                {{$comment->user}}
+            </div>
+        </div>
         @endforeach
-    </div>
-    <form method="POST" action="{{route('Comment.make', $agreements->id)}}">
-        {!! csrf_field()!!}
-        <div class="container">
+
+        <form method="POST" action="{{route('Comment.make', $agreements->id)}}">
+            {!! csrf_field()!!}
+
             <div class="colum-sm-8">
                 <div class="head">
                     <h2 class="card card-header text-muted text-center">Revisión de: "{{$agreements->name}}"</h2>
@@ -55,8 +64,7 @@
                     </div>
                     <div class="form-group">
                         <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
-                        </div>
-
+                    </div>
                     <div class="collapse multi-collapse" id="collapseOptions">
                         <div class="card card-body">
                             <h3>¡Atención!</h3>
@@ -69,17 +77,11 @@
                         <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button"
                             onClick="alertbutton()">
                         <input type="button" value="Soy un boton de prueba" id="Button" onClick="alertbutton()">
-
                     </div>
-
                 </div>
-
             </div>
-
-        </div>
-
-
-    </form>
+        </form>
+    </div>
 </body>
 
 </html>
