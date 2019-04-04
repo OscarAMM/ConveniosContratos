@@ -13,44 +13,60 @@
 </head>
 
 <body>
+    @include('auth.fragment.error')
+    @include('auth.fragment.info')
+    <div class="head">
+        <h2 class="card card-header text-muted text-center">Revisión de: "{{$contracts->name}}"</h2>
+    </div>
     <br>
-    <div class="container">
-        @include('auth.fragment.error')
-        @include('auth.fragment.info')
-        @foreach($contracts->getComments as $comment)
-        <div class="card">
-            <div class="card-header color-header">
-                <a data-toggle="collapse" href="#CollapseComments" role="button" aria-expanded="false"
-                    aria-controls="CollapseComments">{{$comment->topic}}</a>
-            </div>
-            <div class="collapse multi-collapse" id="CollapseComments">
-                <div class="card card-body">
-                <li>Fecha de creación: {{$comment->created_at}}</li>
-                    {{$comment->comment}}
-                </div>
-                @foreach($comment->getFilesContracts as $file)
-                <div class="card card-body">
-                            
+    <!-- COMENTARIOS -->
+    @foreach($contracts->getFiles as $file)
+        @if(count($file->getComments) == 0)
+                <div class="card card-body">  
                             <a href="{{route('contract.download',$file->id)}}">{{$file->name}}</a>
                 </div>
-                @endforeach
-            </div>
-            <div class="card-footer space">
-                Comentario realizado por:
-                {{$comment->user}}
-            </div>
-        </div>
+        @endif
         @endforeach
-
-        {!!Form::open( ['route' =>array('CommentContract.make', $contracts->id), 'files' =>true]) !!}
-
-            {!! csrf_field()!!}
-
-            <div class="colum-sm-8">
-                <div class="head">
-                    <h2 class="card card-header text-muted text-center">Revisión de: "{{$contracts->name}}"</h2>
+    <div class="row-10 d-flex justify-content-left">
+        <div class="col-8">
+            @foreach($contracts->getComments as $comment)
+            <div class="card">
+                <div class="card-header color-header">
+                    <a data-toggle="collapse" href="#CollapseComments" role="button" aria-expanded="false"
+                        aria-controls="CollapseComments">{{$comment->topic}}</a>
+                    Creación {{$comment->created_at}}
                 </div>
-
+                <div class="collapse multi-collapse" id="CollapseComments">
+                    <div class="card card-body">
+                        <p>{{$comment->comment}}</p>
+                        @foreach($comment->getFilesContracts as $file)
+                        <a href="{{route('contract.download',$file->id)}}">{{$file->name}}</a>
+                        @endforeach
+                        <div>Realizado por: {{$comment->user}}</div>
+                    </div>
+                </div>
+                <!-- <div class="card-footer">
+                    Comentario realizado por:
+                    {{$comment->user}}
+                </div>-->
+            </div>
+            @endforeach
+        </div>
+        <br>
+        <!-- formulario -->
+        {!!Form::open( ['route' =>array('CommentContract.make', $contracts->id), 'files' =>true]) !!}
+        {!! csrf_field()!!}
+        <div class="col">
+            <div class="form-group">
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm"
+                    aria-expanded="false" aria-controls="collapseForm">
+                    Comentar
+                </button>
+                <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
+                    aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
+                <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+            </div>
+            <div class="collapse" id="collapseForm">
                 <div class="form-group">
                     <div class="form-group">
                         <label for="subject">Asunto</label>
@@ -66,30 +82,25 @@
                         <br>
                         <input type="file" name="fileForum" id="fileForum" class="btn boton">
                         <input type="submit" class="btn btn-success" value="Comentar">
-                        <input type="button" value="Más Opciones" data-toggle="collapse" data-target="#collapseOptions"
-                            aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
-
                     </div>
-                    <div class="form-group">
-                        <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
-                    </div>
-                    <div class="collapse multi-collapse" id="collapseOptions">
-                        <div class="card card-body">
-                            <h3>¡Atención!</h3>
-                            <p>Al seleccionar la opción finalizar, se estará mandando un mensaje al usuario
-                                correspondiente para notificar que está listo para que revise el último documento
-                                agregado</p>
-                            <p>Si no está seguro de haber finalizado, no seleccione "Finalizar"</p>
-                        </div>
-                        <br>
-                        <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button"
-                            onClick="alertbutton()">
-                        <input type="button" value="Soy un boton de prueba" id="Button" onClick="alertbutton()">
-                    </div>
+                    <br>
                 </div>
             </div>
-        <!--</form>-->
-        {!!Form::close()!!}
+            <div class="collapse" id="collapseOptions">
+                <div class="card card-body">
+                    <h3>¡Atención!</h3>
+                    <p>Al seleccionar la opción finalizar, se estará mandando un mensaje al usuario
+                        correspondiente para notificar que está listo para que revise el último documento
+                        agregado</p>
+                    <p>Si no está seguro de haber finalizado, no seleccione "Finalizar"</p>
+                    <input type="submit" class="btn btn-primary" value="Finalizar" name="finish2" id="Button"
+                        onClick="alertbutton()">
+                    <input type="button" value="Soy un boton de prueba" id="Button" onClick="alertbutton()">
+                </div>
+            </div>
+            <!--</form>-->
+            {!!Form::close()!!}
+        </div>
     </div>
 </body>
 

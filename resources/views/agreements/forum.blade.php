@@ -20,6 +20,13 @@
     </div>
     <br>
     <!-- COMENTARIOS -->
+    @foreach($agreements->getFiles as $file)
+        @if(count($file->getComments) == 0)
+                <div class="card card-body">  
+                            <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
+                </div>
+        @endif
+        @endforeach
     <div class="row-10 d-flex justify-content-left">
         <div class="col-8">
             @foreach($agreements->getComments as $comment)
