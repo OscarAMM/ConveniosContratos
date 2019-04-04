@@ -108,4 +108,26 @@ class CommentController extends Controller
     }
         return redirect()->route('Forum.Contract', $id)->with('info', 'Tu comentario ha sido generado con éxito');
     }
+    public function finallyAgreement($id){
+        $agreement=Agreement::find($id);
+        $agreement->status="finalizado";
+        $agreement->update();
+        $user=User::find($agreement->liable_user);
+                $email = $user->email;
+                $subject = "Convenio finalizado";
+                $message = "El convenio: ". $agreement->name." ya termino su periodo de revisión. Puede acceder a el ingresando al sistema SICC.";
+                Mail::to($email)->send(new SendEmail($subject, $message));
+
+    }
+    public function finallyContract($id){
+        $contract=Contract::find($id);
+        $contract->status="finalizado";
+        $contract->update();
+        $user=User::find($contract->liable_user);
+                $email = $user->email;
+                $subject = "Contrato finalizado";
+                $message = "El contrato: ". $contract->name." ya termino su periodo de revisión. Puede acceder a el ingresando al sistema SICC.";
+                Mail::to($email)->send(new SendEmail($subject, $message));
+
+    }
 }

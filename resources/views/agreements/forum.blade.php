@@ -17,6 +17,13 @@
     <div class="container">
         @include('auth.fragment.error')
         @include('auth.fragment.info')
+        @foreach($agreements->getFiles as $file)
+        @if(count($file->getComments) == 0)
+                <div class="card card-body">  
+                            <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
+                </div>
+        @endif
+        @endforeach
         @foreach($agreements->getComments as $comment)
         <div class="card">
             <div class="card-header color-header">

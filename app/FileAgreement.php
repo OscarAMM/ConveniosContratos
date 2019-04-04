@@ -22,4 +22,7 @@ class FileAgreement extends Model
         ->hasMany(Comment::class)
         ->withTimestamps();
     }
+    public function getComments(){
+        return $this->belongsToMany(Comment::class,'comment_file_agreement');
+    }
 }
