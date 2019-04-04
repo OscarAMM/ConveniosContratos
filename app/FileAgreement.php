@@ -2,6 +2,7 @@
 
 namespace App;
 use App\Agreement;
+use App\Comment;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -14,6 +15,11 @@ class FileAgreement extends Model
     public function agreements(){
         return $this
         ->hasMany(Agreement::class)
+        ->withTimestamps();
+    }
+    public function comments(){
+        return $this
+        ->hasMany(Comment::class)
         ->withTimestamps();
     }
 }

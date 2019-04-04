@@ -18,6 +18,20 @@ class Comment extends Model
         return $this->belongsToMany(Contract::class)
         ->withTimeStamps();
     }
+    public function filesAgreements(){
+        return $this ->belongsToMany(FileAgreement::class)
+        ->withTimestamps();
+    }
+    public function filesContracts(){
+        return $this ->belongsToMany(File::class)
+        ->withTimestamps();
+    }
+    public function getFilesAgreements(){
+        return $this ->belongsToMany(FileAgreement::class,'comment_file_agreement');
+    }
+    public function getFilesContracts(){
+        return $this ->belongsToMany(File::class,'comment_file');
+    }
     
 
 }
