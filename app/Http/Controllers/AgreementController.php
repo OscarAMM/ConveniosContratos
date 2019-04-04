@@ -123,7 +123,7 @@ class AgreementController extends Controller
             $agreement->users()
                 ->attach(User::where('id', $user)->first());
         }
-        return redirect()->route('Agreement.index')->with('info', 'El Convenio ha sido actualizado');
+        return redirect()->route('Agreement.index')->with('info', 'El Convenio '.$agreement->name. ' ha sido actualizado');
 
     }
     public function store(AgreementRequest $request)

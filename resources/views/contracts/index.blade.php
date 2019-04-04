@@ -64,9 +64,9 @@
                     <td>{{$contract->contractValidity}}</td>
                     <td>{{$contract->scope}}</td>
                     <td>
-                        <a href="{{route('Contract.show', $contract ->id)}}" class="btn btn-info">Ver</a> </td>
+                        <a href="{{route('Contract.show', $contract ->id)}}" class="btn botonAzul">Ver</a> </td>
                     <td>
-                        <a href="{{route('Contract.edit', $contract ->id)}}" class="btn btn-warning">Editar</a></td>
+                        <a href="{{route('Contract.edit', $contract ->id)}}" class="btn botonAmarillo">Editar</a></td>
                     <td>
                         <form action="{{route('Contract.destroy', $contract->id)}}" method="POST">
                             {{csrf_field()}}

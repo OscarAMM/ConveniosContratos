@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
-<div class="gradient">
-        <img src="{{asset('images\Edificio_Central.jpg')}}" alt="Edificio-Central">
+<div class="gradientLogin">
+        <img src="{{asset('images\Edificio_Central.jpg')}}" alt="Edificio-Central" >
     </div>
 <div class="container">
     <div class="row-10 d-flex justify-content-center">

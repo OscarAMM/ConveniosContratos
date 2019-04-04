@@ -12,7 +12,10 @@
 </head>
 
 <body>
-    <br>
+<div class="gradientLogin">
+        <img src="{{asset('images\Edificio_Central.jpg')}}" alt="Edificio-Central" >
+    </div>
+
     <div class="container">
         <div class="row ">
             <div class="col">
@@ -29,7 +32,7 @@
                         <tr>
                             <th scope="row">{{$agreemment->name}}</th>
                             <td><a href="{{route('Forum.Agreement', $agreemment->id)}}"
-                                    class="btn btn-primary ">Revisión</a></td>
+                                    class="btn boton ">Revisión</a></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -50,7 +53,7 @@
                         <tr>
                             <th scope="row">{{$contract->name}}</th>
                             <td><a href="{{route('Forum.Contract', $contract->id)}}"
-                                    class="btn btn-primary">Revisión</a></td>
+                                    class="btn boton">Revisión</a></td>
                         </tr>
                         @endforeach
                     </tbody>

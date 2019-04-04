@@ -7,7 +7,7 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <h4 class=" text-center font-weight-bold text-muted">CONVENIO</h4>
+                    <h4 class=" text-center font-weight-bold text-muted">Convenio</h4>
                 </div>
                 <div class="card-body">
                     <li class="list-group-item">

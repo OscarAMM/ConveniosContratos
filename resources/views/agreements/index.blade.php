@@ -18,6 +18,7 @@
 
 <body>
     @if(Auth::user()->hasRole('admin'))
+    @include('auth.fragment.info')
     @include('auth.fragment.error')
     <div class="card-header text-muted text-center" style="margin-bottom:5px">
         <h2> Convenios </h2>

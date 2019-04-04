@@ -90,7 +90,7 @@ class ContractController extends Controller
                     ->attach(User::where('id', $user)->first());
                 
         }
-        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido actualizado');
+        return redirect()->route('Contract.index')->with('info', 'El Contrato '.$contract->name. ' ha sido actualizado');
     }
     public function store(ContractRequest $request)
     {
