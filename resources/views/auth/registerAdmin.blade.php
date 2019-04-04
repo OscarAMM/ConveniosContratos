@@ -1,10 +1,23 @@
 @extends('layouts.app')
-
 @section('content')
-@if(Auth::user()->hasRole('admin'))
+<!DOCTYPE html>
+<html lang="en">
 
-<div class="container">
-    <div class="row justify-content-center">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Registro</title>
+</head>
+
+<body background=>
+
+    @if(Auth::user()->hasRole('admin'))
+
+<div class="gradientUser">
+    <img src="{{asset('images\Edificio_Central2.jpg')}}" alt="Edificio Central">
+</div>
+    <div class="row d-flex justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
@@ -88,20 +101,25 @@
             </div>
         </div>
     </div>
-</div>
-@else
-<div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h2 class="text-muted">Acceso restringido</h2>
-        </div>
-        <div class="card-body">
-            <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún cambio.
-            </h4>
-        </div>
 
+    @else
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-muted">Acceso restringido</h2>
+            </div>
+            <div class="card-body">
+                <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún
+                    cambio.
+                </h4>
+            </div>
+
+        </div>
     </div>
-</div>
 
-@endif
+    @endif
+
+</body>
+
+</html>
 @endsection

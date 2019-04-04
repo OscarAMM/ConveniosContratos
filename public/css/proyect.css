@@ -24,7 +24,20 @@
     margin-top: -150px;
     background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #ffffff 100%);
 }
-
+.gradientUser img{
+    width: 100%;
+    height: 250px;
+   
+}
+.gradientUser::after{
+    display: block;
+    position: relative;
+    content: '';
+    width: 100%;
+    height: 150px;
+    margin-top: -150px;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0, #ffffff 100%);
+}
 .gradient img{
     width: 100%;
     height: 275px;
