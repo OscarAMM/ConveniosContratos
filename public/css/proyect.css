@@ -12,7 +12,7 @@
 
 .gradient img{
     width: 100%;
-    height: 400px;
+    height: 275px;
 }
 
 a.boton{
@@ -36,6 +36,28 @@ a.boton:hover{
 .boton:hover{
     color:#ffffff;
     background-color: #D9B153;
+}
+.botonAzul{
+    text-decoration:none;
+    font-weight: 100;
+    font-size: 14px;
+    color:#ffffff;
+    background-color: #1790D7 ;
+}
+.botonAzul:hover{
+    color:#ffffff;
+    background-color: #0584CF;
+}
+.botonAmarillo{
+    text-decoration:none;
+    font-weight: 100;
+    font-size: 14px;
+    color:#ffffff;
+    background-color: #ff9800 ;
+}
+.botonAmarillo:hover{
+    color:#ffffff;
+    background-color: #e68a00;
 }
 .text{
     margin-bottom: 24px;

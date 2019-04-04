@@ -1,8 +1,15 @@
+
 @if(Session::has('info'))
-<div class="alert alert-info">
-    <button type="button" class="close" data-dismiss="alert">
-    &times;
+<div class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+  <div class="toast-header">
+    <strong class="mr-auto">SICC</strong>
+    <small>Info</small>
+    <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
     </button>
-    {{Session::get('info')}}
+  </div>
+  <div class="toast-body">
+  {{Session::get('info')}}
+  </div>
 </div>
 @endif
