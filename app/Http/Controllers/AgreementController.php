@@ -52,8 +52,11 @@ class AgreementController extends Controller
         $dependence_id = $agreements->dependence_id;
         $dependences = Dependence::find($dependence_id);
         
-        $files = $agreements->getFiles;
-        return view('public.show', compact('agreements', 'dependences', 'files'));
+        $files=$agreements->getFiles;
+        $list=array($files);
+        $cont=count($files);
+        $file=FileAgreement::find(last($list)[$cont-1]->id);
+        return view('public.show', compact('agreements', 'dependences', 'file'));
     }
 
     public function create()
@@ -159,7 +162,7 @@ class AgreementController extends Controller
         } else {
             $agreement->hide = false;
         }
-
+        
         $agreement->dependence_id = $request->dependence_id;
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
@@ -177,6 +180,8 @@ class AgreementController extends Controller
             }
             $agreement->files()
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
+            $agreement->users()
+                    ->attach(User::where('id', $agreement->liable_user)->first());
         }
         return redirect()->route('Agreement.index')->with('info', 'El Convenio ha sido agregado');
     }

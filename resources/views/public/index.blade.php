@@ -7,7 +7,7 @@
 <div class="card-header text-muted text-center" style="margin-bottom:5px">
     <h2> Convenios </h2>
 </div>
-{{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
+{{Form::open(['route'=>'public.index','method'=>'GET','class'=>'form-inline'])}}
 <p class="text-item-center"><!--<a href="{{route('Agreement.create')}}" class="btn btn-success"
         style="margin-right:5px">Nuevo</a>-->
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"

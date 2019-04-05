@@ -66,6 +66,10 @@ class Agreement extends Model
         return $this ->belongsToMany(FileAgreement::class,'agreement_file_agreement')->withPivot('file_agreement_id','agreement_id')
         ->withTimestamps();
     }
+    public function getLastFile(){
+        //User::orderBy('created_at', 'desc')->first();
+        return $this ->belongsToMany(FileAgreement::orderby('created_at','desc')->latest()->first(),'agreement_file_agreement');
+    }
     public function hasUser($email)
     {
         if ($this->users()->where('email', $email)->first()) {

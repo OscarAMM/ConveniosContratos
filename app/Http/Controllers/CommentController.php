@@ -117,6 +117,11 @@ class CommentController extends Controller
                 $subject = "Convenio finalizado";
                 $message = "El convenio: ". $agreement->name." ya termino su periodo de revisión. Puede acceder a el ingresando al sistema SICC.";
                 Mail::to($email)->send(new SendEmail($subject, $message));
+        $files=$agreement->getFiles;
+        $list=array($files);
+        $cont=count($files);
+        echo last($list)[$cont-1]->id;
+
 
     }
     public function finallyContract($id){

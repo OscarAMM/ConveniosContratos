@@ -142,6 +142,8 @@ class ContractController extends Controller
             }
             $contract->files()
                 ->attach(File::where('id', $file_Name->id)->first());
+            $contract->users()
+                ->attach(User::where('id', $contract->liable_user)->first());
         }
         /*$date = date('Y-m-d');
         $ano = substr($date, -10, 4);
