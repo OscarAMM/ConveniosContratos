@@ -59,7 +59,7 @@
                 </tr>
             <tbody>
                 @foreach($agreements as $agreement)
-                @if($agreement->hide)
+                @if($agreement->hide&&$agreement->status=='finalizado')
                 <tr>
                     <td>{{$agreement->id}}</td>
                     <td>{{$agreement->name}}</td>
@@ -71,47 +71,10 @@
                         <a href="{{route('public.show', $agreement ->id)}}" class="btn botonAzul">Ver</a>
                     </td>
 
-<<<<<<< HEAD
-                </tr>
-                @endif
-                @endforeach
-            </tbody>
-            </thead>
-        </table>
-    </div>
-</div>
-=======
-<table class="table  table-bordered">
-    <thead class="thead-dark">
-        <tr>
-            <th>Id</th>
-            <th>Nombre</th>
-            <th>Recepción</th>
-            <th>Objetivo</th>
-            <th>Fecha de validez</th>
-            <th>Ámbito</th>
-            <th colspan="4">&nbsp;</th>
-        </tr>
-    <tbody>
-        @foreach($agreements as $agreement)
-        @if($agreement->hide&&$agreement->status=='finalizado')
-        <tr>
-            <td>{{$agreement->id}}</td>
-            <td>{{$agreement->name}}</td>
-            <td>{{$agreement->reception}}</td>
-            <td>{{$agreement->objective}}</td>
-            <td>{{$agreement->agreementValidity}}</td>
-            <td>{{$agreement->scope}}</td>
-            <td>
-                <a href="{{route('public.show', $agreement ->id)}}" class="btn btn-info">Ver</a>
-            </td>
-        
-        </tr>
+                    </tr>
         @endif
         @endforeach
     </tbody>
     </thead>
 </table>
->>>>>>> 51b1271ca215f490ab22f2669a0f3ae9b253e153
-
 @endsection

@@ -36,7 +36,7 @@ Route::post('send/sendmail', ['uses'=> 'EmailController@sendEmail' , 'as' => 'Se
 Route::get('/RevisionContractForum/{id}',  ['uses'=> 'RevisionController@ForumContract' , 'as' => 'Forum.Contract']);
 Route::get('/RevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@ForumAgreement' , 'as' => 'Forum.Agreement']);
 Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'Revision']);
-
+Route::get('/UserRevision',['uses' => 'RevisionController@UserRevision', 'as' => 'UserRevision']);
 
 
 //Ruta COMMENT

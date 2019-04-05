@@ -19,4 +19,7 @@ class RevisionController extends Controller
         $contracts = Contract::find($id);
         return view('contracts.forum',compact('contracts'));
     }
+    public function UserRevision(){
+        return view('public.UserRevision');
+    }
 }
