@@ -13,9 +13,8 @@
 <body background=>
 
     @if(Auth::user()->hasRole('admin'))
-
-<div class="gradientUser">
-    <img src="{{asset('images\Edificio_Central2.jpg')}}" alt="Edificio Central">
+    <div class="gradient">
+    <img src="{{asset('images\Edificio_Central.jpg')}}" alt="Edificio-Central">
 </div>
     <div class="row d-flex justify-content-center">
         <div class="col-md-8">
@@ -28,7 +27,6 @@
                 <div class="card-body">
                     <form method="POST" action="{{route('admin.create')}}">
                         @csrf
-
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
@@ -91,7 +89,7 @@
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <a href="{{route('home')}}" class="btn btn-secondary">Regresar</a>
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" class="btn boton">
                                     {{ __('Registrar') }}
                                 </button>
                             </div>

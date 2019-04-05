@@ -24,6 +24,6 @@ class EmailController extends Controller
 
         Mail::to($email)->send(new SendEmail($subject, $message));
         Session::flash("success");
-        return back();
+        return back()->with('info',"¡El mensaje ha sido enviado con éxito!");
     }
 }

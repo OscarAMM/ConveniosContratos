@@ -1,5 +1,7 @@
-var message = document.getElementById('Button');
-
-function alertbutton(){
-    confirm("Press a button!");
+function send(){
+    if(confirm("¿Estás seguro de finalizar?")){
+        return true;
+    }else{
+        return false;
+    }
 }
