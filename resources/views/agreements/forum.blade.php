@@ -20,6 +20,18 @@
     </div>
     <br>
     <!-- COMENTARIOS -->
+    @php
+    $cont=array($agreements->getFiles);
+    $cont1=count($agreements->getFiles);
+    echo last($cont)[$cont1-1]->id;
+
+  
+    
+    @endphp
+    @foreach($agreements->getLastFile as $file)
+    <br>
+    {{$file->name}}
+    @endforeach
     @foreach($agreements->getFiles as $file)
         @if(count($file->getComments) == 0)
                 <div class="card card-body">  

@@ -63,7 +63,7 @@ class ContractController extends Controller
     {
         $contract = Contract::find($id);
         $contract->delete();
-        return back()->with('info', "El contrato ha sido eliminado.");
+        return back()->with('info', "El contrato '.$contract->name. ' ha sido eliminado.");
     }
     public function update(ContractRequest $request, $id)
     {
@@ -105,7 +105,7 @@ class ContractController extends Controller
         $file_Name = new File();
         $file_Name->name = $file_path;
         if (File::where('name', $file_Name->name)->exists()) {
-            return back()->with('info', 'El archivo ya ha sido registrado.');
+            return back()->with('info', 'El archivo '.$file_Name->name. ' ya ha sido registrado.');
 
         } else {
             $file_Name->save();
@@ -126,7 +126,7 @@ class ContractController extends Controller
 
         $users = $request->users;
         if (Contract::where('name', $contract->name)->exists()) {
-            return back()->with('info', 'El contrato ya existe.');
+            return back()->with('info', 'El contrato '.$contract->name.' ya existe.');
         } else {
             $contract->save();
             foreach ($users as $user) {
@@ -142,6 +142,8 @@ class ContractController extends Controller
             }
             $contract->files()
                 ->attach(File::where('id', $file_Name->id)->first());
+            $contract->users()
+                ->attach(User::where('id', $contract->liable_user)->first());
         }
         /*$date = date('Y-m-d');
         $ano = substr($date, -10, 4);
@@ -151,7 +153,7 @@ class ContractController extends Controller
         echo $mes ;
         echo $dia+5;
         echo $date;*/
-        return redirect()->route('Contract.index')->with('info', 'El Contrato ha sido agregado');
+        return redirect()->route('Contract.index')->with('info', 'El Contrato '.$contract->name.' ha sido agregado');
     }
     public function showFile($id){
         $file = File::find($id);

@@ -30,7 +30,7 @@ class DependenceController extends Controller
         $dependence = Dependence::find($id);
         //$institute = Institute::find($id);
         $institutes = $dependence->getInstitutes;
-        return view('dependencies.show', compact('dependence'), compact('institutes'));
+        return view('dependencies.show', compact('dependence','institutes'));
     }
 
     public function edit($id)
@@ -38,7 +38,7 @@ class DependenceController extends Controller
         $dependence = Dependence::find($id);
         $institutes = Institute::all();
 
-        return view('dependencies.edit', compact('dependence'), compact('institutes'));
+        return view('dependencies.edit', compact('dependence', 'institutes'));
     }
 
     protected function create()
@@ -53,7 +53,7 @@ class DependenceController extends Controller
         $dependence = Dependence::find($id);
         $dependence->delete();
 
-        return back()->with('info', 'La dependencia ha sido eliminada');
+        return back()->with('info', 'La dependencia '.$dependence->name.' ha sido eliminada');
     }
 
     public function store(DependenceRequest $request)
@@ -65,14 +65,14 @@ class DependenceController extends Controller
         $dependence->institute_id = $request->input('institute_id');
 
         if (Dependence::where('name', $dependence->name)->exists()) {
-            return back()->with('info', 'La dependencia ya existe');
+            return back()->with('info', 'La dependencia '.$dependence->name.' ya existe');
         } else {
             $dependence->save();
             $dependence->institutions()
                 ->attach(Institute::where('id', $request->input('institute_id'))->first());
         }
 
-        return redirect()->route('Dependence.index')->with('info', 'La dependencia ha sido agregado');
+        return redirect()->route('Dependence.index')->with('info', 'La dependencia '.$dependence->name.' ha sido agregado');
     }
 
     public function update(DependenceRequest $request, $id)
@@ -86,6 +86,6 @@ class DependenceController extends Controller
         $dependence->institutions()->detach();
         $dependence->institutions()
                 ->attach(Institute::where('id', $request->input('institute_id'))->first());
-        return redirect()->route('Dependence.index')->with('info', 'La dependencia ha sido actualizado');
+        return redirect()->route('Dependence.index')->with('info', 'La dependencia '.$dependence->name.' ha sido actualizado');
     }
 }

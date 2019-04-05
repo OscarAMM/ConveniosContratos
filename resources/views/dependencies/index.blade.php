@@ -2,7 +2,7 @@
 
 @section('content')
 @if(Auth::user()->hasRole('admin'))
-<br>
+
 @include('dependencies.fragment.info')
 
 <div class="card-header text-muted text-center" style="margin-bottom:5px">

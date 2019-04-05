@@ -52,8 +52,11 @@ class AgreementController extends Controller
         $dependence_id = $agreements->dependence_id;
         $dependences = Dependence::find($dependence_id);
         
-        $files = $agreements->getFiles;
-        return view('public.show', compact('agreements', 'dependences', 'files'));
+        $files=$agreements->getFiles;
+        $list=array($files);
+        $cont=count($files);
+        $file=FileAgreement::find(last($list)[$cont-1]->id);
+        return view('public.show', compact('agreements', 'dependences', 'file'));
     }
 
     public function create()
@@ -92,7 +95,7 @@ class AgreementController extends Controller
         $agreement = Agreement::find($id);
         $agreement->delete();
 
-        return back()->with('info', "El convenio ha sido eliminado.");
+        return back()->with('info', "El convenio '.$agreement->name.' ha sido eliminado.");
     }
     public function update(AgreementRequest $request, $id)
     {
@@ -134,7 +137,7 @@ class AgreementController extends Controller
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('filesAgreements/' . $file_path, \File::get($file));
         } else {
-            return back()->with('info', 'No selecciono un archivo.');
+            return back()->with('info', 'No seleccionó un archivo.');
         }
         //Archivo
         $file_Name = new FileAgreement();
@@ -159,11 +162,11 @@ class AgreementController extends Controller
         } else {
             $agreement->hide = false;
         }
-
+        
         $agreement->dependence_id = $request->dependence_id;
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
-            return back()->with('info', 'El convenio ya existe.');
+            return back()->with('info', 'El convenio '.$agreement->name.' ya existe.');
         } else {
             $agreement->save();
             foreach ($users as $user) {
@@ -177,8 +180,10 @@ class AgreementController extends Controller
             }
             $agreement->files()
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
+            $agreement->users()
+                    ->attach(User::where('id', $agreement->liable_user)->first());
         }
-        return redirect()->route('Agreement.index')->with('info', 'El Convenio ha sido agregado');
+        return redirect()->route('Agreement.index')->with('info', 'El Convenio '.$agreement->name.' ha sido agregado');
     }
     public function showFile($id)
     {

@@ -11,6 +11,8 @@
     {{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
     <p class="text-item-center">
         <!--<a href="{{route('Agreement.create')}}" class="btn btn-success"
+{{Form::open(['route'=>'public.index','method'=>'GET','class'=>'form-inline'])}}
+<p class="text-item-center"><<a href="{{route('Agreement.create')}}" class="btn btn-success"
         style="margin-right:5px">Nuevo</a>-->
         <button class="btn boton" type="button" data-toggle="collapse" data-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
@@ -69,6 +71,7 @@
                         <a href="{{route('public.show', $agreement ->id)}}" class="btn botonAzul">Ver</a>
                     </td>
 
+<<<<<<< HEAD
                 </tr>
                 @endif
                 @endforeach
@@ -77,5 +80,38 @@
         </table>
     </div>
 </div>
+=======
+<table class="table  table-bordered">
+    <thead class="thead-dark">
+        <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Recepción</th>
+            <th>Objetivo</th>
+            <th>Fecha de validez</th>
+            <th>Ámbito</th>
+            <th colspan="4">&nbsp;</th>
+        </tr>
+    <tbody>
+        @foreach($agreements as $agreement)
+        @if($agreement->hide&&$agreement->status=='finalizado')
+        <tr>
+            <td>{{$agreement->id}}</td>
+            <td>{{$agreement->name}}</td>
+            <td>{{$agreement->reception}}</td>
+            <td>{{$agreement->objective}}</td>
+            <td>{{$agreement->agreementValidity}}</td>
+            <td>{{$agreement->scope}}</td>
+            <td>
+                <a href="{{route('public.show', $agreement ->id)}}" class="btn btn-info">Ver</a>
+            </td>
+        
+        </tr>
+        @endif
+        @endforeach
+    </tbody>
+    </thead>
+</table>
+>>>>>>> 51b1271ca215f490ab22f2669a0f3ae9b253e153
 
 @endsection

@@ -38,7 +38,7 @@ class InstituteController extends Controller
         $institutions = Institute::find($id);
         $institutions->delete();
 
-        return back()->with('info', 'La institucion ha sido eliminada');
+        return back()->with('info', 'La institucion '.$institutions->name. ' ha sido eliminada');
     }
 
     public function create()
@@ -53,12 +53,12 @@ class InstituteController extends Controller
         $institute->acronym = $request->acronym;
         $institute->country = $request->country;
         if (Institute::where('name', $institute->name)->exists()) {
-            return back()->with('info', 'La institución ya existe.');
+            return back()->with('info', 'La institución '.$institute->name.' ya existe.');
         } else {
             $institute->save();
         }
 
-        return redirect()->route('Institute.index')->with('info', 'El Instituto ha sido agregado');
+        return redirect()->route('Institute.index')->with('info', 'El Instituto '.$institute->name.' ha sido agregado');
     }
 
     public function update(InstituteRequest $request, $id)
@@ -70,7 +70,7 @@ class InstituteController extends Controller
 
         $institute->save();
 
-        return redirect()->route('Institute.index')->with('info', 'El Instituto ha sido actualizado');
+        return redirect()->route('Institute.index')->with('info', 'El Instituto '.$institute->name.' ha sido actualizado');
     }
 
     public function edit($id)
