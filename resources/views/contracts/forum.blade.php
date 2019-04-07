@@ -80,6 +80,9 @@
                     <br>
                 </div>
             </div>
+            <!--</form>-->
+            {!!Form::close()!!}
+            {!!Form::open( ['route' =>array('FinallyContract.notify', $contracts->id)]) !!}
             <div class="collapse" id="collapseOptions">
                 <div class="card card-body">
                     <h3>¡Atención!</h3>
@@ -91,7 +94,6 @@
                         onClick="return confirm('¿Seguro que quiere finalizar?');">
                 </div>
             </div>
-            <!--</form>-->
             {!!Form::close()!!}
         </div>
     </div>

@@ -27,13 +27,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach(Auth::user()->getAgreements as $agreemment)
+                        @foreach(Auth::user()->getAgreements as $agreement)
                         {!!csrf_field()!!}
+                        @if($agreement->status=='Finalizado')
                         <tr>
-                            <th scope="row">{{$agreemment->name}}</th>
-                            <td><a href="#"
-                                    class="btn boton ">Revisión</a></td>
+                            <th scope="row">{{$agreement->name}}</th>
+                            <td><a href="{{route('PublicForum.Agreement', $agreement ->id)}}"class="btn boton ">Revisión</a></td>
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -50,11 +51,13 @@
                     <tbody>
                         @foreach(Auth::user()->getContracts as $contract)
                         {!!csrf_field()!!}
+                        @if($contract->status=='Finalizado')
                         <tr>
                             <th scope="row">{{$contract->name}}</th>
-                            <td><a href="#"
+                            <td><a href="{{route('PublicForum.Contract', $contract ->id)}}"
                                     class="btn boton">Revisión</a></td>
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>

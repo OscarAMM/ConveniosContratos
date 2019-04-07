@@ -54,7 +54,7 @@ class UserController extends Controller
             $user->roles()->attach(Role::where('name', 'admin')->first());
         }
         //return back()->with('info','El usuario ha sido editado');
-        return redirect()->back();
+        return redirect()->back()->with('info','El usuario '.$user->name.' ha sido editado');
     }
     public function destroy(String $id){
         $user=User::find($id);

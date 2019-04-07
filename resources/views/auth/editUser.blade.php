@@ -1,6 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
+@include('auth.fragment.error')
+@include('auth.fragment.info')
 @if(Auth::user()->hasRole('admin'))
 <div class="container">
     <div class="row justify-content-center">

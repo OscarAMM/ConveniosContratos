@@ -59,7 +59,7 @@
                 </tr>
             <tbody>
                 @foreach($agreements as $agreement)
-                @if($agreement->hide&&$agreement->status=='finalizado')
+                @if($agreement->hide&&$agreement->status=='Finalizado')
                 <tr>
                     <td>{{$agreement->id}}</td>
                     <td>{{$agreement->name}}</td>

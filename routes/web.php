@@ -37,10 +37,13 @@ Route::get('/RevisionContractForum/{id}',  ['uses'=> 'RevisionController@ForumCo
 Route::get('/RevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@ForumAgreement' , 'as' => 'Forum.Agreement']);
 Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'Revision']);
 Route::get('/UserRevision',['uses' => 'RevisionController@UserRevision', 'as' => 'UserRevision']);
-
+Route::get('/PublicRevisionContractForum/{id}',  ['uses'=> 'RevisionController@PublicForumContract' , 'as' => 'PublicForum.Contract']);
+Route::get('/PublicRevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@PublicForumAgreement' , 'as' => 'PublicForum.Agreement']);
 
 //Ruta COMMENT
 Route::resource('Comment', 'CommentController');
 Route::post('/CommentAgreement/{id}',  ['uses'=> 'CommentController@commentAgreement' , 'as' => 'CommentAgreement.make']);
 Route::post('/CommentContract/{id}',  ['uses'=> 'CommentController@commentContract' , 'as' => 'CommentContract.make']);
+Route::post('/FinallyAgreement/{id}',  ['uses'=> 'CommentController@finallyAgreement' , 'as' => 'FinallyAgreement.notify']);
+Route::post('/FinallyContract/{id}',  ['uses'=> 'CommentController@finallyContract' , 'as' => 'FinallyContract.notify']);
 

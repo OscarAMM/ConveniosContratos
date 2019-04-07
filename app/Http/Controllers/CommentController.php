@@ -109,29 +109,28 @@ class CommentController extends Controller
     public function finallyAgreement($id)
     {
         $agreement = Agreement::find($id);
-        $agreement->status = "finalizado";
+        $agreement->status = "Finalizado";
         $agreement->update();
         $user = User::find($agreement->liable_user);
         $email = $user->email;
         $subject = "Convenio finalizado";
         $message = "El convenio: " . $agreement->name . " ya termino su periodo de revisión. Puede acceder a el ingresando al sistema SICC.";
         Mail::to($email)->send(new SendEmail($subject, $message));
-        $files = $agreement->getFiles;
-        $list = array($files);
-        $cont = count($files);
-        echo last($list)[$cont - 1]->id;
+        return redirect()->route('Revision', $id)->with('info', 'El convenio '. $agreement->name.' ha sido finalizado con éxito');
+        
 
     }
     public function finallyContract($id)
     {
         $contract = Contract::find($id);
-        $contract->status = "finalizado";
+        $contract->status = "Finalizado";
         $contract->update();
         $user = User::find($contract->liable_user);
         $email = $user->email;
         $subject = "Contrato finalizado";
         $message = "El contrato: " . $contract->name . " ya termino su periodo de revisión. Puede acceder a el ingresando al sistema SICC.";
         Mail::to($email)->send(new SendEmail($subject, $message));
+        return redirect()->route('Revision', $id)->with('info', 'El contrato '.$contract->name.' ha sido finalizado con éxito');
 
     }
 }

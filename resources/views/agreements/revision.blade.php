@@ -15,7 +15,8 @@
 <div class="gradientLogin">
         <img src="{{asset('images\Edificio_Central.jpg')}}" alt="Edificio-Central" >
     </div>
-
+    @include('auth.fragment.info')
+    @include('auth.fragment.error')
     <div class="container">
         <div class="row ">
             <div class="col">
