@@ -32,7 +32,7 @@
                 </div>
                 <div class="collapse multi-collapse" id="CollapseComments">
                     <div class="card card-body">
-                        <p>{{$comment->comment}}</p>
+                        <p>{!!$comment->comment!!}</p>
                         @foreach($comment->getFilesContracts as $file)
                         <a href="{{route('contract.download',$file->id)}}">{{$file->name}}</a>
                         @endforeach
@@ -69,7 +69,7 @@
                     </div>
                     <div>
                         <label for="comment">Comentario</label>
-                        <textarea name="comment" id="comment" cols="30" rows="10" class="form-control"
+                        <textarea name="comment" id="comment" cols="30" rows="10" class="form-control ckeditor"
                             placeholder="Escriba la revisión"></textarea>
                     </div>
                     <div class="form-group">

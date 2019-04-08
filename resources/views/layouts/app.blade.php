@@ -94,6 +94,8 @@
             requiere permiso previo por escrito de la institución.
         </div>
     </footer>
+    @yield('scripts')
+    <script src="{{asset('vendors\ckeditor\ckeditor.js')}}"></script>
 </body>
 
 </html>

@@ -33,9 +33,8 @@
                 <h4>Convenio - Contrato</h4>
             </div>
             <div class="card-body">
-                <p class="text">Se realiza una administración de contratos y convenios.
-                    En este apartado podrás agregar, editar, eliminar, observar y dar revisión de los contratos y
-                    convenios que se agreguen al sistema.
+                <p class="text">Se administra <strong>Convenios</strong> y <strong>Contratos</strong>.En este aparatado 
+                se puede agregar, editar y eliminar, además de poder consultar los asignados a cada responsable del departamento. 
                 </p>
                 <a href="{{route('Contract.index')}}" class="btn boton">Contratos</a>
                 <a href="{{route('Agreement.index')}}" class="btn boton">Convenios</a>

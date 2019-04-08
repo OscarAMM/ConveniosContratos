@@ -27,11 +27,11 @@
             <div class="card">
                 <div class="card-header color-header text-muted">
                     <button data-toggle="collapse" href="#CollapseComments" role="button" aria-expanded="false"
-                        aria-controls="CollapseComments" class="btn boton">{{$comment->topic}}</button>
+                        aria-controls="CollapseComments" class="btn boton">{!!$comment->topic!!}</button>
                 </div>
                 <div class="collapse multi-collapse" id="CollapseComments">
                     <div class="card card-body">
-                        <p>{{$comment->comment}}</p>
+                        <p>{!!$comment->comment!!}</p>
                         @foreach($comment->getFilesAgreements as $file)
                         <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
                         @endforeach
@@ -63,12 +63,12 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="subject">Asunto</label>
-                        <input name="topic" id="topic" type="text" class="form-control"
+                        <input name="topic" id="topic" type="text" class="form-control "
                             placeholder="Escriba el asunto de revisión">
                     </div>
                     <div>
                         <label for="comment">Comentario</label>
-                        <textarea name="comment" id="comment" cols="30" rows="10" class="form-control"
+                        <textarea name="comment" id="comment" cols="30" rows="10" class="form-control ckeditor"
                             placeholder="Escriba la revisión"></textarea>
                     </div>
                     <div class="form-group">

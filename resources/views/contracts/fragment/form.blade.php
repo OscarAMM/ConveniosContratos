@@ -1,3 +1,5 @@
+@extends('layouts.app')
+@section('content')
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -23,7 +25,7 @@
                     <div class="form-group">
                         <label for="objective" class="col-md-4 col-form-label">Objetivo</label>
                         <textarea name="objective" id="objective" cols="30" rows="5" class="form-control"
-                            placeholder="Describe el objetivo"></textarea>
+                            placeholder="Describe el objetivo" ></textarea>
                     </div>
                     <div class="form-group">
                         <label for="contractValidity" class="col-md-4 col-form-label">Fecha de fin</label>
@@ -103,3 +105,4 @@
     </div>
 
 </div>
+@endsection
