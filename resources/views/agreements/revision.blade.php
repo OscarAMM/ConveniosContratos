@@ -24,17 +24,27 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Nombre del convenio</th>
+                            <th>Tiempo de revisión</th>
                             <th>Revisión</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach(Auth::user()->getAgreements as $agreemment)
                         {!!csrf_field()!!}
+                        @if($agreemment->status=='Revisión')
                         <tr>
+                            
                             <th scope="row">{{$agreemment->name}}</th>
+                            <th scope="row">
+                            @php
+                            $dt= Carbon\Carbon::now()->diffForHumans($agreemment->end_date);
+                            echo $dt." de concluir el periodo de revisión";
+                            @endphp
+                            </th>
                             <td><a href="{{route('Forum.Agreement', $agreemment->id)}}"
                                     class="btn boton ">Revisión</a></td>
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
@@ -45,17 +55,26 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Nombre del contrato</th>
+                            <th>Tiempo de revisión</th>
                             <th>Revisión</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach(Auth::user()->getContracts as $contract)
                         {!!csrf_field()!!}
+                        @if($contract->status=='Revisión')
                         <tr>
                             <th scope="row">{{$contract->name}}</th>
+                            <th scope="row">
+                            @php
+                            $dt= Carbon\Carbon::now()->diffForHumans($contract->end_date);
+                            echo $dt." de concluir el periodo de revisión";
+                            @endphp
+                            </th>
                             <td><a href="{{route('Forum.Contract', $contract->id)}}"
                                     class="btn boton">Revisión</a></td>
                         </tr>
+                        @endif
                         @endforeach
                     </tbody>
                 </table>
