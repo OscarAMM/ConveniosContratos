@@ -180,7 +180,7 @@ class AgreementController extends Controller
                     ->attach(User::where('id', $user)->first());
                     $email = $activeUser->email;
                     $subject = "Asignación de convenios";
-                    $message = "Se le ha asignado el convenio ". $request->name.", cuenta con 5 días para su revisión, desde ".$agreement->start_date->format('d-m-y')." hasta ".$agreement->end_date->format('d-m-y');
+                    $message = " Se le ha asignado el convenio ". $request->name.", cuenta con 5 días para su revisión, desde ".$agreement->start_date->format('d-m-y')." hasta ".$agreement->end_date->format('d-m-y');
                     Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->files()

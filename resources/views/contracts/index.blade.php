@@ -44,7 +44,7 @@
 <div class="row d-flex justify-content-center">
     <div class="col-md-10">
         <table class="table  table-striped table-bordered">
-            <thead class="thead-dark">
+            <thead class="thead-dark ckeditor">
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>

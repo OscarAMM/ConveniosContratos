@@ -95,6 +95,10 @@
         </div>
     </footer>
     @yield('scripts')
+<<<<<<< HEAD
+=======
+    <script src="{{asset('vendors\ckeditor\ckeditor.js')}}"></script>
+>>>>>>> 04e5dbc8f548281bc960e58f59025d6e5bf86a19
 </body>
 
 </html>
