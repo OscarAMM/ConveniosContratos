@@ -20,19 +20,6 @@ class CommentController extends Controller
     {
         $user = \Auth::user();
         $agreement = Agreement::find($id);
-
-        $file = $request->file('fileForum');
-        if ($file) {
-            $file_path = $file->getClientOriginalName();
-            \Storage::disk('public')->put('filesAgreements/' . $file_path, \File::get($file));
-        } else {
-            //Archivo
-            return back()->with('info', 'No selecciono un archivo.');
-        }
-        $file_Name = new FileAgreement();
-        $file_Name->name = $file_path;
-        $file_Name->save();
-
         //Comentario
         $comment = new Comment();
         $comment->topic = $request->topic;
@@ -40,12 +27,25 @@ class CommentController extends Controller
         $comment->user = $user->name . " - " . $user->email;
         $comment->save();
 
+        $file = $request->file('fileForum');
+        if ($file) {
+            $file_path = $file->getClientOriginalName();
+            \Storage::disk('public')->put('filesAgreements/' . $file_path, \File::get($file));
+            $file_Name = new FileAgreement();
+            $file_Name->name = $file_path;
+            $file_Name->save();
+            $agreement->files()
+            ->attach(FileAgreement::where('id', $file_Name->id)->first());
+            $comment->filesAgreements()
+                ->attach(FileAgreement::where('id', $file_Name->id)->first());
+        } 
+        
+
+        
+
         $agreement->comments()
             ->attach(Comment::where('id', $comment->id)->first());
-        $agreement->files()
-            ->attach(FileAgreement::where('id', $file_Name->id)->first());
-        $comment->filesAgreements()
-            ->attach(FileAgreement::where('id', $file_Name->id)->first());
+        
         foreach ($agreement->getUser as $users) {
             if ($users->email == $user->email) {
                 $email = $user->email;
@@ -65,19 +65,6 @@ class CommentController extends Controller
     {
         $user = \Auth::user();
         $contract = Contract::find($id);
-
-        $file = $request->file('fileForum');
-        if ($file) {
-            $file_path = $file->getClientOriginalName();
-            \Storage::disk('public')->put('files/' . $file_path, \File::get($file));
-        } else {
-            return back()->with('info', 'No selecciono un archivo.');
-        }
-        //Archivo
-        $file_Name = new File();
-        $file_Name->name = $file_path;
-        $file_Name->save();
-
         //Comentario
         $comment = new Comment();
         $comment->topic = $request->topic;
@@ -85,12 +72,23 @@ class CommentController extends Controller
         $comment->user = $user->name . " - " . $user->email;
         $comment->save();
 
+        $file = $request->file('fileForum');
+        if ($file) {
+            $file_path = $file->getClientOriginalName();
+            \Storage::disk('public')->put('files/' . $file_path, \File::get($file));
+            //Archivo
+            $file_Name = new File();
+            $file_Name->name = $file_path;
+            $file_Name->save();
+            $contract->files()
+            ->attach(File::where('id', $file_Name->id)->first());
+            $comment->filesContracts()
+            ->attach(File::where('id', $file_Name->id)->first());
+        }
+
         $contract->comments()
             ->attach(Comment::where('id', $comment->id)->first());
-        $contract->files()
-            ->attach(File::where('id', $file_Name->id)->first());
-        $comment->filesContracts()
-            ->attach(File::where('id', $file_Name->id)->first());
+        
         foreach ($contract->getUser as $users) {
             if ($users->email == $user->email) {
                 $email = $user->email;

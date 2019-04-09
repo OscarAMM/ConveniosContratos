@@ -94,6 +94,7 @@
             requiere permiso previo por escrito de la institución.
         </div>
     </footer>
+    @yield('scripts')
 </body>
 
 </html>

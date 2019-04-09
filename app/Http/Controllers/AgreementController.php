@@ -72,6 +72,11 @@ class AgreementController extends Controller
         $dependences = Dependence::find($dependence_id);
         $users = $agreements->getUser;
         $files = $agreements->getFiles;
+        $fecha=$agreements->start_date;
+        /*$dt= Carbon::now()->diffInDays($fecha);
+        echo $dt."-";
+        $dt2= Carbon::now()->diffForHumans($agreements->end_date);
+        echo "Tu tiempo disponible es de: ".$dt2." del periodo de revisión";*/
         /*$date= Carbon::now();
         echo $date->format('Y-m-d');
         echo $date->addWeekDays(4)->format('Y-m-d');
