@@ -1,11 +1,6 @@
 <head>
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<<<<<<< HEAD
-    
-    
-=======
->>>>>>> 04e5dbc8f548281bc960e58f59025d6e5bf86a19
 </head>
 <div class="container">
     <div class="column-sm-8">
@@ -111,12 +106,8 @@ $("#dependence_id").select2({
 });
 
 
-<<<<<<< HEAD
 </div>
 @section('scripts')
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 @endsection
-=======
-</script>
->>>>>>> 04e5dbc8f548281bc960e58f59025d6e5bf86a19

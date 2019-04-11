@@ -1,12 +1,10 @@
 @extends('layouts.app')
 @section('content')
 @if(Auth::user()->hasRole('admin'))
-
-
 <div class="container">
     <div class="column-sm-8">
         <div class="card">
-            <div class="card-header">
+        <div class="card-header">
                 <h3 class="text-muted text-center"> NUEVO CONTRATO</h3>
             </div>
             <div class="card-body">
