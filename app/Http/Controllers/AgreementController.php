@@ -82,6 +82,10 @@ class AgreementController extends Controller
         echo $date->addWeekDays(4)->format('Y-m-d');
         $date2=$date->addWeekDays(4);
         echo $date->diffInDays($date2->copy());*/
+        /*$data=Agreement::where('scope', 'Estatal')->count();
+        $data1=Agreement::where('scope', 'Nacional')->count();
+        $data2=Agreement::where('scope', 'Internacional')->count();
+        echo $data.'-'.$data1.'-'.$data2;*/
         return view('agreements.show', compact('agreements', 'users', 'dependences', 'files'));
     }
     public function edit($id)
