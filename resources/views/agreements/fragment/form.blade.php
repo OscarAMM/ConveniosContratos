@@ -106,4 +106,12 @@ $("#dependence_id").select2({
 });
 
 
+<<<<<<< HEAD
 </script>
+=======
+</div>
+@section('scripts')
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+@endsection
+>>>>>>> 161946be7b2118abd916c0e9364486e52ca78e3a

@@ -79,8 +79,6 @@
                     <br>
                 </div>
             </div>
-            
-
             <!--</form>-->
             {!!Form::close()!!}
             {!!Form::open( ['route' =>array('FinallyAgreement.notify', $agreements->id)]) !!}
