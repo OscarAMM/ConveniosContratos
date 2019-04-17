@@ -2,73 +2,60 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-use DB;
-use PDF;
 use App\Agreement;
+use App\Contract;
+use PDF;
 
 class PDFController extends Controller
 {
-    function index(){
-       // $custom_data = $this->get_custom_data();
-       $custom_data = Agreement::all();
-        return view('PDFGenerator.dynamic_pdf',compact('custom_data'));
+    public function index()
+    {
+        // $custom_data = $this->get_custom_data();
+        //Se hace un llamado a los Agreement con el parámetro de alcance y se hace un conteo
+        $custom_data = Agreement::all();
+        $custom_agreement1 = Agreement::where('scope', 'Estatal')->count();
+        $custom_agreement2 = Agreement::where('scope', 'Nacional')->count();
+        $custom_agreement3 = Agreement::where('scope', 'Internacional')->count();
+        //Se hace un parse de enteros a string para imprimir en la vista
+        $custom_agreement2 = (string) $custom_agreement2;
+        $custom_agreement1 = (string) $custom_agreement1;
+        $custom_agreement3 = (string) $custom_agreement3;
+        //Se hace llamado a los contratos
+        $custom_contract = Contract::all();
+        $custom_contract1 = Contract::where('scope','Estatal')->count();
+        $custom_contract2 = Contract::where('scope','Nacional')->count();
+        $custom_contract3 = Contract::where('scope','Internacional')->count();
+
+        $custom_contract1 = (string) $custom_contract1;
+        $custom_contract2 = (string) $custom_contract2;
+        $custom_contract3 = (string) $custom_contract3;
+
+        //se pasa las variables creadas para ser llamadas en las vistas
+        return view('PDFGenerator.dynamic_pdf', compact('custom_data', 'custom_agreement1', 'custom_agreement2', 'custom_agreement3','custom_contract1','custom_contract2','custom_contract3'));
     }
-    /*
-     function get_custom_data(){
-         $custom_data = DB::table('agreements')->limit(10)->get();
-         return $custom_data;
-     }
-     function pdf(){
-         $pdf = \App::make('dompdf.wrapper'); 
-            echo "ctm Irving";
-         $pdf->loadHTML($this->convert_customer_data_to_html());
-         $pdf->stream();
-         return "tuptm";
-     }
-     function convert_customer_data_to_html(){
-         $custom_data = $this->get_custom_data();
-         $output = '<h3 align ="center">Datos de prueba</h3>
-         <table width="100%" style="border-collapse:collapse; border: 0px;">
-         <tr>
-                <th style = "border: 1px solid;
-                padding: 12px; " >Id</th>
-                <th style = "border: 1px solid;
-                padding: 12px; " >Nombre</th>
-                <th style = "border: 1px solid;
-                padding: 12px; " >Recepción</th>
-                <th style = "border: 1px solid;
-                padding: 12px; ">Objetivo</th>
-                <th style = "border: 1px solid;
-                padding: 12px; " >Fecha de validez</th>
-                <th style = "border: 1px solid;
-                padding: 12px; ">Ámbito</th>
-            </tr>
-            
-         ';
-         foreach($custom_data as $data){
-             $output = '<tr>
-             <th style = "border: 1px solid;
-             padding: 12px; " >'.$data->id.'</th>
-             <th style = "border: 1px solid;
-             padding: 12px; " >'.$data->name .'</th>
-             <th style = "border: 1px solid;
-             padding: 12px; " >' .$data->reception.' </th>
-             <th style = "border: 1px solid;
-             padding: 12px; ">' .$data->objective. '</th>
-             <th style = "border: 1px solid;
-             padding: 12px; " >' .$data->agreementValidity.'</th>
-             <th style = "border: 1px solid;
-             padding: 12px; ">' .$data->scope .'</th>
-         </tr>';
-         }
-         $output = '</table>';
-         return $output;
-     }*/
-     public function downloadPDF($id){
-         $custom_data = Agreement::find($id);
-         $pdf = PDF::loadView('PDFGenerator.pdf', compact('custom_data'));
-         return $pdf->download('reporte.pdf');
-     }
+
+    public function downloadPDF()
+    {
+        //Busca el agreement por el id y carga la vista del pdf con las variables dadas
+        $custom_agreement1 = Agreement::where('scope', 'Estatal')->count();
+        $custom_agreement2 = Agreement::where('scope', 'Nacional')->count();
+        $custom_agreement3 = Agreement::where('scope', 'Internacional')->count();
+        //Se hace un parse de enteros a string para imprimir en la vista
+        $custom_agreement2 = (string) $custom_agreement2;
+        $custom_agreement1 = (string) $custom_agreement1;
+        $custom_agreement3 = (string) $custom_agreement3;
+        //Se hace llamado a los contratos
+        $custom_contract = Contract::all();
+        $custom_contract1 = Contract::where('scope','Estatal')->count();
+        $custom_contract2 = Contract::where('scope','Nacional')->count();
+        $custom_contract3 = Contract::where('scope','Internacional')->count();;
+
+        $custom_contract1 = (string) $custom_contract1;
+        $custom_contract2 = (string) $custom_contract2;
+        $custom_contract3 = (string) $custom_contract3;
+        $pdf = PDF::loadView('PDFgenerator.pdf', compact( 'custom_agreement1', 'custom_agreement2', 'custom_agreement3','custom_contract1','custom_contract2','custom_contract3'));
+        //Regresa la descarga del pdf
+        return $pdf->download('reporte.pdf');
+    }
 
 }

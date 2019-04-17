@@ -41,6 +41,7 @@
                 @if(count (Auth::user()->getContracts)||count (Auth::user()->getAgreements))
                 <a href="{{route('Revision')}}" class="btn boton">Asignados</a>
                 @endif
+                <a href="{{route('PrePDF')}}" class="btn boton">Reporte</a>
             </div>
 
         </div>

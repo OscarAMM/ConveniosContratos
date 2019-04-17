@@ -2,14 +2,10 @@
 <head>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-<<<<<<< HEAD
-
-=======
     <script>
     // Give $ to prototype.js
     var $jq = jQuery.noConflict();
     </script>
->>>>>>> 161946be7b2118abd916c0e9364486e52ca78e3a
 </head>
 
 <div class="container">
