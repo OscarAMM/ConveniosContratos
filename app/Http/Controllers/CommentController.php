@@ -8,10 +8,13 @@ use App\Contract;
 use App\File;
 use App\FileAgreement;
 use App\Http\Requests\CommentRequest;
-use App\Mail\SendEmail;
+
 use App\User;
 use Illuminate\Support\Facades\Storage;
 use Mail;
+use App\Mail\SendEmail;
+use Session;
+use Carbon\Carbon;
 
 class CommentController extends Controller
 {
@@ -129,6 +132,56 @@ class CommentController extends Controller
         $message = "El contrato: " . $contract->name . " ya termino su periodo de revisión. Puede acceder a el ingresando al sistema SICC.";
         Mail::to($email)->send(new SendEmail($subject, $message));
         return redirect()->route('Revision', $id)->with('info', 'El contrato '.$contract->name.' ha sido finalizado con éxito');
+
+    }
+    public function notifyAgreement($id){
+        $agreement = Agreement::find($id);
+        $value =null;
+        foreach($agreement->getUser as $user){
+            foreach($agreement->getComments as $comment){
+                $value = ends_with($comment->user,$user->email );
+            }
+            if(!$value){
+                $dt= Carbon::now()->diffForHumans($agreement->end_date);
+                        
+                $email = $user->email;
+                $subject = "Recordatorio de revisión";
+                if($value = ends_with($dt, 'antes')){
+                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al convenio: " . $agreement->name.", por lo que se le recuerda que el tiempo con el que dispone es de ". $dt." de concluir el periodo de revisión.";
+                }
+                if($value = ends_with($dt, 'después')){
+                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al convenio: " . $agreement->name.", por lo que se le recuerda que el tiempo transcurrido es de ". $dt." de haber concluido el periodo de revisión.";
+                }
+                Mail::to($email)->send(new SendEmail($subject, $message));
+
+            }
+        }
+        return redirect()->route('Forum.Contract', $id)->with('info', 'Haz notificado a los usuarios con éxito');
+
+    }
+    public function notifyContract($id){
+        $contract = Contract::find($id);
+        $value =null;
+        foreach($contract->getUser as $user){
+            foreach($contract->getComments as $comment){
+                $value = ends_with($comment->user,$user->email );
+            }
+            if(!$value){
+                $dt= Carbon::now()->diffForHumans($contract->end_date);
+                        
+                $email = $user->email;
+                $subject = "Recordatorio de revisión";
+                if($value = ends_with($dt, 'antes')){
+                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al contrato: " . $contract->name.", por lo que se le recuerda que el tiempo con el que dispone es de ". $dt." de concluir el periodo de revisión.";
+                }
+                if($value = ends_with($dt, 'después')){
+                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al contrato: " . $contract->name.", por lo que se le recuerda que el tiempo transcurrido es de ". $dt." de haber concluido el periodo de revisión.";
+                }
+                Mail::to($email)->send(new SendEmail($subject, $message));
+
+            }
+        }
+        return redirect()->route('Forum.Contract', $id)->with('info', 'Haz notificado a los usuarios con éxito');
 
     }
 }

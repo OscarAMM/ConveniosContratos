@@ -24,7 +24,7 @@
                     <thead class="thead-dark">
                         <tr>
                             <th>Nombre del convenio</th>
-                            <th>Tiempo de revisión</th>
+                            <th>Estatus - Tiempo de revisión</th>
                             <th>Revisión</th>
                         </tr>
                     </thead>
@@ -37,6 +37,13 @@
                             <th scope="row">{{$agreemment->name}}</th>
                             <th scope="row">
                             @php
+                            $user = \Auth::user();
+                            foreach($agreemment->getComments as $comment){
+                            $value = ends_with($comment->user,$user->email );
+                            if($value){
+                                echo "Revisado - Tiempo transcurrido: ";
+                            }
+                            }
                             $dt= Carbon\Carbon::now()->diffForHumans($agreemment->end_date);
                             echo $dt." de concluir el periodo de revisión";
                             @endphp
@@ -67,6 +74,13 @@
                             <th scope="row">{{$contract->name}}</th>
                             <th scope="row">
                             @php
+                            $user = \Auth::user();
+                            foreach($contract->getComments as $comment){
+                            $value = ends_with($comment->user,$user->email );
+                            if($value){
+                                echo "Revisado - Tiempo transcurrido: ";
+                            }
+                            }
                             $dt= Carbon\Carbon::now()->diffForHumans($contract->end_date);
                             echo $dt." de concluir el periodo de revisión";
                             @endphp

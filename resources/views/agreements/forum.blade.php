@@ -51,6 +51,7 @@
         {!! csrf_field()!!}
         <div class="col">
             <div class="form-group">
+                <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn btn-success">Notificar</a>
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm"
                     aria-expanded="false" aria-controls="collapseForm">
                     Comentar
