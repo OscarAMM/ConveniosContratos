@@ -50,6 +50,7 @@
         </thead>
     </table>
     <div>
+    <hr>
         <footer>Dirección: Calle 57 No. 491 A x 60 y 62 Col. Centro, C.P. 97000 Teléfono/Fax: +52 (999) 930-0900
             Extensión:
             1151

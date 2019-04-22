@@ -7,7 +7,7 @@
 <div class="row d-flex justify-content-center">
     <div class="col-md-10 ">
         <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
+           <!-- <thead class="thead-dark">
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
@@ -27,11 +27,11 @@
                     <td>{{$data->objective}}</td>
                     <td>{{$data->agreementValidity}}</td>
                     <td>{{$data->scope}}</td>
-                   <!-- <td><a href="{{route('PDFDownload')}}" class="btn boton">Convertir PDF</a></td> -->
+                    <td><a href="{{route('PDFDownload')}}" class="btn boton">Convertir PDF</a></td> -
                 </tr>
                 @endforeach
             </tbody>
-            </thead>
+            </thead> -->
         </table>
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
