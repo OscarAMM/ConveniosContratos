@@ -142,7 +142,7 @@ class CommentController extends Controller
                 $value = ends_with($comment->user,$user->email );
             }
             if(!$value){
-                $dt= Carbon::now()->diffForHumans($agreement->end_date);
+                $dt= Carbon::now()->subDays(1)->diffForHumans($agreement->end_date);
                         
                 $email = $user->email;
                 $subject = "Recordatorio de revisión";
@@ -167,7 +167,7 @@ class CommentController extends Controller
                 $value = ends_with($comment->user,$user->email );
             }
             if(!$value){
-                $dt= Carbon::now()->diffForHumans($contract->end_date);
+                $dt= Carbon::now()->subDays(1)->diffForHumans($contract->end_date);
                         
                 $email = $user->email;
                 $subject = "Recordatorio de revisión";
