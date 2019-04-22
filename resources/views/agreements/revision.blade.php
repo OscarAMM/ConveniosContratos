@@ -44,7 +44,8 @@
                                 echo "Revisado - Tiempo transcurrido: ";
                             }
                             }
-                            $dt= Carbon\Carbon::now()->diffForHumans($agreemment->end_date);
+                            $dt= Carbon\Carbon::now()->subDays(1)->diffForHumans($agreemment->end_date);
+                            
                             echo $dt." de concluir el periodo de revisión";
                             @endphp
                             </th>
@@ -81,7 +82,7 @@
                                 echo "Revisado - Tiempo transcurrido: ";
                             }
                             }
-                            $dt= Carbon\Carbon::now()->diffForHumans($contract->end_date);
+                            $dt= Carbon\Carbon::now()->subDays(1)->diffForHumans($contract->end_date);
                             echo $dt." de concluir el periodo de revisión";
                             @endphp
                             </th>
