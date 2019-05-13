@@ -16,7 +16,7 @@
     <title>Index</title>
 </head>
 
-<body>
+<body data-gr-c-s-loaded="true">
     @if(Auth::user()->hasRole('admin'))
     @include('auth.fragment.info')
     @include('auth.fragment.error')

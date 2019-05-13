@@ -31,7 +31,7 @@
                 <p class="lead">¡Bienvenido a SICC {{Auth::user()->name}}!</p>
             </div>
             <h2>Administración de documentos</h2>
-            <hr>
+            <hr style="border:1px solid #0F3558;">
             <div class="row">
                 <div class="col-lg-4">
                     <h3>Contratos</h3>
@@ -55,7 +55,7 @@
                 </div>
             </div>
             <h2>Altas en el sistema</h2>
-            <hr>
+            <hr style="border:1px solid #0F3558;">
             <div class="row">
                 <div class="col-lg-4">
                     <h3>Institución</h3>
@@ -73,7 +73,26 @@
                     <h3>Persona</h3>
                     <p>Se hace la administración únicamente de personas. Se puede agregar, editar, eliminar y examinar
                         las personas que suscriben.</p>
-                        <p><a href="{{route('Person.index')}}" class="btn boton">Administrar</a></p>
+                    <p><a href="{{route('Person.index')}}" class="btn boton">Administrar</a></p>
+                </div>
+            </div>
+            <h2>Administración de usuarios</h2>
+            <hr style="border:1px solid #0F3558;">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>Registro usuario</h3>
+                    <p>Se hace el registro de usuarios. ¡El usuario registrado tendrá acceso como administrador!</p>
+                    <p><a href="{{route('admin.index')}}" class="btn boton">Registrar</a></p>
+                </div>
+                <div class="col-lg-4">
+                <h3>Consultar usuario</h3>
+                <p>Se consulta todos los usuarios registrados en el sistema, tanto usuarios normales como administradores.</p>
+                <p><a href="{{route('users.index')}}" class="btn boton">Consultar</a></p>
+                </div>
+                <div class="col-lg-4">
+                <h3>Correo</h3>
+                <p>El sistema cuenta un apartado de correo donde se podrá mandar correo a la persona deseada.</p>
+                <p><a href="{{route('mail.index')}}" class="btn boton">Enviar Correo</a></p>
                 </div>
             </div>
 

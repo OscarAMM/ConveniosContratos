@@ -24,12 +24,12 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light navbar-laravel mb-4">
             <div class="container">
                 <!--<img src="http://www.uady.mx/media/convocatorias/LOGO%20FIRMA_18_02_15.jpg"  width="80" height="70" class="d-inline-block align-top" alt="...">-->
 
-                <a href="{{route('home')}}">
-                    <h2 class=text-muted>SICC</h2>
+                <a href="{{route('home')}}" class="navbar-brand text-muted">
+                    <h3>SICC</h3> 
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse"
                     data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -39,10 +39,33 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+                   
+                    
+                   
+                   @if(!Auth::guest())
+                  
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                        <a class="nav-link" href="{{route('Contract.index')}}" >Contrato<span class="sr-only">(current)</span> </a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="{{route('Agreement.index')}}" class="nav-link">Convenio</a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="{{route('Institute.index')}}" class="nav-link">Institución</a></li>
+                        <li class="nav-item">
+                        <a href="{{route('Dependence.index')}}" class="nav-link">Dependencia</a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="{{route('Person.index')}}" class="nav-link">Persona</a>
+                        </li>
+                        <li class="nav-item">
+                        <a href="{{route('users.index')}}" class="nav-link">Usuarios</a>
+                        </li>
                     </ul>
+                    @endif
 
+                     
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
@@ -88,7 +111,7 @@
     </main>
 
 
-    
+
     @yield('scripts')
     <script src="{{asset('vendors\ckeditor\ckeditor.js')}}"></script>
 </body>
