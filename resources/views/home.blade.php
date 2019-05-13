@@ -7,7 +7,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{asset('css\proyect.css')}}"> 
+    <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
     <title>SICC</title>
 </head>
 
@@ -17,8 +17,6 @@
     </div>
 
     <div class="container">
-
-
         @if (session('status'))
         <div class="alert alert-success" role="alert">
             {{ session('status') }}
@@ -27,14 +25,68 @@
         @if(Auth::user()->hasRole('admin'))
         <!-- INICIO DE CATALOGOS -->
         <!-- Inicio CONTRATO-->
+        <div class="container">
+            <div class="jumbotron">
+                <h1>Sistema de Convenio y Contratos</h1>
+                <p class="lead">¡Bienvenido a SICC {{Auth::user()->name}}!</p>
+            </div>
+            <h2>Administración de documentos</h2>
+            <hr>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>Contratos</h3>
+                    <p>Se hace administración únicamente de contratos. Se puede agregar, editar, eliminar y examinar los
+                        contratos que se realizan en la jornada diaria.</p>
+                    <p> <a href="{{route('Contract.index')}}" class="btn boton">Administrar</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Convenios</h3>
+                    <p>Se hace administración únicamente de Convenios. Se puede agregar, editar, eliminar y examninar
+                        los convenios que se realizan en la jornada diaria.</p>
+                    <p><a href="{{route('Agreement.index')}}" class="btn boton">Administrar</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Asignación</h3>
+                    <p>Se muestran los contratos y convenios asignados al usuario. ¡No se verán contratos y convenios no
+                        asignados! </p>
+                    <p> @if(count (Auth::user()->getContracts)||count (Auth::user()->getAgreements))
+                        <a href="{{route('Revision')}}" class="btn boton">Asignados</a>
+                        @endif</p>
+                </div>
+            </div>
+            <h2>Altas en el sistema</h2>
+            <hr>
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>Institución</h3>
+                    <p>Se hace la administración únicamente de instituciones. Se puede agregar, editar, eliminar y
+                        examinar las instituciones que suscriben.</p>
+                    <p><a href="{{route('Institute.index')}}" class="btn boton">Administrar</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Dependencia</h3>
+                    <p>Se hace la administración únicamente de dependencia. Se puede agregar, editar, eliminar y
+                        examinar las dependencias que suscriben.</p>
+                    <p><a href="{{route('Dependence.index')}}" class="btn boton">Administrar</a></p>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Persona</h3>
+                    <p>Se hace la administración únicamente de personas. Se puede agregar, editar, eliminar y examinar
+                        las personas que suscriben.</p>
+                        <p><a href="{{route('Person.index')}}" class="btn boton">Administrar</a></p>
+                </div>
+            </div>
+
+        </div>
 
         <div class="card">
             <div class="card-header text-muted text-center">
                 <h4>Convenio - Contrato</h4>
             </div>
             <div class="card-body">
-                <p class="text">Se administra <strong>Convenios</strong> y <strong>Contratos</strong>.En este aparatado 
-                se puede agregar, editar y eliminar, además de poder consultar los asignados a cada responsable del departamento. 
+                <p class="text">Se administra <strong>Convenios</strong> y <strong>Contratos</strong>.En este aparatado
+                    se puede agregar, editar y eliminar, además de poder consultar los asignados a cada responsable del
+                    departamento.
                 </p>
                 <a href="{{route('Contract.index')}}" class="btn boton">Contratos</a>
                 <a href="{{route('Agreement.index')}}" class="btn boton">Convenios</a>
@@ -116,6 +168,8 @@
     </div>
 
     @endif
+
 </body>
+
 </html>
 @endsection

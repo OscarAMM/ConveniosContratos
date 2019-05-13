@@ -5,7 +5,8 @@ Route::get('/', 'HomeController@index')->name('home');
 
 //Ruta Institute
 Route::resource('Institute', 'InstituteController');
-
+//RUTA Persona
+Route::resource('Person', 'PersonController');
 //Ruta DEPENDENCIA
 Route::resource('Dependence', 'DependenceController');
 

@@ -69,7 +69,6 @@
                             @endforeach
                         </select>
                     </div>
-
                 </div>
                 <div class="form-group text-center" style="margin-top:5px">
                     <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>

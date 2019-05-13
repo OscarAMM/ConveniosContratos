@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Http\Request\UserRequest;
 class HomeController extends Controller
 {
     /**
@@ -25,6 +25,10 @@ class HomeController extends Controller
     {
         $request->user()->authorizeRoles(['user', 'admin']);
         return view('home');
+    }
+    public function requestUser(UserRequest $request){
+        $name = $request->get('name');
+        return view('home', compact('name'));
     }
     
 }

@@ -24,7 +24,7 @@
 
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
+        <nav class="navbar navbar-expand-md navbar-light fixed-top navbar-laravel">
             <div class="container">
                 <!--<img src="http://www.uady.mx/media/convocatorias/LOGO%20FIRMA_18_02_15.jpg"  width="80" height="70" class="d-inline-block align-top" alt="...">-->
 
@@ -81,19 +81,14 @@
                 </div>
             </div>
         </nav>
-        <main class="pb-4 mb-5">
-            @yield('content')
-
-        </main>
-
     </div>
-    <footer class="footer text-muted text-center">
-        <div class="container">
-            © Todos los Derechos Reservados, UADY 2019. Esta página puede ser reproducida con fines no lucrativos,
-            siempre y cuando no se mutile, se cite la fuente completa y su dirección electrónica, de otro forma
-            requiere permiso previo por escrito de la institución.
-        </div>
-    </footer>
+    <main class="pb-4 mb-5">
+        @yield('content')
+
+    </main>
+
+
+    
     @yield('scripts')
     <script src="{{asset('vendors\ckeditor\ckeditor.js')}}"></script>
 </body>

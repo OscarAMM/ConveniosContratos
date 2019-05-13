@@ -71,10 +71,11 @@
                         <a href="{{route('public.show', $agreement ->id)}}" class="btn botonAzul">Ver</a>
                     </td>
 
-                    </tr>
-        @endif
-        @endforeach
-    </tbody>
-    </thead>
-</table>
-@endsection
+                </tr>
+                @endif
+                @endforeach
+            </tbody>
+            </thead>
+        </table>
+        
+        @endsection
