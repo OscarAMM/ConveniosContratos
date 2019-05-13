@@ -3,11 +3,15 @@
 @section('content')
 @if(Auth::user()->hasRole('admin'))
 @include('institutes.fragment.info')
-<div class="card-header text-muted text-center" style="margin-bottom:5px">
-    <h2> Instituciones </h2>
-</div>
-<div class="row-10 d-flex justify-content-center">
-    {{Form::open(['route'=>'Institute.index','method'=>'GET','class'=>'form-inline'])}}
+<div class="container">
+
+    <div class="jumbotron" style="background-color:#0F3558;">
+        <h1 class="text-muted">Institución</h1>
+        <hr style="border:2px solid #BF942D">
+        <p class="text-muted">Se desplegará una lista con todas los convenios registrados hasta el momento en el
+            sistema.
+        </p>
+        {{Form::open(['route'=>'Institute.index','method'=>'GET','class'=>'form-inline'])}}
     <p class="text-item-center"><a href="{{route('Institute.create')}}" class="btn boton"
             style="margin-right:5px">Nuevo</a>
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
@@ -38,8 +42,10 @@
             </div>
         </div>
         {{Form::close()}}
+        </div>
     </div>
 </div>
+
 <div class="row d-flex justify-content-center">
     <div class="col-md-10">
         <table class="table  table-striped table-bordered">

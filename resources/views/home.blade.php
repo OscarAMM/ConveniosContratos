@@ -27,8 +27,11 @@
         <!-- Inicio CONTRATO-->
         <div class="container">
             <div class="jumbotron">
-                <h1>Sistema de Convenio y Contratos</h1>
+                <h1>Sistema de Convenios y Contratos</h1>
                 <p class="lead">¡Bienvenido a SICC {{Auth::user()->name}}!</p>
+                <p>Nota: El sistema se está dividiendo en dos partes. La primera es de trabajo diario, tomando en cuenta
+                    desde la sección "Administración de documentos" hasta "Administración de usuarios".
+                    La sección "Finalización" será utilizada cuando todos los documentos estén en orden y firmados. </p>
             </div>
             <h2>Administración de documentos</h2>
             <hr style="border:1px solid #0F3558;">
@@ -85,76 +88,30 @@
                     <p><a href="{{route('admin.index')}}" class="btn boton">Registrar</a></p>
                 </div>
                 <div class="col-lg-4">
-                <h3>Consultar usuario</h3>
-                <p>Se consulta todos los usuarios registrados en el sistema, tanto usuarios normales como administradores.</p>
-                <p><a href="{{route('users.index')}}" class="btn boton">Consultar</a></p>
+                    <h3>Consultar usuario</h3>
+                    <p>Se consulta todos los usuarios registrados en el sistema, tanto usuarios normales como
+                        administradores.</p>
+                    <p><a href="{{route('users.index')}}" class="btn boton">Consultar</a></p>
                 </div>
                 <div class="col-lg-4">
-                <h3>Correo</h3>
-                <p>El sistema cuenta un apartado de correo donde se podrá mandar correo a la persona deseada.</p>
-                <p><a href="{{route('mail.index')}}" class="btn boton">Enviar Correo</a></p>
+                    <h3>Correo</h3>
+                    <p>El sistema cuenta un apartado de correo donde se podrá mandar correo a la persona deseada.</p>
+                    <p><a href="{{route('mail.index')}}" class="btn boton">Enviar Correo</a></p>
+                </div>
+            </div>
+            <h2>Finalización</h2>
+            <hr style="border:1px solid #0F3558;">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>Reporte</h3>
+                    <p>El sistema arrojará los reportes correspondientes según la fecha especificada.</p>
+                    <p><a href="{{route('PrePDF')}}" class="btn boton">Reporte</a></p>
                 </div>
             </div>
 
         </div>
 
-        <div class="card">
-            <div class="card-header text-muted text-center">
-                <h4>Convenio - Contrato</h4>
-            </div>
-            <div class="card-body">
-                <p class="text">Se administra <strong>Convenios</strong> y <strong>Contratos</strong>.En este aparatado
-                    se puede agregar, editar y eliminar, además de poder consultar los asignados a cada responsable del
-                    departamento.
-                </p>
-                <a href="{{route('Contract.index')}}" class="btn boton">Contratos</a>
-                <a href="{{route('Agreement.index')}}" class="btn boton">Convenios</a>
-                @if(count (Auth::user()->getContracts)||count (Auth::user()->getAgreements))
-                <a href="{{route('Revision')}}" class="btn boton">Asignados</a>
-                @endif
-                <a href="{{route('PrePDF')}}" class="btn boton">Reporte</a>
-            </div>
-
-        </div>
-
-        <br>
-        <!-- Fin Contrato-->
-
-        <!--Inicio INST/DEP-->
-
-        <div class="card">
-            <div class="card-header text-muted text-center">
-                <h4>Institución - Dependencia</h4>
-            </div>
-            <div class="card-body">
-                <p class="text">Se administran instituciones y dependendencias permitiendo agregar, editar,
-                    eliminar y observar lo registrado.</p>
-                <a href="{{route('Institute.index')}}" class="btn boton">Instituciones</a>
-                <a href="{{route('Dependence.index')}}" class="btn boton">Dependencias</a>
-            </div>
-        </div>
-
-        <br>
-        <!--FIN INST/DEP-->
-        <!--REGISTRO ADMINISTRADORES-->
-        <!--Inicio ADMINS-->
-
-        <div class="card ">
-            <div class="card-header text-muted text-center">
-                <h4>Usuarios</h4>
-            </div>
-            <div class="card-body">
-                <p class="text">Se administran usuarios y administradores permitiendo agregar, editar, eliminar
-                    y
-                    observar lo registrado.</p>
-                <a href="{{route('admin.index')}}" class="btn boton">Registrar</a>
-                <a href="{{route('users.index')}}" class="btn boton">Consultar</a>
-                <a href="{{route('mail.index')}}" class="btn boton">Enviar Correo</a>
-            </div>
-
-        </div>
-
-
+       
         <!-- Fin ADMINS-->
         @else
         <!--{{(Auth::user()->name)}}-->

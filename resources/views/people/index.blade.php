@@ -39,9 +39,6 @@
                         </button>
                     </div>
                 </div>
-                <div class="form-row">
-                
-                </div>
             </div>
             {{Form::close()}}
         </div>
@@ -102,6 +99,6 @@
 
     </div>
 </div>
-
+{!!$people->render()!!}
 @endif
 @endsection
