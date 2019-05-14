@@ -27,10 +27,7 @@
                     </li>
                     <li class="list-group-item"> 
                     <h5 class="card-title font-weight-bold">Contratos asignados</h5>
-                    @foreach($user->getContracts as $contract)       
-                        {{$contract->name}}
-                        <br>
-                    @endforeach
+                  
                     </li>
                     <li class="list-group-item"> 
                     <h5 class="card-title font-weight-bold">Convenios asignados</h5>

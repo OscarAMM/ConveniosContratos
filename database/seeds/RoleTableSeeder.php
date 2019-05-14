@@ -22,5 +22,9 @@ class RoleTableSeeder extends Seeder
         $role->name = 'user';
         $role->description = 'User';
         $role->save();
+        $role = new Role();
+        $role->name = 'revisor';
+        $role->description ='Revisor';
+        $role->save();
     }
 }
