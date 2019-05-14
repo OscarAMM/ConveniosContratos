@@ -8,7 +8,7 @@
             <div class="card-body">
                 <form method="POST" action="#">
                     <div class="form-group ">
-                        <label for="name" class="col-md-4 col-form-label ">Nombre de convenio</label>
+                        <label for="name" class="col-md-4 col-form-label ">Instrumento jurídico</label>
                         <input type="text" id="name" name="name" class="form-control " placeholder="Nombre">
                     </div>
                     <div class="form-group ">
@@ -21,8 +21,16 @@
                             placeholder="Describe el objetivo"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="agreementValidity" class="col-md-4 col-form-label">Fecha de fin</label>
-                        <input type="date" id="agreementValidity" name="agreementValidity" class="form-control">
+                        <label for="legalInstrument" class="col-md-4 col-form-label">Tipo de instrumento</label>
+                        <select name="legalInstrument" id="legalInstrument" class="form-control">
+                            <option>Convenio</option>
+                            <option>Contrato</option>
+                            <option>Otros</option>
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <label for="registerNumber" class="col-md-4 col-form-label ">Número de registro</label>
+                        <input type="text" id="registerNumber" name="registerNumber" class="form-control " placeholder="registerNumber">
                     </div>
                     <div class="form-group">
                         <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
@@ -51,8 +59,8 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="person_id" class=" col-form-label">Asigne Persona</label>
-                            <select name="person_id" id="person_id"
+                            <label for="people_id" class="col-form-label">Asigne </label>
+                            <select name="people_id" id="people_id"
                                 placeholder="Selecciona la institucion asignado" class="form-control"
                                 required="required">
                                 <!--Integrar for each -->

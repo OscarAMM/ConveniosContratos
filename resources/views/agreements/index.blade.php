@@ -98,6 +98,9 @@
                                 <button class="btn btn-danger">Eliminar</button>
                             </form>
                         </td>
+                        <td><a href="{{route('Forum.Agreement', $agreement->id)}}"
+                                    class="btn boton ">Revisión</a>
+                        </td>
                     </tr>
                     @endforeach
                 </tbody>

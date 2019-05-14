@@ -156,7 +156,7 @@ class CommentController extends Controller
 
             }
         }
-        return redirect()->route('Forum.Contract', $id)->with('info', 'Haz notificado a los usuarios con éxito');
+        return redirect()->route('Forum.Agreement', $id)->with('info', 'Haz notificado a los usuarios con éxito');
 
     }
     public function notifyContract($id){

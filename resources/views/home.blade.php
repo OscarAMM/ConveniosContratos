@@ -38,9 +38,9 @@
             <div class="row">
                
                 <div class="col-lg-4">
-                    <h3>Convenios</h3>
-                    <p>Se hace administración únicamente de Convenios. Se puede agregar, editar, eliminar y examninar
-                        los convenios que se realizan en la jornada diaria.</p>
+                    <h3>Documentos</h3>
+                    <p>Se hace administración de Documentos. Se puede agregar, editar, eliminar y examninar
+                        los documentos que se realizan en la jornada diaria.</p>
                     <p><a href="{{route('Agreement.index')}}" class="btn boton">Administrar</a></p>
                 </div>
                 <div class="col-lg-4">
@@ -58,9 +58,9 @@
                 
                 
                 <div class="col-lg-4">
-                    <h3>Persona</h3>
-                    <p>Se hace la administración únicamente de personas. Se puede agregar, editar, eliminar y examinar
-                        las personas que suscriben.</p>
+                    <h3>Suscritos</h3>
+                    <p>Se hace la administración de instituciones, dependencias y personas. Se puede agregar, editar, eliminar y examinar
+                        los que suscriben.</p>
                     <p><a href="{{route('Person.index')}}" class="btn boton">Administrar</a></p>
                 </div>
             </div>

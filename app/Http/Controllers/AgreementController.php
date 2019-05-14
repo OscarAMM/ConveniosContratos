@@ -50,7 +50,7 @@ class AgreementController extends Controller
     public function showPublic($id)
     {
         $agreements = Agreement::find($id);
-        $person_id = $agreements->person_id;
+        $person_id = $agreements->people_id;
         $people = Person::find($person_id);
         
         $files=$agreements->getFiles;
@@ -69,7 +69,7 @@ class AgreementController extends Controller
     public function show($id)
     {
         $agreements = Agreement::find($id);
-        $person_id = $agreements->person_id;
+        $person_id = $agreements->people_id;
         $person = Person::find($person_id);
         $users = $agreements->getUser;
         $files = $agreements->getFiles;
@@ -113,9 +113,10 @@ class AgreementController extends Controller
         $agreement->name = $request->name;
         $agreement->reception = $request->reception;
         $agreement->objective = $request->objective;
-        $agreement->agreementValidity = $request->agreementValidity;
+        $agreement->legalInstrument = $request->legalInstrument;
+        $agreement->registerNumber = $request->registerNumber;
         $agreement->scope = $request->scope;
-        $agreement->person_id = $request->person_id;
+        $agreement->people_id  = $request->people_id ;
         $users = $request->users;
         if ($request->hide == "visible") {
             $agreement->hide = true;
@@ -159,7 +160,8 @@ class AgreementController extends Controller
         $agreement->name = $request->name;
         $agreement->reception = $request->reception;
         $agreement->objective = $request->objective;
-        $agreement->agreementValidity = $request->agreementValidity;
+        $agreement->legalInstrument = $request->legalInstrument;
+        $agreement->registerNumber = $request->registerNumber;
         $agreement->scope = $request->scope;
         $agreement->status="Revisión";
         $agreement->liable_user = $request->liable_user;
@@ -171,7 +173,7 @@ class AgreementController extends Controller
             $agreement->hide = false;
         }
         
-        $agreement->person_id = $request->person_id;
+        $agreement->people_id = $request->people_id;
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
             return back()->with('info', 'El convenio '.$agreement->name.' ya existe.');

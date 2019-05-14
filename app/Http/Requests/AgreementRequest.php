@@ -27,11 +27,11 @@ class AgreementRequest extends FormRequest
             'name' => 'required ',
             'reception'=>'required',
             'objective'=>'required',
-            'agreementValidity'=>'required',
             'scope'=>'required',
             'users'=>'required',
             'hide'=>'required',
-            'person_id'=>'required',
+            'registerNumber' =>'required',
+            'people_id'=>'required',
     
             
         ];
@@ -45,7 +45,7 @@ class AgreementRequest extends FormRequest
             'contractValidity.required' => 'Ingresa una fecha de fin válida',
             'scope.required' => 'Ingresa el ambito del contrato',
             'users.required' => 'Asigna un usuario',
-            'person_id.required' => 'Asigna una persona',
+            'people_id.required' => 'Asigna una persona',
             
 
         ];
