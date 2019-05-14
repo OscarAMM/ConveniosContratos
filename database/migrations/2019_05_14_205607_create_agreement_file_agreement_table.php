@@ -33,3 +33,4 @@ class CreateAgreementFileAgreementTable extends Migration
         Schema::dropIfExists('agreement_file_agreement');
     }
 }
+
