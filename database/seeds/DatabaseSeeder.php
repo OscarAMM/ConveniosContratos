@@ -11,11 +11,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->truncateTables([
+        /*$this->truncateTables([
             'institutes','dependences',
-        ]);
-        $this->call(InstituteTableSeeder::class);
-        $this->call(DependenciesTableSeeder::class);
+        ]);*/
+       
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
     }
