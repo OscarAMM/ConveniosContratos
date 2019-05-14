@@ -61,9 +61,11 @@
                                     @if($user->hasRole('user'))
                                     <option value="user">User</option>
                                     <option value="admin">Admin</option>
+                                    <option value="revisor">Revisor</option>
                                     @else
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
+                                    <option value="revisor">Revisor</option>
                                     @endif
                                 </select>
                             </div>

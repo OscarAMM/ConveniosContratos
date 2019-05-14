@@ -52,6 +52,8 @@ class UserController extends Controller
         }
         if ($request['rol']=="admin") {
             $user->roles()->attach(Role::where('name', 'admin')->first());
+        }if ($request['rol']=="revisor") {
+            $user->roles()->attach(Role::where('name', 'revisor')->first());
         }
         //return back()->with('info','El usuario ha sido editado');
         return redirect()->back()->with('info','El usuario '.$user->name.' ha sido editado');

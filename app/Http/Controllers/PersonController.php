@@ -16,12 +16,14 @@ class PersonController extends Controller
         $personType = $request->get('personType');
         $country = $request->get('country');
         $email = $request->get('email');
+        $acronym = $request->get('acronym');
         $people = Person::orderBy('id', 'ASC')
             ->id($id)
             ->name($name)
             ->personType($personType)
             ->country($country)
             ->email($email)
+            ->acronym($acronym)
             ->paginate();
         return view('people.index', compact('people'));
 
@@ -50,6 +52,7 @@ class PersonController extends Controller
         $person->name = $request->name;
         $person->personType = $request->personType;
         $person->country = $request->country;
+        $person->acronym = $request->acronym;
         $person->email = $request->email;
         //The function checks if a person with the same name alredy exists
         if (Person::where('name', $person->name)->exists()) {
@@ -67,7 +70,7 @@ class PersonController extends Controller
         $person->personType = $request->personType;
         $person->country = $request->country;
         $person->email = $request->email;
-
+        $person->acronym = $request->acronym;
         $person->save();
 
         return redirect()->route('Person.index')->with('info', 'La persona ' . $person->name . ' ha sido actualizado');

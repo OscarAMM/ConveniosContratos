@@ -19,7 +19,7 @@ class CreatePeopleTable extends Migration
             $table->string('personType');
             $table->string('country');
             $table->string('email')->unique();
-            $table->string('acronym');
+            $table->string('acronym')->nullable();
             $table->timestamps();
         });
     }

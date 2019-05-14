@@ -13,8 +13,14 @@ class DatabaseSeeder extends Seeder
     {
         /*$this->truncateTables([
             'institutes','dependences',
+<<<<<<< HEAD
         ]);*/
        
+=======
+        ]);
+        $this->call(InstituteTableSeeder::class);
+        $this->call(DependenciesTableSeeder::class);*/
+>>>>>>> 50797cfec7809d5945e24d8c71ac4cc5677023f2
         $this->call(RoleTableSeeder::class);
         $this->call(UserTableSeeder::class);
     }

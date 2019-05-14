@@ -77,7 +77,7 @@ class RegisterAdminController extends Controller
                 $user->save();
                 $user
                 ->roles()
-                ->attach(Role::where('name', 'admin')->first());
+                ->attach(Role::where('name', 'revisor')->first());
                 return redirect("/");
             }
             
