@@ -31,8 +31,8 @@
                         {{$agreements->scope}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Depenendencia perteneciente</h5>
-                        {{$dependences->name}}
+                        <h5 class="card-title font-weight-bold">Suscrito perteneciente</h5>
+                        {{$person->name}}
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Usuario(s) asignado(s)</h5>

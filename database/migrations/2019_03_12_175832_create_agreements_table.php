@@ -26,10 +26,9 @@ class CreateAgreementsTable extends Migration
             $table->date('end_date');
             $table->string('status');
             $table->integer('liable_user')->unsigned();
-            $table->integer('dependence_id')->unsigned();
-            
+            $table->integer('person_id')->unsigned();
 
-            $table->foreign('dependence_id')->references('id')->on('dependences')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('person_id')->references('id')->on('people')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('liable_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
 
             $table->timestamps();

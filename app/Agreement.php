@@ -4,6 +4,7 @@ namespace App;
 use App\Institute;
 use App\Dependence;
 use App\User;
+use App\Person;
 use App\Comment;
 use App\FileAgreement;
 
@@ -44,6 +45,10 @@ class Agreement extends Model
     }
     public function dependences(){
         return $this ->belongsToMany(Dependence::class)
+        ->withTimestamps();
+    }
+    public function people(){
+        return $this ->belongsToMany(Person::class)
         ->withTimestamps();
     }
 
