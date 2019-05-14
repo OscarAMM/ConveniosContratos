@@ -13,6 +13,7 @@ use Mail;
 use Session;
 use App\Mail\SendEmail;
 use Carbon\Carbon;
+use DB;
 
 class ContractController extends Controller
 {
@@ -120,7 +121,7 @@ class ContractController extends Controller
         $contract->scope = $request->scope;
         $contract->institute_id = $request->institute_id;
         $contract->status="Revisión";
-        $contract->liable_user = $request->liable_user;
+        $contract->liable_user = $request->liable;
         $contract->start_date =  Carbon::now();
         $contract->end_date = Carbon::now()->addWeekDays(4);
 
@@ -161,5 +162,40 @@ class ContractController extends Controller
         echo "existe";
         return Storage::download('/files/'.$file->name);
     }
-  
+    function fetch(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('users')
+        ->where('name', 'LIKE', "%{$query}%")
+        ->get();
+      foreach($data as $row)
+      {
+        if ($row->hasRole('user')) {
+            $output= '
+            <option value="'.$row->id.'">'.$row->email.'</option>
+            ';
+        }
+      }
+      echo $output;
+     }
+    }
+    function fetchInstitutes(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('institutes')
+        ->where('name', 'LIKE', "%{$query}%")
+        ->get();
+      foreach($data as $row)
+      {
+            $output= '
+            <option value="'.$row->id.'">'.$row->name.'</option>
+            ';
+      }
+      echo $output;
+     }
+    }
 }
