@@ -18,14 +18,15 @@ class CreateAgreementsTable extends Migration
             $table->string('name');
             $table->date('reception');
             $table->text('objective');
-            $table->date('agreementValidity');
+            $table->string('legalInstrument');
+            $table->integer('registerNumber');
             $table->string('scope');
             $table->boolean('hide');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('status');
             $table->integer('liable_user')->unsigned();
-            $table->integer('dependence_id')->unsigned();
+            
 
             $table->foreign('dependence_id')->references('id')->on('dependences')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('liable_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
