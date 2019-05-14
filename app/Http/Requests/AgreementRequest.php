@@ -31,7 +31,7 @@ class AgreementRequest extends FormRequest
             'scope'=>'required',
             'users'=>'required',
             'hide'=>'required',
-            'dependence_id'=>'required',
+            'person_id'=>'required',
     
             
         ];
@@ -45,7 +45,7 @@ class AgreementRequest extends FormRequest
             'contractValidity.required' => 'Ingresa una fecha de fin válida',
             'scope.required' => 'Ingresa el ambito del contrato',
             'users.required' => 'Asigna un usuario',
-            'dependence_id.required' => 'Asigna una dependencia',
+            'person_id.required' => 'Asigna una persona',
             
 
         ];

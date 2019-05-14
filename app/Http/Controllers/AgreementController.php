@@ -7,6 +7,7 @@ use App\Dependence;
 use App\FileAgreement;
 use App\Http\Requests\AgreementRequest;
 use App\User;
+use App\Person;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Mail;
@@ -49,27 +50,27 @@ class AgreementController extends Controller
     public function showPublic($id)
     {
         $agreements = Agreement::find($id);
-        $dependence_id = $agreements->dependence_id;
-        $dependences = Dependence::find($dependence_id);
+        $person_id = $agreements->person_id;
+        $people = Person::find($person_id);
         
         $files=$agreements->getFiles;
         $list=array($files);
         $cont=count($files);
         $file=FileAgreement::find(last($list)[$cont-1]->id);
-        return view('public.show', compact('agreements', 'dependences', 'file'));
+        return view('public.show', compact('agreements', 'people', 'file'));
     }
 
     public function create()
     {
-        $dependences = Dependence::all();
+        $people = Person::all();
         $users = User::all();
-        return view('agreements.create', compact('dependences', 'users'));
+        return view('agreements.create', compact('people', 'users'));
     }
     public function show($id)
     {
         $agreements = Agreement::find($id);
-        $dependence_id = $agreements->dependence_id;
-        $dependences = Dependence::find($dependence_id);
+        $person_id = $agreements->person_id;
+        $person = Person::find($person_id);
         $users = $agreements->getUser;
         $files = $agreements->getFiles;
         $fecha=$agreements->start_date;
@@ -86,17 +87,16 @@ class AgreementController extends Controller
         $data1=Agreement::where('scope', 'Nacional')->count();
         $data2=Agreement::where('scope', 'Internacional')->count();
         echo $data.'-'.$data1.'-'.$data2;*/
-        return view('agreements.show', compact('agreements', 'users', 'dependences', 'files'));
+        return view('agreements.show', compact('agreements', 'users', 'person', 'files'));
     }
     public function edit($id)
     {
         $agreements = Agreement::find($id);
         $user = $agreements->getUser;
         $users = User::all();
-        $dependence_id = $agreements->dependence_id;
-        $dependences = Dependence::all();
+        $people = Person::all();
         //buscar la dependencia y pasarlo a la vista (creo)
-        return view('agreements.edit', compact('agreements', 'users', 'dependences', 'user'));
+        return view('agreements.edit', compact('agreements', 'users', 'people', 'user'));
     }
 
     public function destroy($id)
@@ -115,7 +115,7 @@ class AgreementController extends Controller
         $agreement->objective = $request->objective;
         $agreement->agreementValidity = $request->agreementValidity;
         $agreement->scope = $request->scope;
-        $agreement->dependence_id = $request->dependence_id;
+        $agreement->person_id = $request->person_id;
         $users = $request->users;
         if ($request->hide == "visible") {
             $agreement->hide = true;
@@ -140,7 +140,6 @@ class AgreementController extends Controller
     }
     public function store(AgreementRequest $request)
     {
-
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
@@ -172,7 +171,7 @@ class AgreementController extends Controller
             $agreement->hide = false;
         }
         
-        $agreement->dependence_id = $request->dependence_id;
+        $agreement->person_id = $request->person_id;
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
             return back()->with('info', 'El convenio '.$agreement->name.' ya existe.');

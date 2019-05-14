@@ -57,43 +57,7 @@
                     </tbody>
                 </table>
             </div>
-            <!-- tabla de contratos-->
-            <div class=" col">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Nombre del contrato</th>
-                            <th>Tiempo de revisión</th>
-                            <th>Revisión</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach(Auth::user()->getContracts as $contract)
-                        {!!csrf_field()!!}
-                        @if($contract->status=='Revisión')
-                        <tr>
-                            <th scope="row">{{$contract->name}}</th>
-                            <th scope="row">
-                            @php
-                            $user = \Auth::user();
-                            foreach($contract->getComments as $comment){
-                            $value = ends_with($comment->user,$user->email );
-                            if($value){
-                                echo "Revisado - Tiempo transcurrido: ";
-                            }
-                            }
-                            $dt= Carbon\Carbon::now()->subDays(1)->diffForHumans($contract->end_date);
-                            echo $dt." de concluir el periodo de revisión";
-                            @endphp
-                            </th>
-                            <td><a href="{{route('Forum.Contract', $contract->id)}}"
-                                    class="btn boton">Revisión</a></td>
-                        </tr>
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            
         </div>
     </div>
 </body>

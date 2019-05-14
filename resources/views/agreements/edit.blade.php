@@ -60,12 +60,12 @@
                         @endforeach
                     </div>
                     <div class="col-md-4">
-                        <label for="dependence_id" class=" col-form-label">Asigne la dependencia</label>
-                        <select name="dependence_id" id="dependence_id" placeholder="Selecciona la dependencia asignado"
+                        <label for="person_id" class=" col-form-label">Asigne la persona</label>
+                        <select name="person_id" id="person_id" placeholder="Selecciona la dependencia asignado"
                             class="form-control" required="required">
                             <!--Integrar for each -->
-                            @foreach($dependences as $dependence)
-                            <option value="{{$dependence->id}}">{{$dependence->name}}</option>
+                            @foreach($people as $person)
+                            <option value="{{$person->id}}">{{$person->name}}</option>
                             @endforeach
                         </select>
                     </div>

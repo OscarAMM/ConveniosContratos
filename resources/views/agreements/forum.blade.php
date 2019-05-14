@@ -104,7 +104,7 @@
             <div class="card-header text-muted">Documento original</div>
             <div class="card-body">Este es el documento original, es decir, un respaldo en caso de que se hagan
                 demasiadas modificaciones
-                <p><a href="{{route('contract.download',$file->id)}}">{{$file->name}}</a></p>
+                <p><a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a></p>
             </div>
 
         </div>
