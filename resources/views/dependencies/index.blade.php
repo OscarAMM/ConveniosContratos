@@ -2,43 +2,49 @@
 @section('content')
 @if(Auth::user()->hasRole('admin'))
 @include('dependencies.fragment.info')
-<div class="card-header text-muted text-center" style="margin-bottom:5px">
-    <h2> Dependencias </h2>
-</div>
-<div class="row-10 d-flex justify-content-center">
-    {{Form::open(['route'=>'Dependence.index','method'=>'GET','class'=>'form-inline'])}}
-    <p class="text-item-center"><a href="{{route('Dependence.create')}}" class="btn boton"
-            style="margin-right:5px">Nuevo</a>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
-            Búsqueda
-        </button></p>
-    <div class="collapse" id="collapseExample">
-        <div class=" card card-body " style="margin-bottom:5px">
-            <!-- inicio form busqueda-->
-            <div class="form-row">
-                <div class="col" style="margin-right:5px">
-                    {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
-                </div>
-                <div class="col" style="margin-right:5px">
-                    {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
-                </div>
-                <div class="col" style="margin-right:5px">
-                    {{Form::text('acronym',null,['class'=>'form-control','placeholder'=>'Siglas'])}}
-                </div>
-                <div class="col" style="margin-right:5px">
-                    {{Form::text('country',null,['class' =>'form-control','placeholder'=>'Pais'])}}
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search">Buscar</span>
-                    </button>
+<div class="container">
+
+    <div class="jumbotron" style="background-color:#0F3558;">
+        <h1 class="text-muted">Dependencia</h1>
+        <hr style="border:2px solid #BF942D">
+        <p class="text-muted">Se desplegará una lista con todas los convenios registrados hasta el momento en el
+            sistema.
+        </p>
+        {{Form::open(['route'=>'Dependence.index','method'=>'GET','class'=>'form-inline'])}}
+        <p class="text-item-center"><a href="{{route('Dependence.create')}}" class="btn boton"
+                style="margin-right:5px">Nuevo</a>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
+                Búsqueda
+            </button></p>
+        <div class="collapse" id="collapseExample">
+            <div class=" card card-body " style="margin-bottom:5px">
+                <!-- inicio form busqueda-->
+                <div class="form-row">
+                    <div class="col" style="margin-right:5px">
+                        {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
+                    </div>
+                    <div class="col" style="margin-right:5px">
+                        {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
+                    </div>
+                    <div class="col" style="margin-right:5px">
+                        {{Form::text('acronym',null,['class'=>'form-control','placeholder'=>'Siglas'])}}
+                    </div>
+                    <div class="col" style="margin-right:5px">
+                        {{Form::text('country',null,['class' =>'form-control','placeholder'=>'Pais'])}}
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search">Buscar</span>
+                        </button>
+                    </div>
                 </div>
             </div>
+            {{Form::close()}}
         </div>
-        {{Form::close()}}
     </div>
 </div>
+
 <div class="row  d-flex justify-content-center">
     <div class="col-md-10">
         <table class="table  table-striped table-bordered">
@@ -60,7 +66,8 @@
                     <td>
                         <a href="{{route('Dependence.show', $dependence ->id)}}" class="btn botonAzul">Ver</a> </td>
                     <td>
-                        <a href="{{route('Dependence.edit', $dependence ->id)}}" class="btn botonAmarillo">Editar</a></td>
+                        <a href="{{route('Dependence.edit', $dependence ->id)}}" class="btn botonAmarillo">Editar</a>
+                    </td>
                     <td>
                         <form action="{{route('Dependence.destroy', $dependence->id)}}" method="POST">
                             {{csrf_field()}}

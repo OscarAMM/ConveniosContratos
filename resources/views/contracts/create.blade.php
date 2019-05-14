@@ -5,7 +5,7 @@
     <div class="column-sm-8">
         <div class="card">
         <div class="card-header">
-                <h3 class="text-muted text-center"> NUEVO CONTRATO</h3>
+                <h3 class="text-muted text-center"> Contrato</h3>
             </div>
             <div class="card-body">
                 @include('auth.fragment.error')

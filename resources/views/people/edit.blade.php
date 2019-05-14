@@ -2,24 +2,23 @@
 
 @section('content')
 @if(Auth::user()->hasRole('admin'))
-
-
 <div class="container">
     <div class="column-sm-8">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="text-muted text-center"> Convenio </h3>
-            </div>
-            <div class="card-body">
-                @include('auth.fragment.error')
-                @include('auth.fragment.info')
-                {!!Form::open( ['route' =>'Agreement.store', 'files' =>true]) !!}
-                @include('agreements.fragment.form')
-                {{csrf_field()}}
-                {!!Form::close()!!}
-            </div>
+        <h2 class="text-right">
+    </div>
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-muted text-center">Editar Persona</h3>
+        </div>
+        <div class="card-body">
+            @include('institutes.fragment.error')
+            {!!Form::model($person, ['route' =>['Person.update', $person->id],'method' =>'PUT']) !!}
+            @include('people.fragment.form')
+            {!!Form::close()!!}
         </div>
     </div>
+    {{csrf_field()}}
+</div>
 </div>
 @else
 <div class="container">
@@ -34,7 +33,6 @@
 
     </div>
 </div>
-
 
 @endif
 @endsection

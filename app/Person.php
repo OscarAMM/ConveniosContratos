@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Person extends Model
 {
     protected $fillable = [
-        'name','type','country', 'email',
+        'name','personType','country', 'email',
     ];
     public function scopeName($query,$name){
         if($name){
             return $query->where('name','LIKE',"%$name%");
         }
     }
-    public function scopeAcronym($query,$type){
-        if($type){
-            return $query->where('type','LIKE',"%$type%");
+    public function scopePersonType($query,$personType){
+        if($personType){
+            return $query->where('personType','LIKE',"%$personType%");
         }
     }
     public function scopeId($query,$id){

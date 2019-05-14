@@ -15,8 +15,8 @@ class CreateContractsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->date('reception');
-            $table->string('objective', 2000);
-            $table->date('contractValidity');
+            $table->text('objective');
+            $table->date('contractValidity')->nullable();
             $table->string('scope');
             $table->date('start_date');
             $table->date('end_date');
