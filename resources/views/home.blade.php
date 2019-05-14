@@ -107,6 +107,11 @@
                     <p>El sistema arrojará los reportes correspondientes según la fecha especificada.</p>
                     <p><a href="{{route('PrePDF')}}" class="btn boton">Reporte</a></p>
                 </div>
+                <div class="col-lg-4">
+                <h3>Registro</h3>
+                <p>Se realiza el registro final que contará con todo lo solicitado para almacenar en el sistema.</p>
+                <p><a href="{{route('Register')}}">Registro</a></p>
+                </div>
             </div>
 
         </div>

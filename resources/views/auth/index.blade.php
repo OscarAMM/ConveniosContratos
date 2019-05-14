@@ -19,32 +19,33 @@
         </p>
         <small class="text-muted">Nota: La lista está compuesta de los usuarios normales y los administradores. </small>
         {{Form::open(['route'=>'users.index','method'=>'GET','class'=>'form-inline'])}}
-    <p class="text-item-center"><a href="{{route('admin.index')}}" class="btn boton" style="margin-right:5px">Nuevo</a>
-        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-            aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
-            Búsqueda
-        </button></p>
-    <div class="collapse" id="collapseExample">
-        <div class=" card card-body " style="margin-bottom:5px">
-            <!-- inicio form busqueda-->
-            <div class="form-row">
-                <div class="col" style="margin-right:5px">
-                    {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
-                </div>
-                <div class="col" style="margin-right:5px">
-                    {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
-                </div>
-                <div class="col" style="margin-right:5px">
-                    {{Form::text('email',null,['class'=>'form-control','placeholder'=>'Email'])}}
-                </div>
-                <div class="col">
-                    <button type="submit" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-search">Buscar</span>
-                    </button>
+        <p class="text-item-center"><a href="{{route('admin.index')}}" class="btn boton"
+                style="margin-right:5px">Nuevo</a>
+            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
+                Búsqueda
+            </button></p>
+        <div class="collapse" id="collapseExample">
+            <div class=" card card-body " style="margin-bottom:5px">
+                <!-- inicio form busqueda-->
+                <div class="form-row">
+                    <div class="col" style="margin-right:5px">
+                        {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
+                    </div>
+                    <div class="col" style="margin-right:5px">
+                        {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
+                    </div>
+                    <div class="col" style="margin-right:5px">
+                        {{Form::text('email',null,['class'=>'form-control','placeholder'=>'Email'])}}
+                    </div>
+                    <div class="col">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search">Buscar</span>
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
-        {{Form::close()}}
+            {{Form::close()}}
         </div>
     </div>
 </div>
