@@ -9,8 +9,8 @@
     <h3 class="text-muted text-center">Persona</h3>
     </div>
     <div class="card-body">
-    @include('institutes.fragment.info')
-    @include('institutes.fragment.error')
+    @include('people.fragment.info')
+    @include('people.fragment.error')
     <!--Se agrega el formulario que se encuentra en fragment-->
     {!!Form::open( ['route' =>'Person.store']) !!}
         @include('people.fragment.form')

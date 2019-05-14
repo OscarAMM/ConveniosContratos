@@ -36,12 +36,7 @@
             <h2>Administración de documentos</h2>
             <hr style="border:1px solid #0F3558;">
             <div class="row">
-                <div class="col-lg-4">
-                    <h3>Contratos</h3>
-                    <p>Se hace administración únicamente de contratos. Se puede agregar, editar, eliminar y examinar los
-                        contratos que se realizan en la jornada diaria.</p>
-                    <p> <a href="{{route('Contract.index')}}" class="btn boton">Administrar</a></p>
-                </div>
+               
                 <div class="col-lg-4">
                     <h3>Convenios</h3>
                     <p>Se hace administración únicamente de Convenios. Se puede agregar, editar, eliminar y examninar
@@ -52,7 +47,7 @@
                     <h3>Asignación</h3>
                     <p>Se muestran los contratos y convenios asignados al usuario. ¡No se verán contratos y convenios no
                         asignados! </p>
-                    <p> @if(count (Auth::user()->getContracts)||count (Auth::user()->getAgreements))
+                    <p> @if(count (Auth::user()->getAgreements))
                         <a href="{{route('Revision')}}" class="btn boton">Asignados</a>
                         @endif</p>
                 </div>
@@ -60,18 +55,8 @@
             <h2>Altas en el sistema</h2>
             <hr style="border:1px solid #0F3558;">
             <div class="row">
-                <div class="col-lg-4">
-                    <h3>Institución</h3>
-                    <p>Se hace la administración únicamente de instituciones. Se puede agregar, editar, eliminar y
-                        examinar las instituciones que suscriben.</p>
-                    <p><a href="{{route('Institute.index')}}" class="btn boton">Administrar</a></p>
-                </div>
-                <div class="col-lg-4">
-                    <h3>Dependencia</h3>
-                    <p>Se hace la administración únicamente de dependencia. Se puede agregar, editar, eliminar y
-                        examinar las dependencias que suscriben.</p>
-                    <p><a href="{{route('Dependence.index')}}" class="btn boton">Administrar</a></p>
-                </div>
+                
+                
                 <div class="col-lg-4">
                     <h3>Persona</h3>
                     <p>Se hace la administración únicamente de personas. Se puede agregar, editar, eliminar y examinar
@@ -93,12 +78,7 @@
                         administradores.</p>
                     <p><a href="{{route('users.index')}}" class="btn boton">Consultar</a></p>
                 </div>
-                <div class="col-lg-4">
-                    <h3>Correo</h3>
-                    <p>El sistema cuenta un apartado de correo donde se podrá mandar correo a la persona deseada.</p>
-                    <p><a href="{{route('mail.index')}}" class="btn boton">Enviar Correo</a></p>
-                </div>
-            </div>
+                
             <h2>Finalización</h2>
             <hr style="border:1px solid #0F3558;">
             <div class="row">

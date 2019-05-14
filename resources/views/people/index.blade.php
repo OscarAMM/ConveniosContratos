@@ -1,7 +1,7 @@
 @extends('layouts.app')
 @section('content')
 @if(Auth::user()->hasRole('admin'))
-@include('institutes.fragment.info')
+@include('people.fragment.info')
 <div class="container">
 
     <div class="jumbotron" style="background-color:#0F3558;">

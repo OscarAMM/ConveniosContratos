@@ -45,17 +45,11 @@
                    @if(!Auth::guest())
                   
                     <ul class="navbar-nav mr-auto">
+                       
                         <li class="nav-item">
-                        <a class="nav-link" href="{{route('Contract.index')}}" >Contrato<span class="sr-only">(current)</span> </a>
+                        <a href="{{route('Agreement.index')}}" class="nav-link">Documentos</a>
                         </li>
-                        <li class="nav-item">
-                        <a href="{{route('Agreement.index')}}" class="nav-link">Convenio</a>
-                        </li>
-                        <li class="nav-item">
-                        <a href="{{route('Institute.index')}}" class="nav-link">Institución</a></li>
-                        <li class="nav-item">
-                        <a href="{{route('Dependence.index')}}" class="nav-link">Dependencia</a>
-                        </li>
+                       
                         <li class="nav-item">
                         <a href="{{route('Person.index')}}" class="nav-link">Persona</a>
                         </li>
