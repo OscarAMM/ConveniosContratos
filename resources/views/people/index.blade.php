@@ -32,6 +32,9 @@
                     <div class="col" style="margin-right:2px">
                         {{Form::text('country',null,['class' =>'form-control','placeholder'=>'Pais'])}}
                     </div>
+                    <div class="col" style="margin-right:2px">
+                        {{Form::text('acronym',null,['class' =>'form-control','placeholder'=>'Pais'])}}
+                    </div>
                     
                     <div class="col">
                         <button type="submit" class="btn btn-primary">

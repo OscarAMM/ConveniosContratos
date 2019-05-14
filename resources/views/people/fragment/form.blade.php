@@ -17,6 +17,10 @@
         {!!Form::text('country', null, ['class' => 'form-control'])!!}
     </div>
     <div class="form-group">
+        {!! Form::label('acronym','Siglas')!!}
+        {!!Form::text('acronym', null, ['class' => 'form-control'])!!}
+    </div>
+    <div class="form-group">
         {!! Form::label('email','Correo')!!}
         {!!Form::text('email', null, ['class' => 'form-control'])!!}
     </div>

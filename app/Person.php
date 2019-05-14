@@ -33,5 +33,9 @@ class Person extends Model
         if($email){
             return $query->where('email','LIKE',"%$email%");
         }
+    }public function scopeAcronym($query, $acronym){
+        if($acronym){
+            return $query->where('acronym','LIKE',"%$acronym%");
+        }
     }
 }
