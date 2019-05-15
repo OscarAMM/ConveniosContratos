@@ -1,6 +1,6 @@
 <head>
-
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
 <div class="container">
     <div class="column-sm-8">
@@ -30,7 +30,7 @@
                     </div>
                     <div class="form-group ">
                         <label for="registerNumber" class="col-md-4 col-form-label ">Número de registro</label>
-                        <input type="text" id="registerNumber" name="registerNumber" class="form-control " placeholder="registerNumber">
+                        <input type="text" id="registerNumber" name="registerNumber" class="form-control " placeholder="ingrese número de registro">
                     </div>
                     <div class="form-group">
                         <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
@@ -59,15 +59,17 @@
                         </div>
 
                         <div class="col-md-4">
-                            <label for="people_id" class="col-form-label">Asigne </label>
-                            <select name="people_id" id="people_id"
+                            <label for="people_id" class="col-md-8 col-form-label">Asigne suscrito</label>
+                            <input type="text" id="people_id" name="people_id" class="form-control " placeholder="ingrese suscrito">
+                            <!--<select name="people_id" id="people_id"
                                 placeholder="Selecciona la institucion asignado" class="form-control"
                                 required="required">
-                                <!--Integrar for each -->
                                 @foreach($people as $person)
                                 <option value="{{$person->id}}">{{$person->name}}</option>
                                 @endforeach
-                            </select>
+                            </select>-->
+                            <div id="peopleList">
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
@@ -75,16 +77,10 @@
                             <input type="file" class="form-control-file" name="file" id="file">
                         </div>
                         <div class="col-md-4">
-                            <label for="liable_user" class=" col-form-label">Asigne responsable</label>
-                            <select name="liable_user" id="liable_user" placeholder="Selecciona el responsable asignado"
-                                class="form-control" required="required">
-                                <!--Integrar for each -->
-                                @foreach($users as $user)
-                                @if($user->hasRole('user'))
-                                <option value="{{$user->id}}">{{$user->email}}</option>
-                                @endif
-                                @endforeach
-                            </select>
+                            <label for="liable_user" class="col-md-8 col-form-label">Asigne responsable</label>
+                            <input type="text" id="liable_user" name="liable_user" class="form-control " placeholder="ingrese responsable">
+                            <div id="userList">
+                            </div>
                         </div>
 
 
@@ -101,21 +97,58 @@
 
     </div>
 </div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-<script type="text/javascript">
-$("#liable_user").select2({
-    placeholder: "Select a Name",
-    allowClear: true
-});
-$("#dependence_id").select2({
-    placeholder: "Select a Name",
-    allowClear: true
-});
-
-
 </div>
-@section('scripts')
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-@endsection
+<script>
+$(document).ready(function(){
+
+ $('#people_id').keyup(function(){ 
+        var query = $(this).val();
+        if(query != '')
+        {
+         var _token = $('input[name="_token"]').val();
+         $.ajax({
+          url:"{{ route('autocomplete.fetch') }}",
+          method:"POST",
+          data:{query:query, _token:_token},
+          success:function(data){
+           $('#peopleList').fadeIn();  
+                    $('#peopleList').html(data);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'li', function(){  
+        $('#people_id').val($(this).text());  
+        $('#peopleList').fadeOut();  
+    });  
+
+});
+</script>
+<script>
+$(document).ready(function(){
+
+ $('#liable_user').keyup(function(){ 
+        var query2 = $(this).val();
+        if(query2 != '')
+        {
+         var _token = $('input[name="_token"]').val();
+         $.ajax({
+          url:"{{ route('autocomplete.fetchUsers') }}",
+          method:"POST",
+          data:{query:query2, _token:_token},
+          success:function(data2){
+           $('#userList').fadeIn();  
+                    $('#userList').html(data2);
+          }
+         });
+        }
+    });
+
+    $(document).on('click', 'lo', function(){  
+        $('#liable_user').val($(this).text());  
+        $('#userList').fadeOut();  
+    });  
+
+});
+</script>

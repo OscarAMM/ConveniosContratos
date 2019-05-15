@@ -14,6 +14,7 @@ use Mail;
 use Session;
 use App\Mail\SendEmail;
 use Carbon\Carbon;
+use DB;
 
 
 
@@ -164,7 +165,9 @@ class AgreementController extends Controller
         $agreement->registerNumber = $request->registerNumber;
         $agreement->scope = $request->scope;
         $agreement->status="Revisión";
-        $agreement->liable_user = $request->liable_user;
+        $splitName2 = explode(' - ', $request->liable_user);
+
+        $agreement->liable_user = $splitName2[0];
         $agreement->start_date =  Carbon::now();
         $agreement->end_date = Carbon::now()->addWeekDays(4);
         if ($request->hide == "visible") {
@@ -172,8 +175,8 @@ class AgreementController extends Controller
         } else {
             $agreement->hide = false;
         }
-        
-        $agreement->people_id = $request->people_id;
+        $splitName = explode(' - ', $request->people_id);
+        $agreement->people_id = $splitName[0];
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
             return back()->with('info', 'El convenio '.$agreement->name.' ya existe.');
@@ -199,6 +202,44 @@ class AgreementController extends Controller
     {
         $file = FileAgreement::find($id);
         return Storage::download('/filesAgreements/' . $file->name);
+    }
+    function fetch(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query');
+      $data = DB::table('people')
+        ->where('name', 'LIKE', "%{$query}%")
+        ->get();
+        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+        foreach($data as $row)
+        {
+         $output .= '
+         <li class="dropdown-item">'.$row->id.' - '.$row->name.'</li>
+         ';
+        }
+        $output .= '</ul>';
+        echo $output;
+     }
+    }
+    function fetchUsers(Request $request)
+    {
+     if($request->get('query'))
+     {
+      $query = $request->get('query2');
+      $data = DB::table('users')
+        ->where('name', 'LIKE', "%{$query}%")
+        ->get();
+        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+        foreach($data as $row)
+        {
+         $output .= '
+         <lo class="dropdown-item">'.$row->id.' - '.$row->name.' - '.$row->email.'</lo>
+         ';
+        }
+        $output .= '</ul>';
+        echo $output;
+     }
     }
     
 

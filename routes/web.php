@@ -15,14 +15,15 @@ Route::resource('Contract', 'ContractController');
 Route::get('/ContractDownloadFile/{id}', ['as' => 'contract.download', 'uses' => 'ContractController@showfile']);
 Route::get('/AgreementDownloadFile/{id}', ['as' => 'agreement.download', 'uses' => 'AgreementController@showfile']);
 Route::get('/contract/users', ['uses' => 'ContractController@getUsers', 'as' => 'getusers']);
-Route::post('/autocomplete/fetch', 'ContractController@fetch')->name('autocomplete.fetch');
-Route::post('/autocomplete/fetchInstitute', 'ContractController@fetchInstitutes')->name('autocomplete.fetchInstitute');
+
 
 
 //Ruta Convenio
 Route::resource('Agreement', 'AgreementController');
 Route::get('/AgreementPublic', ['uses' => 'AgreementController@indexPublic', 'as' => 'public.index']);
 Route::get('/AgreementShow/{id}', ['uses' => 'AgreementController@showPublic', 'as' => 'public.show']);
+Route::post('/autocomplete/fetch', 'AgreementController@fetch')->name('autocomplete.fetch');
+Route::post('/autocomplete/fetchUsers', 'AgreementController@fetchUsers')->name('autocomplete.fetchUsers');
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);
