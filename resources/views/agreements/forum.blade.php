@@ -13,6 +13,7 @@
 </head>
 
 <body>
+    @if(!Auth::guest()&&Auth::user()->hasDocument($agreements->id))
     @include('auth.fragment.error')
     @include('auth.fragment.info')
     <div class="head">
@@ -35,7 +36,7 @@
                         @foreach($comment->getFilesAgreements as $file)
                         <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
                         @endforeach
-                        <div>Realizado por: {{$comment->user}} a las  {{$comment->created_at}}</div>
+                        <div>Realizado por: {{$comment->user}} a las {{$comment->created_at}}</div>
                     </div>
                 </div>
                 <!-- <div class="card-footer">
@@ -74,7 +75,7 @@
                     </div>
                     <div class="form-group">
                         <br>
-                        <input type="file" name="fileForum" id="fileForum" >
+                        <input type="file" name="fileForum" id="fileForum">
                         <input type="submit" class="btn botonAzul" value="Comentar">
                     </div>
                     <br>
@@ -112,6 +113,22 @@
     <br>
     @endif
     @endforeach
+    
+    @else
+    <div class="container">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-muted">Acceso restringido</h2>
+                </div>
+                <div class="card-body">
+                    <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún
+                        cambio.
+                    </h4>
+                </div>
+
+            </div>
+        </div>
+    @endif
 </body>
 
 </html>

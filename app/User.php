@@ -104,6 +104,13 @@ class User extends Authenticatable
         }
         return false;
     }
+    public function hasDocument($id)
+    {
+        if ($this->agreements()->where('agreement_id', $id)->first()) {
+            return true;
+        }
+        return false;
+    }
     public function getAgreements(){
         return $this->belongsToMany(Agreement::class,'agreement_user');
     }

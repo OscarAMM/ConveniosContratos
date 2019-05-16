@@ -51,7 +51,7 @@
                     <div class="col-md-4">
                         <label for="user_id" class=" col-form-label">Asigne usuarios</label>
                         @foreach($users as $user)
-                        @if($user->hasRole('admin'))
+                        @if($user->hasRole('admin')||$user->hasRole('revisor'))
                         <br>
                         <input type="checkbox" name="users[]" value="{{$user->id}}"
                             {{ $user ->hasAgreement($agreements->name)?'checked':'' }}> <label>{{$user->name}}</label>
