@@ -62,10 +62,14 @@
                                     <option value="user">User</option>
                                     <option value="admin">Admin</option>
                                     <option value="revisor">Revisor</option>
-                                    @else
+                                    @elseif($user->hasRole('Admin'))
                                     <option value="admin">Admin</option>
                                     <option value="user">User</option>
                                     <option value="revisor">Revisor</option>
+                                    @elseif($user->hasRole('Revisor'))
+                                    <option value="revisor">Revisor</option>
+                                    <option value="admin">Admin</option>
+                                    <option value="user">User</option>
                                     @endif
                                 </select>
                             </div>
