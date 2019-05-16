@@ -61,3 +61,5 @@ Route::get('/dynamic_pdf', ['uses' => 'PDFController@index', 'as' => 'PrePDF']);
 Route::get('/PDF', ['uses' => 'PDFController@downloadPDF', 'as' => 'PDFDownload'] );
 
 Route::get('/RegistroFinal', ['uses' =>'FinalRegisterController@index', 'as' => 'Register'] );
+//Legal Instrument Route
+Route::resource('LegalInstrument', 'LegalInstrumentController');
