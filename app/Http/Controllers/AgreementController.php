@@ -236,7 +236,7 @@ class AgreementController extends Controller
         foreach($data as $row)
         {
          $output .= '
-         <lo class="dropdown-item">'.$row->id.' - '.$row->name.' - '.$row->email.'</lo>
+         <li class="dropdown-item">'.$row->id.' - '.$row->name.' - '.$row->email.'</li>
          ';
         }
         $output .= '</ul>';

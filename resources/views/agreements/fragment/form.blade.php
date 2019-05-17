@@ -143,7 +143,12 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <script>
+<<<<<<< HEAD
 $(document).ready(function() {
+=======
+$.noConflict();
+jQuery( document ).ready(function(){
+>>>>>>> 2f2e539114a829a5fc9a276c61a3005e1f866466
 
     $('#people_id').keyup(function() {
         var query = $(this).val();
@@ -164,6 +169,7 @@ $(document).ready(function() {
         }
     });
 
+<<<<<<< HEAD
     $(document).on('click', 'li', function() {
         $('#people_id').val($(this).text());
         $('#peopleList').fadeOut();
@@ -173,6 +179,13 @@ $(document).ready(function() {
 </script>
 <script>
 $(document).ready(function() {
+=======
+    jQuery( '#peopleList' ).on('click', 'li', function(){  
+        $('#people_id').val($(this).text());  
+        $('#peopleList').fadeOut();  
+    });  
+
+>>>>>>> 2f2e539114a829a5fc9a276c61a3005e1f866466
 
     $('#liable_user').keyup(function() {
         var query2 = $(this).val();
@@ -193,10 +206,17 @@ $(document).ready(function() {
         }
     });
 
+<<<<<<< HEAD
     $(document).on('click', 'lo', function() {
         $('#liable_user').val($(this).text());
         $('#userList').fadeOut();
     });
+=======
+    jQuery( '#userList' ).on('click', 'li', function(){  
+        $('#liable_user').val($(this).text());  
+        $('#userList').fadeOut();  
+    });  
+>>>>>>> 2f2e539114a829a5fc9a276c61a3005e1f866466
 
 });
 </script>
