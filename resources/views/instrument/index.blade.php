@@ -2,12 +2,46 @@
 @section('content')
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
-        <h1 class="text-muted">Convenio</h1>
+        <h1 class="text-muted">Instrumento jurtídico</h1>
         <hr style="border:2px solid #BF942D">
-        <p class="text-muted">Se desplegará una lista con todas los convenios registrados hasta el momento en el
+        <p class="text-muted">Se desplegará una lista con todas los instrumentos jurídicos registrados hasta el momento
+            en el
             sistema.
         </p>
+        <p><a href="{{route('LegalInstrument.create')}}" class="btn boton">Nuevo</a></p>
     </div>
 
+
+    <div class="row d-flex justify-content-center">
+        <div class="col-md-10">
+            <table class="table  table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th colspan="3">&nbsp;</th>
+                    </tr>
+                <tbody>
+                    @foreach($instrument as $instrument)
+                    <tr>
+                        <td>{{$instrument->id}}</td>
+                        <td>{{$instrument->name}}</td>
+
+                        <td> <a href="{{route('LegalInstrument.edit', $instrument->id)}}"
+                                class="btn botonAmarillo">Editar</a></td>
+                        <td>
+                            <form action="{{route('LegalInstrument.destroy', $instrument->id)}}" method="POST">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+                </thead>
+            </table>
+        </div>
+    </div>
 </div>
 @endsection

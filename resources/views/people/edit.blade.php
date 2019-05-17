@@ -11,7 +11,7 @@
             <h3 class="text-muted text-center">Editar Persona</h3>
         </div>
         <div class="card-body">
-            @include('institutes.fragment.error')
+            
             {!!Form::model($person, ['route' =>['Person.update', $person->id],'method' =>'PUT']) !!}
             @include('people.fragment.form')
             {!!Form::close()!!}
