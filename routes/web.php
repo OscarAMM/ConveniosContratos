@@ -63,3 +63,4 @@ Route::get('/PDF', ['uses' => 'PDFController@downloadPDF', 'as' => 'PDFDownload'
 Route::get('/RegistroFinal', ['uses' =>'FinalRegisterController@index', 'as' => 'Register'] );
 //Legal Instrument Route
 Route::resource('LegalInstrument', 'LegalInstrumentController');
+Route::get('/legalInstrument', ['uses' => 'LegalInstrumentController@storeModal', 'as' =>'newInstrument']);

@@ -33,6 +33,17 @@ class LegalInstrumentController extends Controller
         }
         return redirect()->route('LegalInstrument.index')->with('Info', 'El instrumento jurídico '.$instrument->name. 'ha sido guardado');
     }
+    public function storeModal(InstrumentRequest $request)
+    {
+        $instrument = new LegalInstrument();
+        $instrument->name = $request->name;
+        if (LegalInstrument::where('name', $instrument->name)->exists()) {
+            return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya existe');
+        } else {
+            $instrument->save();
+        }
+        return redirect()->route('Agreement.create')->with('Info', 'El instrumento jurídico '.$instrument->name. 'ha sido guardado');
+    }
 
     public function update(InstrumentRequest $request, $id)
     {

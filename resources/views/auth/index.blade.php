@@ -103,5 +103,5 @@
 </div>
 
 @endif
-
+{!!$users->render()!!}
 @endsection

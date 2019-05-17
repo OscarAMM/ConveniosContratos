@@ -1,16 +1,32 @@
 <head>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <div class="container">
     <div class="column-sm-8">
         <div class="card">
             <div class="card-body">
                 <form method="POST" action="#">
-                    <div class="form-group ">
-                        <label for="name" class="col-md-4 col-form-label ">Instrumento jurídico</label>
-                        <input type="text" id="name" name="name" class="form-control " placeholder="Nombre">
+                    <div class="form-group">
+                        <label for="name" class="col-md-4 col-form-label">Nombre completo del documento </label>
+                        <input type="text" name="name" id="name" class="form-control"
+                            placeholder="Nombre del documento">
                     </div>
+                   
+                    <div class="form-group">
+                        <label for="legalInstrument" class="col-auto col-form-label ">Instrumento jurídico</label>
+                        
+                        <button type="button" class="btn btn-secondary col-auto" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">...</button>
+                        
+                        <select name="legalInstrument" id="legalInstrument" class="form-control">
+                            @foreach($instrument as $instrument)
+                            <option> {{$instrument->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                   
+                   
                     <div class="form-group ">
                         <label for="reception" class="col-md-4 col-form-label">Recepción</label>
                         <input type="date" id="reception" name="reception" class="form-control">
@@ -30,7 +46,8 @@
                     </div>
                     <div class="form-group ">
                         <label for="registerNumber" class="col-md-4 col-form-label ">Número de registro</label>
-                        <input type="text" id="registerNumber" name="registerNumber" class="form-control " placeholder="ingrese número de registro">
+                        <input type="text" id="registerNumber" name="registerNumber" class="form-control "
+                            placeholder="ingrese número de registro">
                     </div>
                     <div class="form-group">
                         <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
@@ -40,51 +57,46 @@
                             <option>Internacional</option>
                         </select>
                     </div>
+                    
                     <div class="form-group">
-                        <label for="hide" class="col-md-4 col-form-label">Estado</label>
-                        <select name="hide" id="hide" class="form-control" required="required">
-                            <option value="visible">Visible</option>
-                            <option value="noVisible">No visible</option>
-                        </select>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-4">
-                            <label for="user_id" class=" col-form-label">Asigne usuarios</label>
-                            @foreach($users as $user)
-                            @if($user->hasRole('admin')||$user->hasRole('revisor'))
-                            <br>
-                            <input type="checkbox" name="users[]" value="{{$user->id}}"> <label>{{$user->name}}</label>
-                            @endif
-                            @endforeach
-                        </div>
-
-                        <div class="col-md-4">
-                            <label for="people_id" class="col-md-8 col-form-label">Asigne suscrito</label>
-                            <input type="text" id="people_id" name="people_id" class="form-control " placeholder="ingrese suscrito">
-                            <!--<select name="people_id" id="people_id"
+                        <label for="people_id" class="col-md-8 col-form-label">Asigne suscrito</label>
+                        <input type="text" id="people_id" name="people_id" class="form-control "
+                            placeholder="ingrese suscrito">
+                        <!--<select name="people_id" id="people_id"
                                 placeholder="Selecciona la institucion asignado" class="form-control"
                                 required="required">
                                 @foreach($people as $person)
                                 <option value="{{$person->id}}">{{$person->name}}</option>
                                 @endforeach
                             </select>-->
-                            <div id="peopleList">
-                            </div>
+                        <div id="peopleList">
                         </div>
-                        <div class="col-md-4">
-                            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                            <label for="file" class="col-md-8 col-form-label">Seleccione el archivo</label>
-                            <input type="file" class="form-control-file" name="file" id="file">
-                        </div>
-                        <div class="col-md-4">
-                            <label for="liable_user" class="col-md-8 col-form-label">Asigne responsable</label>
-                            <input type="text" id="liable_user" name="liable_user" class="form-control " placeholder="ingrese responsable">
-                            <div id="userList">
-                            </div>
-                        </div>
-
-
                     </div>
+
+                    <div class="form-group">
+                        <label for="liable_user" class="col-md-8 col-form-label">Asigne responsable</label>
+                        <input type="text" id="liable_user" name="liable_user" class="form-control "
+                            placeholder="ingrese responsable">
+                        <div id="userList">
+                        </div>
+                    </div>
+                    <div class="form-check">
+                        <label for="user_id" class="form-check-label">Asigne usuarios</label>
+                        @foreach($users as $user)
+                        @if($user->hasRole('admin')||$user->hasRole('revisor'))
+                        <br>
+                        <input type="radio" name="users[]" value="{{$user->id}}" class="form-check-input">
+                        <label class="form-check-label">{{$user->name}}</label>
+                        @endif
+                        @endforeach
+                    </div>
+                    <div class="form-group">
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <label for="file" class="col-md-8 col-form-label">Seleccione el archivo</label>
+                        <input type="file" class="form-control-file" name="file" id="file">
+                    </div>
+
+
                     {{csrf_field()}}
                 </form>
             </div>
@@ -98,57 +110,93 @@
     </div>
 </div>
 </div>
-<script>
-$(document).ready(function(){
+ <!--MODAL FOR THE LEGAL INSTRUMENT -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Instrumento jurídico</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form action ="{{route('newInstrument')}}">
+        <div class="form-group mb-2">
+            <label for="legalInstrument">Instrumento jurídico</label>
+            <input type="text" class="form-control" id="name" name="name" placeholder="Instrumento jurídico">
+        </div>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary">Guardar</button>
+      </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
- $('#people_id').keyup(function(){ 
+
+<!-- SCRIPTS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+$(document).ready(function() {
+
+    $('#people_id').keyup(function() {
         var query = $(this).val();
-        if(query != '')
-        {
-         var _token = $('input[name="_token"]').val();
-         $.ajax({
-          url:"{{ route('autocomplete.fetch') }}",
-          method:"POST",
-          data:{query:query, _token:_token},
-          success:function(data){
-           $('#peopleList').fadeIn();  
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetch') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#peopleList').fadeIn();
                     $('#peopleList').html(data);
-          }
-         });
+                }
+            });
         }
     });
 
-    $(document).on('click', 'li', function(){  
-        $('#people_id').val($(this).text());  
-        $('#peopleList').fadeOut();  
-    });  
+    $(document).on('click', 'li', function() {
+        $('#people_id').val($(this).text());
+        $('#peopleList').fadeOut();
+    });
 
 });
 </script>
 <script>
-$(document).ready(function(){
+$(document).ready(function() {
 
- $('#liable_user').keyup(function(){ 
+    $('#liable_user').keyup(function() {
         var query2 = $(this).val();
-        if(query2 != '')
-        {
-         var _token = $('input[name="_token"]').val();
-         $.ajax({
-          url:"{{ route('autocomplete.fetchUsers') }}",
-          method:"POST",
-          data:{query:query2, _token:_token},
-          success:function(data2){
-           $('#userList').fadeIn();  
+        if (query2 != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetchUsers') }}",
+                method: "POST",
+                data: {
+                    query: query2,
+                    _token: _token
+                },
+                success: function(data2) {
+                    $('#userList').fadeIn();
                     $('#userList').html(data2);
-          }
-         });
+                }
+            });
         }
     });
 
-    $(document).on('click', 'lo', function(){  
-        $('#liable_user').val($(this).text());  
-        $('#userList').fadeOut();  
-    });  
+    $(document).on('click', 'lo', function() {
+        $('#liable_user').val($(this).text());
+        $('#userList').fadeOut();
+    });
 
 });
 </script>

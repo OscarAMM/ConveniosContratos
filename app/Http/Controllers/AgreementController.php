@@ -8,6 +8,7 @@ use App\FileAgreement;
 use App\Http\Requests\AgreementRequest;
 use App\User;
 use App\Person;
+use App\LegalInstrument;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Mail;
@@ -65,7 +66,8 @@ class AgreementController extends Controller
     {
         $people = Person::all();
         $users = User::all();
-        return view('agreements.create', compact('people', 'users'));
+        $instrument = LegalInstrument::all();
+        return view('agreements.create', compact('people', 'users', 'instrument'));
     }
     public function show($id)
     {

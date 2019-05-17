@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
         <h1 class="text-muted">Instrumento jurtídico</h1>
@@ -31,7 +32,7 @@
                                 class="btn botonAmarillo">Editar</a></td>
                         <td>
                             <form action="{{route('LegalInstrument.destroy', $instrument->id)}}" method="POST">
-                                {{csrf_field()}}
+                                
                                 <input type="hidden" name="_method" value="DELETE">
                                 <button class="btn btn-danger">Eliminar</button>
                             </form>
@@ -44,4 +45,5 @@
         </div>
     </div>
 </div>
+
 @endsection

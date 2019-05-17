@@ -125,9 +125,6 @@
         @endif
     </div>
 </body>
-
 </html>
-
-
-
+{!!$agreements->render()!!}
 @endsection

@@ -1,14 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
-@if(Auth::user()->hasRole('admin'))
-
-
+@if(!Auth::guest())
 <div class="container">
     <div class="column-sm-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-muted text-center"> Convenio </h3>
+                <h3 class="text-muted text-center"> Documentos </h3>
             </div>
             <div class="card-body">
                 @include('auth.fragment.error')
@@ -33,8 +31,6 @@
         </div>
 
     </div>
-</div>
-
-
+</div> 
 @endif
 @endsection
