@@ -99,7 +99,8 @@
 </div>
 </div>
 <script>
-$(document).ready(function(){
+$.noConflict();
+jQuery( document ).ready(function(){
 
  $('#people_id').keyup(function(){ 
         var query = $(this).val();
@@ -118,15 +119,11 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', 'li', function(){  
+    jQuery( '#peopleList' ).on('click', 'li', function(){  
         $('#people_id').val($(this).text());  
         $('#peopleList').fadeOut();  
     });  
 
-});
-</script>
-<script>
-$(document).ready(function(){
 
  $('#liable_user').keyup(function(){ 
         var query2 = $(this).val();
@@ -145,7 +142,7 @@ $(document).ready(function(){
         }
     });
 
-    $(document).on('click', 'lo', function(){  
+    jQuery( '#userList' ).on('click', 'li', function(){  
         $('#liable_user').val($(this).text());  
         $('#userList').fadeOut();  
     });  
