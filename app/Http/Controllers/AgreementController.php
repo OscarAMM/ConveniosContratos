@@ -93,11 +93,11 @@ class AgreementController extends Controller
     public function edit($id)
     {
         $agreements = Agreement::find($id);
-        $user = $agreements->getUser;
+        $liableUser = User::find($agreements->liable_user);
         $users = User::all();
-        $people = Person::all();
+        $people = Person::find($agreements->people_id);
         //buscar la dependencia y pasarlo a la vista (creo)
-        return view('agreements.edit', compact('agreements', 'users', 'people', 'user'));
+        return view('agreements.edit', compact('agreements', 'users', 'people', 'liableUser'));
     }
 
     public function destroy($id)

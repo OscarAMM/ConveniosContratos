@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-@if(Auth::user()->hasRole('admin'))
+@if(!Auth::guest()&&(Auth::user()->hasRole('admin')||Auth::user()->hasRole('revisor')))
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <h4 class=" text-center font-weight-bold text-muted">CONVENIO</h4>
+                    <h4 class=" text-center font-weight-bold text-muted">Documento</h4>
                 </div>
                 <div class="card-body">
                     <li class="list-group-item">

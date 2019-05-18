@@ -17,20 +17,22 @@
 </head>
 
 <body data-gr-c-s-loaded="true">
-    @if(Auth::user()->hasRole('admin'))
+    @if(!Auth::guest()&&(Auth::user()->hasRole('admin')||Auth::user()->hasRole('revisor')))
     @include('auth.fragment.info')
     @include('auth.fragment.error')
     <div class="container">
 
         <div class="jumbotron" style="background-color:#0F3558;">
-            <h1 class="text-muted">Convenio</h1>
+            <h1 class="text-muted">Documento</h1>
             <hr style="border:2px solid #BF942D">
-            <p class="text-muted">Se desplegará una lista con todas los convenios registrados hasta el momento en el
+            <p class="text-muted">Se desplegará una lista con todos los documentos registrados hasta el momento en el
                 sistema.
             </p>
             {{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
+            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
             <p class="text-item-center"><a href="{{route('Agreement.create')}}" class="btn boton"
                     style="margin-right:5px">Nuevo</a>
+            @endif
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                     aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
                     Búsqueda
@@ -88,6 +90,7 @@
                         <td>{{$agreement->scope}}</td>
                         <td>
                             <a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a> </td>
+                        @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
                         <td>
                             <a href="{{route('Agreement.edit', $agreement ->id)}}" class="btn botonAmarillo">Editar</a>
                         </td>
@@ -98,6 +101,7 @@
                                 <button class="btn btn-danger">Eliminar</button>
                             </form>
                         </td>
+                        @endif
                         <td><a href="{{route('Forum.Agreement', $agreement->id)}}"
                                     class="btn boton ">Revisión</a>
                         </td>
