@@ -24,6 +24,7 @@ Route::get('/AgreementPublic', ['uses' => 'AgreementController@indexPublic', 'as
 Route::get('/AgreementShow/{id}', ['uses' => 'AgreementController@showPublic', 'as' => 'public.show']);
 Route::post('/autocomplete/fetch', 'AgreementController@fetch')->name('autocomplete.fetch');
 Route::post('/autocomplete/fetchUsers', 'AgreementController@fetchUsers')->name('autocomplete.fetchUsers');
+Route::post('/autocomplete/fetchInstruments', 'AgreementController@fetchInstruments')->name('autocomplete.fetchInstruments');
 
 //RUTAS DE ADMIN
 Route::get('/registerAdmin', ['as' => 'admin.index', 'uses' => 'RegisterAdminController@index']);

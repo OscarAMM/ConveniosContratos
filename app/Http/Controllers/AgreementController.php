@@ -17,8 +17,6 @@ use App\Mail\SendEmail;
 use Carbon\Carbon;
 use DB;
 
-
-
 class AgreementController extends Controller
 {
     public function index(Request $request)
@@ -130,17 +128,16 @@ class AgreementController extends Controller
         $agreement->users()->detach();
         foreach ($users as $user) {
             $activeUser=User::where('id', $user)->first();
-                if(!$agreement->hasUser($activeUser->email)){
-                    $email = $activeUser->email;
-                    $subject = "Asignación de convenios";
-                    $message = "Se le ha asignado el convenio ". $request->name." para revisión";
-                    Mail::to($email)->send(new SendEmail($subject, $message));
-                }
+            if (!$agreement->hasUser($activeUser->email)) {
+                $email = $activeUser->email;
+                $subject = "Asignación de convenios";
+                $message = "Se le ha asignado el convenio ". $request->name." para revisión";
+                Mail::to($email)->send(new SendEmail($subject, $message));
+            }
             $agreement->users()
                 ->attach(User::where('id', $user)->first());
         }
         return redirect()->route('Agreement.index')->with('info', 'El Convenio '.$agreement->name. ' ha sido actualizado');
-
     }
     public function store(AgreementRequest $request)
     {
@@ -155,7 +152,7 @@ class AgreementController extends Controller
         $file_Name = new FileAgreement();
         $file_Name->name = $file_path;
         
-            $file_Name->save();
+        $file_Name->save();
         
 
         //Convenio
@@ -172,11 +169,11 @@ class AgreementController extends Controller
         $agreement->liable_user = $splitName2[0];
         $agreement->start_date =  Carbon::now();
         $agreement->end_date = Carbon::now()->addWeekDays(4);
-        if ($request->hide == "visible") {
+        /*if ($request->hide == "visible") {
             $agreement->hide = true;
         } else {
             $agreement->hide = false;
-        }
+        }*/
         $splitName = explode(' - ', $request->people_id);
         $agreement->people_id = $splitName[0];
         $users = $request->users;
@@ -185,13 +182,13 @@ class AgreementController extends Controller
         } else {
             $agreement->save();
             foreach ($users as $user) {
-                    $activeUser=User::where('id', $user)->first();
-                    $agreement->users()
+                $activeUser=User::where('id', $user)->first();
+                $agreement->users()
                     ->attach(User::where('id', $user)->first());
-                    $email = $activeUser->email;
-                    $subject = "Asignación de convenios";
-                    $message = " Se le ha asignado el convenio ". $request->name.", cuenta con 5 días para su revisión, desde ".$agreement->start_date->format('d-m-y')." hasta ".$agreement->end_date->format('d-m-y');
-                    Mail::to($email)->send(new SendEmail($subject, $message));
+                $email = $activeUser->email;
+                $subject = "Asignación de convenios";
+                $message = " Se le ha asignado el convenio ". $request->name.", cuenta con 5 días para su revisión, desde ".$agreement->start_date->format('d-m-y')." hasta ".$agreement->end_date->format('d-m-y');
+                Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->files()
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
@@ -205,44 +202,55 @@ class AgreementController extends Controller
         $file = FileAgreement::find($id);
         return Storage::download('/filesAgreements/' . $file->name);
     }
-    function fetch(Request $request)
+    public function fetch(Request $request)
     {
-     if($request->get('query'))
-     {
-      $query = $request->get('query');
-      $data = DB::table('people')
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $data = DB::table('people')
         ->where('name', 'LIKE', "%{$query}%")
         ->get();
-        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-        foreach($data as $row)
-        {
-         $output .= '
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach ($data as $row) {
+                $output .= '
          <li class="dropdown-item">'.$row->id.' - '.$row->name.'</li>
          ';
+            }
+            $output .= '</ul>';
+            echo $output;
         }
-        $output .= '</ul>';
-        echo $output;
-     }
     }
-    function fetchUsers(Request $request)
+    public function fetchUsers(Request $request)
     {
-     if($request->get('query'))
-     {
-      $query = $request->get('query2');
-      $data = DB::table('users')
+        if ($request->get('query')) {
+            $query = $request->get('query2');
+            $data = DB::table('users')
         ->where('name', 'LIKE', "%{$query}%")
         ->get();
-        $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
-        foreach($data as $row)
-        {
-         $output .= '
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach ($data as $row) {
+                $output .= '
          <li class="dropdown-item">'.$row->id.' - '.$row->name.' - '.$row->email.'</li>
          ';
+            }
+            $output .= '</ul>';
+            echo $output;
         }
-        $output .= '</ul>';
-        echo $output;
-     }
     }
-    
-
+    public function fetchInstruments(Request $request)
+    {
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $data = DB::table('legal_instruments')
+        ->where('name', 'LIKE', "%{$query}%")
+        ->get();
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach ($data as $row) {
+                $output .= '
+         <li class="dropdown-item">'.$row->name.'</li>
+         ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
 }

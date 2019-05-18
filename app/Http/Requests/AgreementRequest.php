@@ -29,7 +29,6 @@ class AgreementRequest extends FormRequest
             'objective'=>'required',
             'scope'=>'required',
             'users'=>'required',
-            'hide'=>'required',
             'registerNumber' =>'required',
             'people_id'=>'required',
     

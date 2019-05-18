@@ -51,7 +51,7 @@
                         </li>
                        
                         <li class="nav-item">
-                        <a href="{{route('Person.index')}}" class="nav-link">Persona</a>
+                        <a href="{{route('Person.index')}}" class="nav-link">Suscritos</a>
                         </li>
                         <li class="nav-item">
                         <a href="{{route('users.index')}}" class="nav-link">Usuarios</a>
