@@ -75,7 +75,7 @@
             <div class="row">
                 <div class="col-lg-4">
                     <h3>Registro usuario</h3>
-                    <p>Se hace el registro de usuarios. ¡El usuario registrado tendrá acceso como administrador!</p>
+                    <p>Se hace el registro de usuarios. ¡El usuario registrado tendrá acceso como revisor!</p>
                     <p><a href="{{route('admin.index')}}" class="btn boton">Registrar</a></p>
                 </div>
                 <div class="col-lg-4">
