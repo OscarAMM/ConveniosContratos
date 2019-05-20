@@ -1,10 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-@if(Auth::user()->hasRole('admin'))
+@if(!Auth::guest()&&Auth::user()->hasRole('admin'))
 
 @include('auth.fragment.info')
 @include('auth.fragment.error')
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
 <div class="container">
     <div class="column-sm-8">
         <div class="card">
@@ -13,10 +17,19 @@
                 @include('agreements.fragment.error')
                 {!!Form::model($agreements, ['route' =>['Agreement.update', $agreements->id],'method' =>'PUT']) !!}
                 <div class="form-group ">
-                    <label for="name" class="col-md-4 col-form-label ">Nombre de convenio</label>
+                    <label for="name" class="col-md-4 col-form-label ">Nombre de documento</label>
                     <input type="text" id="name" name="name" class="form-control " placeholder="Nombre"
                         value="{{$agreements->name}}">
                 </div>
+                <div class="form-group">
+                        <label for="legalInstrument" class="col-auto col-form-label ">Instrumento jurídico</label>
+                        
+                        <button type="button" class="btn btn-secondary col-auto" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">...</button>
+                        <input type="text" id="legalInstrument" name="legalInstrument" class="form-control "
+                            placeholder="Ingrese instrumento" value="{{$agreements->legalInstrument}}">
+                        <div id="instrumentList" >
+                        </div>
+                    </div>
                 <div class="form-group ">
                     <label for="reception" class="col-md-4 col-form-label">Recepción</label>
                     <input type="date" id="reception" name="reception" class="form-control"
@@ -28,23 +41,25 @@
                         value="{{$agreements->objective}}">{{$agreements->objective}}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="agreementValidity" class="col-md-4 col-form-label">Fecha de fin</label>
-                    <input type="date" id="agreementValidity" name="agreementValidity" class="form-control"
-                        value="{{$agreements->agreementValidity}}">
-                </div>
+                        <label for="legalInstrument" class="col-md-4 col-form-label">Tipo de instrumento</label>
+                        <select name="legalInstrument" id="legalInstrument" class="form-control">
+                            <option>Convenio</option>
+                            <option>Contrato</option>
+                            <option>Otros</option>
+                        </select>
+                    </div>
+                    <div class="form-group ">
+                        <label for="registerNumber" class="col-md-4 col-form-label ">Número de registro</label>
+                        <input type="text" id="registerNumber" name="registerNumber" class="form-control "
+                            placeholder="ingrese número de registro"value="{{$agreements->registerNumber}}">
+                    </div>
+
                 <div class="form-group">
                     <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
                     <select name="scope" id="scope" class="form-control" value="{{$agreements->scope}}">
                         <option>Estatal</option>
                         <option>Nacional</option>
                         <option>Internacional</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="hide" class="col-md-4 col-form-label">Estado</label>
-                    <select name="hide" id="hide" class="form-control" required="required">
-                        <option value="visible">Visible</option>
-                        <option value="noVisible">No visible</option>
                     </select>
                 </div>
                 <div class="form-row">
@@ -59,15 +74,21 @@
                         @endif
                         @endforeach
                     </div>
-                    <div class="col-md-4">
-                        <label for="person_id" class=" col-form-label">Asigne la persona</label>
-                        <select name="person_id" id="person_id" placeholder="Selecciona la dependencia asignado"
-                            class="form-control" required="required">
-                            <!--Integrar for each -->
-                            @foreach($people as $person)
-                            <option value="{{$person->id}}">{{$person->name}}</option>
-                            @endforeach
-                        </select>
+                    <div class="form-group">
+                        <label for="people_id" class="col-md-8 col-form-label">Asigne suscrito</label>
+                        <input type="text" id="people_id" name="people_id" class="form-control "
+                            placeholder="ingrese suscrito" value="{{$people->id.' - '.$people->name}}">
+                        
+                        <div id="peopleList">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="liable_user" class="col-md-8 col-form-label">Asigne responsable</label>
+                        <input type="text" id="liable_user" name="liable_user" class="form-control "
+                            placeholder="ingrese responsable" value="{{$liableUser->id.' - '.$liableUser->name.' - '.$liableUser->email}}">
+                        <div id="userList">
+                        </div>
                     </div>
                 </div>
                 <div class="form-group text-center" style="margin-top:5px">
@@ -97,3 +118,86 @@
 </div>
 @endif
 @endsection
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script>
+$.noConflict();
+jQuery( document ).ready(function(){
+
+    $('#people_id').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetch') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#peopleList').fadeIn();
+                    $('#peopleList').html(data);
+                }
+            });
+        }
+    });
+
+    jQuery( '#peopleList' ).on('click', 'li', function(){  
+        $('#people_id').val($(this).text());  
+        $('#peopleList').fadeOut();  
+    });  
+
+
+    $('#liable_user').keyup(function() {
+        var query2 = $(this).val();
+        if (query2 != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetchUsers') }}",
+                method: "POST",
+                data: {
+                    query: query2,
+                    _token: _token
+                },
+                success: function(data2) {
+                    $('#userList').fadeIn();
+                    $('#userList').html(data2);
+                }
+            });
+        }
+    });
+
+    jQuery( '#userList' ).on('click', 'li', function(){  
+        $('#liable_user').val($(this).text());  
+        $('#userList').fadeOut();  
+    });  
+
+    $('#legalInstrument').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetchInstruments') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#instrumentList').fadeIn();
+                    $('#instrumentList').html(data);
+                }
+            });
+        }
+    });
+
+    jQuery( '#instrumentList' ).on('click', 'li', function(){  
+        $('#legalInstrument').val($(this).text());  
+        $('#instrumentList').fadeOut();  
+    });  
+
+
+});
+</script>

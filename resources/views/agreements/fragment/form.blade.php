@@ -18,12 +18,10 @@
                         <label for="legalInstrument" class="col-auto col-form-label ">Instrumento jurídico</label>
                         
                         <button type="button" class="btn btn-secondary col-auto" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">...</button>
-                        
-                        <select name="legalInstrument" id="legalInstrument" class="form-control">
-                            @foreach($instrument as $instrument)
-                            <option> {{$instrument->name}}</option>
-                            @endforeach
-                        </select>
+                        <input type="text" id="legalInstrument" name="legalInstrument" class="form-control "
+                            placeholder="Ingrese instrumento">
+                        <div id="instrumentList">
+                        </div>
                     </div>
                    
                    
@@ -165,23 +163,11 @@ jQuery( document ).ready(function(){
         }
     });
 
-<<<<<<< HEAD
-    $(document).on('click', 'li', function() {
-        $('#people_id').val($(this).text());
-        $('#peopleList').fadeOut();
-    });
-
-});
-</script>
-<script>
-$(document).ready(function() {
-=======
     jQuery( '#peopleList' ).on('click', 'li', function(){  
         $('#people_id').val($(this).text());  
         $('#peopleList').fadeOut();  
     });  
 
->>>>>>> 2f2e539114a829a5fc9a276c61a3005e1f866466
 
     $('#liable_user').keyup(function() {
         var query2 = $(this).val();
@@ -202,17 +188,35 @@ $(document).ready(function() {
         }
     });
 
-<<<<<<< HEAD
-    $(document).on('click', 'lo', function() {
-        $('#liable_user').val($(this).text());
-        $('#userList').fadeOut();
-    });
-=======
     jQuery( '#userList' ).on('click', 'li', function(){  
         $('#liable_user').val($(this).text());  
         $('#userList').fadeOut();  
     });  
->>>>>>> 2f2e539114a829a5fc9a276c61a3005e1f866466
+
+    $('#legalInstrument').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetchInstruments') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#instrumentList').fadeIn();
+                    $('#instrumentList').html(data);
+                }
+            });
+        }
+    });
+
+    jQuery( '#instrumentList' ).on('click', 'li', function(){  
+        $('#legalInstrument').val($(this).text());  
+        $('#instrumentList').fadeOut();  
+    });  
+
 
 });
 </script>
