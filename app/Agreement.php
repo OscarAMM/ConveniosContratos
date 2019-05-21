@@ -20,9 +20,9 @@ class Agreement extends Model
             return $query->where('name','LIKE',"%$name%");
         }
     }
-    public function scopeReception($query,$reception){
-        if($reception){
-            return $query->where('reception','LIKE',"%$reception%");
+    public function scopeLegalInstrument($query,$legalInstrument){
+        if($legalInstrument){
+            return $query->where('reception','LIKE',"%$legalInstrument%");
         }
     }
     public function scopeId($query,$id){
@@ -30,9 +30,14 @@ class Agreement extends Model
             return $query->where('id','LIKE',"%$id%");
         }
     }
-    public function scopeScope($query,$scope){
-        if($scope){
-            return $query->where('scope','LIKE',"%$scope%");
+    public function scopeInstrumentType($query,$instrumentType){
+        if($instrumentType){
+            return $query->where('scope','LIKE',"%$instrumentType%");
+        }
+    }
+    public function scopePeople_id($query,$people_id){
+        if($people_id){
+            return $query->where('scope','LIKE',"%$people_id%");
         }
     }
     public function files(){

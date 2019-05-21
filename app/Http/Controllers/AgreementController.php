@@ -23,13 +23,15 @@ class AgreementController extends Controller
     {
         $id = $request->get('id');
         $name = $request->get('name');
-        $reception = $request->get('reception');
-        $scope = $request->get('scope');
+        $legalInstrument = $request->get('legalInstrument');
+        $instrumentType = $request->get('instrumentType');
+        $people = $request->get('people_id');
         $agreements = Agreement::orderBy('id', 'ASC')
             ->id($id)
             ->name($name)
-            ->reception($reception)
-            ->scope($scope)
+            ->legalInstrument($legalInstrument)
+            ->instrumentType($instrumentType)
+            ->people_id($people)
             ->paginate();
         return view('agreements.index', compact('agreements'));
     }
@@ -116,7 +118,6 @@ class AgreementController extends Controller
         $agreement->objective = $request->objective;
         $agreement->legalInstrument = $request->legalInstrument;
         $agreement->instrumentType = $request->instrumentType;
-        $agreement->registerNumber = $request->registerNumber;
         $agreement->scope = $request->scope;
         $splitName2 = explode(' - ', $request->liable_user);
 
@@ -168,7 +169,6 @@ class AgreementController extends Controller
         $agreement->objective = $request->objective;
         $agreement->legalInstrument = $request->legalInstrument;
         $agreement->instrumentType = $request->instrumentType;
-        $agreement->registerNumber = $request->registerNumber;
         $agreement->scope = $request->scope;
         $agreement->status="Revisión";
         $splitName2 = explode(' - ', $request->liable_user);

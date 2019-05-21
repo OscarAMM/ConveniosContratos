@@ -19,7 +19,7 @@ class CreateAgreementsTable extends Migration
             $table->date('reception');
             $table->text('objective');
             $table->string('legalInstrument');
-            $table->integer('registerNumber');
+            $table->integer('registerNumber')->nullable();
             $table->string('scope');
             $table->boolean('hide')->nullable();
             $table->date('start_date');

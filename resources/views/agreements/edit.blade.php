@@ -43,17 +43,23 @@
                         value="{{$agreements->objective}}">{{$agreements->objective}}</textarea>
                 </div>
                 <div class="form-group">
-                    <label for="instrumentType" class="col-md-4 col-form-label">Tipo de instrumento</label>
+                    <label for="instrumentType" class="col-md-4 col-form-label">Tipo de documento</label>
                     <select name="instrumentType" id="instrumentType" class="form-control">
-                        <option>Convenio</option>
-                        <option>Contrato</option>
+                    @if($agreements->instrumentType === "General")
+                        <option>General</option>
+                        <option>Específico</option>
                         <option>Otros</option>
+                    @elseif($agreements->instrumentType === "Específico")
+                    <option>Específico</option>
+                    <option>General</option>
+                    <option>Otros</option>
+                    @elseif($agreements->instrumentType === "Otros")
+                    <option>Otros</option>
+                    <option>Específico</option>
+                    <option>General</option>
+                    
+                    @endif
                     </select>
-                </div>
-                <div class="form-group ">
-                    <label for="registerNumber" class="col-md-4 col-form-label ">Número de registro</label>
-                    <input type="text" id="registerNumber" name="registerNumber" class="form-control "
-                        placeholder="ingrese número de registro" value="{{$agreements->registerNumber}}">
                 </div>
 
                 <div class="form-group">
@@ -64,7 +70,7 @@
                         <option>Internacional</option>
                     </select>
                 </div>
-                <div class="form-row">
+                
                     <div class="col-md-4">
                         <label for="user_id" class=" col-form-label">Asigne usuarios</label>
                         @foreach($users as $user)
@@ -93,7 +99,7 @@
                         <div id="userList">
                         </div>
                     </div>
-                </div>
+                
                 <div class="form-group text-center" style="margin-top:5px">
                     <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
                     <input type="submit" value="Guardar" class="btn btn-primary">

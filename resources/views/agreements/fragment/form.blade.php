@@ -36,18 +36,14 @@
                             placeholder="Describe el objetivo"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="instrumentType" class="col-md-4 col-form-label">Tipo de instrumento</label>
+                        <label for="instrumentType" class="col-md-4 col-form-label">Tipo de documento</label>
                         <select name="instrumentType" id="instrumentType" class="form-control">
-                            <option>Convenio</option>
-                            <option>Contrato</option>
+                            <option>Específico</option>
+                            <option>General</option>
                             <option>Otros</option>
                         </select>
                     </div>
-                    <div class="form-group ">
-                        <label for="registerNumber" class="col-md-4 col-form-label ">Número de registro</label>
-                        <input type="text" id="registerNumber" name="registerNumber" class="form-control "
-                            placeholder="ingrese número de registro">
-                    </div>
+                   
                     <div class="form-group">
                         <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
                         <select name="scope" id="scope" class="form-control">
@@ -86,7 +82,7 @@
                         @foreach($users as $user)
                         @if($user->hasRole('admin')||$user->hasRole('revisor'))
                         <br>
-                        <input type="radio" name="users[]" value="{{$user->id}}" class="form-check-input">
+                        <input type="checkbox" name="users[]" value="{{$user->id}}" class="form-check-input">
                         <label class="form-check-label">{{$user->name}}</label>
                         @endif
                         @endforeach

@@ -29,7 +29,6 @@ class AgreementRequest extends FormRequest
             'objective'=>'required',
             'scope'=>'required',
             'users'=>'required',
-            'registerNumber' =>'required',
             'people_id'=>'required',
     
             
@@ -41,7 +40,6 @@ class AgreementRequest extends FormRequest
             'name.required' => 'Ingresa nombre del contrato',
             'reception.required' => 'Ingresa una fecha de recepción válida',
             'objective.required' => 'Ingresa el objetivo del contrato',
-            'contractValidity.required' => 'Ingresa una fecha de fin válida',
             'scope.required' => 'Ingresa el ambito del contrato',
             'users.required' => 'Asigna un usuario',
             'people_id.required' => 'Asigna una persona',

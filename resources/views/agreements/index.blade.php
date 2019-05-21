@@ -32,7 +32,7 @@
             @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
             <p class="text-item-center"><a href="{{route('Agreement.create')}}" class="btn boton"
                     style="margin-right:5px">Nuevo</a>
-            @endif
+                @endif
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                     aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
                     Búsqueda
@@ -72,26 +72,28 @@
                 <thead class="thead-dark">
                     <tr>
                         <th>Id</th>
-                        <th>Nombre</th>
+                        <th>Nombre completo</th>
+                        <th>Instrumento jurídico</th>
+                        <th>Tipo de documento</th>
                         <th>Recepción</th>
                         <th>Objetivo</th>
-                        <th>Fecha de validez</th>
-                        <th>Ámbito</th>
-                        <th colspan="4">&nbsp;</th>
+                        <th>Suscrito</th>
+                        <th colspan="5">&nbsp;</th>
                     </tr>
                 <tbody>
                     @foreach($agreements as $agreement)
                     <tr>
                         <td>{{$agreement->id}}</td>
                         <td>{{$agreement->name}}</td>
+                        <td>{{$agreement->legalInstrument}}</td>
+                        <td>{{$agreement->instrumentType}}</td>
                         <td>{{$agreement->reception}}</td>
                         <td>{{$agreement->objective}}</td>
-                        <td>{{$agreement->scope}}</td>
+                        <td>{{App\Person::find($agreement->people_id)->name}}</td>
                         <td>
-                            <a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a> </td>
+                        <td><a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a></td>
                         @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                        <td>
-                            <a href="{{route('Agreement.edit', $agreement ->id)}}" class="btn botonAmarillo">Editar</a>
+                        <td><a href="{{route('Agreement.edit', $agreement ->id)}}" class="btn botonAmarillo">Editar</a>
                         </td>
                         <td>
                             <form action="{{route('Agreement.destroy', $agreement->id)}}" method="POST">
@@ -101,9 +103,10 @@
                             </form>
                         </td>
                         @endif
-                        <td><a href="{{route('Forum.Agreement', $agreement->id)}}"
-                                    class="btn boton ">Revisión</a>
+                        <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>
                         </td>
+
+
                     </tr>
                     @endforeach
                 </tbody>
@@ -128,6 +131,7 @@
         @endif
     </div>
 </body>
+
 </html>
 {!!$agreements->render()!!}
 @endsection
