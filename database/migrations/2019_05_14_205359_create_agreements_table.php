@@ -23,6 +23,7 @@ class CreateAgreementsTable extends Migration
             $table->string('scope');
             $table->boolean('hide')->nullable();
             $table->date('start_date');
+            $table->string('instrumentType');
             $table->date('end_date');
             $table->string('status');
             $table->integer('liable_user')->unsigned();

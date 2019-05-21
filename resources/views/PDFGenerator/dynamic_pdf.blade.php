@@ -50,12 +50,7 @@
                     <td>{{$custom_agreement3}}</td>
                   <!--  <td><a href="{{route('PDFDownload')}}" class="btn boton">Convertir PDF</a></td>-->
                 </tr>
-                <tr>
-                    <td>Contrato</td>
-                    <td>{{$custom_contract1}}</td>
-                    <td>{{$custom_contract2}}</td>
-                    <td>{{$custom_contract3}}</td>
-                </tr>
+               
             </tbody>
             </thead>
         </table>

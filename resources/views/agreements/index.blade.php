@@ -86,7 +86,6 @@
                         <td>{{$agreement->name}}</td>
                         <td>{{$agreement->reception}}</td>
                         <td>{{$agreement->objective}}</td>
-                        <td>{{$agreement->agreementValidity}}</td>
                         <td>{{$agreement->scope}}</td>
                         <td>
                             <a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a> </td>

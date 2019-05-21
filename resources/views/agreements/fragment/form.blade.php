@@ -13,18 +13,19 @@
                         <input type="text" name="name" id="name" class="form-control"
                             placeholder="Nombre del documento">
                     </div>
-                   
+
                     <div class="form-group">
                         <label for="legalInstrument" class="col-auto col-form-label ">Instrumento jurídico</label>
-                        
-                        <button type="button" class="btn btn-secondary col-auto" data-toggle="modal" data-target="#exampleModal" data-whatever="@fat">...</button>
+
+                        <button type="button" class="btn btn-secondary col-auto" data-toggle="modal"
+                            data-target="#exampleModal" data-whatever="@fat">...</button>
                         <input type="text" id="legalInstrument" name="legalInstrument" class="form-control "
                             placeholder="Ingrese instrumento">
                         <div id="instrumentList">
                         </div>
                     </div>
-                   
-                   
+
+
                     <div class="form-group ">
                         <label for="reception" class="col-md-4 col-form-label">Recepción</label>
                         <input type="date" id="reception" name="reception" class="form-control">
@@ -35,8 +36,8 @@
                             placeholder="Describe el objetivo"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="legalInstrument" class="col-md-4 col-form-label">Tipo de instrumento</label>
-                        <select name="legalInstrument" id="legalInstrument" class="form-control">
+                        <label for="instrumentType" class="col-md-4 col-form-label">Tipo de instrumento</label>
+                        <select name="instrumentType" id="instrumentType" class="form-control">
                             <option>Convenio</option>
                             <option>Contrato</option>
                             <option>Otros</option>
@@ -55,9 +56,11 @@
                             <option>Internacional</option>
                         </select>
                     </div>
-                    
+
                     <div class="form-group">
-                        <label for="people_id" class="col-md-8 col-form-label">Asigne suscrito</label>
+                        <label for="people_id" class="col-auto col-form-label">Asigne suscrito</label>
+                        <button type="button" class="btn btn-secondary col-auto" data-toggle="modal"
+                            data-target="#suscrito" data-whatever="@fat">...</button>
                         <input type="text" id="people_id" name="people_id" class="form-control "
                             placeholder="ingrese suscrito">
                         <!--<select name="people_id" id="people_id"
@@ -108,41 +111,95 @@
     </div>
 </div>
 </div>
- <!--MODAL FOR THE LEGAL INSTRUMENT -->
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Instrumento jurídico</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action ="{{route('newInstrument')}}">
-        <div class="form-group mb-2">
-            <label for="legalInstrument">Instrumento jurídico</label>
-            <input type="text" class="form-control" id="name" name="name" placeholder="Instrumento jurídico">
+<!--MODAL FOR THE LEGAL INSTRUMENT -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Instrumento jurídico</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('newInstrument')}}">
+                    <div class="form-group mb-2">
+                        <label for="legalInstrument">Instrumento jurídico</label>
+                        <input type="text" class="form-control" id="name" name="name"
+                            placeholder="Instrumento jurídico">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
         </div>
-        <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="submit" class="btn btn-primary">Guardar</button>
-      </div>
-        </form>
-      </div>
-      
     </div>
-  </div>
 </div>
 
-
+<!-- MODAL FOR ASIGNED USERS -->
+<div class="modal fade" id="suscrito" tabindex="-1" role="dialog" aria-labelledby="suscrito" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="suscrito">Suscrito</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{route('PersonModal')}}">
+                    <div class="form-group mb-2">
+                        <label for="name">Nombre</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del suscrito">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="personType">Tipo</label>
+                        <select name="personType" id="personType" class="form-control">
+                            <option>Persona física</option>
+                            <option>Persona moral</option>
+                            <option>Institución</option>
+                            <option>Dependencia</option>
+                            <option>Otros</option>
+                        </select>
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="country">País</label>
+                        <input type="text" class="form-control" id="country" name="country" placeholder="País">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="acronym">Siglas</label>
+                        <input type="text" class="form-control" id="acronym" name="acronym" placeholder="Siglas">
+                    </div>
+                    <div class="form-group mb-2">
+                        <label for="email">correo</label>
+                        <input type="text" class="form-control" id="email" name="email"
+                            placeholder="email del suscrito">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <!-- SCRIPTS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+</script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+</script>
 <script>
 $.noConflict();
-jQuery( document ).ready(function(){
+jQuery(document).ready(function() {
 
     $('#people_id').keyup(function() {
         var query = $(this).val();
@@ -163,10 +220,10 @@ jQuery( document ).ready(function(){
         }
     });
 
-    jQuery( '#peopleList' ).on('click', 'li', function(){  
-        $('#people_id').val($(this).text());  
-        $('#peopleList').fadeOut();  
-    });  
+    jQuery('#peopleList').on('click', 'li', function() {
+        $('#people_id').val($(this).text());
+        $('#peopleList').fadeOut();
+    });
 
 
     $('#liable_user').keyup(function() {
@@ -188,10 +245,10 @@ jQuery( document ).ready(function(){
         }
     });
 
-    jQuery( '#userList' ).on('click', 'li', function(){  
-        $('#liable_user').val($(this).text());  
-        $('#userList').fadeOut();  
-    });  
+    jQuery('#userList').on('click', 'li', function() {
+        $('#liable_user').val($(this).text());
+        $('#userList').fadeOut();
+    });
 
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
@@ -212,10 +269,10 @@ jQuery( document ).ready(function(){
         }
     });
 
-    jQuery( '#instrumentList' ).on('click', 'li', function(){  
-        $('#legalInstrument').val($(this).text());  
-        $('#instrumentList').fadeOut();  
-    });  
+    jQuery('#instrumentList').on('click', 'li', function() {
+        $('#legalInstrument').val($(this).text());
+        $('#instrumentList').fadeOut();
+    });
 
 
 });

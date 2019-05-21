@@ -21,17 +21,10 @@ class PDFController extends Controller
         $custom_agreement1 = (string) $custom_agreement1;
         $custom_agreement3 = (string) $custom_agreement3;
         //Se hace llamado a los contratos
-        $custom_contract = Contract::all();
-        $custom_contract1 = Contract::where('scope','Estatal')->count();
-        $custom_contract2 = Contract::where('scope','Nacional')->count();
-        $custom_contract3 = Contract::where('scope','Internacional')->count();
-
-        $custom_contract1 = (string) $custom_contract1;
-        $custom_contract2 = (string) $custom_contract2;
-        $custom_contract3 = (string) $custom_contract3;
+       
 
         //se pasa las variables creadas para ser llamadas en las vistas
-        return view('PDFGenerator.dynamic_pdf', compact('custom_data', 'custom_agreement1', 'custom_agreement2', 'custom_agreement3','custom_contract1','custom_contract2','custom_contract3'));
+        return view('PDFGenerator.dynamic_pdf', compact('custom_data', 'custom_agreement1', 'custom_agreement2', 'custom_agreement3'));
     }
 
     public function downloadPDF()
@@ -44,16 +37,8 @@ class PDFController extends Controller
         $custom_agreement2 = (string) $custom_agreement2;
         $custom_agreement1 = (string) $custom_agreement1;
         $custom_agreement3 = (string) $custom_agreement3;
-        //Se hace llamado a los contratos
-        $custom_contract = Contract::all();
-        $custom_contract1 = Contract::where('scope','Estatal')->count();
-        $custom_contract2 = Contract::where('scope','Nacional')->count();
-        $custom_contract3 = Contract::where('scope','Internacional')->count();;
-
-        $custom_contract1 = (string) $custom_contract1;
-        $custom_contract2 = (string) $custom_contract2;
-        $custom_contract3 = (string) $custom_contract3;
-        $pdf = PDF::loadView('PDFgenerator.pdf', compact( 'custom_agreement1', 'custom_agreement2', 'custom_agreement3','custom_contract1','custom_contract2','custom_contract3'));
+       
+        $pdf = PDF::loadView('PDFgenerator.pdf', compact( 'custom_agreement1', 'custom_agreement2', 'custom_agreement3'));
         //Regresa la descarga del pdf
         return $pdf->download('reporte.pdf');
     }

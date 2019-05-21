@@ -115,15 +115,21 @@ class AgreementController extends Controller
         $agreement->reception = $request->reception;
         $agreement->objective = $request->objective;
         $agreement->legalInstrument = $request->legalInstrument;
+        $agreement->instrumentType = $request->instrumentType;
         $agreement->registerNumber = $request->registerNumber;
         $agreement->scope = $request->scope;
-        $agreement->people_id  = $request->people_id ;
+        $splitName2 = explode(' - ', $request->liable_user);
+
+        $agreement->liable_user = $splitName2[0];
         $users = $request->users;
-        if ($request->hide == "visible") {
+      /*  if ($request->hide == "visible") {
             $agreement->hide = true;
         } else {
             $agreement->hide = false;
-        }
+        }*/ 
+
+        $splitName = explode(' - ', $request->people_id);
+        $agreement->people_id = $splitName[0];
         $agreement->update();
         $agreement->users()->detach();
         foreach ($users as $user) {
@@ -161,6 +167,7 @@ class AgreementController extends Controller
         $agreement->reception = $request->reception;
         $agreement->objective = $request->objective;
         $agreement->legalInstrument = $request->legalInstrument;
+        $agreement->instrumentType = $request->instrumentType;
         $agreement->registerNumber = $request->registerNumber;
         $agreement->scope = $request->scope;
         $agreement->status="Revisión";

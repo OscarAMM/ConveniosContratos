@@ -65,3 +65,5 @@ Route::get('/RegistroFinal', ['uses' =>'FinalRegisterController@index', 'as' => 
 //Legal Instrument Route
 Route::resource('LegalInstrument', 'LegalInstrumentController');
 Route::get('/legalInstrument', ['uses' => 'LegalInstrumentController@storeModal', 'as' =>'newInstrument']);
+
+Route::get('/PersonModal', ['uses' => 'PersonController@storeModal', 'as' =>'PersonModal']);
