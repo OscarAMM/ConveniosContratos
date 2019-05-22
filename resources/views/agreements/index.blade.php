@@ -9,20 +9,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
-    </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
-    </script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
-    </script>
-    <script>
-    $(document).ready(function() {
-        $('.toast').toast('show');
-    });
-    </script>
     <title>Index</title>
 </head>
 
@@ -31,7 +17,6 @@
     @include('auth.fragment.info')
     @include('auth.fragment.error')
     <div class="container">
-
         <div class="jumbotron" style="background-color:#0F3558;">
             <h1 class="text-muted">Documento</h1>
             <hr style="border:2px solid #BF942D">
@@ -46,9 +31,10 @@
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                     aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
                     Búsqueda
-                </button></p>
+                </button>
+            </p>
             <div class="collapse" id="collapseExample">
-                <div class=" card card-body " style="margin-bottom:5px; background-color:#BF942D;">
+                <div class="card card-body" style="margin-bottom:5px; background-color:#BF942D;">
                     <!-- inicio form busqueda-->
                     <div class="form-row">
                         <div class="col" style="margin-right:5px">
@@ -65,7 +51,7 @@
                                 <option>Otros</option>
                             </select>
                         </div>
-                        <div>
+                        <div class="col" style="margin-right:5px;">
                             <input type="text" id="people_id" name="people_id" class="form-control "
                                 placeholder="ingrese suscrito">
                             <div id="peopleList">
@@ -80,6 +66,7 @@
                 </div>
                 {{Form::close()}}
             </div>
+            
         </div>
     </div>
 
@@ -176,8 +163,8 @@ jQuery(document).ready(function() {
         $('#peopleList').fadeOut();
     });
 });
-
 </script>
-</html> 
+
+</html>
 {!!$agreements->render()!!}
 @endsection

@@ -150,6 +150,7 @@
                     <div class="form-group mb-2">
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del suscrito">
+                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="personType">Tipo</label>
@@ -160,19 +161,24 @@
                             <option>Dependencia</option>
                             <option>Otros</option>
                         </select>
+                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="country">País</label>
                         <input type="text" class="form-control" id="country" name="country" placeholder="País">
+                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="acronym">Siglas</label>
                         <input type="text" class="form-control" id="acronym" name="acronym" placeholder="Siglas">
+                        <small style="color:#897979">Opcional</small>
                     </div>
                     <div class="form-group mb-2">
                         <label for="email">correo</label>
+                        
                         <input type="text" class="form-control" id="email" name="email"
                             placeholder="email del suscrito">
+                            <small style="color:#897979">Opcional</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
