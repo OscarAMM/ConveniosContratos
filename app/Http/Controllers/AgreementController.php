@@ -23,7 +23,9 @@ class AgreementController extends Controller
         $name = $request->get('name');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
-        $people = $request->get('people_id');
+        $splitName = explode(' - ', $request->get('people_id'));
+        $people= $splitName[0];
+        //$people = $request->get('people_id');
         $objective = $request->get('objective');
         $agreements = Agreement::orderBy('id', 'ASC')
             ->id($id)
