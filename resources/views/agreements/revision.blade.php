@@ -24,7 +24,7 @@
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Nombre del convenio</th>
+                            <th>Nombre del documento</th>
                             <th>Estatus - Tiempo de revisión</th>
                             <th>Revisión</th>
                         </tr>

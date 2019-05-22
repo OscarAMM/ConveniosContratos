@@ -96,7 +96,7 @@
                     <h3>Registro</h3>
                     <p>Se realiza el registro final que contará con todo lo solicitado para almacenar en el sistema.
                     </p>
-                    <p><a href="{{route('Register')}}">Registro</a></p>
+                    <p><a href="{{route('Register')}}" class="btn boton">Registro</a></p>
                 </div>
             </div>
             <!-- Fin ADMINS-->
