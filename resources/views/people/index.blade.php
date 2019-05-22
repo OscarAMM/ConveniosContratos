@@ -3,9 +3,9 @@
 @if(Auth::user()->hasRole('admin'))
 @include('people.fragment.info')
 <div class="container">
-
     <div class="jumbotron" style="background-color:#0F3558;">
         <h1 class="text-muted">Persona</h1>
+        <hr style="border:2px solid #BF942D">
         <p class="text-muted">Se desplegará una lista con todas las personas registradas hasta el momento en el sistema.
         </p>
         {{Form::open(['route'=>'Person.index','method'=>'GET','class'=>'form-inline'])}}
@@ -16,33 +16,45 @@
                 Búsqueda
             </button></p>
         <div class="collapse " id="collapseExample">
-            <div class=" card card-body " style="margin-bottom:5px;background-color:#BF942D;">
+            <div class="card card-body" style="margin-bottom:5px; background-color:#BF942D;">
                 <!-- inicio form busqueda-->
                 <div class="form-row">
-                    
-                    <div class="col" style="margin-right:2px">
+                    <div class="col">
+                    <label for="name" class="col-form-label text-muted"><strong>Nombre</strong> </label>
                         {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
                     </div>
-                    <div class="col" style="margin-right:2px; ">
-                        {{Form::text('personType',null,['class'=>'form-control','placeholder'=>'Tipo'])}}
-                    </div>
-                    <div class="col" style="margin-right:2px">
-                        {{Form::text('email',null,['class'=>'form-control','placeholder'=>'email'])}}
-                    </div>
-                    <div class="col" style="margin-right:2px">
-                        {{Form::text('country',null,['class' =>'form-control','placeholder'=>'Pais'])}}
-                    </div>
-                    <div class="col" style="margin-right:2px">
-                        {{Form::text('acronym',null,['class' =>'form-control','placeholder'=>'Pais'])}}
-                    </div>
-                    
                     <div class="col">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="glyphicon glyphicon-search">Buscar</span>
-                        </button>
+                    <label for="personType" class="col-form-label text-muted"><strong>Tipo de suscrito</strong> </label>
+                        <select name="personType" id="personType" class="form-control">
+                            <option><option>
+                            <option>Persona física</option>
+                            <option>Persona moral</option>
+                            <option>Institución</option>
+                            <option>Dependencia</option>
+                            <option>Otros</option>
+                        </select>
                     </div>
+                    <div class="col">
+                    <label for="country" class="col-form-label text-muted"><strong>País</strong> </label>
+                        {{Form::text('country',null,['class'=>'form-control','placeholder'=>'País'])}}
+                    </div>
+                    <div class="col">
+                    <label for="email" class="col-form-label text-muted"><strong>Correo</strong> </label>
+                        {{Form::text('email', null, ['class'=>'form-control', 'placeholder'=>'Correo'])}}
+                    </div>
+                    <div class="col">
+                    <label for="acronym" class="col-form-label text-muted"><strong>Siglas</strong> </label>
+                        {{Form::text('acronym', null, ['class'=>'form-control', 'placeholder'=>'Siglas'])}}
+                    </div>
+
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-search">Buscar</span>
+                    </button>
                 </div>
             </div>
+
             {{Form::close()}}
         </div>
     </div>

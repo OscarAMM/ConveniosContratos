@@ -24,12 +24,14 @@ class AgreementController extends Controller
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
         $people = $request->get('people_id');
+        $objective = $request->get('objective');
         $agreements = Agreement::orderBy('id', 'ASC')
             ->id($id)
             ->name($name)
             ->legalInstrument($legalInstrument)
             ->instrumentType($instrumentType)
             ->people_id($people)
+            ->objective($objective)
             ->paginate();
         return view('agreements.index', compact('agreements'));
     }

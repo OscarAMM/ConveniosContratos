@@ -23,6 +23,8 @@
             <p class="text-muted">Se desplegará una lista con todos los documentos registrados hasta el momento en el
                 sistema.
             </p>
+            <p class="text-muted"><i>Nota: Los archivos registrados en esta sección son ÚNICAMENTE para trabajar de
+                    manera interna. No se desplegará ninguna información en vistas públicas o al usuario final.</i></p>
             {{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
             @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
             <p class="text-item-center"><a href="{{route('Agreement.create')}}" class="btn boton"
@@ -38,12 +40,19 @@
                     <!-- inicio form busqueda-->
                     <div class="form-row">
                         <div class="col" style="margin-right:5px">
+                            <label for="name" class="col-form-label text-muted">Nombre</label>
                             {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre  del documento'])}}
                         </div>
                         <div class="col" style="margin-right:5px">
+                            <label for="name" class="col-form-label text-muted">Instrumento jurídico</label>
                             {{Form::text('legalInstrument',null,['class'=>'form-control','placeholder'=>'Instrumento jurídico'])}}
                         </div>
+                        <div class="col" style="margin-right:5px;">
+                            <label for="name" class="col-form-label text-muted">Objetivo</label>
+                            {{Form::text('objective', null, ['class'=>'form-control', 'placeholder'=>'Objetivo'])}}
+                        </div>
                         <div class="col" style="margin-right:5px">
+                            <label for="name" class="col-form-label text-muted">Tipo de instrumento</label>
                             <select name="instrumentType" id="instrumentType" class="form-control">
                                 <option></option>
                                 <option>General</option>
@@ -52,21 +61,22 @@
                             </select>
                         </div>
                         <div class="col" style="margin-right:5px;">
+                            <label for="name" class="col-form-label text-muted">Suscrito</label>
                             <input type="text" id="people_id" name="people_id" class="form-control "
                                 placeholder="ingrese suscrito">
                             <div id="peopleList">
                             </div>
                         </div>
-                        <div class="col">
-                            <button type="submit" class="btn btn-primary">
-                                <span class="glyphicon glyphicon-search">Buscar</span>
-                            </button>
-                        </div>
                     </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">
+                            <span class="glyphicon glyphicon-search">Buscar</span>
+                        </button></div>
                 </div>
+
                 {{Form::close()}}
             </div>
-            
+
         </div>
     </div>
 

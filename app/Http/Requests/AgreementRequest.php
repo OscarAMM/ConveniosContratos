@@ -25,26 +25,26 @@ class AgreementRequest extends FormRequest
     {
         return [
             'name' => 'required ',
+            'legalInstrument' =>'required',
             'reception'=>'required',
             'objective'=>'required',
+            'instrumentType' => 'required',
             'scope'=>'required',
             'users'=>'required',
             'people_id'=>'required',
-    
-            
         ];
     }
     public function messages()
     {
         return [
-            'name.required' => 'Ingresa nombre del contrato',
-            'reception.required' => 'Ingresa una fecha de recepción válida',
-            'objective.required' => 'Ingresa el objetivo del contrato',
-            'scope.required' => 'Ingresa el ambito del contrato',
-            'users.required' => 'Asigna un usuario',
-            'people_id.required' => 'Asigna una persona',
-            
-
+            'name.required' => 'Ingresa nombre del documento.',
+            'legalInstrument.required' => 'Ingresa el instrumento jurídico.',
+            'reception.required' => 'Ingresa una fecha de recepción válida.',
+            'objective.required' => 'Ingresa el objetivo del contrato.',
+            'instrumentType.required' => 'Ingresa el tipo de instrumento.',
+            'scope.required' => 'Ingresa el ambito del contrato.',
+            'users.required' => 'Asigna un usuario.',
+            'people_id.required' => 'Asigna suscrito.',
         ];
     }
 }
