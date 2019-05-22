@@ -15,7 +15,6 @@
 <div class="gradientLogin">
         <img src="{{asset('images\Edificio_Central.jpg')}}" alt="Edificio-Central" >
     </div>
-
     <div class="container">
         <div class="row ">
             <div class="col">
@@ -40,28 +39,7 @@
                 </table>
             </div>
             <!-- tabla de contratos-->
-            <div class=" col">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Nombre del contrato</th>
-                            <th>Revisión</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach(Auth::user()->getContracts as $contract)
-                        {!!csrf_field()!!}
-                        @if($contract->status=='Finalizado')
-                        <tr>
-                            <th scope="row">{{$contract->name}}</th>
-                            <td><a href="{{route('PublicForum.Contract', $contract ->id)}}"
-                                    class="btn boton">Revisión</a></td>
-                        </tr>
-                        @endif
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+            
         </div>
     </div>
 </body>

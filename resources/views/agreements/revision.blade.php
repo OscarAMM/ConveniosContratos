@@ -34,7 +34,6 @@
                         {!!csrf_field()!!}
                         @if($agreemment->status=='Revisión')
                         <tr>
-
                             <th scope="row">{{$agreemment->name}}</th>
                             <th scope="row">
                                 @php
@@ -58,7 +57,6 @@
                     </tbody>
                 </table>
             </div>
-
         </div>
     </div>
     @else
@@ -77,7 +75,6 @@
     </div>
     @endif
 </body>
-
 </html>
 
 @endsection

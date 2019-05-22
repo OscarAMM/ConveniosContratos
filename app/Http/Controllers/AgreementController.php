@@ -54,7 +54,6 @@ class AgreementController extends Controller
         $agreements = Agreement::find($id);
         $person_id = $agreements->people_id;
         $people = Person::find($person_id);
-
         $files = $agreements->getFiles;
         $list = array($files);
         $cont = count($files);
