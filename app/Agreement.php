@@ -22,7 +22,7 @@ class Agreement extends Model
     }
     public function scopeLegalInstrument($query,$legalInstrument){
         if($legalInstrument){
-            return $query->where('reception','LIKE',"%$legalInstrument%");
+            return $query->where('legalInstrument','LIKE',"%$legalInstrument%");
         }
     }
     public function scopeId($query,$id){
@@ -32,12 +32,12 @@ class Agreement extends Model
     }
     public function scopeInstrumentType($query,$instrumentType){
         if($instrumentType){
-            return $query->where('scope','LIKE',"%$instrumentType%");
+            return $query->where('instrumentType','LIKE',"%$instrumentType%");
         }
     }
     public function scopePeople_id($query,$people_id){
         if($people_id){
-            return $query->where('scope','LIKE',"%$people_id%");
+            return $query->where('people_id','LIKE',"%$people_id%");
         }
     }
     public function files(){

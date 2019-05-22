@@ -3,19 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Agreement;
-use App\Dependence;
 use App\FileAgreement;
 use App\Http\Requests\AgreementRequest;
-use App\User;
-use App\Person;
 use App\LegalInstrument;
+use App\Mail\SendEmail;
+use App\Person;
+use App\User;
+use Carbon\Carbon;
+use DB;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Mail;
-use Session;
-use App\Mail\SendEmail;
-use Carbon\Carbon;
-use DB;
 
 class AgreementController extends Controller
 {
@@ -54,11 +52,11 @@ class AgreementController extends Controller
         $agreements = Agreement::find($id);
         $person_id = $agreements->people_id;
         $people = Person::find($person_id);
-        
-        $files=$agreements->getFiles;
-        $list=array($files);
-        $cont=count($files);
-        $file=FileAgreement::find(last($list)[$cont-1]->id);
+
+        $files = $agreements->getFiles;
+        $list = array($files);
+        $cont = count($files);
+        $file = FileAgreement::find(last($list)[$cont - 1]->id);
         return view('public.show', compact('agreements', 'people', 'file'));
     }
 
@@ -76,7 +74,7 @@ class AgreementController extends Controller
         $person = Person::find($person_id);
         $users = $agreements->getUser;
         $files = $agreements->getFiles;
-        $fecha=$agreements->start_date;
+        $fecha = $agreements->start_date;
         /*$dt= Carbon::now()->diffInDays($fecha);
         echo $dt."-";
         $dt2= Carbon::now()->diffForHumans($agreements->end_date);
@@ -123,28 +121,28 @@ class AgreementController extends Controller
 
         $agreement->liable_user = $splitName2[0];
         $users = $request->users;
-      /*  if ($request->hide == "visible") {
-            $agreement->hide = true;
+        /*  if ($request->hide == "visible") {
+        $agreement->hide = true;
         } else {
-            $agreement->hide = false;
-        }*/ 
+        $agreement->hide = false;
+        }*/
 
         $splitName = explode(' - ', $request->people_id);
         $agreement->people_id = $splitName[0];
         $agreement->update();
         $agreement->users()->detach();
         foreach ($users as $user) {
-            $activeUser=User::where('id', $user)->first();
+            $activeUser = User::where('id', $user)->first();
             if (!$agreement->hasUser($activeUser->email)) {
                 $email = $activeUser->email;
                 $subject = "Asignación de convenios";
-                $message = "Se le ha asignado el convenio ". $request->name." para revisión";
+                $message = "Se le ha asignado el convenio " . $request->name . " para revisión";
                 Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->users()
                 ->attach(User::where('id', $user)->first());
         }
-        return redirect()->route('Agreement.index')->with('info', 'El Convenio '.$agreement->name. ' ha sido actualizado');
+        return redirect()->route('Agreement.index')->with('info', 'El Convenio ' . $agreement->name . ' ha sido actualizado');
     }
     public function store(AgreementRequest $request)
     {
@@ -158,9 +156,8 @@ class AgreementController extends Controller
         //Archivo
         $file_Name = new FileAgreement();
         $file_Name->name = $file_path;
-        
+
         $file_Name->save();
-        
 
         //Convenio
         $agreement = new Agreement();
@@ -170,39 +167,39 @@ class AgreementController extends Controller
         $agreement->legalInstrument = $request->legalInstrument;
         $agreement->instrumentType = $request->instrumentType;
         $agreement->scope = $request->scope;
-        $agreement->status="Revisión";
+        $agreement->status = "Revisión";
         $splitName2 = explode(' - ', $request->liable_user);
 
         $agreement->liable_user = $splitName2[0];
-        $agreement->start_date =  Carbon::now();
+        $agreement->start_date = Carbon::now();
         $agreement->end_date = Carbon::now()->addWeekDays(4);
         /*if ($request->hide == "visible") {
-            $agreement->hide = true;
+        $agreement->hide = true;
         } else {
-            $agreement->hide = false;
+        $agreement->hide = false;
         }*/
         $splitName = explode(' - ', $request->people_id);
         $agreement->people_id = $splitName[0];
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
-            return back()->with('info', 'El convenio '.$agreement->name.' ya existe.');
+            return back()->with('info', 'El convenio ' . $agreement->name . ' ya existe.');
         } else {
             $agreement->save();
             foreach ($users as $user) {
-                $activeUser=User::where('id', $user)->first();
+                $activeUser = User::where('id', $user)->first();
                 $agreement->users()
                     ->attach(User::where('id', $user)->first());
                 $email = $activeUser->email;
                 $subject = "Asignación de convenios";
-                $message = " Se le ha asignado el convenio ". $request->name.", cuenta con 5 días para su revisión, desde ".$agreement->start_date->format('d-m-y')." hasta ".$agreement->end_date->format('d-m-y');
+                $message = " Se le ha asignado el convenio " . $request->name . ", cuenta con 5 días para su revisión, desde " . $agreement->start_date->format('d-m-y') . " hasta " . $agreement->end_date->format('d-m-y');
                 Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->files()
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
             $agreement->users()
-                    ->attach(User::where('id', $agreement->liable_user)->first());
+                ->attach(User::where('id', $agreement->liable_user)->first());
         }
-        return redirect()->route('Agreement.index')->with('info', 'El Convenio '.$agreement->name.' ha sido agregado');
+        return redirect()->route('Agreement.index')->with('info', 'El Convenio ' . $agreement->name . ' ha sido agregado');
     }
     public function showFile($id)
     {
@@ -214,12 +211,12 @@ class AgreementController extends Controller
         if ($request->get('query')) {
             $query = $request->get('query');
             $data = DB::table('people')
-        ->where('name', 'LIKE', "%{$query}%")
-        ->get();
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output .= '
-         <li class="dropdown-item">'.$row->id.' - '.$row->name.'</li>
+         <li class="dropdown-item">' . $row->id . ' - ' . $row->name . '</li>
          ';
             }
             $output .= '</ul>';
@@ -231,12 +228,12 @@ class AgreementController extends Controller
         if ($request->get('query')) {
             $query = $request->get('query2');
             $data = DB::table('users')
-        ->where('name', 'LIKE', "%{$query}%")
-        ->get();
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output .= '
-         <li class="dropdown-item">'.$row->id.' - '.$row->name.' - '.$row->email.'</li>
+         <li class="dropdown-item">' . $row->id . ' - ' . $row->name . ' - ' . $row->email . '</li>
          ';
             }
             $output .= '</ul>';
@@ -248,12 +245,12 @@ class AgreementController extends Controller
         if ($request->get('query')) {
             $query = $request->get('query');
             $data = DB::table('legal_instruments')
-        ->where('name', 'LIKE', "%{$query}%")
-        ->get();
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output .= '
-         <li class="dropdown-item">'.$row->name.'</li>
+         <li class="dropdown-item">' . $row->name . '</li>
          ';
             }
             $output .= '</ul>';

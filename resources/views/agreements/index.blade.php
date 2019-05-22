@@ -8,6 +8,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous">
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
+    </script>
     <script>
     $(document).ready(function() {
         $('.toast').toast('show');
@@ -42,16 +52,24 @@
                     <!-- inicio form busqueda-->
                     <div class="form-row">
                         <div class="col" style="margin-right:5px">
-                            {{Form::text('id',null,['class'=>'form-control','placeholder'=>'ID'])}}
+                            {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre  del documento'])}}
                         </div>
                         <div class="col" style="margin-right:5px">
-                            {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
+                            {{Form::text('legalInstrument',null,['class'=>'form-control','placeholder'=>'Instrumento jurídico'])}}
                         </div>
                         <div class="col" style="margin-right:5px">
-                            {{Form::text('reception',null,['class'=>'form-control','placeholder'=>'Recepción'])}}
+                            <select name="instrumentType" id="instrumentType" class="form-control">
+                                <option></option>
+                                <option>General</option>
+                                <option>Especifico</option>
+                                <option>Otros</option>
+                            </select>
                         </div>
                         <div>
-                            {{Form::text('scope',null,['class'=>'form-control','placeholder'=>'Ámbito'])}}
+                            <input type="text" id="people_id" name="people_id" class="form-control "
+                                placeholder="ingrese suscrito">
+                            <div id="peopleList">
+                            </div>
                         </div>
                         <div class="col">
                             <button type="submit" class="btn btn-primary">
@@ -131,7 +149,35 @@
         @endif
     </div>
 </body>
+<script>
+$.noConflict();
+jQuery(document).ready(function() {
 
-</html>
+    $('#people_id').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetch') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#peopleList').fadeIn();
+                    $('#peopleList').html(data);
+                }
+            });
+        }
+    });
+    jQuery('#peopleList').on('click', 'li', function() {
+        $('#people_id').val($(this).text());
+        $('#peopleList').fadeOut();
+    });
+});
+
+</script>
+</html> 
 {!!$agreements->render()!!}
 @endsection

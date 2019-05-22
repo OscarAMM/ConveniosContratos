@@ -43,7 +43,7 @@
                             <option>Otros</option>
                         </select>
                     </div>
-                   
+
                     <div class="form-group">
                         <label for="scope" class="col-md-4 col-form-label">Ámbito</label>
                         <select name="scope" id="scope" class="form-control">
