@@ -134,9 +134,9 @@
                 <hr style="border:1px solid #0F3558;">
                 <div class="row">
                     <div class="col-lg-4">
-                        <h3>Reporte</h3>
-                        <p>El sistema arrojará los reportes correspondientes según la fecha especificada.</p>
-                        <p><a href="{{route('PrePDF')}}" class="btn boton">Reporte</a></p>
+                        <h3>Registro</h3>
+                        <p>Se hace consulta de todos los documentos registrados en el sistema. </p>
+                        <p><a href="{{route('FinalRegister.index')}}" class="btn boton">Consultar</a></p>
                     </div>
                 </div>
                 <!------------------------------------ USUARIO EMPIEZA AQUÍ------------------------------------------------------------------------->
