@@ -37,6 +37,11 @@
                     <input type="date" id="reception" name="reception" class="form-control"
                         value="{{$agreements->reception}}">
                 </div>
+                <div class="form-group ">
+                    <label for="end_date" class="col-md-4 col-form-label">Fecha final de revisión</label>
+                    <input type="date" id="end_date" name="end_date" class="form-control"
+                        value="{{$agreements->end_date}}">
+                </div>
                 <div class="form-group">
                     <label for="objective" class="col-md-4 col-form-label">Objetivo</label>
                     <textarea name="objective" id="objective" cols="30" rows="5" class="form-control"

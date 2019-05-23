@@ -93,7 +93,7 @@
                         <th>Recepción</th>
                         <th>Objetivo</th>
                         <th>Suscrito</th>
-                        <th colspan="5">&nbsp;</th>
+                        <th colspan="6">&nbsp;Opciones</th>
                     </tr>
                 <tbody>
                     @foreach($agreements as $agreement)
@@ -107,9 +107,12 @@
                         <td>{{App\Person::find($agreement->people_id)->name}}</td>
                         <td>
                         <td><a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a></td>
+                        <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>
+                        </td>
                         @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
                         <td><a href="{{route('Agreement.edit', $agreement ->id)}}" class="btn botonAmarillo">Editar</a>
                         </td>
+                        <td><a href="{{route('Register',$agreement->id)}}" class="btn btn-success">Registrar</a></td>
                         <td>
                             <form action="{{route('Agreement.destroy', $agreement->id)}}" method="POST">
                                 {{csrf_field()}}
@@ -118,8 +121,7 @@
                             </form>
                         </td>
                         @endif
-                        <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>
-                        </td>
+                        
 
 
                     </tr>

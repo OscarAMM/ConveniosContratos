@@ -32,6 +32,9 @@ class AgreementRequest extends FormRequest
             'scope'=>'required',
             'users'=>'required',
             'people_id'=>'required',
+            'end_date'=>'nullable',
+
+
         ];
     }
     public function messages()

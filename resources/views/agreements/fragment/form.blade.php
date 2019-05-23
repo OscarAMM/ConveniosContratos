@@ -29,7 +29,12 @@
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
                         <label for="reception" class="col-form-label">Recepción</label>
-                        <input type="date" id="reception" name="reception" class="form-control">
+                        <input type="date" id="reception" name="reception" class="form-control" value={{Carbon\Carbon::now()}}>
+                    </div>
+                    <div class="form-group ">
+                        <small style="color:#D90101;">*</small>
+                        <label for="end_date" class="col-form-label">Fecha final de revisión</label>
+                        <input type="date" id="end_date" name="end_date" class="form-control" value={{Carbon\Carbon::now()->addWeekDays(5)}}>
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
@@ -211,9 +216,11 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
 </script>
+
 <script>
 $.noConflict();
 jQuery(document).ready(function() {
+    
 
     $('#people_id').keyup(function() {
         var query = $(this).val();
@@ -287,7 +294,10 @@ jQuery(document).ready(function() {
         $('#legalInstrument').val($(this).text());
         $('#instrumentList').fadeOut();
     });
-
+    $("#reception").keyup(function () {
+            var value = $(this).val();
+            $("#end_date").val(value);
+        });
 
 });
 </script>

@@ -120,8 +120,14 @@ class AgreementController extends Controller
         $agreement->legalInstrument = $request->legalInstrument;
         $agreement->instrumentType = $request->instrumentType;
         $agreement->scope = $request->scope;
+        if($request->end_date){
+            $agreement->end_date=new Carbon($request->end_date);
+        }else{
+            $pre=new Carbon($request->reception);
+            $final=$pre->addWeekDays(4);
+            $agreement->end_date = $final;
+        }
         $splitName2 = explode(' - ', $request->liable_user);
-
         $agreement->liable_user = $splitName2[0];
         $users = $request->users;
         /*  if ($request->hide == "visible") {
@@ -174,8 +180,16 @@ class AgreementController extends Controller
         $splitName2 = explode(' - ', $request->liable_user);
 
         $agreement->liable_user = $splitName2[0];
-        $agreement->start_date = Carbon::now();
-        $agreement->end_date = Carbon::now()->addWeekDays(4);
+        //$agreement->start_date = Carbon::now();
+        $agreement->start_date = new Carbon($request->reception);
+        if($request->end_date){
+            $agreement->end_date=new Carbon($request->end_date);
+        }else{
+            $pre=new Carbon($request->reception);
+            $final=$pre->addWeekDays(4);
+            $agreement->end_date = $final;
+        }
+        
         /*if ($request->hide == "visible") {
         $agreement->hide = true;
         } else {

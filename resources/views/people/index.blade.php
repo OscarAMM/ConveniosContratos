@@ -4,7 +4,7 @@
 @include('people.fragment.info')
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
-        <h1 class="text-muted">Persona</h1>
+        <h1 class="text-muted">Suscrito</h1>
         <hr style="border:2px solid #BF942D">
         <p class="text-muted">Se desplegará una lista con todas las personas registradas hasta el momento en el sistema.
         </p>

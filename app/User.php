@@ -112,6 +112,6 @@ class User extends Authenticatable
         return false;
     }
     public function getAgreements(){
-        return $this->belongsToMany(Agreement::class,'agreement_user');
+        return $this->belongsToMany(Agreement::class,'agreement_user')->orderBy('id', 'DESC');
     }
 }
