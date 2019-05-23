@@ -78,19 +78,7 @@ class AgreementController extends Controller
         $users = $agreements->getUser;
         $files = $agreements->getFiles;
         $fecha = $agreements->start_date;
-        /*$dt= Carbon::now()->diffInDays($fecha);
-        echo $dt."-";
-        $dt2= Carbon::now()->diffForHumans($agreements->end_date);
-        echo "Tu tiempo disponible es de: ".$dt2." del periodo de revisión";*/
-        /*$date= Carbon::now();
-        echo $date->format('Y-m-d');
-        echo $date->addWeekDays(4)->format('Y-m-d');
-        $date2=$date->addWeekDays(4);
-        echo $date->diffInDays($date2->copy());*/
-        /*$data=Agreement::where('scope', 'Estatal')->count();
-        $data1=Agreement::where('scope', 'Nacional')->count();
-        $data2=Agreement::where('scope', 'Internacional')->count();
-        echo $data.'-'.$data1.'-'.$data2;*/
+
         return view('agreements.show', compact('agreements', 'users', 'person', 'files'));
     }
     public function edit($id)
