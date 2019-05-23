@@ -15,6 +15,8 @@ use Mail;
 use App\Mail\SendEmail;
 use Session;
 use Carbon\Carbon;
+	
+use Illuminate\Support\Collection;
 
 class CommentController extends Controller
 {
@@ -135,6 +137,8 @@ class CommentController extends Controller
     public function notifyAgreement($id){
         $agreement = Agreement::find($id);
         $value =null;
+        $messageAdmin=null;
+        $usersNotified=New Collection();
         foreach($agreement->getUser as $user){
             foreach($agreement->getComments as $comment){
                 $value = ends_with($comment->user,$user->email );
@@ -143,17 +147,30 @@ class CommentController extends Controller
                 $dt= Carbon::now()->subDays(1)->diffForHumans($agreement->end_date);
                         
                 $email = $user->email;
+                $usersNotified->push($user->name.' - '.$user->email);
                 $subject = "Recordatorio de revisión";
                 if($value = ends_with($dt, 'antes')){
-                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al convenio: " . $agreement->name.", por lo que se le recuerda que el tiempo con el que dispone es de ". $dt." de concluir el periodo de revisión.";
+                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al documento: " . $agreement->name.", por lo que se le recuerda que el tiempo con el que dispone es de ". $dt." de concluir el periodo de revisión.";
+                    $messageAdmin="Buen día, se le informa que el tiempo con el que dispone el documento ".$agreement->name." es de ". $dt." de concluir el periodo de revisión.";
                 }
                 if($value = ends_with($dt, 'después')){
-                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al convenio: " . $agreement->name.", por lo que se le recuerda que el tiempo transcurrido es de ". $dt." de haber concluido el periodo de revisión.";
+                    $message = "Buen día, se le informa que no ha realizado la revisión correspondiente al documento: " . $agreement->name.", por lo que se le recuerda que el tiempo transcurrido es de ". $dt." de haber concluido el periodo de revisión.";
+                    $messageAdmin="Buen día, se le informa que el tiempo transcurrido del documento ".$agreement->name." es de ". $dt." de haber concluido el periodo de revisión.";
+
                 }
                 Mail::to($email)->send(new SendEmail($subject, $message));
 
             }
         }
+        foreach($agreement->getUser as $admin){
+            if($admin->hasRole('admin')){
+                $email = $admin->email;
+                $subject = "Usuarios sin revisar el documento ".$agreement->name;
+                $message=$messageAdmin.'  Los siguientes usuarios no han realizado la revisión correspondiente: '.$usersNotified;
+                Mail::to($email)->send(new SendEmail($subject, $message));
+            }
+        }
+        
         return redirect()->route('Forum.Agreement', $id)->with('info', 'Haz notificado a los usuarios con éxito');
 
     }
