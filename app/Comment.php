@@ -8,7 +8,7 @@ use App\Contract;
 class Comment extends Model
 {
     protected $fillable = [
-        'topic', 'comment','user'
+        'topic', 'comment','user','status'
     ];
     public function agreements(){
         return $this->belongsToMany(Agreement::class)

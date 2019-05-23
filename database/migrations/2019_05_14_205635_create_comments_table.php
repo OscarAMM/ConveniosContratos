@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->string('topic');
             $table->text('comment');
             $table->string('user');
+            $table->string('status');
             $table->timestamps();
         });
     }
