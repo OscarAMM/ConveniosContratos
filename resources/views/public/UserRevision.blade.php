@@ -28,7 +28,7 @@
                     <tbody>
                         @foreach(Auth::user()->getAgreements as $agreement)
                         {!!csrf_field()!!}
-                        @if($agreement->status=='Finalizado')
+                        @if($agreement->status=='Entregado')
                         <tr>
                             <th scope="row">{{$agreement->name}}</th>
                             <td><a href="{{route('PublicForum.Agreement', $agreement ->id)}}"class="btn boton ">Revisión</a></td>

@@ -37,17 +37,20 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
-                    @if(!Auth::guest())
+                    @if(!Auth::guest()&&(Auth::user()->hasRole('admin')||Auth::user()->hasRole('revisor')))
                     <ul class="navbar-nav mr-auto">
+                    
                         <li class="nav-item">
                             <a href="{{route('Agreement.index')}}" class="nav-link">Documentos</a>
                         </li>
+                        @if(Auth::user()->hasRole('admin'))
                         <li class="nav-item">
                             <a href="{{route('Person.index')}}" class="nav-link">Suscritos</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link">Usuarios</a>
                         </li>
+                        @endif
                     </ul>
                     @endif
 

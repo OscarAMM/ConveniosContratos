@@ -28,6 +28,7 @@ class CommentController extends Controller
         $comment->topic = $request->topic;
         $comment->comment = $request->comment;
         $comment->user = $user->name . " - " . $user->email;
+        $comment->status=$agreement->status;
         $comment->save();
 
         $file = $request->file('fileForum');
@@ -43,9 +44,6 @@ class CommentController extends Controller
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
         } 
         
-
-        
-
         $agreement->comments()
             ->attach(Comment::where('id', $comment->id)->first());
         
@@ -110,11 +108,11 @@ class CommentController extends Controller
     public function finallyAgreement($id)
     {
         $agreement = Agreement::find($id);
-        $agreement->status = "Finalizado";
+        $agreement->status = "Entregado";
         $agreement->update();
         $user = User::find($agreement->liable_user);
         $email = $user->email;
-        $subject = "Convenio finalizado";
+        $subject = "Convenio Entregado";
         $message = "El convenio: " . $agreement->name . " ya termino su periodo de revisión. Puede acceder a el ingresando al sistema SICC.";
         Mail::to($email)->send(new SendEmail($subject, $message));
         return redirect()->route('Revision', $id)->with('info', 'El convenio '. $agreement->name.' ha sido finalizado con éxito');
