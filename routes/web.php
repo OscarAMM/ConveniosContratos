@@ -35,6 +35,9 @@ Route::get('/registerAdminRoles', 'RegisterAdminController@change_roles');
 Route::post('/registerAdminRolesChange', 'RegisterAdminController@AdminAssignRoles');
 Route::resource('users', 'UserController');
 Route::post('/usersEdited/{id}', ['as' => 'users.edited', 'uses' => 'UserController@edited']);
+Route::get('/usersReset', ['as' => 'users.reset', 'uses' => 'UserController@reset']);
+Route::post('/usersUpdate/{id}', ['as' => 'users.update', 'uses' => 'UserController@update']);
+
 
 //RUTA MAIL
 Route::get('/mail', ['uses'=> 'EmailController@index' , 'as' => 'mail.index']);

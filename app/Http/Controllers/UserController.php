@@ -65,4 +65,18 @@ class UserController extends Controller
         return back()->with('info','El usuario ha sido eliminado');
         //return redirect()->back();
     }
+    public function reset(){
+        return view('auth.update');
+    }
+    public function update(Request $request, $id){
+        $user = User::where('id', $id)->first();
+        $user->name=$request['name'];
+        $user->email=$request['email'];
+        if($request['password']){
+            $user->password=bcrypt($request['password']);
+        }
+        
+        $user->update();
+        return view('home')->with('info',$user->name.' Haz actualizado tus datos.' );
+    }
 }
