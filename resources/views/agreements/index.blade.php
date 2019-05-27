@@ -89,7 +89,7 @@
                         <th>Id</th>
                         <th>Nombre completo</th>
                         <th>Instrumento jurídico</th>
-                        <th>Tipo de documento</th>
+                        <th>Tipo de instrumento</th>
                         <th>Recepción</th>
                         <th>Objetivo</th>
                         <th>Suscrito</th>
@@ -121,16 +121,12 @@
                             </form>
                         </td>
                         @endif
-                        
-
-
                     </tr>
                     @endforeach
                 </tbody>
                 </thead>
             </table>
         </div>
-
         @else
         <div class="container">
             <div class="card">
