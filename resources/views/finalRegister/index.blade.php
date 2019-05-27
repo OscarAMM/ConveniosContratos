@@ -12,7 +12,7 @@
                 públicas, por lo que se pide que verifiquen el
                 documento que será visible para el público general. </i></p>
         @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
-        <p class="text-item-center"><a href="#" class="btn boton" style="margin-right:5px">Nuevo</a>
+        <p class="text-item-center"><a href="{{route('FinalRegister.create')}}" class="btn boton" style="margin-right:5px">Nuevo</a>
             @endif
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                 aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">

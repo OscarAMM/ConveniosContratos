@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\FinalRegister;
+use App\Http\Requests\FinalRegisterRequest;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
