@@ -18,15 +18,15 @@
                         <small style="color:#D90101;">*</small>
                         <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
                         <div class="form-inline ">
-                        <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
-                            placeholder="Ingrese instrumento">
+                            <input type="text" id="legalInstrument" name="legalInstrument"
+                                class="form-control col-md-11" placeholder="Ingrese instrumento">
                             <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
-                            data-target="#exampleModal" data-whatever="@fat">...</button>
+                                data-target="#exampleModal" data-whatever="@fat">...</button>
                         </div>
                         <div id="instrumentList">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
                         <label for="objective" class=" col-form-label">Objetivo</label>
@@ -42,15 +42,24 @@
                             <option>Otros</option>
                         </select>
                     </div>
+                    <div class="form-group">
+                        <label for="registerNumber">Número de registro</label>
+                        <input type="text" id="registerNumber" name="registerNumber" class="form-control" placeholder="Número de registro">
+                    </div>
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
                         <label for="reception" class="col-form-label">Recepción</label>
-                        <input type="date" id="reception" name="reception" class="form-control" value={{Carbon\Carbon::now()}}>
+                        <input type="date" id="reception" name="reception" class="form-control"
+                            value={{Carbon\Carbon::now()}}>
                     </div>
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
                         <label for="signature" class="col-form-label">Fecha de firma</label>
                         <input type="date" id="signature" name="signature" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="validity">Validación</label>
+                        <input type="date" id="validity" name="validity" class="form-control">
                     </div>
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
@@ -58,9 +67,10 @@
                         <input type="date" id="session" name="session" class="form-control">
                     </div>
                     <div class="form-group">
-                    <input type="checkbox" name="observationCheck" id="observationCheck" class="form-checkbox">
-                    <label for="observation" class="col-form-label">Observación</label>
-                    <textarea name="observation" id="observation" cols="30" rows="10" class="form-control" disabled></textarea>
+                        <input type="checkbox" name="observationCheck" id="observationCheck" class="form-checkbox">
+                        <label for="observation" class="col-form-label">Observación</label>
+                        <textarea name="observation" id="observation" cols="30" rows="10" class="form-control"
+                            disabled></textarea>
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
@@ -75,10 +85,10 @@
                         <small style="color:#D90101;">*</small>
                         <label for="people_id" class="col-form-label">Asigne suscrito</label>
                         <div class="form-inline">
-                        <input type="text" id="people_id" name="people_id" class="form-control col-md-11"
-                            placeholder="ingrese suscrito">
+                            <input type="text" id="people_id" name="people_id" class="form-control col-md-11"
+                                placeholder="ingrese suscrito">
                             <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
-                            data-target="#suscrito" data-whatever="@fat">...</button>
+                                data-target="#suscrito" data-whatever="@fat">...</button>
                         </div>
                         <div id="peopleList">
                         </div>
@@ -92,11 +102,11 @@
                         </div>
                     </div>
                     <div class="form-group">
-                    <label for="hide" class="col-form-label">Vista pública</label>
-                    <select name="hide" id="hide" class="form-control">
-                    <option>No mostrar</option>
-                    <option>Mostrar</option>
-                    </select>
+                        <label for="hide" class="col-form-label">Vista pública</label>
+                        <select name="hide" id="hide" class="form-control">
+                            <option>No mostrar</option>
+                            <option>Mostrar</option>
+                        </select>
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
@@ -114,10 +124,10 @@
 
         </div>
         <div class="row">
-        <div class="col">
-            <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+            <div class="col">
+                <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+            </div>
         </div>
-    </div>
     </div>
 </div>
 </div>
@@ -218,7 +228,7 @@
 <script>
 $.noConflict();
 jQuery(document).ready(function() {
-    
+
 
     $('#people_id').keyup(function() {
         var query = $(this).val();
@@ -292,10 +302,10 @@ jQuery(document).ready(function() {
         $('#legalInstrument').val($(this).text());
         $('#instrumentList').fadeOut();
     });
-    $("#reception").keyup(function () {
-            var value = $(this).val();
-            $("#end_date").val(value);
-        });
+    $("#reception").keyup(function() {
+        var value = $(this).val();
+        $("#end_date").val(value);
+    });
 
 });
 </script>
