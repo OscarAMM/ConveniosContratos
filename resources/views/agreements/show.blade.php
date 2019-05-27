@@ -19,12 +19,12 @@
                         {{$agreements->reception}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Objetivo</h5>
-                        {{$agreements->objective}}
+                        <h5 class="card-title font-weight-bold">Fecha final de revisión</h5>
+                        {{$agreements->end_date}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Convenio válido hasta..</h5>
-                        {{$agreements->agreementValidity}}
+                        <h5 class="card-title font-weight-bold">Objetivo</h5>
+                        {{$agreements->objective}}
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Ámbito</h5>
@@ -44,6 +44,7 @@
                         <ul>{{$user->email}}</ul>
                         @endforeach
                     </li>
+                    @if(Auth::user()->hasRole('admin')||Auth::user()->hasDocument($agreements->id))
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Archivos</h5>
                         @foreach($files as $file)
@@ -53,6 +54,7 @@
                         </ul>
                         @endforeach
                     </li>
+                    @endif
                     <!--<li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Visibilidad del documento</h5>
                         @if($agreements->hide)

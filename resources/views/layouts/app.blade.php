@@ -86,6 +86,9 @@
                                     style="display: none;">
                                     @csrf
                                 </form>
+                                <a class="dropdown-item" href="{{ route('users.reset') }}">
+                                    {{ __('Editar usuario') }}
+                                </a>
                             </div>
                         </li>
                         @endguest
