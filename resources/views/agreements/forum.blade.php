@@ -25,93 +25,90 @@
                 tipo: <i>Foto, PDF, DOCX, EXCEL, PPT</i></p>
         </div>
     </div>
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-            <h3>Opciones</h3>
-            <hr style="border:2px solid #BF942D">
-            {!!Form::open( ['route' =>array('CommentAgreement.make', $agreements->id), 'files' =>true]) !!}
-            <div class="form-group">
-                <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
-                @if(Auth::user()->hasDocument($agreements->id))
-                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm"
-                    aria-expanded="false" aria-controls="collapseForm">
-                    Comentar
-                </button>
-                <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn btn-warning">Notificar</a>
-                <input type="button" value="Finalizar" data-toggle="collapse" data-target="#collapseOptions"
-                    aria-expanded="false" aria-controls="collapseOptions" class="btn btn-success">
-                @endif
-            </div>
-            <div class="collapse" id="collapseForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h3>Opciones</h3>
+                <hr style="border:2px solid #BF942D">
+                {!!Form::open( ['route' =>array('CommentAgreement.make', $agreements->id), 'files' =>true]) !!}
                 <div class="form-group">
+                    <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                    @if(Auth::user()->hasDocument($agreements->id))
+                    <button class="btn boton" type="button" data-toggle="collapse" data-target="#collapseForm"
+                        aria-expanded="false" aria-controls="collapseForm">
+                        Comentar
+                    </button>
+                    <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn boton">Notificar</a>
+                    <input type="button" value="Finalizar" data-toggle="collapse" data-target="#collapseOptions"
+                        aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
+                    @endif
+                </div>
+                <div class="collapse" id="collapseForm">
                     <div class="form-group">
-                        <label for="subject">Asunto</label>
-                        <input name="topic" id="topic" type="text" class="form-control "
-                            placeholder="Escriba el asunto de revisión">
-                    </div>
-                    <div class="form-group">
-                        <label for="comment">Comentario</label>
-                        <textarea name="comment" id="comment" cols="30" rows="10" class="form-control ckeditor"
-                            placeholder="Escriba la revisión"></textarea>
-                    </div>
-                    <div class="form-group">
+                        <div class="form-group">
+                            <label for="subject">Asunto</label>
+                            <input name="topic" id="topic" type="text" class="form-control "
+                                placeholder="Escriba el asunto de revisión">
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comentario</label>
+                            <textarea name="comment" id="comment" cols="30" rows="10" class="form-control ckeditor"
+                                placeholder="Escriba la revisión"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <br>
+                            <input type="file" name="fileForum" id="fileForum">
+                            <input type="submit" class="btn botonAzul" value="Comentar">
+                        </div>
                         <br>
-                        <input type="file" name="fileForum" id="fileForum">
-                        <input type="submit" class="btn botonAzul" value="Comentar">
                     </div>
-                    <br>
                 </div>
-            </div>
-            {!!Form::close()!!}
-            {!!Form::open( ['route' =>array('FinallyAgreement.notify', $agreements->id)]) !!}
-            <div class="collapse" id="collapseOptions">
-                <div class="card card-body">
-                    <h3>¡Atención!</h3>
-                    <p>Al seleccionar la opción finalizar, se estará mandando un mensaje al usuario
-                        correspondiente para notificar que está listo para que revise el último documento
-                        agregado</p>
-                    <p>Si no está seguro de haber finalizado, no seleccione "Finalizar"</p>
-                    <input type="submit" class="btn btn-primary" value="Finalizar"
-                        onClick="return confirm('¿Seguro que quiere finalizar?');">
+                {!!Form::close()!!}
+                {!!Form::open( ['route' =>array('FinallyAgreement.notify', $agreements->id)]) !!}
+                <div class="collapse" id="collapseOptions">
+                    <div class="card card-body">
+                        <h3>¡Atención!</h3>
+                        <p>Al seleccionar la opción finalizar, se estará mandando un mensaje al usuario
+                            correspondiente para notificar que está listo para que revise el último documento
+                            agregado</p>
+                        <p>Si no está seguro de haber finalizado, no seleccione "Finalizar"</p>
+                        <input type="submit" class="btn btn-primary" value="Finalizar"
+                            onClick="return confirm('¿Seguro que quiere finalizar?');">
+                    </div>
                 </div>
+                {!!Form::close()!!}
             </div>
-            {!!Form::close()!!}
+
+            <div class="col-md-8 order-md-1">
+                <h3>Comentarios</h3>
+                <hr style="border:2px solid #BF942D">
+                @foreach($agreements->getComments as $comment)
+                <div>
+                    <div class="card-header">
+                        <h5 style="color:white">Asunto:{!!$comment->topic!!}</h5>
+                    </div>
+                    <div class="card card-body">
+                        <p>{!!$comment->comment!!}</p>
+                        @foreach($comment->getFilesAgreements as $file)
+                        <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
+                        @endforeach
+                        <p>Realizado por: {{$comment->user}} a las {{$comment->created_at}}</p>
+                    </div>
+
+                </div>
+                @endforeach
+            </div>
         </div>
-
         <div class="col-md-8 order-md-1">
-            <h3 class="text-center">Comentarios</h3>
-            <hr style="border:2px solid #BF942D">
-            @foreach($agreements->getComments as $comment)
-            <div class="span12">
-                <a href="#">
-                    <h4>Asunto:{!!$comment->topic!!}</h4>
-                </a>
-                <div class="card card-body">
-                    <p>{!!$comment->comment!!}</p>
-                    @foreach($comment->getFilesAgreements as $file)
-                    <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
-                    @endforeach
-                    <div>Realizado por: {{$comment->user}} a las {{$comment->created_at}}</div>
+            @foreach($agreements->getFiles as $file)
+            @if(count($file->getComments) == 0)
+                <div class="card-header text-muted">Documento original</div>
+                <div class="card card-body">Documento original.
+                    <p><a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a></p>
                 </div>
-
-            </div>
+            @endif
             @endforeach
         </div>
-    </div>
-    <div class="col-md-8 order-md-2">
-        @foreach($agreements->getFiles as $file)
-        @if(count($file->getComments) == 0)
-        <div class="card">
-            <div class="card-header text-muted">Documento original</div>
-            <div class="card-body">Este es el documento original, es decir, un respaldo en caso de que se hagan
-                demasiadas modificaciones
-                <p><a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a></p>
-            </div>
-        </div>
-        @endif
-        @endforeach
-    </div>
     </div>
     @else
     <div class="container">
