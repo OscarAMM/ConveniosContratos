@@ -27,13 +27,14 @@ class AgreementController extends Controller
         $people= $splitName[0];
         //$people = $request->get('people_id');
         $objective = $request->get('objective');
-        if($request->get('id')||
+        $reception=$request->get('reception');
+        /*if($request->get('id')||
         $request->get('name')||
         $request->get('legalInstrument')||
         $request->get('instrumentType')||
         $request->get('people_id')||
         $request->get('objective')
-        ){
+        ){*/
             $agreements = Agreement::orderBy('id', 'ASC')
             ->id($id)
             ->name($name)
@@ -41,14 +42,50 @@ class AgreementController extends Controller
             ->instrumentType($instrumentType)
             ->people_id($people)
             ->objective($objective)
+            ->reception($reception)
             ->paginate();
-        }else{
-            $agreements = Agreement::where('id')->orderBy('id', 'ASC')->paginate();
-        }
+        /*}else{
+            $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
+        }*/
         
         
 
         return view('agreements.index', compact('agreements'));
+    }
+    public function index2(Request $request)
+    {
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $legalInstrument = $request->get('legalInstrument');
+        $instrumentType = $request->get('instrumentType');
+        $splitName = explode(' - ', $request->get('people_id'));
+        $people= $splitName[0];
+        //$people = $request->get('people_id');
+        $objective = $request->get('objective');
+        $reception=$request->get('reception');
+        /*if($request->get('id')||
+        $request->get('name')||
+        $request->get('legalInstrument')||
+        $request->get('instrumentType')||
+        $request->get('people_id')||
+        $request->get('objective')
+        ){*/
+            $agreements = Agreement::orderBy('id', 'ASC')
+            ->id($id)
+            ->name($name)
+            ->legalInstrument($legalInstrument)
+            ->instrumentType($instrumentType)
+            ->people_id($people)
+            ->objective($objective)
+            ->reception($reception)
+            ->paginate();
+        /*}else{
+            $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
+        }*/
+        
+        
+
+        return view('agreements.index2', compact('agreements'));
     }
     public function indexPublic(Request $request)
     {
@@ -97,11 +134,10 @@ class AgreementController extends Controller
     public function edit($id)
     {
         $agreements = Agreement::find($id);
-        $liableUser = User::find($agreements->liable_user);
         $users = User::all();
         $people = Person::find($agreements->people_id);
         //buscar la dependencia y pasarlo a la vista (creo)
-        return view('agreements.edit', compact('agreements', 'users', 'people', 'liableUser'));
+        return view('agreements.edit', compact('agreements', 'users', 'people'));
     }
 
     public function destroy($id)
@@ -128,8 +164,7 @@ class AgreementController extends Controller
             $final=$pre->addWeekDays(4);
             $agreement->end_date = $final;
         }
-        $splitName2 = explode(' - ', $request->liable_user);
-        $agreement->liable_user = $splitName2[0];
+        $agreement->liable_user = $request->liable_user;
         $users = $request->users;
         /*  if ($request->hide == "visible") {
         $agreement->hide = true;
@@ -178,9 +213,8 @@ class AgreementController extends Controller
         $agreement->instrumentType = $request->instrumentType;
         $agreement->scope = $request->scope;
         $agreement->status = "Revisión";
-        $splitName2 = explode(' - ', $request->liable_user);
 
-        $agreement->liable_user = $splitName2[0];
+        $agreement->liable_user = $request->liable_user;
         //$agreement->start_date = Carbon::now();
         $agreement->start_date = new Carbon($request->reception);
         if($request->end_date){
@@ -214,8 +248,6 @@ class AgreementController extends Controller
             }
             $agreement->files()
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
-            $agreement->users()
-                ->attach(User::where('id', $agreement->liable_user)->first());
         }
         return redirect()->route('Agreement.index')->with('info', 'El Convenio ' . $agreement->name . ' ha sido agregado');
     }

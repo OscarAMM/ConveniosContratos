@@ -22,6 +22,8 @@ Route::get('/contract/users', ['uses' => 'ContractController@getUsers', 'as' => 
 Route::resource('Agreement', 'AgreementController');
 Route::get('/AgreementPublic', ['uses' => 'AgreementController@indexPublic', 'as' => 'public.index']);
 Route::get('/AgreementShow/{id}', ['uses' => 'AgreementController@showPublic', 'as' => 'public.show']);
+Route::get('/AgreementIndexPersonal', ['uses' => 'AgreementController@index2', 'as' => 'Agreement.index2']);
+
 Route::post('/autocomplete/fetch', 'AgreementController@fetch')->name('autocomplete.fetch');
 Route::post('/autocomplete/fetchUsers', 'AgreementController@fetchUsers')->name('autocomplete.fetchUsers');
 Route::post('/autocomplete/fetchInstruments', 'AgreementController@fetchInstruments')->name('autocomplete.fetchInstruments');

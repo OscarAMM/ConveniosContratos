@@ -6,7 +6,7 @@
     <div class="column-sm-8">
         <div class="card">
             <div class="card-header">
-                <h3 class="text-muted text-center">Persona</h3>
+                <h3 class="text-muted text-center">Parte</h3>
             </div>
             <div class="card-body">
                 @include('people.fragment.info')
