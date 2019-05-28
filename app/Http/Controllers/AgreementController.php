@@ -43,7 +43,7 @@ class AgreementController extends Controller
             ->objective($objective)
             ->paginate();
         }else{
-            $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
+            $agreements = Agreement::where('id')->orderBy('id', 'ASC')->paginate();
         }
         
         

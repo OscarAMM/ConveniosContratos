@@ -13,53 +13,35 @@
 </head>
 
 <body>
-    @if(!Auth::guest()&&Auth::user()->hasDocument($agreements->id))
+    @if(!Auth::guest() && (Auth::user()->hasRole('admin') || Auth::user()->hasRole('revisor')))
     @include('auth.fragment.error')
     @include('auth.fragment.info')
-    <div class="head">
-        <h2 class="card card-header text-muted text-center">Revisión de: "{{$agreements->name}}"</h2>
-    </div>
-    <br>
-    <!-- COMENTARIOS -->
-    <div class="row-10 d-flex justify-content-left">
-        <div class="col-8">
-            <h3>Comentarios</h3>
-            @foreach($agreements->getComments as $comment)
-            <div class="card">
-                <div class="card-header color-header text-muted">
-                    <button data-toggle="collapse" href="#CollapseComments" role="button" aria-expanded="false"
-                        aria-controls="CollapseComments" class="btn boton">{!!$comment->topic!!}</button>
-                </div>
-                <div class="collapse multi-collapse" id="CollapseComments">
-                    <div class="card card-body">
-                        <p>{!!$comment->comment!!}</p>
-                        @foreach($comment->getFilesAgreements as $file)
-                        <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
-                        @endforeach
-                        <div>Realizado por: {{$comment->user}} a las {{$comment->created_at}}</div>
-                    </div>
-                </div>
-                <!-- <div class="card-footer">
-                    Comentario realizado por:
-                    {{$comment->user}}
-                </div>-->
-            </div>
-            @endforeach
+    <div class="container">
+        <div class="jumbotron text-center text-muted" style="background-color: #0F3558">
+            <h1>Revisión de: "{{$agreements->name}}"</h1>
+            <hr style="border:2px solid #BF942D">
+            <h3>¡Bienvenido al foro {{Auth::user()->name}}!</h3>
+            <p>Aquí podrás estar comentando revisiones con los otros usuarios. Recuerda que puedes agregar archivos de
+                tipo: <i>Foto, PDF, DOCX, EXCEL, PPT</i></p>
         </div>
-        <br>
-        <!-- formulario -->
-        {!!Form::open( ['route' =>array('CommentAgreement.make', $agreements->id), 'files' =>true]) !!}
-        {!! csrf_field()!!}
-        <div class="col">
+    </div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <h3>Opciones</h3>
+            <hr style="border:2px solid #BF942D">
+            {!!Form::open( ['route' =>array('CommentAgreement.make', $agreements->id), 'files' =>true]) !!}
             <div class="form-group">
-                <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn btn-success">Notificar</a>
+                <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                @if(Auth::user()->hasDocument($agreements->id))
                 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseForm"
                     aria-expanded="false" aria-controls="collapseForm">
                     Comentar
                 </button>
+                <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn btn-warning">Notificar</a>
                 <input type="button" value="Finalizar" data-toggle="collapse" data-target="#collapseOptions"
-                    aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
-                <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                    aria-expanded="false" aria-controls="collapseOptions" class="btn btn-success">
+                @endif
             </div>
             <div class="collapse" id="collapseForm">
                 <div class="form-group">
@@ -68,7 +50,7 @@
                         <input name="topic" id="topic" type="text" class="form-control "
                             placeholder="Escriba el asunto de revisión">
                     </div>
-                    <div>
+                    <div class="form-group">
                         <label for="comment">Comentario</label>
                         <textarea name="comment" id="comment" cols="30" rows="10" class="form-control ckeditor"
                             placeholder="Escriba la revisión"></textarea>
@@ -81,7 +63,6 @@
                     <br>
                 </div>
             </div>
-            <!--</form>-->
             {!!Form::close()!!}
             {!!Form::open( ['route' =>array('FinallyAgreement.notify', $agreements->id)]) !!}
             <div class="collapse" id="collapseOptions">
@@ -97,37 +78,55 @@
             </div>
             {!!Form::close()!!}
         </div>
+
+        <div class="col-md-8 order-md-1">
+            <h3 class="text-center">Comentarios</h3>
+            <hr style="border:2px solid #BF942D">
+            @foreach($agreements->getComments as $comment)
+            <div class="span12">
+                <a href="#">
+                    <h4>Asunto:{!!$comment->topic!!}</h4>
+                </a>
+                <div class="card card-body">
+                    <p>{!!$comment->comment!!}</p>
+                    @foreach($comment->getFilesAgreements as $file)
+                    <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
+                    @endforeach
+                    <div>Realizado por: {{$comment->user}} a las {{$comment->created_at}}</div>
+                </div>
+
+            </div>
+            @endforeach
+        </div>
     </div>
-    @foreach($agreements->getFiles as $file)
-    @if(count($file->getComments) == 0)
-    <div class="col-md-8">
+    <div class="col-md-8 order-md-2">
+        @foreach($agreements->getFiles as $file)
+        @if(count($file->getComments) == 0)
         <div class="card">
             <div class="card-header text-muted">Documento original</div>
             <div class="card-body">Este es el documento original, es decir, un respaldo en caso de que se hagan
                 demasiadas modificaciones
                 <p><a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a></p>
             </div>
+        </div>
+        @endif
+        @endforeach
+    </div>
+    </div>
+    @else
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2 class="text-muted">Acceso restringido</h2>
+            </div>
+            <div class="card-body">
+                <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún
+                    cambio.
+                </h4>
+            </div>
 
         </div>
     </div>
-    <br>
-    @endif
-    @endforeach
-    
-    @else
-    <div class="container">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="text-muted">Acceso restringido</h2>
-                </div>
-                <div class="card-body">
-                    <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún
-                        cambio.
-                    </h4>
-                </div>
-
-            </div>
-        </div>
     @endif
 </body>
 
