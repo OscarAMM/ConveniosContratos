@@ -50,6 +50,8 @@ class FinalRegisterController extends Controller
         $document->session = $request->session;
         $document->scope = $request->scope;
         $document->hide = $request->hide;
+        $document->status = 'Finalizado';
+
         $document->instrumentType = $request->instrumentType;
         $splitName = explode(' - ', $request->liable_user);
         $document->liable_user = $splitName[0];

@@ -13,7 +13,7 @@ class CreateFinalRegistersTable extends Migration
      */
     public function up()
     {
-        Schema::create('finalregister', function (Blueprint $table) {
+        Schema::create('final_registers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->date('reception');
@@ -48,6 +48,6 @@ class CreateFinalRegistersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('finalregister');
+        Schema::dropIfExists('final_registers');
     }
 }
