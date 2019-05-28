@@ -101,6 +101,7 @@
                     </tr>
                 <tbody>
                     @foreach($agreements as $agreement)
+                    @if(Auth::user()->hasDocument($agreement->id))
                     <tr>
                         <td>{{$agreement->id}}</td>
                         <td>{{$agreement->name}}</td>
@@ -126,6 +127,7 @@
                         </td>
                         @endif
                     </tr>
+                    @endif
                     @endforeach
                 </tbody>
                 </thead>

@@ -120,6 +120,12 @@
                     <p><a href="{{route('Agreement.index')}}" class="btn btn-primary">Administrar</a></p>
                 </div>
                 <div class="col-md-6">
+                    <h4>Mis Documentos</h4>
+                    <p>Se hace administración de Documentos. Se puede agregar, editar, eliminar y examninar
+                        los documentos que se realizan en la jornada diaria.</p>
+                    <p><a href="{{route('Agreement.index2')}}" class="btn btn-primary">Administrar</a></p>
+                </div>
+                <div class="col-md-6">
                     <h4>Asignación</h4>
                     <p>Se muestran los contratos y convenios asignados al usuario. ¡No se verán contratos y convenios no
                         asignados! </p>

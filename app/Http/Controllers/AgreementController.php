@@ -52,6 +52,41 @@ class AgreementController extends Controller
 
         return view('agreements.index', compact('agreements'));
     }
+    public function index2(Request $request)
+    {
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $legalInstrument = $request->get('legalInstrument');
+        $instrumentType = $request->get('instrumentType');
+        $splitName = explode(' - ', $request->get('people_id'));
+        $people= $splitName[0];
+        //$people = $request->get('people_id');
+        $objective = $request->get('objective');
+        $reception=$request->get('reception');
+        /*if($request->get('id')||
+        $request->get('name')||
+        $request->get('legalInstrument')||
+        $request->get('instrumentType')||
+        $request->get('people_id')||
+        $request->get('objective')
+        ){*/
+            $agreements = Agreement::orderBy('id', 'ASC')
+            ->id($id)
+            ->name($name)
+            ->legalInstrument($legalInstrument)
+            ->instrumentType($instrumentType)
+            ->people_id($people)
+            ->objective($objective)
+            ->reception($reception)
+            ->paginate();
+        /*}else{
+            $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
+        }*/
+        
+        
+
+        return view('agreements.index2', compact('agreements'));
+    }
     public function indexPublic(Request $request)
     {
         $id = $request->get('id');
