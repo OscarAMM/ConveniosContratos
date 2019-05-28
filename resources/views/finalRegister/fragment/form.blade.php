@@ -83,7 +83,7 @@
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
-                        <label for="people_id" class="col-form-label">Asigne suscrito</label>
+                        <label for="people_id" class="col-form-label">Partes</label>
                         <div class="form-inline">
                             <input type="text" id="people_id" name="people_id" class="form-control col-md-11"
                                 placeholder="ingrese suscrito">

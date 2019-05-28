@@ -63,7 +63,7 @@
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
-                        <label for="people_id" class="col-form-label">Asigne suscrito</label>
+                        <label for="people_id" class="col-form-label">Partes</label>
                         <div class="form-inline">
                         <input type="text" id="people_id" name="people_id" class="form-control col-md-11"
                             placeholder="ingrese suscrito">
@@ -83,7 +83,7 @@
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
-                        <label for="liable_user" class="col-form-label">Asigne responsable</label>
+                        <label for="liable_user" class="col-form-label">Asigne Externos</label>
                         <input type="text" id="liable_user" name="liable_user" class="form-control "
                             placeholder="ingrese responsable">
                         <div id="userList">
@@ -91,7 +91,7 @@
                     </div>
                     <div class="form-check">
                         <small style="color:#D90101;">*</small>
-                        <label for="user_id" class="col-form-label">Asigne usuarios</label>
+                        <label for="user_id" class="col-form-label">Asigne Internos</label>
                         @foreach($users as $user)
                         @if($user->hasRole('admin')||$user->hasRole('revisor'))
                         <br>
