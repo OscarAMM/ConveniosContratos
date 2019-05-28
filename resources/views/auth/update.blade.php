@@ -30,8 +30,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="email"
-                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
                             <div class="col-md-6">
                                 <input id="email" type="email"
                                     class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email"
@@ -42,28 +41,37 @@
                                 </span>
                                 @endif
                             </div>
+                            
                         </div>
+                       
+                        <div class="collapse" id="collapseForm">
+                            <div class="form-group row">
+                                <label for="password"
+                                    class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+                                <div class="col-md-6">
+                                    <input id="password" type="password"
+                                        class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}"
+                                        name="password">
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password">
-
-                                @if ($errors->has('password'))
+                                    @if ($errors->has('password'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
-                                @endif
+                                    @endif
+                                </div>
                             </div>
                         </div>
-
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <a href="{{route('home')}}" class="btn btn-secondary">Regresar</a>
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Guardar') }}
                                 </button>
+                                <button class="btn boton" type="button" data-toggle="collapse" data-target="#collapseForm"
+                            aria-expanded="false" aria-controls="collapseForm">
+                            Cambiar contraseña
+                        </button>
                             </div>
                         </div>
                     </form>
