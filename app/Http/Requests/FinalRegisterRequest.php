@@ -35,7 +35,6 @@ class FinalRegisterRequest extends FormRequest
             'scope' => 'required',
             'hide' => 'required',
             'instrumentType' => 'required',
-            'liable_user' => 'required',
             'people_id' => 'required',
         ];
     }

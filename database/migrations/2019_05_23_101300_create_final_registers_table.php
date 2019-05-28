@@ -26,15 +26,12 @@ class CreateFinalRegistersTable extends Migration
             $table->text('observation')->nullable();
             $table->string('scope');
             $table->boolean('hide')->nullable();
-            $table->date('start_date');
             $table->string('instrumentType');
             $table->date('end_date');
             $table->string('status');
-            $table->integer('liable_user')->unsigned();
             $table->integer('people_id')->unsigned();
 
             $table->timestamps();
-            $table->foreign('liable_user')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
             $table->foreign('people_id')->references('id')->on('people')->onUpdate('cascade')->onDelete('cascade');
 
 

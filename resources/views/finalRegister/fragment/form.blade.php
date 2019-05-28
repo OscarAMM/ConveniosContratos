@@ -93,14 +93,7 @@
                         <div id="peopleList">
                         </div>
                     </div>
-                    <div class="form-group">
-                        <small style="color:#D90101;">*</small>
-                        <label for="liable_user" class="col-form-label">Asigne responsable</label>
-                        <input type="text" id="liable_user" name="liable_user" class="form-control "
-                            placeholder="ingrese responsable">
-                        <div id="userList">
-                        </div>
-                    </div>
+                    
                     <div class="form-group">
                         <label for="hide" class="col-form-label">Vista pública</label>
                         <select name="hide" id="hide" class="form-control">
@@ -255,30 +248,7 @@ jQuery(document).ready(function() {
     });
 
 
-    $('#liable_user').keyup(function() {
-        var query2 = $(this).val();
-        if (query2 != '') {
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{ route('autocomplete.fetchUsers') }}",
-                method: "POST",
-                data: {
-                    query: query2,
-                    _token: _token
-                },
-                success: function(data2) {
-                    $('#userList').fadeIn();
-                    $('#userList').html(data2);
-                }
-            });
-        }
-    });
-
-    jQuery('#userList').on('click', 'li', function() {
-        $('#liable_user').val($(this).text());
-        $('#userList').fadeOut();
-    });
-
+    
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
         if (query != '') {

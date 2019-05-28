@@ -53,17 +53,9 @@ class FinalRegisterController extends Controller
         $document->status = 'Finalizado';
 
         $document->instrumentType = $request->instrumentType;
-        $splitName = explode(' - ', $request->liable_user);
-        $document->liable_user = $splitName[0];
-        $document->start_date = new Carbon($request->reception);
-        if($request->end_date){
-            $document->end_date = new Carbon($request->end_date);
-        }else{
-            $pre = new Carbon($request->reception);
-            $final = $pre->addWeekDays(5);
-            $document->end_date = $final;
-        }
-        if ($request->hide == "visible") {
+        $document->end_date = $request->signature;
+        
+        if ($request->hide == "Mostrar") {
             $document->hide = true;
             } else {
             $document->hide = false;
@@ -75,10 +67,9 @@ class FinalRegisterController extends Controller
         }else{
             $document->save();
             $document->files()->attach(FileAgreement::where('id',$file_Name->id)->first());
-        $document->users()->attach(User::where('id', $document->liable_user)->first());
         }
         
-        return redirect()->route('finalregister.index')->with('info', 'El documento '.$document->name.' ha sido guardado');
+        return redirect()->route('FinalRegister.index')->with('info', 'El documento '.$document->name.' ha sido guardado');
     }
     
 }
