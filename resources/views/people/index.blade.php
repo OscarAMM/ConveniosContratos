@@ -4,9 +4,9 @@
 @include('people.fragment.info')
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
-        <h1 class="text-muted">Suscrito</h1>
+        <h1 class="text-muted">Parte</h1>
         <hr style="border:2px solid #BF942D">
-        <p class="text-muted">Se desplegará una lista con todas las personas registradas hasta el momento en el sistema.
+        <p class="text-muted">Se desplegará una lista con todas las Partes registradas hasta el momento en el sistema.
         </p>
         {{Form::open(['route'=>'Person.index','method'=>'GET','class'=>'form-inline'])}}
         <p class="text-item-center"><a href="{{route('Person.create')}}" class="btn boton"

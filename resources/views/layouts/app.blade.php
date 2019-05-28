@@ -46,7 +46,7 @@
                         </li>
                         @if(Auth::user()->hasRole('admin'))
                         <li class="nav-item">
-                            <a href="{{route('Person.index')}}" class="nav-link">Suscritos</a>
+                            <a href="{{route('Person.index')}}" class="nav-link">Partes</a>
                         </li>
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link">Usuarios</a>

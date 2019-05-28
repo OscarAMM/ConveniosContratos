@@ -99,9 +99,8 @@
                     <div class="form-group">
                         <label for="liable_user" class="col-md-8 col-form-label">Asigne responsable</label>
                         <input type="text" id="liable_user" name="liable_user" class="form-control "
-                            placeholder="ingrese responsable"
-                            value="{{$liableUser->id.' - '.$liableUser->name.' - '.$liableUser->email}}">
-                        <div id="userList">
+                            placeholder="ingrese responsable externo"
+                            value="{{$agreements->liable_user}}">
                         </div>
                     </div>
                 
@@ -168,32 +167,6 @@ jQuery(document).ready(function() {
         $('#people_id').val($(this).text());
         $('#peopleList').fadeOut();
     });
-
-
-    $('#liable_user').keyup(function() {
-        var query2 = $(this).val();
-        if (query2 != '') {
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{ route('autocomplete.fetchUsers') }}",
-                method: "POST",
-                data: {
-                    query: query2,
-                    _token: _token
-                },
-                success: function(data2) {
-                    $('#userList').fadeIn();
-                    $('#userList').html(data2);
-                }
-            });
-        }
-    });
-
-    jQuery('#userList').on('click', 'li', function() {
-        $('#liable_user').val($(this).text());
-        $('#userList').fadeOut();
-    });
-
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
         if (query != '') {

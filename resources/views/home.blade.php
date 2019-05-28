@@ -58,7 +58,7 @@
             <hr style="border:2px solid #BF942D;">
             <div class="row">
                 <div class="col-md-6">
-                    <h4>Suscritos</h4>
+                    <h4>Partes</h4>
                     <p>Se hace la administración de instituciones, dependencias y personas. Se puede agregar, editar,
                         eliminar y examinar
                         los que suscriben.</p>

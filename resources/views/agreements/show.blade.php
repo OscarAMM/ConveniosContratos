@@ -35,6 +35,10 @@
                         {{$person->name}}
                     </li>
                     <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Responsable externo</h5>
+                        {{$agreements->liable_user}}
+                    </li>
+                    <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Usuario(s) asignado(s)</h5>
                         @foreach($users as $user)
                         <label for="name">Nombre</label>
