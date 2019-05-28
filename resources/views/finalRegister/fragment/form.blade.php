@@ -10,6 +10,12 @@
                 <form method="POST" action="#">
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
+                        <label for="registerNumber">Número de registro</label>
+                        <input type="text" id="registerNumber" name="registerNumber" class="form-control"
+                            placeholder="Número de registro">
+                    </div>
+                    <div class="form-group">
+                        <small style="color:#D90101;">*</small>
                         <label for="name" class="col-form-label">Nombre completo del documento </label>
                         <input type="text" name="name" id="name" class="form-control"
                             placeholder="Nombre del documento">
@@ -42,24 +48,20 @@
                             <option>Otros</option>
                         </select>
                     </div>
-                    <div class="form-group">
-                        <label for="registerNumber">Número de registro</label>
-                        <input type="text" id="registerNumber" name="registerNumber" class="form-control" placeholder="Número de registro">
-                    </div>
-                    <div class="form-group ">
-                        <small style="color:#D90101;">*</small>
-                        <label for="reception" class="col-form-label">Recepción</label>
-                        <input type="date" id="reception" name="reception" class="form-control"
-                            value={{Carbon\Carbon::now()}}>
-                    </div>
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
                         <label for="signature" class="col-form-label">Fecha de firma</label>
                         <input type="date" id="signature" name="signature" class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="validity">Validación</label>
-                        <input type="date" id="validity" name="validity" class="form-control">
+                        <small style="color:#D90101;">*</small>
+                        <label for="start_date">Fecha de inicio</label>
+                        <input type="date" id="start_date" name="start_date" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <small style="color:#D90101;">*</small>
+                        <label for="end_date">Fecha de fin</label>
+                        <input type="date" id="end_date" name="end_date" class="form-control">
                     </div>
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
@@ -93,7 +95,7 @@
                         <div id="peopleList">
                         </div>
                     </div>
-                    
+
                     <div class="form-group">
                         <label for="hide" class="col-form-label">Vista pública</label>
                         <select name="hide" id="hide" class="form-control">
@@ -248,7 +250,7 @@ jQuery(document).ready(function() {
     });
 
 
-    
+
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
         if (query != '') {

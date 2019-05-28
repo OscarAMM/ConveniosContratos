@@ -21,12 +21,12 @@ class CreateFinalRegistersTable extends Migration
             $table->string('legalInstrument');
             $table->integer('registerNumber')->nullable();
             $table->date('signature')->nullable();
-            $table->date('validity')->nullable();
             $table->date('session')->nullable();
             $table->text('observation')->nullable();
             $table->string('scope');
             $table->boolean('hide')->nullable();
             $table->string('instrumentType');
+            $table->date('start_date');
             $table->date('end_date');
             $table->string('status');
             $table->integer('people_id')->unsigned();

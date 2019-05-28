@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class FinalRegister extends Model
 {
     protected $fillable = [
-        'id', 'name', 'reception', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status', 'liable_user', 'people_id',
+        'id', 'name', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status', 
     ];
     public function scopeName($query, $name)
     {
