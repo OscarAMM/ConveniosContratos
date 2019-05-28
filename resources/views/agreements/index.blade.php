@@ -51,6 +51,10 @@
                             <label for="name" class="col-form-label text-muted">Objetivo</label>
                             {{Form::text('objective', null, ['class'=>'form-control', 'placeholder'=>'Objetivo'])}}
                         </div>
+                        <div class="col" style="margin-right:5px;">
+                            <label for="name" class="col-form-label text-muted">Fecha Recepción</label>
+                            {{Form::text('reception', null, ['class'=>'form-control', 'placeholder'=>'Recepción'])}}
+                        </div>
                         <div class="col" style="margin-right:5px">
                             <label for="name" class="col-form-label text-muted">Tipo de instrumento</label>
                             <select name="instrumentType" id="instrumentType" class="form-control">

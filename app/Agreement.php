@@ -51,6 +51,12 @@ class Agreement extends Model
             return $query->where('objective', 'LIKE', "%$objective%");
         }
     }
+    public function scopeReception($query, $reception)
+    {
+        if ($reception) {
+            return $query->where('reception', 'LIKE', "%$reception%");
+        }
+    }
     public function files()
     {
         return $this->belongsToMany(FileAgreement::class)

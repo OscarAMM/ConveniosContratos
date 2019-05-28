@@ -27,6 +27,7 @@ class AgreementController extends Controller
         $people= $splitName[0];
         //$people = $request->get('people_id');
         $objective = $request->get('objective');
+        $reception=$request->get('reception');
         /*if($request->get('id')||
         $request->get('name')||
         $request->get('legalInstrument')||
@@ -41,6 +42,7 @@ class AgreementController extends Controller
             ->instrumentType($instrumentType)
             ->people_id($people)
             ->objective($objective)
+            ->reception($reception)
             ->paginate();
         /*}else{
             $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
