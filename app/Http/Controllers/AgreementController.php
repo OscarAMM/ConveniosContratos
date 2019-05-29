@@ -248,6 +248,8 @@ class AgreementController extends Controller
             }
             $agreement->files()
                 ->attach(FileAgreement::where('id', $file_Name->id)->first());
+            $agreement->people()
+                ->attach(Person::where('id', $agreement->people_id)->first());
         }
         return redirect()->route('Agreement.index')->with('info', 'El Convenio ' . $agreement->name . ' ha sido agregado');
     }

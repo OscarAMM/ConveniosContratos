@@ -62,6 +62,7 @@ class Agreement extends Model
         return $this->belongsToMany(FileAgreement::class)
             ->withTimestamps();
     }
+    
     public function institutions()
     {
         return $this->belongsToMany(Institute::class)

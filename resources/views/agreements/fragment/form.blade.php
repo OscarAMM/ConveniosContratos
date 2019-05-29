@@ -18,10 +18,10 @@
                         <small style="color:#D90101;">*</small>
                         <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
                         <div class="form-inline ">
-                        <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
-                            placeholder="Ingrese instrumento">
+                            <input type="text" id="legalInstrument" name="legalInstrument"
+                                class="form-control col-md-11" placeholder="Ingrese instrumento">
                             <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
-                            data-target="#exampleModal" data-whatever="@fat">...</button>
+                                data-target="#exampleModal" data-whatever="@fat">...</button>
                         </div>
                         <div id="instrumentList">
                         </div>
@@ -29,12 +29,14 @@
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
                         <label for="reception" class="col-form-label">Recepción</label>
-                        <input type="date" id="reception" name="reception" class="form-control" value={{Carbon\Carbon::now()}}>
+                        <input type="date" id="reception" name="reception" class="form-control"
+                            value={{Carbon\Carbon::now()}}>
                     </div>
                     <div class="form-group ">
                         <small style="color:#D90101;">*</small>
                         <label for="end_date" class="col-form-label">Fecha final de revisión</label>
-                        <input type="date" id="end_date" name="end_date" class="form-control" value={{Carbon\Carbon::now()->addWeekDays(5)}}>
+                        <input type="date" id="end_date" name="end_date" class="form-control"
+                            value={{Carbon\Carbon::now()->addWeekDays(5)}}>
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
@@ -65,28 +67,21 @@
                         <small style="color:#D90101;">*</small>
                         <label for="people_id" class="col-form-label">Partes</label>
                         <div class="form-inline">
-                        <input type="text" id="people_id" name="people_id" class="form-control col-md-11"
-                            placeholder="ingrese suscrito">
+                            <input type="text" id="people_id" name="people_id" class="form-control col-md-11"
+                                placeholder="ingrese suscrito">
                             <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
-                            data-target="#suscrito" data-whatever="@fat">...</button>
+                                data-target="#suscrito" data-whatever="@fat">...</button>
                         </div>
                         <div id="peopleList">
                         </div>
-                        <!--<select name="people_id" id="people_id"
-                                placeholder="Selecciona la institucion asignado" class="form-control"
-                                required="required">
-                                @foreach($people as $person)
-                                <option value="{{$person->id}}">{{$person->name}}</option>
-                                @endforeach
-                            </select>-->
-                        
                     </div>
+
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
                         <label for="liable_user" class="col-form-label">Asigne Externos</label>
                         <input type="text" id="liable_user" name="liable_user" class="form-control "
                             placeholder="ingrese responsable externo">
-                        
+
                     </div>
                     <div class="form-check">
                         <small style="color:#D90101;">*</small>
@@ -94,7 +89,7 @@
                         @foreach($users as $user)
                         @if($user->hasRole('admin')||$user->hasRole('revisor'))
                         <br>
-                        <input type="checkbox" name="users[]" value="{{$user->id}}" class="form-check-input" >
+                        <input type="checkbox" name="users[]" value="{{$user->id}}" class="form-check-input">
                         <label class="form-check-label">{{$user->name}}</label>
                         @endif
                         @endforeach
@@ -105,15 +100,35 @@
                         <label for="file" class="col-form-label">Seleccione el archivo</label>
                         <input type="file" class="form-control-file" name="file" id="file">
                     </div>
-                    <div class="field_wrapper">
-                        <div>
-                            <input type="text" class="autocomplete"name="field_name[]" id="field_name[]"value=""/>
-                            <a href="javascript:void(0);" class="add_button" title="Add field">Agregar</a>
-                            <div id="peopleList">
-                            </div>
-                        </div>
-                        
-                    </div>
+                    <from>
+                        <label for="ListaPro" class="col-form-label">Asigne Partes</label>
+                        <br>
+                        <!-- Trigger the modal with a button -->
+                        <button type="button" class="btn btn-info" data-toggle="modal"
+                            data-target="#myModal">Agregar</button>
+                        <input type="hidden" id="ListaPro" name="ListaPro" value="" required />
+                        <table id="TablaPro" class="table">
+                            <thead>
+                                <tr>
+                                    <th>Parte</th>
+
+                                    <th>Acción</th>
+                                </tr>
+                            </thead>
+                            <tbody id="ProSelected">
+                                <!--Ingreso un id al tbody-->
+                                <tr>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!--Agregue un boton en caso de desear enviar los productos para ser procesados
+                <div class="form-group">
+                    <button type="submit" id="guardar" name="guardar"
+                        class="btn btn-lg btn-default pull-right">Guardar</button>
+                </div>-->
+
+                    </from>
                     {{csrf_field()}}
                 </form>
             </div>
@@ -124,13 +139,44 @@
 
         </div>
         <div class="row">
-        <div class="col">
-            <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+            <div class="col">
+                <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+            </div>
         </div>
     </div>
+</div>
+</div>
+<!-- Modal for people-->
+<div class="modal fade" id="myModal" role="dialog">
+
+<div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">Agregar Parte a la lista</h4>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Parte</label>
+                <input type="text" id="pro_id" name="pro_id" data-width='100%'
+                    class="form-control col-md-11" placeholder="ingrese suscrito">
+                <div id="proList">
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <!--Uso la funcion onclick para llamar a la funcion en javascript-->
+            <button type="button" onclick="agregarProducto()" class="btn btn-default"
+                data-dismiss="modal">Agregar</button>
+        </div>
     </div>
+
 </div>
 </div>
+<!--   -->
+
 <!--MODAL FOR THE LEGAL INSTRUMENT -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -228,7 +274,29 @@
 <script>
 $.noConflict();
 jQuery(document).ready(function() {
-    
+    $('#pro_id').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetch') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#proList').fadeIn();
+                    $('#proList').html(data);
+                }
+            });
+        }
+    });
+
+    jQuery('#proList').on('click', 'li', function() {
+        $('#pro_id').val($(this).text());
+        $('#proList').fadeOut();
+    });
 
     $('#people_id').keyup(function() {
         var query = $(this).val();
@@ -277,55 +345,63 @@ jQuery(document).ready(function() {
         $('#legalInstrument').val($(this).text());
         $('#instrumentList').fadeOut();
     });
-    $("#reception").keyup(function () {
-            var value = $(this).val();
-            $("#end_date").val(value);
-        });
-
-
-
-        /*___*/
-var maxField = 10; //Input fields increment limitation
-    var addButton = $('.add_button'); //Add button selector
-    var wrapper = $('.field_wrapper'); //Input field wrapper
-    var fieldHTML = '<div><input type="text" name="field_name[]" class="autocomplete" value=""/><a href="javascript:void(0);" class="remove_button" title="Remove field"> Eliminar</a></div>'; //New input field html 
-    var x = 1; //Initial field counter is 1
-    $(addButton).click(function(){ //Once add button is clicked
-        if(x < maxField){ //Check maximum number of input fields
-            x++; //Increment field counter
-            $(wrapper).append(fieldHTML); // Add field html
-        }
-    });
-    $(wrapper).on('click', '.remove_button', function(e){ //Once remove button is clicked
-        e.preventDefault();
-        $(this).parent('div').remove(); //Remove field html
-        x--; //Decrement field counter
-    });
-    $('.autocomplete').keyup(function() {
-        var query = $(this).val();
-        if (query != '') {
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{ route('autocomplete.fetch') }}",
-                method: "POST",
-                data: {
-                    query: query,
-                    _token: _token
-                },
-                success: function(data) {
-                    $('#peopleList').fadeIn();
-                    $('#peopleList').html(data);
-                }
-            });
-        }
+    $("#reception").keyup(function() {
+        var value = $(this).val();
+        $("#end_date").val(value);
     });
 
-    jQuery('#peopleList').on('click', 'li', function() {
-        $('.autocomplete').val($(this).text());
-        $('#peopleList').fadeOut();
-    });
+
+
 
 });
+</script>
+<script type="text/javascript">
+// Refresca Producto: Refresco la Lista de Productos dentro de la Tabla
+// Si es vacia deshabilito el boton guardar para obligar a seleccionar al menos un producto al usuario
+// Sino habilito el boton Guardar para que pueda Guardar
+function RefrescaProducto() {
+    var ip = [];
+    var i = 0;
+    $('#guardar').attr('disabled', 'disabled'); //Deshabilito el Boton Guardar
+    $('.iProduct').each(function(index, element) {
+        i++;
+        ip.push({
+            id_pro: $(this).val()
+        });
+    });
+    // Si la lista de Productos no es vacia Habilito el Boton Guardar
+    if (i > 0) {
+        $('#guardar').removeAttr('disabled', 'disabled');
+    }
+    var ipt = JSON.stringify(ip); //Convierto la Lista de Productos a un JSON para procesarlo en tu controlador
+    $('#ListaPro').val(encodeURIComponent(ipt));
+}
+
+function agregarProducto() {
+
+    var sel = $('#pro_id').val(); //Capturo el Value del Producto
+    var text = $('#pro_id').text(); //Capturo el Nombre del Producto- Texto dentro del Select
 
 
+    var sptext = text.split();
+
+    var newtr = '<tr class="item"  data-id="' + sel + '">';
+    newtr = newtr + '<td class="iProduct" >' + sel + '</td>';
+    newtr = newtr +
+        '<td><button type="button" class="btn btn-danger btn-xs remove-item"><i class="fa fa-times"></i></button></td></tr>';
+
+    $('#ProSelected').append(newtr); //Agrego el Producto al tbody de la Tabla con el id=ProSelected
+
+    RefrescaProducto(); //Refresco Productos
+
+    $('.remove-item').off().click(function(e) {
+        $(this).parent('td').parent('tr').remove(); //En accion elimino el Producto de la Tabla
+        if ($('#ProSelected tr.item').length == 0)
+            $('#ProSelected .no-item').slideDown(300);
+        RefrescaProducto();
+    });
+    $('.iProduct').off().change(function(e) {
+        RefrescaProducto();
+    });
+}
 </script>

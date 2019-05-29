@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Agreement;
 
 class Person extends Model
 {
@@ -37,5 +38,10 @@ class Person extends Model
         if($acronym){
             return $query->where('acronym','LIKE',"%$acronym%");
         }
+    }
+    public function agreements(){
+        return $this
+        ->hasMany(Agreement::class)
+        ->withTimestamps();
     }
 }
