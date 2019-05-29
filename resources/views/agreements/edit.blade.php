@@ -77,27 +77,38 @@
                 </div>
                 
                     <div class="col-md-4">
-                        <label for="user_id" class=" col-form-label">Asigne usuarios</label>
+                        <label for="user_id" class=" col-form-label">Asigne Internos</label>
                         @foreach($users as $user)
                         @if($user->hasRole('admin')||$user->hasRole('revisor'))
                         <br>
                         <input type="checkbox" name="users[]" value="{{$user->id}}"
-                            {{ $user ->hasAgreement($agreements->name)?'checked':'' }}> <label>{{$user->name}}</label>
+                            {{ $user ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$user->name}}</label>
+
+                        @endif
+                        @endforeach
+                    </div>
+                    <div class="col-md-4">
+                        <label for="person_id" class=" col-form-label">Partes</label>
+                        @foreach($agreements->getPeople as $person)
+                        @if($user->hasRole('admin')||$user->hasRole('revisor'))
+                        <br>
+                        <input type="checkbox" name="people[]" value="{{$person->id}}"
+                            {{ $person ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$person->name}}</label>
 
                         @endif
                         @endforeach
                     </div>
                     <div class="form-group">
-                        <label for="people_id" class="col-md-8 col-form-label">Asigne suscrito</label>
+                        <label for="people_id" class="col-md-8 col-form-label">Añadir Parte</label>
                         <input type="text" id="people_id" name="people_id" class="form-control "
-                            placeholder="ingrese suscrito" value="{{$people->id.' - '.$people->name}}">
+                            placeholder="ingrese suscrito">
 
                         <div id="peopleList">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="liable_user" class="col-md-8 col-form-label">Asigne responsable</label>
+                        <label for="liable_user" class="col-md-8 col-form-label">Asigne Externos</label>
                         <input type="text" id="liable_user" name="liable_user" class="form-control "
                             placeholder="ingrese responsable externo"
                             value="{{$agreements->liable_user}}">

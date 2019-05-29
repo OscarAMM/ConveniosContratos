@@ -31,8 +31,9 @@ class AgreementRequest extends FormRequest
             'instrumentType' => 'required',
             'scope'=>'required',
             'users'=>'required',
-            'people_id'=>'required',
             'end_date'=>'nullable',
+            'people_id'=>'nullable',
+            'ListaPro'=>'nullable',
 
 
         ];

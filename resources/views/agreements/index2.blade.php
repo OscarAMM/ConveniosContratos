@@ -109,7 +109,7 @@
                         <td>{{$agreement->instrumentType}}</td>
                         <td>{{$agreement->reception}}</td>
                         <td>{{$agreement->objective}}</td>
-                        <td>{{App\Person::find($agreement->people_id)->name}}</td>
+                        <td>@foreach($agreement->getPeople as $person){{$person->name.'; '}}@endforeach</td>
                         <td>
                         <td><a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a></td>
                         <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>

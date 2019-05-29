@@ -98,6 +98,11 @@ class Agreement extends Model
         return $this->belongsToMany(User::class, 'agreement_user')->withPivot('user_id', 'agreement_id')
             ->withTimestamps();
     }
+    public function getPeople()
+    {
+        return $this->belongsToMany(Person::class, 'agreement_person')->withPivot('person_id', 'agreement_id')
+            ->withTimestamps();
+    }
     public function getFiles()
     {
         return $this->belongsToMany(FileAgreement::class, 'agreement_file_agreement')->withPivot('file_agreement_id', 'agreement_id')

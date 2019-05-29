@@ -40,8 +40,14 @@ class Person extends Model
         }
     }
     public function agreements(){
-        return $this
-        ->hasMany(Agreement::class)
+        return $this->belongsToMany(Agreement::class)
         ->withTimestamps();
+    }
+    public function hasDocument($id)
+    {
+        if ($this->agreements()->where('agreement_id', $id)->first()) {
+            return true;
+        }
+        return false;
     }
 }
