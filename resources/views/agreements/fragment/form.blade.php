@@ -381,10 +381,7 @@ function agregarProducto() {
 
     var sel = $('#pro_id').val(); //Capturo el Value del Producto
     var text = $('#pro_id').text(); //Capturo el Nombre del Producto- Texto dentro del Select
-
-
     var sptext = text.split();
-
     var newtr = '<tr class="item"  data-id="' + sel + '">';
     newtr = newtr + '<td class="iProduct" >' + sel + '</td>';
     newtr = newtr +
