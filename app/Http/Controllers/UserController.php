@@ -39,7 +39,7 @@ class UserController extends Controller
     public function edit(String $id){
         $user = User::where('id', $id)->first();
         
-        return view('auth.editUSer', ['user' => $user]);
+        return view('auth.editUser', ['user' => $user]);
     }
     public function edited(Request $request,String $id){
         $user = User::where('id', $request['id'])->first();
