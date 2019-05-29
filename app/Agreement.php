@@ -42,7 +42,8 @@ class Agreement extends Model
     public function scopePeople_id($query, $people_id)
     {
         if ($people_id) {
-            return $query->where('people_id', 'LIKE', "%$people_id%");
+            return $agreements=Person::find($people_id)->getAgreements();
+            //return $query->where('people_id', 'LIKE', "%$people_id%");
         }
     }
     public function scopeObjective($query, $objective)

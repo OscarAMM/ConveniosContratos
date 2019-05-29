@@ -50,4 +50,7 @@ class Person extends Model
         }
         return false;
     }
+    public function getAgreements(){
+        return $this->belongsToMany(Agreement::class,'agreement_person')->orderBy('id', 'ASC')->paginate();
+    }
 }
