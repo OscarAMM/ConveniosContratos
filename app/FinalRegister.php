@@ -115,4 +115,5 @@ class FinalRegister extends Model
         }
         return false;
     }
+    
 }
