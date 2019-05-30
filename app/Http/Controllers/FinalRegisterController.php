@@ -235,6 +235,11 @@ class FinalRegisterController extends Controller
             echo $output;
         }
     }
+    public function formIndex($id){
+        $agreements = Agreement::find($id);
+
+        return view('finalregister.createDocs', compact('agreements'));
+    }
     public function fetchInstruments(Request $request)
     {
         if ($request->get('query')) {
