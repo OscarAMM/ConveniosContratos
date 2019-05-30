@@ -1,9 +1,16 @@
+@extends('layouts.app')
+
+@section('content')
+@if(!Auth::guest()&&Auth::user()->hasRole('admin'))
+
+@include('auth.fragment.info')
+@include('auth.fragment.error')
+
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{asset('js\disable.js')}}" defer></script>
 </head>
-
 <div class="container">
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
@@ -21,25 +28,27 @@
         </div>
         <div class="col-md-8 order-md-1">
             <h3>Formulario</h3>
+            {!!Form::model($documents, ['route' =>['FinalRegister.update', $documents->id],'method' =>'PUT']) !!}
             <hr style="border:2px solid #BF942D">
             <form method="POST" action="#">
                 <div class="form-group {{$errors->has('registerNumber') ? 'has-error':''}}">
                     <small style="color:#D90101;">*</small>
                     <label for="registerNumber">Número de registro</label>
                     <input type="text" id="registerNumber" name="registerNumber" class="form-control"
-                        value="{{old('registerNumber')}}" placeholder="Número de registro">
+                        placeholder="Número de registro" value="{{$documents->registerNumber}}">
                 </div>
                 <div class="form-group">
                     <small style="color:#D90101;">*</small>
                     <label for="name" class="col-form-label">Nombre completo del documento </label>
-                    <input type="text" name="name" id="name" class="form-control" placeholder="Nombre del documento">
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Nombre del documento"
+                        value="{{$documents->name}}">
                 </div>
                 <div class="form-group">
                     <small style="color:#D90101;">*</small>
                     <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
                     <div class="form-inline ">
                         <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
-                            placeholder="Ingrese instrumento">
+                            placeholder="Ingrese instrumento" value="{{$documents->legalInstrument}}">
 
                     </div>
                     <div id="instrumentList">
@@ -50,50 +59,76 @@
                     <small style="color:#D90101;">*</small>
                     <label for="objective" class=" col-form-label">Objetivo</label>
                     <textarea name="objective" id="objective" cols="30" rows="5" class="form-control"
-                        placeholder="Describe el objetivo"></textarea>
+                        placeholder="Describe el objetivo">{{$documents->objective}}</textarea>
                 </div>
                 <div class="form-group">
                     <small style="color:#D90101;">*</small>
                     <label for="instrumentType" class=" col-form-label">Tipo de instrumento</label>
                     <select name="instrumentType" id="instrumentType" class="form-control">
+                        @if($documents->instrumentType === "General")
+                        <option>General</option>
+                        <option>Específico</option>
+                        <option>Otros</option>
+                        @elseif($documents->instrumentType === "Específico")
                         <option>Específico</option>
                         <option>General</option>
                         <option>Otros</option>
+                        @elseif($documents->instrumentType === "Otros")
+                        <option>Otros</option>
+                        <option>Específico</option>
+                        <option>General</option>
+
+                        @endif
                     </select>
                 </div>
                 <div class="form-group ">
                     <small style="color:#D90101;">*</small>
                     <label for="signature" class="col-form-label">Fecha de firma</label>
-                    <input type="date" id="signature" name="signature" class="form-control">
+                    <input type="date" id="signature" name="signature" class="form-control"
+                        value="{{$documents->signature}}">
                 </div>
                 <div class="form-group">
                     <small style="color:#D90101;">*</small>
                     <label for="start_date">Fecha de inicio</label>
-                    <input type="date" id="start_date" name="start_date" class="form-control">
+                    <input type="date" id="start_date" name="start_date" class="form-control"
+                        value="{{$documents->start_date}}">
                 </div>
                 <div class="form-group">
                     <small style="color:#D90101;">*</small>
                     <label for="end_date">Fecha de fin</label>
-                    <input type="date" id="end_date" name="end_date" class="form-control">
+                    <input type="date" id="end_date" name="end_date" class="form-control"
+                        value="{{$documents->end_date}}">
                 </div>
                 <div class="form-group ">
                     <small style="color:#D90101;">*</small>
                     <label for="session" class="col-form-label">Fecha de sesión</label>
-                    <input type="date" id="session" name="session" class="form-control">
+                    <input type="date" id="session" name="session" class="form-control" value="{{$documents->session}}">
                 </div>
                 <div class="form-group">
                     <input type="checkbox" name="observationCheck" id="observationCheck" class="form-checkbox">
                     <label for="observation" class="col-form-label">Observación</label>
                     <textarea name="observation" id="observation" cols="30" rows="10" class="form-control"
-                        disabled></textarea>
+                        disabled>{{$documents->observation}}</textarea>
                 </div>
                 <div class="form-group">
                     <small style="color:#D90101;">*</small>
                     <label for="scope" class="col-form-label">Ámbito</label>
                     <select name="scope" id="scope" class="form-control">
+                        @if($documents->instrumentType === "Estatal")
                         <option>Estatal</option>
                         <option>Nacional</option>
                         <option>Internacional</option>
+                        @elseif($documents->instrumentType === "Nacional")
+                        <option>Nacional</option>
+                        <option>Estatal</option>
+                        <option>Internacional</option>
+                        @elseif($documents->instrumentType === "Internacional")
+                        <option>Internacional</option>
+                        <option>Nacional</option>
+                        <option>Estatal</option>
+
+                        @endif
+
                     </select>
                 </div>
                 <form>
@@ -128,15 +163,10 @@
                         <option>Mostrar</option>
                     </select>
                 </div>
-                <div class="form-group">
-                    <small style="color:#D90101;">*</small>
-                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                    <label for="file" class="col-form-label">Seleccione el archivo</label>
-                    <input type="file" class="form-control-file" name="file" id="file">
-                </div>
-                {{csrf_field()}}
+
 
             </form>
+            {!!Form::close()!!}
             <div class="form-group text-center" style="margin-top:5px">
                 <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
                 {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
@@ -153,8 +183,9 @@
         </div>
     </div>
 </div>
-</div>
-</div>
+@endif
+@endsection
+
 <!--MODAL FOR THE LEGAL INSTRUMENT -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -270,6 +301,7 @@
 
     </div>
 </div>
+
 <!--   -->
 <!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -285,7 +317,9 @@
 <script>
 $.noConflict();
 jQuery(document).ready(function() {
-    $('#pro_id').keyup(function() {
+
+
+    $('#people_id').keyup(function() {
         var query = $(this).val();
         if (query != '') {
             var _token = $('input[name="_token"]').val();
@@ -297,18 +331,20 @@ jQuery(document).ready(function() {
                     _token: _token
                 },
                 success: function(data) {
-                    $('#proList').fadeIn();
-                    $('#proList').html(data);
+                    $('#peopleList').fadeIn();
+                    $('#peopleList').html(data);
                 }
             });
         }
     });
 
-    jQuery('#proList').on('click', 'li', function() {
-        $('#pro_id').val($(this).text());
-        $('#proList').fadeOut();
+    jQuery('#peopleList').on('click', 'li', function() {
+        $('#people_id').val($(this).text());
+        $('#peopleList').fadeOut();
     });
-    
+
+
+
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
         if (query != '') {
@@ -331,6 +367,10 @@ jQuery(document).ready(function() {
     jQuery('#instrumentList').on('click', 'li', function() {
         $('#legalInstrument').val($(this).text());
         $('#instrumentList').fadeOut();
+    });
+    $("#reception").keyup(function() {
+        var value = $(this).val();
+        $("#end_date").val(value);
     });
 
 });

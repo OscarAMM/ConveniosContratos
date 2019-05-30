@@ -50,24 +50,61 @@ class FinalRegisterController extends Controller
     }
     public function show($id)
     {
-
         $documents = FinalRegister::find($id);
-        $person_id = $documents->$person_id;
-        $person = Person::find($person_id);
         $files = $documents->getFiles;
-
-        return view('finalregister.show', compact('documents', 'person'));
+        return view('finalregister.show', compact('documents'));
     }
     public function edit($id)
     {
-        $document = FinalRegister::find($id);
-        return view('finalregister.edit', compact('document'));
+        $documents = FinalRegister::find($id);
+        return view('finalregister.edit', compact('documents'));
     }
     public function destroy($id)
     {
         $document = FinalRegister::find($id);
         $document->delete();
         return back()->with('info', "El documento '.$document->name.' ha sido eliminado");
+    }
+    public function update(FinalRegisterRequest $request, $id)
+    {
+        $document = FinalRegister::find($id);
+        $document->name = $request->name;
+        $document->objective = $request->objective;
+        $document->legalInstrument = $request->legalInstrument;
+        $document->registerNumber = $request->registerNumber;
+        $document->signature = $request->signature;
+        $document->start_date = $request->start_date;
+        $document->end_date = $request->end_date;
+        $document->session = $request->session;
+        $document->scope = $request->scope;
+        $document->hide = $request->hide;
+        $document->status = 'Finalizado';
+
+        $document->instrumentType = $request->instrumentType;
+        $document->end_date = $request->signature;
+
+        if ($request->hide == "Mostrar") {
+            $document->hide = true;
+        } else {
+            $document->hide = false;
+        }
+        /*  $splitPeopleName = explode(' - ', $request->people_id);
+        $document->people_id = $splitPeopleName[0];*/
+
+        $document->update();
+        $agreement->people()->detach();
+        foreach ($people as $person) {
+            $agreement->people()
+                ->attach(Person::where('id', $person)->first());
+        }
+        if ($request->people_id) {
+            $splitName = explode(' - ', $request->people_id);
+            $agreement->people()
+                ->attach(Person::where('id', $splitName[0])->first());
+        }
+
+        return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido actualizado');
+
     }
     public function store(FinalRegisterRequest $request)
     {
@@ -104,7 +141,7 @@ class FinalRegisterController extends Controller
         } else {
             $document->hide = false;
         }
-      /*  $splitPeopleName = explode(' - ', $request->people_id);
+        /*  $splitPeopleName = explode(' - ', $request->people_id);
         $document->people_id = $splitPeopleName[0];*/
         if (FinalRegister::where('name', $document->name)->exists()) {
             return back()->with('info', 'El documento ' . $document->name . ' ya existe.');

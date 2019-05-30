@@ -95,7 +95,20 @@
                     <td>{{$document->instrumentType}}</td>
                     <td>{{$document->signature}}</td>
                     <td>{{$document->end_date}}</td>
-                    <td>@foreach($document->getPeople as $person){{$person->name.', '}}@endforeach</td>
+                    <td></td>
+                    <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
+                        </td>
+                        @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                        <td><a href="{{route('FinalRegister.edit', $document->id)}}" class="btn botonAmarillo">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </td>
+                        @endif
                     @endforeach
                 </tr>
             </tbody>
