@@ -9,7 +9,7 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
+    <script src="{{asset('js\disable.js')}}" defer></script>
 </head>
 
 <div class="container">
@@ -66,15 +66,15 @@
                     <small style="color:#D90101;">*</small>
                     <label for="instrumentType" class=" col-form-label">Tipo de instrumento</label>
                     <select name="instrumentType" id="instrumentType" class="form-control">
-                        @if($agreements->instrumentType === "General")
+                        @if($documents->instrumentType === "General")
                         <option>General</option>
                         <option>Específico</option>
                         <option>Otros</option>
-                        @elseif($agreements->instrumentType === "Específico")
+                        @elseif($documents->instrumentType === "Específico")
                         <option>Específico</option>
                         <option>General</option>
                         <option>Otros</option>
-                        @elseif($agreements->instrumentType === "Otros")
+                        @elseif($documents->instrumentType === "Otros")
                         <option>Otros</option>
                         <option>Específico</option>
                         <option>General</option>
@@ -115,15 +115,15 @@
                     <small style="color:#D90101;">*</small>
                     <label for="scope" class="col-form-label">Ámbito</label>
                     <select name="scope" id="scope" class="form-control">
-                        @if($agreements->instrumentType === "Estatal")
+                        @if($documents->instrumentType === "Estatal")
                         <option>Estatal</option>
                         <option>Nacional</option>
                         <option>Internacional</option>
-                        @elseif($agreements->instrumentType === "Nacional")
+                        @elseif($documents->instrumentType === "Nacional")
                         <option>Nacional</option>
                         <option>Estatal</option>
                         <option>Internacional</option>
-                        @elseif($agreements->instrumentType === "Internacional")
+                        @elseif($documents->instrumentType === "Internacional")
                         <option>Internacional</option>
                         <option>Nacional</option>
                         <option>Estatal</option>
