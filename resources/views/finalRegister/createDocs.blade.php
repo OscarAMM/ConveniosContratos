@@ -12,6 +12,11 @@
     <script src="{{asset('js\disable.js')}}" defer></script>
 </head>
 <div class="container">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-muted text-center"> Registro final </h3>
+        </div>
+    </div>
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
             <h3>Agregar</h3>
