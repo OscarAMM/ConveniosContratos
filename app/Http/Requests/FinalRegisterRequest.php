@@ -35,6 +35,7 @@ class FinalRegisterRequest extends FormRequest
             'scope' => 'required',
             'hide' => 'required',
             'instrumentType' => 'required',
+            'observation' => 'nullable',
         ];
     }
 }

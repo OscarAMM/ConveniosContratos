@@ -44,6 +44,10 @@
                         <li class="nav-item">
                             <a href="{{route('Agreement.index')}}" class="nav-link">Documentos</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('FinalRegister.index')}}" class="nav-link">Registros</a>
+                        </li>
+
                         @if(Auth::user()->hasRole('admin'))
                         <li class="nav-item">
                             <a href="{{route('Person.index')}}" class="nav-link">Partes</a>

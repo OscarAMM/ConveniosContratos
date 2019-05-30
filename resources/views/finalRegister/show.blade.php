@@ -11,64 +11,82 @@
                 </div>
                 <div class="card-body">
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Recepción</h5>
-                        {{$agreements->reception}}
+                        <h5 class="card-title font-weight-bold">Número de registro</h5>
+                        {{$documents->registerNumber}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Fecha final de revisión</h5>
-                        {{$agreements->end_date}}
+                        <h5 class="card-title font-weight-bold">Nombre</h5>
+                        {{$documents->name}}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Instrumento jurídico</h5>
+                        {{$documents->legalInstrument}}
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Objetivo</h5>
-                        {{$agreements->objective}}
+                        {{$documents->objective}}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Tipo de instrumento</h5>
+                        {{$documents->instrumentType}}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Observación</h5>
+                        {{$documents->observation}}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Fecha de firma</h5>
+                        {{$documents->signature}}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Fecha de inicio</h5>
+                        {{$documents->start_date}}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Fecha de fin</h5>
+                        {{$documents->end_date}}
+                    </li>
+                    <li class="list-group-item">
+                        <h5 class="card-title font-weight-bold">Fecha de sesión</h5>
+                        {{$documents->session}}
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Ámbito</h5>
-                        {{$agreements->scope}}
+                        {{$documents->scope}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Suscrito perteneciente</h5>
-                        {{$person->name}}
+                        <h5 class="card-title font-weight-bold">Visibilidad del documento</h5>
+                        @if($documents->hide)
+                        <label for="visible">Visible</label>
+                        @else
+                        <label for="NoVisible">No Visible</label>
+                        @endif
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Responsable externo</h5>
-                        {{$agreements->liable_user}}
-                    </li>
-                    <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Usuario(s) asignado(s)</h5>
-                        @foreach($users as $user)
-                        <label for="name">Nombre</label>
-                        <ul>{{$user->name}}
-                        </ul>
-                        <label for="email">Email</label>
-                        <ul>{{$user->email}}</ul>
+                        <h5 class="card-title font-weight-bold">Partes</h5>
+                        @foreach($documents->getPeople as $person)
+                        <ul> {{$person->name}}</ul>
                         @endforeach
                     </li>
-                    @if(Auth::user()->hasRole('admin')||Auth::user()->hasDocument($agreements->id))
+                    
+                    
+                    @if(Auth::user()->hasRole('admin')||Auth::user()->hasDocument($documents->id))
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Archivos</h5>
                         @foreach($files as $file)
                         <ul>
                             <li>Fecha de creación: {{$file->created_at}}</li>
-                            <a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a>
+                            <a href="{{route('document.download',$file->id)}}">{{$file->name}}</a>
                         </ul>
                         @endforeach
                     </li>
                     @endif
-                    <!--<li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Visibilidad del documento</h5>
-                        @if($agreements->hide)
-                        <label for="visible">Visible</label>
-                        @else
-                        <label for="NoVisible">No Visible</label>
-                        @endif
-                    </li>-->
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Estado</h5>
-                        {{$agreements->status}}
+                        {{$documents->status}}
                     </li>
                     <li class="list-group-item text-center">
-                        <a href="{{route('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
+                        <a href="{{route('FinalRegister.index')}}" class="btn btn-secondary">Regresar</a>
                         </ul>
                 </div>
                 <div>

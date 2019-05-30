@@ -76,12 +76,15 @@
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">
                             <span class="glyphicon glyphicon-search">Buscar</span>
-                        </button></div>
+                        </button>
+                    </div>
                 </div>
-                {{Form::close()}}
-            </div>
 
+            </div>
+            {{Form::close()}}
         </div>
+
+    </div>
     </div>
 
 

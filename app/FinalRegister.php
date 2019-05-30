@@ -2,12 +2,8 @@
 
 namespace App;
 
-use App\Comment;
-use App\Dependence;
 use App\FileAgreement;
-use App\Institute;
 use App\Person;
-use App\User;
 use App\FinalRegister;
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,6 +42,12 @@ class FinalRegister extends Model
             return $query->where('instrumentType', 'LIKE', "%$instrumentType%");
         }
     }
+    public function scopeObjective($query, $objective)
+    {
+        if ($objective) {
+            return $query->where('objective', 'LIKE', "%$objective%");
+        }
+    }
     public function scopePeople_id($query, $people_id)
     {
         if ($people_id) {
@@ -73,53 +75,16 @@ class FinalRegister extends Model
         return $this->belongsToMany(FileAgreement::class)
             ->withTimestamps();
     }
-    public function institutions()
-    {
-        return $this->belongsToMany(Institute::class)
-            ->withTimestamps();
-    }
-    public function dependences()
-    {
-        return $this->belongsToMany(Dependence::class)
-            ->withTimestamps();
-    }
-    
-
-    public function users()
-    {
-        return $this->belongsToMany(User::class)
-            ->withTimeStamps();
-    }
-    public function comments()
-    {
-        return $this->belongsToMany(Comment::class)
-            ->withTimestamps();
-    }
-    public function getComments()
-    {
-        return $this->belongsToMany(Comment::class, 'agreement_comment');
-    }
-    public function getUser()
-    {
-        return $this->belongsToMany(User::class, 'agreement_user')->withPivot('user_id', 'agreement_id')
-            ->withTimestamps();
-    }
     public function getFiles()
     {
-        return $this->belongsToMany(FileAgreement::class, 'agreement_file_agreement')->withPivot('file_agreement_id', 'agreement_id')
+        return $this->belongsToMany(FileAgreement::class, 'file_agreement_final_register')->withPivot('file_agreement_id', 'final_register_id')
             ->withTimestamps();
     }
     public function getLastFile()
     {
         //User::orderBy('created_at', 'desc')->first();
-        return $this->belongsToMany(FileAgreement::orderby('created_at', 'desc')->latest()->first(), 'agreement_file_agreement');
+        return $this->belongsToMany(FileAgreement::orderby('created_at', 'desc')->latest()->first(), 'file_agreement_final_register');
     }
-    public function hasUser($email)
-    {
-        if ($this->users()->where('email', $email)->first()) {
-            return true;
-        }
-        return false;
-    }
+    
     
 }

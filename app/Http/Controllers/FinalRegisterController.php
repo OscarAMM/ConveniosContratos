@@ -20,22 +20,46 @@ class FinalRegisterController extends Controller
         $name = $request->get('name');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
+        $objective = $request->get('objective');
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
-        if ($request->get('people_id')) {
-            $splitName = explode(' - ', $request->get('people_id'));
-            $agreements = Person::find($splitName[0])->agreements()
-                ->where('name', 'LIKE', "%$name%")
-                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                ->where('signature', 'LIKE', "%$signature%")
-                ->where('end_date', 'LIKE', "%$end_date%")
-                ->paginate();
+        $people=$request->get('people_id');
+        if ($people) {
+            if (str_contains($people, ' - ')) {
+                $splitName = explode(' - ', $people);
+                $documents = Person::find($splitName[0])->final()
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+            } else {
+                $person=Person::where('name', 'LIKE', "%$people%")->first();
+                if (!empty($person)) {
+                    $documents = $person->final()
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+                } else {
+                    $documents = FinalRegister::where('id','0')->orderBy('id', 'DESC')->paginate();
+                }
+                
+            }
         } else {
-            $documents = FinalRegister::orderBy('id', 'ASC')
+            $documents = FinalRegister::orderBy('id', 'DESC')
                 ->id($id)
                 ->name($name)
                 ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
                 ->signature($signature)
                 ->end_date($end_date)
                 ->paginate();
@@ -53,7 +77,7 @@ class FinalRegisterController extends Controller
     {
         $documents = FinalRegister::find($id);
         $files = $documents->getFiles;
-        return view('finalregister.show', compact('documents'));
+        return view('finalregister.show', compact('documents', 'files'));
     }
     public function edit($id)
     {
@@ -77,6 +101,7 @@ class FinalRegisterController extends Controller
         $document->start_date = $request->start_date;
         $document->end_date = $request->end_date;
         $document->session = $request->session;
+        $document->observation = $request->observation;
         $document->scope = $request->scope;
         $document->hide = $request->hide;
         $document->status = 'Finalizado';
@@ -107,7 +132,6 @@ class FinalRegisterController extends Controller
         }
 
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido actualizado');
-
     }
     public function store(FinalRegisterRequest $request)
     {
@@ -117,7 +141,6 @@ class FinalRegisterController extends Controller
             \Storage::disk('public')->put('finalFiles/' . $file_path, \File::get($file));
         } else {
             return back()->with('info', 'No seleccionó un archivo.');
-
         }
         $file_Name = new FileAgreement();
         $file_Name->name = $file_path;
@@ -132,6 +155,8 @@ class FinalRegisterController extends Controller
         $document->start_date = $request->start_date;
         $document->end_date = $request->end_date;
         $document->session = $request->session;
+        $document->observation = $request->observation;
+
         $document->scope = $request->scope;
         $document->hide = $request->hide;
         $document->status = 'Finalizado';
@@ -167,14 +192,14 @@ class FinalRegisterController extends Controller
         return storage::download('/finalFiles/' . $file->name);
     }
     //STORE FOR DOCUMENTS
-    public function storeDocs(FinalRegisterRequest $request){
+    public function storeDocs(FinalRegisterRequest $request)
+    {
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('finalFiles/' . $file_path, \File::get($file));
         } else {
             return back()->with('info', 'No seleccionó un archivo.');
-
         }
         $file_Name = new FileAgreement();
         $file_Name->name = $file_path;
@@ -189,6 +214,7 @@ class FinalRegisterController extends Controller
         $document->start_date = $request->start_date;
         $document->end_date = $request->end_date;
         $document->session = $request->session;
+        $document->observation = $request->observation;
         $document->scope = $request->scope;
         $document->hide = $request->hide;
         $document->status = 'Finalizado';
@@ -247,7 +273,8 @@ class FinalRegisterController extends Controller
             echo $output;
         }
     }
-    public function formIndex($id){
+    public function formIndex($id)
+    {
         $agreements = Agreement::find($id);
 
         return view('finalregister.createDocs', compact('agreements'));

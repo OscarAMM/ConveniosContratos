@@ -1,6 +1,18 @@
 @extends('layouts.app')
 @section('content')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <title>Index</title>
+</head>
 @if(!Auth::guest() && (Auth::user()->hasRole('admin') || Auth::user()->hasRole('revisor')))
+@include('auth.fragment.info')
+@include('auth.fragment.error')
 <!-----------------------------------------WELCOME MESSAGE WITH FUNCTIONS----------------------------------------->
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
@@ -35,10 +47,6 @@
                         <label for="name" class="col-form-label text-muted">Instrumento jurídico</label>
                         {{Form::text('legalInstrument',null,['class'=>'form-control','placeholder'=>'Instrumento jurídico'])}}
                     </div>
-                    <div class="col-label-form" style="margin-right:5px;">
-                        <label for="name" class="col-form-label text-muted">Objetivo</label>
-                        {{Form::text('legalInstrument', null, ['class'=>'form-control', 'placeholder'=>'legalInstrument'])}}
-                    </div>
                     <div class="col-label-form" style="margin-right:5px">
                         <label for="name" class="col-form-label text-muted">Tipo de instrumento</label>
                         <select name="instrumentType" id="instrumentType" class="form-control">
@@ -49,17 +57,24 @@
                         </select>
                     </div>
                     <div class="col-label-form" style="margin-right:5px;">
-                        <label for="name" class="col-form-label text-muted">Fecha Recepción</label>
+                            <label for="name" class="col-form-label text-muted">Objetivo</label>
+                            {{Form::text('objective', null, ['class'=>'form-control', 'placeholder'=>'Objetivo'])}}
+                        </div>
+                    <div class="col-label-form" style="margin-right:5px;">
+                        <label for="signature" class="col-form-label text-muted">Fecha Firma</label>
                         {{Form::text('signature',null,['class' => 'form-control', 'placeholder'=>'Fecha firma'])}}
                     </div>
                     <div class="col-label-form" style="margin-right:5px;">
-                        <label for="name" class="col-form-label text-muted">Fecha Recepción</label>
+                        <label for="end_date" class="col-form-label text-muted">Fecha Fin</label>
                         {{Form::text('end_date',null,['class' => 'form-control', 'placeholder'=>'Fecha fin'])}}
                     </div>
-                    <div class="col-label-form" style="margin-right:5px;">
-                        <label for="name" class="col-form-label text-muted">Fecha Recepción</label>
-                        {{Form::text('people_id',null,['class' => 'form-control', 'placeholder'=>'Partes'])}}
-                    </div>
+                    <div class="col-label-form">
+                            <label for="people_id" class=" text-muted">Parte</label>
+                            <input type="text" id="people_id" name="people_id" class="form-control"
+                                placeholder="ingrese las partes">
+                            <div id="peopleList">
+                            </div>
+                        </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">
                             <span class="glyphicon glyphicon-search">Buscar</span>
@@ -80,43 +95,46 @@
                     <th>Nombre completo</th>
                     <th>Instrumento jurídico</th>
                     <th>Tipo de instrumento</th>
+                    <th>Objetivo</th>
                     <th>Fecha de firma</th>
                     <th>Fecha de fin</th>
                     <th>Partes</th>
                     <th colspan="3">&nbsp; Opciones</th>
                 </tr>
             <tbody>
+
+                <!-----------------------------FOREACH SEARCH ------------------------------->
+                @foreach($documents as $document)
                 <tr>
-                    <!-----------------------------FOREACH SEARCH ------------------------------->
-                    @foreach($documents as $document)
                     <td>{{$document->id}}</td>
                     <td>{{$document->name}}</td>
                     <td>{{$document->legalInstrument}}</td>
                     <td>{{$document->instrumentType}}</td>
+                    <td>{{$document->objective}}</td>
                     <td>{{$document->signature}}</td>
                     <td>{{$document->end_date}}</td>
                     <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
                     <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
-                        </td>
-                        @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                        <td><a href="{{route('FinalRegister.edit', $document->id)}}" class="btn botonAmarillo">Editar</a>
-                        </td>
-                        <td>
-                            <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                                {{csrf_field()}}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger">Eliminar</button>
-                            </form>
-                        </td>
-                        @endif
-                    @endforeach
+                    </td>
+                    @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                    <td><a href="{{route('FinalRegister.edit', $document->id)}}" class="btn botonAmarillo">Editar</a>
+                    </td>
+                    <td>
+                        <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger">Eliminar</button>
+                        </form>
+                    </td>
+                    @endif
                 </tr>
+
+                @endforeach
             </tbody>
             </thead>
         </table>
     </div>
 </div>
-
 </div>
 @else
 <!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
@@ -130,4 +148,38 @@
     </div>
 </div>
 @endif
+<script>
+$.noConflict();
+jQuery(document).ready(function() {
+
+    $('#people_id').keyup(function() {
+        var query = $(this).val();
+        if (query != '') {
+            var _token = $('input[name="_token"]').val();
+            $.ajax({
+                url: "{{ route('autocomplete.fetch') }}",
+                method: "POST",
+                data: {
+                    query: query,
+                    _token: _token
+                },
+                success: function(data) {
+                    $('#peopleList').fadeIn();
+                    $('#peopleList').html(data);
+                }
+            });
+        }
+    });
+    jQuery('#peopleList').on('click', 'li', function() {
+        $('#people_id').val($(this).text());
+        $('#peopleList').fadeOut();
+    });
+});
+</script>
+
+</html>
+{!!$documents->render()!!}
 @endsection
+
+
+
