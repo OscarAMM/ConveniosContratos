@@ -158,7 +158,6 @@
                     </div>
 
 
-            </form>
             <div class="form-group text-center" style="margin-top:5px">
                     <a href="{{route ('FinalRegister.index')}}" class="btn btn-secondary">Regresar</a>
                     <input type="submit" value="Guardar" class="btn btn-primary">
