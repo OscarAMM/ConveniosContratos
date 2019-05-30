@@ -7,6 +7,7 @@ use App\FinalRegister;
 use App\Http\Requests\FinalRegisterRequest;
 use App\LegalInstrument;
 use App\Person;
+use App\Agreement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Redirect;
@@ -164,8 +165,56 @@ class FinalRegisterController extends Controller
         return storage::download('/finalFiles/' . $file->name);
     }
     //STORE FOR DOCUMENTS
-    public function storeDocs(){
-     return view('finalregister.createDocs');
+    public function storeDocs(FinalRegisterRequest $request){
+        $file = $request->file('file');
+        if ($file) {
+            $file_path = $file->getClientOriginalName();
+            \Storage::disk('public')->put('finalFiles/' . $file_path, \File::get($file));
+        } else {
+            return back()->with('info', 'No seleccionó un archivo.');
+
+        }
+        $file_Name = new FileAgreement();
+        $file_Name->name = $file_path;
+        $file_Name->save();
+
+        $document = new FinalRegister();
+        $document->name = $request->input('name');
+        $document->objective = $request->objective;
+        $document->legalInstrument = $request->legalInstrument;
+        $document->registerNumber = $request->registerNumber;
+        $document->signature = $request->signature;
+        $document->start_date = $request->start_date;
+        $document->end_date = $request->end_date;
+        $document->session = $request->session;
+        $document->scope = $request->scope;
+        $document->hide = $request->hide;
+        $document->status = 'Finalizado';
+
+        $document->instrumentType = $request->instrumentType;
+        $document->end_date = $request->signature;
+
+        if ($request->hide == "Mostrar") {
+            $document->hide = true;
+        } else {
+            $document->hide = false;
+        }
+        /*  $splitPeopleName = explode(' - ', $request->people_id);
+        $document->people_id = $splitPeopleName[0];*/
+        if (FinalRegister::where('name', $document->name)->exists()) {
+            return back()->with('info', 'El documento ' . $document->name . ' ya existe.');
+        } else {
+            $document->save();
+            $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
+        }
+        $acturl = urldecode($request->ListaPro); //decodifico el JSON
+        $people = json_decode($acturl);
+        foreach ($people as $peopleSelected) {
+            $splitPerson = explode(' - ', $peopleSelected->id_pro);
+            $document->people()
+                ->attach(Person::where('id', $splitPerson[0])->first());
+        }
+        return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido guardado');
     }
     public function fetch(Request $request)
     {
