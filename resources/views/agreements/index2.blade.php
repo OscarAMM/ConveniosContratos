@@ -25,7 +25,7 @@
             </p>
             <p class="text-muted"><i>Nota: Los archivos registrados en esta sección son ÚNICAMENTE para trabajar de
                     manera interna. No se desplegará ninguna información en vistas públicas o al usuario final.</i></p>
-            {{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
+            {{Form::open(['route'=>'Agreement.index2','method'=>'GET','class'=>'form-inline'])}}
             @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
             <p class="text-item-center"><a href="{{route('Agreement.create')}}" class="btn boton"
                     style="margin-right:5px">Nuevo</a>
