@@ -99,7 +99,7 @@
                     <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
                         </td>
                         @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                        <td><a href="#" class="btn botonAmarillo">Editar</a>
+                        <td><a href="{{route('FinalRegister.edit', $document->id)}}" class="btn botonAmarillo">Editar</a>
                         </td>
                         <td>
                             <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
