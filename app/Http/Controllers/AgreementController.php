@@ -47,9 +47,6 @@ class AgreementController extends Controller
         /*}else{
             $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
         }*/
-        
-        
-
         return view('agreements.index', compact('agreements'));
     }
     public function index2(Request $request)
@@ -82,9 +79,6 @@ class AgreementController extends Controller
         /*}else{
             $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
         }*/
-        
-        
-
         return view('agreements.index2', compact('agreements'));
     }
     public function indexPublic(Request $request)

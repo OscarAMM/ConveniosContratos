@@ -1,37 +1,61 @@
 <?php
 
 namespace App\Http\Controllers;
+
+use App\FileAgreement;
 use App\FinalRegister;
 use App\Http\Requests\FinalRegisterRequest;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Storage;
-use App\FileAgreement;
 use App\LegalInstrument;
 use App\Person;
-use App\User;
+use Redirect;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FinalRegisterController extends Controller
 {
-    public function index(){
-        return view('finalregister.index');
+    public function index(Request $request)
+    {
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $legalInstrument = $request->get('legalInstrument');
+        $instrumentType = $request->get('instrumentType');
+        $signature = $request->get('signature');
+        $end_date = $request->get('end_date');
+        $splitName = explode(' - ', $request->get('people_id'));
+        $people = $splitName[0];
+        $documents = FinalRegister::orderBy('id', 'ASC')
+            ->id($id)
+            ->name($name)
+            ->legalInstrument($legalInstrument)
+            ->signature($signature)
+            ->end_date($end_date)
+            ->people_id($people)
+            ->paginate();
+        return view('finalregister.index', compact('documents'));
     }
-    public function create(){
+    public function create()
+    {
         $people = Person::all();
         $instrument = LegalInstrument::all();
-        return view('finalregister.create', compact('people','instrument'));
+        return view('finalregister.create', compact('people', 'instrument'));
     }
-    public function show($id){
-        $documents = FinalRegister::find($id);
+    public function show($id)
+    {
 
-        return view();
+        $documents = FinalRegister::find($id);
+        $person_id = $documents->$person_id;
+        $person = Person::find($person_id);
+        $files = $documents->getFiles;
+
+        return view('finalregister.show',compact('documents','person'));
     }
-    public function store(FinalRegisterRequest $request){
+    public function store(FinalRegisterRequest $request)
+    {
         $file = $request->file('file');
-        if($file){
+        if ($file) {
             $file_path = $file->getClientOriginalName();
-            \Storage::disk('public')->put('finalFiles/'.$file_path, \File::get($file));
-        }else{
+            \Storage::disk('public')->put('finalFiles/' . $file_path, \File::get($file));
+        } else {
             return back()->with('info', 'No seleccionó un archivo.');
 
         }
@@ -40,7 +64,7 @@ class FinalRegisterController extends Controller
         $file_Name->save();
 
         $document = new FinalRegister();
-        $document->name = $request->name;
+        $document->name = $request->input('name');
         $document->reception = $request->reception;
         $document->objective = $request->objective;
         $document->legalInstrument = $request->legalInstrument;
@@ -54,22 +78,38 @@ class FinalRegisterController extends Controller
 
         $document->instrumentType = $request->instrumentType;
         $document->end_date = $request->signature;
-        
+
         if ($request->hide == "Mostrar") {
             $document->hide = true;
-            } else {
+        } else {
             $document->hide = false;
-            }
+        }
         $splitPeopleName = explode(' - ', $request->people_id);
         $document->people_id = $splitPeopleName[0];
-        if(FinalRegister::where('name', $document->name)->exists()){
-            return back()->with('info', 'El documento '.$document->name. ' ya existe.');
-        }else{
+        if (FinalRegister::where('name', $document->name)->exists()) {
+            return back()->with('info', 'El documento ' . $document->name . ' ya existe.');
+        } else {
             $document->save();
-            $document->files()->attach(FileAgreement::where('id',$file_Name->id)->first());
+            $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
         }
-        
-        return redirect()->route('FinalRegister.index')->with('info', 'El documento '.$document->name.' ha sido guardado');
+
+        return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido guardado');
     }
-    
+    public function fetchUsers(Request $request)
+    {
+        if ($request->get('query')) {
+            $query = $request->get('query2');
+            $data = DB::table('users')
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach ($data as $row) {
+                $output .= '
+         <li class="dropdown-item">' . $row->id . ' - ' . $row->name . ' - ' . $row->email . '</li>
+         ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
 }

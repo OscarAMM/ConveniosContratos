@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-
+<script src="{{asset('js/popup.js')}}"></script>
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
         <h1 class="text-muted">Instrumento jurtídico</h1>

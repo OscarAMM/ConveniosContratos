@@ -1,6 +1,8 @@
 <head>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="{{asset('js/disable.js')}}" defer></script>
+  
 </head>
 
 <div class="container">
@@ -8,10 +10,10 @@
         <div class="card">
             <div class="card-body">
                 <form method="POST" action="#">
-                    <div class="form-group">
+                    <div class="form-group {{$errors->has('registerNumber') ? 'has-error':''}}">
                         <small style="color:#D90101;">*</small>
                         <label for="registerNumber">Número de registro</label>
-                        <input type="text" id="registerNumber" name="registerNumber" class="form-control"
+                        <input type="text" id="registerNumber" name="registerNumber" class="form-control" value ="{{old('registerNumber')}}"
                             placeholder="Número de registro">
                     </div>
                     <div class="form-group">

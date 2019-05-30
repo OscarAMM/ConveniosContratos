@@ -8,17 +8,24 @@ use App\FileAgreement;
 use App\Institute;
 use App\Person;
 use App\User;
+use App\FinalRegister;
 use Illuminate\Database\Eloquent\Model;
 
 class FinalRegister extends Model
 {
     protected $fillable = [
-        'id', 'name', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status', 
+        'id', 'name', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status',
     ];
     public function scopeName($query, $name)
     {
         if ($name) {
             return $query->where('name', 'LIKE', "%$name%");
+        }
+    }
+    public function scopesignature($query, $signature)
+    {
+        if ($signature) {
+            return $query->where('signature', 'LIKE', "%$signature%");
         }
     }
     public function scopeLegalInstrument($query, $legalInstrument)
@@ -45,10 +52,10 @@ class FinalRegister extends Model
             return $query->where('people_id', 'LIKE', "%$people_id%");
         }
     }
-    public function scopeObjective($query, $objective)
+    public function scopeEnd_date($query, $end_date)
     {
-        if ($objective) {
-            return $query->where('objective', 'LIKE', "%$objective%");
+        if ($end_date) {
+            return $query->where('end_date', 'LIKE', "%$end_date%");
         }
     }
     public function files()

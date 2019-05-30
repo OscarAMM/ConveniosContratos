@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Http\Requests\InstrumentRequest;
 use App\LegalInstrument;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Input;
 
 class LegalInstrumentController extends Controller
 {
@@ -42,7 +45,7 @@ class LegalInstrumentController extends Controller
         } else {
             $instrument->save();
         }
-        return redirect()->route('Agreement.create')->with('Info', 'El instrumento jurídico '.$instrument->name. 'ha sido guardado');
+        return Redirect::back()->withInput(Input::all());
     }
 
     public function update(InstrumentRequest $request, $id)

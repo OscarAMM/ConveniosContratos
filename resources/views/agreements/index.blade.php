@@ -37,25 +37,25 @@
             </p>
             <div class="collapse" id="collapseExample">
                 <div class="card card-body" style="margin-bottom:5px; background-color:#BF942D;">
-                    <!-- inicio form busqueda-->
+                    <!-- -----------------------------inicio form busqueda----------------------------->
                     <div class="form-row">
-                        <div class="col" style="margin-right:5px">
+                        <div class="col-label-form" style="margin-right:5px">
                             <label for="name" class="col-form-label text-muted">Nombre</label>
                             {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre  del documento'])}}
                         </div>
-                        <div class="col" style="margin-right:5px">
+                        <div class="col-label-form" style="margin-right:5px">
                             <label for="name" class="col-form-label text-muted">Instrumento jurídico</label>
                             {{Form::text('legalInstrument',null,['class'=>'form-control','placeholder'=>'Instrumento jurídico'])}}
                         </div>
-                        <div class="col" style="margin-right:5px;">
+                        <div class="col-label-form" style="margin-right:5px;">
                             <label for="name" class="col-form-label text-muted">Objetivo</label>
                             {{Form::text('objective', null, ['class'=>'form-control', 'placeholder'=>'Objetivo'])}}
                         </div>
-                        <div class="col" style="margin-right:5px;">
+                        <div class="col-label-form" style="margin-right:5px;">
                             <label for="name" class="col-form-label text-muted">Fecha Recepción</label>
                             {{Form::text('reception', null, ['class'=>'form-control', 'placeholder'=>'Año-Mes-Dia'])}}
                         </div>
-                        <div class="col" style="margin-right:5px">
+                        <div class="col-label-form" style="margin-right:5px">
                             <label for="name" class="col-form-label text-muted">Tipo de instrumento</label>
                             <select name="instrumentType" id="instrumentType" class="form-control">
                                 <option></option>
@@ -64,20 +64,20 @@
                                 <option>Otros</option>
                             </select>
                         </div>
-                        <div class="col" style="margin-right:5px;">
-                            <label for="name" class="col-form-label text-muted">Suscrito</label>
-                            <input type="text" id="people_id" name="people_id" class="form-control "
-                                placeholder="ingrese suscrito">
+                        <div class="col-label-form">
+                            <label for="people_id" class=" text-muted">Parte</label>
+                            <input type="text" id="people_id" name="people_id" class="form-control"
+                                placeholder="ingrese las partes">
                             <div id="peopleList">
                             </div>
                         </div>
                     </div>
+
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">
                             <span class="glyphicon glyphicon-search">Buscar</span>
                         </button></div>
                 </div>
-
                 {{Form::close()}}
             </div>
 
