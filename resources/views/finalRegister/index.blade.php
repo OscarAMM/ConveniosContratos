@@ -95,7 +95,7 @@
                     <td>{{$document->instrumentType}}</td>
                     <td>{{$document->signature}}</td>
                     <td>{{$document->end_date}}</td>
-                    <td>{{App\Person::find($document->people_id)->name}}</td>
+                    <td>@foreach($document->getPeople as $person){{$person->name.', '}}@endforeach</td>
                     @endforeach
                 </tr>
             </tbody>

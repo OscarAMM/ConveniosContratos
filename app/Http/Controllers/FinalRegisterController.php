@@ -89,7 +89,8 @@ class FinalRegisterController extends Controller
         $document->legalInstrument = $request->legalInstrument;
         $document->registerNumber = $request->registerNumber;
         $document->signature = $request->signature;
-        $document->validity = $request->validity;
+        $document->start_date = $request->start_date;
+        $document->end_date = $request->end_date;
         $document->session = $request->session;
         $document->scope = $request->scope;
         $document->hide = $request->hide;
@@ -103,8 +104,8 @@ class FinalRegisterController extends Controller
         } else {
             $document->hide = false;
         }
-        $splitPeopleName = explode(' - ', $request->people_id);
-        $document->people_id = $splitPeopleName[0];
+      /*  $splitPeopleName = explode(' - ', $request->people_id);
+        $document->people_id = $splitPeopleName[0];*/
         if (FinalRegister::where('name', $document->name)->exists()) {
             return back()->with('info', 'El documento ' . $document->name . ' ya existe.');
         } else {
@@ -115,7 +116,7 @@ class FinalRegisterController extends Controller
         $people = json_decode($acturl);
         foreach ($people as $peopleSelected) {
             $splitPerson = explode(' - ', $peopleSelected->id_pro);
-            $agreement->people()
+            $document->people()
                 ->attach(Person::where('id', $splitPerson[0])->first());
         }
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido guardado');
