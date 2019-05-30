@@ -209,13 +209,25 @@ class FinalRegisterController extends Controller
             $document->save();
             $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
         }
-        $acturl = urldecode($request->ListaPro); //decodifico el JSON
+        $people = $request->people;
+
+        $document->people()->detach();
+        foreach ($people as $person) {
+            $document->people()
+                ->attach(Person::where('id', $person)->first());
+        }
+        if ($request->people_id) {
+            $splitName = explode(' - ', $request->people_id);
+            $document->people()
+                ->attach(Person::where('id', $splitName[0])->first());
+        }
+        /*$acturl = urldecode($request->ListaPro); //decodifico el JSON
         $people = json_decode($acturl);
         foreach ($people as $peopleSelected) {
             $splitPerson = explode(' - ', $peopleSelected->id_pro);
             $document->people()
                 ->attach(Person::where('id', $splitPerson[0])->first());
-        }
+        }*/
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido guardado');
     }
     public function fetch(Request $request)
