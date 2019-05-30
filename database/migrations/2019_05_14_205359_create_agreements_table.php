@@ -25,10 +25,10 @@ class CreateAgreementsTable extends Migration
             $table->date('end_date');
             $table->string('status');
             $table->String('liable_user');
-            $table->integer('people_id')->unsigned();
+            /*$table->integer('people_id')->unsigned();*/
 
             $table->timestamps();
-            $table->foreign('people_id')->references('id')->on('people')->onUpdate('cascade')->onDelete('cascade');
+           /* $table->foreign('people_id')->references('id')->on('people')->onUpdate('cascade')->onDelete('cascade');*/
 
 
         });

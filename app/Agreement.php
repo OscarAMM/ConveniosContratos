@@ -42,7 +42,8 @@ class Agreement extends Model
     public function scopePeople_id($query, $people_id)
     {
         if ($people_id) {
-            return $query->where('people_id', 'LIKE', "%$people_id%");
+            return $agreements=Person::find($people_id)->getAgreements();
+            //return $query->where('people_id', 'LIKE', "%$people_id%");
         }
     }
     public function scopeObjective($query, $objective)
@@ -96,6 +97,11 @@ class Agreement extends Model
     public function getUser()
     {
         return $this->belongsToMany(User::class, 'agreement_user')->withPivot('user_id', 'agreement_id')
+            ->withTimestamps();
+    }
+    public function getPeople()
+    {
+        return $this->belongsToMany(Person::class, 'agreement_person')->withPivot('person_id', 'agreement_id')
             ->withTimestamps();
     }
     public function getFiles()

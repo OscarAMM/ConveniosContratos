@@ -40,8 +40,17 @@ class Person extends Model
         }
     }
     public function agreements(){
-        return $this
-        ->hasMany(Agreement::class)
+        return $this->belongsToMany(Agreement::class)
         ->withTimestamps();
+    }
+    public function hasDocument($id)
+    {
+        if ($this->agreements()->where('agreement_id', $id)->first()) {
+            return true;
+        }
+        return false;
+    }
+    public function getAgreements(){
+        return $this->belongsToMany(Agreement::class,'agreement_person')->orderBy('id', 'ASC')->paginate();
     }
 }

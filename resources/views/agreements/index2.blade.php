@@ -25,7 +25,7 @@
             </p>
             <p class="text-muted"><i>Nota: Los archivos registrados en esta sección son ÚNICAMENTE para trabajar de
                     manera interna. No se desplegará ninguna información en vistas públicas o al usuario final.</i></p>
-            {{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
+            {{Form::open(['route'=>'Agreement.index2','method'=>'GET','class'=>'form-inline'])}}
             @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
             <p class="text-item-center"><a href="{{route('Agreement.create')}}" class="btn boton"
                     style="margin-right:5px">Nuevo</a>
@@ -109,7 +109,7 @@
                         <td>{{$agreement->instrumentType}}</td>
                         <td>{{$agreement->reception}}</td>
                         <td>{{$agreement->objective}}</td>
-                        <td>{{App\Person::find($agreement->people_id)->name}}</td>
+                        <td>@foreach($agreement->getPeople as $person){{$person->name.'; '}}@endforeach</td>
                         <td>
                         <td><a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a></td>
                         <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>

@@ -65,19 +65,6 @@
                     </div>
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
-                        <label for="people_id" class="col-form-label">Partes</label>
-                        <div class="form-inline">
-                            <input type="text" id="people_id" name="people_id" class="form-control col-md-11"
-                                placeholder="ingrese suscrito">
-                            <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
-                                data-target="#suscrito" data-whatever="@fat">...</button>
-                        </div>
-                        <div id="peopleList">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <small style="color:#D90101;">*</small>
                         <label for="liable_user" class="col-form-label">Asigne Externos</label>
                         <input type="text" id="liable_user" name="liable_user" class="form-control "
                             placeholder="ingrese responsable externo">
@@ -94,18 +81,14 @@
                         @endif
                         @endforeach
                     </div>
-                    <div class="form-group">
-                        <small style="color:#D90101;">*</small>
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                        <label for="file" class="col-form-label">Seleccione el archivo</label>
-                        <input type="file" class="form-control-file" name="file" id="file">
-                    </div>
                     <from>
                         <label for="ListaPro" class="col-form-label">Asigne Partes</label>
                         <br>
                         <!-- Trigger the modal with a button -->
                         <button type="button" class="btn btn-info" data-toggle="modal"
-                            data-target="#myModal">Agregar</button>
+                            data-target="#myModal">Asignar</button>
+                        <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
+                            data-target="#suscrito" data-whatever="@fat">...</button>
                         <input type="hidden" id="ListaPro" name="ListaPro" value="" required />
                         <table id="TablaPro" class="table">
                             <thead>
@@ -122,13 +105,13 @@
                                 </tr>
                             </tbody>
                         </table>
-                        <!--Agregue un boton en caso de desear enviar los productos para ser procesados
-                <div class="form-group">
-                    <button type="submit" id="guardar" name="guardar"
-                        class="btn btn-lg btn-default pull-right">Guardar</button>
-                </div>-->
-
                     </from>
+                    <div class="form-group">
+                        <small style="color:#D90101;">*</small>
+                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                        <label for="file" class="col-form-label">Seleccione el archivo</label>
+                        <input type="file" class="form-control-file" name="file" id="file">
+                    </div>
                     {{csrf_field()}}
                 </form>
             </div>
@@ -298,30 +281,6 @@ jQuery(document).ready(function() {
         $('#proList').fadeOut();
     });
 
-    $('#people_id').keyup(function() {
-        var query = $(this).val();
-        if (query != '') {
-            var _token = $('input[name="_token"]').val();
-            $.ajax({
-                url: "{{ route('autocomplete.fetch') }}",
-                method: "POST",
-                data: {
-                    query: query,
-                    _token: _token
-                },
-                success: function(data) {
-                    $('#peopleList').fadeIn();
-                    $('#peopleList').html(data);
-                }
-            });
-        }
-    });
-
-    jQuery('#peopleList').on('click', 'li', function() {
-        $('#people_id').val($(this).text());
-        $('#peopleList').fadeOut();
-    });
-
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
         if (query != '') {
@@ -345,10 +304,7 @@ jQuery(document).ready(function() {
         $('#legalInstrument').val($(this).text());
         $('#instrumentList').fadeOut();
     });
-    $("#reception").keyup(function() {
-        var value = $(this).val();
-        $("#end_date").val(value);
-    });
+    
 
 
 
@@ -363,10 +319,10 @@ function RefrescaProducto() {
     var ip = [];
     var i = 0;
     $('#guardar').attr('disabled', 'disabled'); //Deshabilito el Boton Guardar
-    $('.iProduct').each(function(index, element) {
+    $('.item').each(function(index, element) {
         i++;
         ip.push({
-            id_pro: $(this).val()
+            id_pro: $(this).text()
         });
     });
     // Si la lista de Productos no es vacia Habilito el Boton Guardar
@@ -382,8 +338,8 @@ function agregarProducto() {
     var sel = $('#pro_id').val(); //Capturo el Value del Producto
     var text = $('#pro_id').text(); //Capturo el Nombre del Producto- Texto dentro del Select
     var sptext = text.split();
-    var newtr = '<tr class="item"  data-id="' + sel + '">';
-    newtr = newtr + '<td class="iProduct" >' + sel + '</td>';
+    var newtr = '<tr class="item" value"'+sel+'" data-id="' + sel + '">';
+    newtr = newtr + '<td class="iProduct" value"'+sel+'">' + sel + '</td>';
     newtr = newtr +
         '<td><button type="button" class="btn btn-danger btn-xs remove-item"><i class="fa fa-times"></i></button></td></tr>';
 
@@ -397,7 +353,7 @@ function agregarProducto() {
             $('#ProSelected .no-item').slideDown(300);
         RefrescaProducto();
     });
-    $('.iProduct').off().change(function(e) {
+    $('.item').off().change(function(e) {
         RefrescaProducto();
     });
 }

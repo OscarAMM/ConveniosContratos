@@ -48,6 +48,8 @@ Route::post('send/sendmail', ['uses'=> 'EmailController@sendEmail' , 'as' => 'Se
 Route::get('/RevisionContractForum/{id}',  ['uses'=> 'RevisionController@ForumContract' , 'as' => 'Forum.Contract']);
 Route::get('/RevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@ForumAgreement' , 'as' => 'Forum.Agreement']);
 Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'Revision']);
+Route::get('/Back', ['uses' => 'RevisionController@back', 'as' => 'Back']);
+
 Route::get('/UserRevision',['uses' => 'RevisionController@UserRevision', 'as' => 'UserRevision']);
 Route::get('/PublicRevisionContractForum/{id}',  ['uses'=> 'RevisionController@PublicForumContract' , 'as' => 'PublicForum.Contract']);
 Route::get('/PublicRevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@PublicForumAgreement' , 'as' => 'PublicForum.Agreement']);
