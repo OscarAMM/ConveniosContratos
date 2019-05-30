@@ -77,3 +77,4 @@ Route::get('/PersonModal', ['uses' => 'PersonController@storeModal', 'as' =>'Per
 //FINAL REGISTER ROUTE
 Route::resource('FinalRegister','FinalRegisterController');
 Route::get('/FinalPersonModal',['uses' => 'PersonController@storeModalFinal','as' =>'FinalModal']);
+Route::get('/FinalDocs', ['uses'=> 'FinalRegisterController@storeDocs', 'as' =>'FinalDocs']);

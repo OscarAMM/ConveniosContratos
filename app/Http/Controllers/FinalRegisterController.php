@@ -163,6 +163,10 @@ class FinalRegisterController extends Controller
         $file = FileAgreement::find($id);
         return storage::download('/finalFiles/' . $file->name);
     }
+    //STORE FOR DOCUMENTS
+    public function storeDocs(){
+     return view('finalregister.createDocs');
+    }
     public function fetch(Request $request)
     {
         if ($request->get('query')) {
