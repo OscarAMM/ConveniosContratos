@@ -65,7 +65,7 @@ class FinalRegister extends Model
     }
     public function getPeople()
     {
-        return $this->belongsToMany(Person::class, 'agreement_person')->withPivot('person_id', 'agreement_id')
+        return $this->belongsToMany(Person::class, 'final_register_person')->withPivot('person_id', 'final_register_id')
             ->withTimestamps();
     }
     public function files()

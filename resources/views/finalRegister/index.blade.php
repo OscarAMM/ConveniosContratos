@@ -95,7 +95,7 @@
                     <td>{{$document->instrumentType}}</td>
                     <td>{{$document->signature}}</td>
                     <td>{{$document->end_date}}</td>
-                    <td></td>
+                    <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
                     <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
                         </td>
                         @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
