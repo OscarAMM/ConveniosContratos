@@ -285,9 +285,7 @@
 <script>
 $.noConflict();
 jQuery(document).ready(function() {
-
-
-    $('#people_id').keyup(function() {
+    $('#pro_id').keyup(function() {
         var query = $(this).val();
         if (query != '') {
             var _token = $('input[name="_token"]').val();
@@ -299,20 +297,18 @@ jQuery(document).ready(function() {
                     _token: _token
                 },
                 success: function(data) {
-                    $('#peopleList').fadeIn();
-                    $('#peopleList').html(data);
+                    $('#proList').fadeIn();
+                    $('#proList').html(data);
                 }
             });
         }
     });
 
-    jQuery('#peopleList').on('click', 'li', function() {
-        $('#people_id').val($(this).text());
-        $('#peopleList').fadeOut();
+    jQuery('#proList').on('click', 'li', function() {
+        $('#pro_id').val($(this).text());
+        $('#proList').fadeOut();
     });
-
-
-
+    
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
         if (query != '') {
@@ -335,10 +331,6 @@ jQuery(document).ready(function() {
     jQuery('#instrumentList').on('click', 'li', function() {
         $('#legalInstrument').val($(this).text());
         $('#instrumentList').fadeOut();
-    });
-    $("#reception").keyup(function() {
-        var value = $(this).val();
-        $("#end_date").val(value);
     });
 
 });

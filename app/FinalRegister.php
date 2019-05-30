@@ -58,6 +58,16 @@ class FinalRegister extends Model
             return $query->where('end_date', 'LIKE', "%$end_date%");
         }
     }
+    public function people()
+    {
+        return $this->belongsToMany(Person::class)
+            ->withTimestamps();
+    }
+    public function getPeople()
+    {
+        return $this->belongsToMany(Person::class, 'agreement_person')->withPivot('person_id', 'agreement_id')
+            ->withTimestamps();
+    }
     public function files()
     {
         return $this->belongsToMany(FileAgreement::class)
@@ -73,11 +83,7 @@ class FinalRegister extends Model
         return $this->belongsToMany(Dependence::class)
             ->withTimestamps();
     }
-    public function people()
-    {
-        return $this->belongsToMany(Person::class)
-            ->withTimestamps();
-    }
+    
 
     public function users()
     {

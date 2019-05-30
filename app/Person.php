@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Agreement;
+use App\FinalRegister;
 
 class Person extends Model
 {
@@ -43,6 +44,10 @@ class Person extends Model
         return $this->belongsToMany(Agreement::class)
         ->withTimestamps();
     }
+    public function final(){
+        return $this->belongsToMany(FinalRegister::class)
+        ->withTimestamps();
+    }
     public function hasDocument($id)
     {
         if ($this->agreements()->where('agreement_id', $id)->first()) {
@@ -52,5 +57,8 @@ class Person extends Model
     }
     public function getAgreements(){
         return $this->belongsToMany(Agreement::class,'agreement_person')->orderBy('id', 'ASC')->paginate();
+    }
+    public function getFinal(){
+        return $this->belongsToMany(FinalRegister::class,'final_register_person')->orderBy('id', 'ASC')->paginate();
     }
 }
