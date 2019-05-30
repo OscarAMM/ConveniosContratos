@@ -68,7 +68,7 @@ Route::get('/NotifyContract/{id}',  ['uses'=> 'CommentController@notifyContract'
 Route::get('/dynamic_pdf', ['uses' => 'PDFController@index', 'as' => 'PrePDF']);
 Route::get('/PDF', ['uses' => 'PDFController@downloadPDF', 'as' => 'PDFDownload'] );
 
-Route::get('/RegistroFinal/{id}', ['uses' =>'FinalRegisterController@index', 'as' => 'Register'] );
+Route::get('/RegistroFinal/{id}', ['uses' =>'FinalRegisterController@storeDocs', 'as' => 'Register'] );
 //Legal Instrument Route
 Route::resource('LegalInstrument', 'LegalInstrumentController');
 Route::get('/legalInstrument', ['uses' => 'LegalInstrumentController@storeModal', 'as' =>'newInstrument']);
@@ -77,3 +77,4 @@ Route::get('/PersonModal', ['uses' => 'PersonController@storeModal', 'as' =>'Per
 //FINAL REGISTER ROUTE
 Route::resource('FinalRegister','FinalRegisterController');
 Route::get('/FinalPersonModal',['uses' => 'PersonController@storeModalFinal','as' =>'FinalModal']);
+Route::get('/FinalDocs', ['uses'=> 'FinalRegisterController@storeDocs', 'as' =>'FinalDocs']);
