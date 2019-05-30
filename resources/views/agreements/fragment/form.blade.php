@@ -4,10 +4,24 @@
 </head>
 
 <div class="container">
-    <div class="column-sm-8">
-        <div class="card">
-            <div class="card-body">
-                <form method="POST" action="#">
+    <div class="row">
+        <div class="col-md-4 order-md-2 mb-4">
+            <h3>Agregar</h3>
+            <hr style="border:2px solid #BF942D">
+            <div class="form-group">
+                <p>Se recomienda agregar <i>Nuevo instrumento</i> y <i>Partes</i> antes de llenar el formulario, para
+                    evitar pérdidas de información al momento de llenar el formulario.</p>
+                <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModal"
+                    data-whatever="@fat">Nuevo Instrumento</button>
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#suscrito"
+                    data-whatever="@fat">Agregar partes</button>
+            </div>
+
+        </div>
+        <div class="col-md-8 order-md-1">
+        <h3>Formulario</h3>
+        <hr style="border:2px solid #BF942D">
+        <form method="POST" action="#">
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
                         <label for="name" class="col-form-label">Nombre completo del documento </label>
@@ -17,11 +31,10 @@
                     <div class="form-group">
                         <small style="color:#D90101;">*</small>
                         <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
-                        <div class="form-inline ">
+                        <div class="form-group ">
                             <input type="text" id="legalInstrument" name="legalInstrument"
-                                class="form-control col-md-11" placeholder="Ingrese instrumento">
-                            <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
-                                data-target="#exampleModal" data-whatever="@fat">...</button>
+                                class="form-control" placeholder="Ingrese instrumento">
+            
                         </div>
                         <div id="instrumentList">
                         </div>
@@ -85,10 +98,9 @@
                         <label for="ListaPro" class="col-form-label">Asigne Partes</label>
                         <br>
                         <!-- Trigger the modal with a button -->
-                        <button type="button" class="btn btn-info" data-toggle="modal"
+                        <button type="button" class="btn btn-primary" data-toggle="modal"
                             data-target="#myModal">Asignar</button>
-                        <button type="button" class="btn btn-secondary col-sm-1" data-toggle="modal"
-                            data-target="#suscrito" data-whatever="@fat">...</button>
+                
                         <input type="hidden" id="ListaPro" name="ListaPro" value="" required />
                         <table id="TablaPro" class="table">
                             <thead>
@@ -114,13 +126,13 @@
                     </div>
                     {{csrf_field()}}
                 </form>
-            </div>
-        </div>
-        <div class="form-group text-center" style="margin-top:5px">
+                <div class="form-group text-center" style="margin-top:5px">
             <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
             {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
 
         </div>
+        </div>
+    </div>
         <div class="row">
             <div class="col">
                 <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
@@ -132,31 +144,30 @@
 <!-- Modal for people-->
 <div class="modal fade" id="myModal" role="dialog">
 
-<div class="modal-dialog">
+    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">Agregar Parte a la lista</h4>
-        </div>
-        <div class="modal-body">
-            <div class="form-group">
-                <label>Parte</label>
-                <input type="text" id="pro_id" name="pro_id" data-width='100%'
-                    class="form-control col-md-11" placeholder="ingrese suscrito">
-                <div id="proList">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Agregar Parte a la lista</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Parte</label>
+                    <input type="text" id="pro_id" name="pro_id" data-width='100%' class="form-control col-md-11"
+                        placeholder="ingrese suscrito">
+                    <div id="proList">
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="modal-footer">
-            <!--Uso la funcion onclick para llamar a la funcion en javascript-->
-            <button type="button" onclick="agregarProducto()" class="btn btn-default"
-                data-dismiss="modal">Agregar</button>
+            <div class="modal-footer">
+                <!--Uso la funcion onclick para llamar a la funcion en javascript-->
+                <button type="button" onclick="agregarProducto()" class="btn btn-default"
+                    data-dismiss="modal">Agregar</button>
+            </div>
         </div>
     </div>
-
-</div>
 </div>
 <!--   -->
 
@@ -304,7 +315,7 @@ jQuery(document).ready(function() {
         $('#legalInstrument').val($(this).text());
         $('#instrumentList').fadeOut();
     });
-    
+
 
 
 
@@ -338,8 +349,8 @@ function agregarProducto() {
     var sel = $('#pro_id').val(); //Capturo el Value del Producto
     var text = $('#pro_id').text(); //Capturo el Nombre del Producto- Texto dentro del Select
     var sptext = text.split();
-    var newtr = '<tr class="item" value"'+sel+'" data-id="' + sel + '">';
-    newtr = newtr + '<td class="iProduct" value"'+sel+'">' + sel + '</td>';
+    var newtr = '<tr class="item" value"' + sel + '" data-id="' + sel + '">';
+    newtr = newtr + '<td class="iProduct" value"' + sel + '">' + sel + '</td>';
     newtr = newtr +
         '<td><button type="button" class="btn btn-danger btn-xs remove-item"><i class="fa fa-times"></i></button></td></tr>';
 
