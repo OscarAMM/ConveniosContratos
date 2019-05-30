@@ -93,14 +93,16 @@ class FinalRegisterController extends Controller
         $document->people_id = $splitPeopleName[0];*/
 
         $document->update();
-        $agreement->people()->detach();
+        $people = $request->people;
+
+        $document->people()->detach();
         foreach ($people as $person) {
-            $agreement->people()
+            $document->people()
                 ->attach(Person::where('id', $person)->first());
         }
         if ($request->people_id) {
             $splitName = explode(' - ', $request->people_id);
-            $agreement->people()
+            $document->people()
                 ->attach(Person::where('id', $splitName[0])->first());
         }
 
