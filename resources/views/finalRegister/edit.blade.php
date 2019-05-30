@@ -131,31 +131,7 @@
 
                     </select>
                 </div>
-                <form>
-                    <label for="ListaPro" class="col-form-label">Asigne Partes</label>
-                    <br>
-                    <!-- Trigger the modal with a button -->
-                    <button type="button" class="btn btn-primary" data-toggle="modal"
-                        data-target="#myModal">Asignar</button>
-
-                    <input type="hidden" id="ListaPro" name="ListaPro" value="" required />
-                    <table id="TablaPro" class="table">
-                        <thead>
-                            <tr>
-                                <th>Parte</th>
-
-                                <th>Acción</th>
-                            </tr>
-                        </thead>
-                        <tbody id="ProSelected">
-                            <!--Ingreso un id al tbody-->
-                            <tr>
-
-                            </tr>
-                        </tbody>
-                    </table>
-                </form>
-
+                
                 <div class="form-group">
                     <label for="hide" class="col-form-label">Vista pública</label>
                     <select name="hide" id="hide" class="form-control">
@@ -163,15 +139,34 @@
                         <option>Mostrar</option>
                     </select>
                 </div>
+                <div class="col-md-4">
+                        <label for="person_id" class=" col-form-label">Partes</label>
+                        @foreach($documents->getPeople as $person)
+                        <br>
+                        <input type="checkbox" name="people[]" value="{{$person->id}}"
+                            {{ $person ->hasFinal($documents->id)?'checked':'' }}> <label>{{$person->name}}</label>
+
+                        @endforeach
+                    </div>
+                    <div class="form-group">
+                        <label for="people_id" class="col-md-8 col-form-label">Añadir Parte</label>
+                        <input type="text" id="people_id" name="people_id" class="form-control "
+                            placeholder="ingrese suscrito">
+
+                        <div id="peopleList">
+                        </div>
+                    </div>
 
 
             </form>
-            {!!Form::close()!!}
             <div class="form-group text-center" style="margin-top:5px">
-                <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
-                {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
-
+                    <a href="{{route ('FinalRegister.index')}}" class="btn btn-secondary">Regresar</a>
+                    <input type="submit" value="Guardar" class="btn btn-primary">
             </div>
+            {{csrf_field()}}
+
+            {!!Form::close()!!}
+            
         </div>
 
     </div>
@@ -270,39 +265,6 @@
     </div>
 </div>
 
-<!-- Modal for people-->
-<div class="modal fade" id="myModal" role="dialog">
-
-    <div class="modal-dialog">
-
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title">Agregar Parte a la lista</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-group">
-                    <label>Parte</label>
-                    <input type="text" id="pro_id" name="pro_id" data-width='100%' class="form-control col-md-11"
-                        placeholder="ingrese suscrito">
-                    <div id="proList">
-                    </div>
-                </div>
-            </div>
-            <div class="modal-footer">
-                <!--Uso la funcion onclick para llamar a la funcion en javascript-->
-                <button type="button" onclick="agregarProducto()" class="btn btn-default"
-                    data-dismiss="modal">Agregar</button>
-            </div>
-        </div>
-
-    </div>
-</div>
-
-<!--   -->
 <!-- SCRIPTS -->
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
     integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous">
@@ -374,51 +336,4 @@ jQuery(document).ready(function() {
     });
 
 });
-</script>
-<script type="text/javascript">
-// Refresca Producto: Refresco la Lista de Productos dentro de la Tabla
-// Si es vacia deshabilito el boton guardar para obligar a seleccionar al menos un producto al usuario
-// Sino habilito el boton Guardar para que pueda Guardar
-function RefrescaProducto() {
-    var ip = [];
-    var i = 0;
-    $('#guardar').attr('disabled', 'disabled'); //Deshabilito el Boton Guardar
-    $('.item').each(function(index, element) {
-        i++;
-        ip.push({
-            id_pro: $(this).text()
-        });
-    });
-    // Si la lista de Productos no es vacia Habilito el Boton Guardar
-    if (i > 0) {
-        $('#guardar').removeAttr('disabled', 'disabled');
-    }
-    var ipt = JSON.stringify(ip); //Convierto la Lista de Productos a un JSON para procesarlo en tu controlador
-    $('#ListaPro').val(encodeURIComponent(ipt));
-}
-
-function agregarProducto() {
-
-    var sel = $('#pro_id').val(); //Capturo el Value del Producto
-    var text = $('#pro_id').text(); //Capturo el Nombre del Producto- Texto dentro del Select
-    var sptext = text.split();
-    var newtr = '<tr class="item" value"' + sel + '" data-id="' + sel + '">';
-    newtr = newtr + '<td class="iProduct" value"' + sel + '">' + sel + '</td>';
-    newtr = newtr +
-        '<td><button type="button" class="btn btn-danger btn-xs remove-item"><i class="fa fa-times"></i></button></td></tr>';
-
-    $('#ProSelected').append(newtr); //Agrego el Producto al tbody de la Tabla con el id=ProSelected
-
-    RefrescaProducto(); //Refresco Productos
-
-    $('.remove-item').off().click(function(e) {
-        $(this).parent('td').parent('tr').remove(); //En accion elimino el Producto de la Tabla
-        if ($('#ProSelected tr.item').length == 0)
-            $('#ProSelected .no-item').slideDown(300);
-        RefrescaProducto();
-    });
-    $('.item').off().change(function(e) {
-        RefrescaProducto();
-    });
-}
 </script>

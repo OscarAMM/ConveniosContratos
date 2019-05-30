@@ -138,7 +138,7 @@
 
             </form>
             <div class="form-group text-center" style="margin-top:5px">
-                <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
+                <a href="{{route ('FinalRegister.index')}}" class="btn btn-secondary">Regresar</a>
                 {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
 
             </div>

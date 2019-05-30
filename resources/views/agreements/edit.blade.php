@@ -90,12 +90,10 @@
                     <div class="col-md-4">
                         <label for="person_id" class=" col-form-label">Partes</label>
                         @foreach($agreements->getPeople as $person)
-                        @if($user->hasRole('admin')||$user->hasRole('revisor'))
                         <br>
                         <input type="checkbox" name="people[]" value="{{$person->id}}"
                             {{ $person ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$person->name}}</label>
 
-                        @endif
                         @endforeach
                     </div>
                     <div class="form-group">

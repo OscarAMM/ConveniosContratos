@@ -55,6 +55,13 @@ class Person extends Model
         }
         return false;
     }
+    public function hasFinal($id)
+    {
+        if ($this->final()->where('final_register_id', $id)->first()) {
+            return true;
+        }
+        return false;
+    }
     public function getAgreements(){
         return $this->belongsToMany(Agreement::class,'agreement_person')->orderBy('id', 'ASC')->paginate();
     }
