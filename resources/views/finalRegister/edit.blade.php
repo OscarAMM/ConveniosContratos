@@ -114,15 +114,15 @@
                     <small style="color:#D90101;">*</small>
                     <label for="scope" class="col-form-label">Ámbito</label>
                     <select name="scope" id="scope" class="form-control">
-                        @if($documents->instrumentType === "Estatal")
+                        @if($documents->scope === "Estatal")
                         <option>Estatal</option>
                         <option>Nacional</option>
                         <option>Internacional</option>
-                        @elseif($documents->instrumentType === "Nacional")
+                        @elseif($documents->scope === "Nacional")
                         <option>Nacional</option>
                         <option>Estatal</option>
                         <option>Internacional</option>
-                        @elseif($documents->instrumentType === "Internacional")
+                        @elseif($documents->scope === "Internacional")
                         <option>Internacional</option>
                         <option>Nacional</option>
                         <option>Estatal</option>
