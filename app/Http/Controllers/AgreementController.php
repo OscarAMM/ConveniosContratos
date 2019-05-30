@@ -24,16 +24,16 @@ class AgreementController extends Controller
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
-        $reception=$request->get('reception');
+        $reception = $request->get('reception');
         if ($request->get('people_id')) {
             $splitName = explode(' - ', $request->get('people_id'));
-            $agreements=Person::find($splitName[0])->agreements()
-            ->where('name', 'LIKE', "%$name%")
-            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-            ->where('instrumentType', 'LIKE', "%$instrumentType%")
-            ->where('objective', 'LIKE', "%$objective%")
-            ->where('reception', 'LIKE', "%$reception%")
-            ->paginate();
+            $agreements = Person::find($splitName[0])->agreements()
+                ->where('name', 'LIKE', "%$name%")
+                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                ->where('objective', 'LIKE', "%$objective%")
+                ->where('reception', 'LIKE', "%$reception%")
+                ->paginate();
         } else {
             /*if($request->get('id')||
             $request->get('name')||
@@ -47,17 +47,14 @@ class AgreementController extends Controller
                 ->name($name)
                 ->legalInstrument($legalInstrument)
                 ->instrumentType($instrumentType)
-                /*->people_id($people)*/
+            /*->people_id($people)*/
                 ->objective($objective)
                 ->reception($reception)
                 ->paginate();
             /*}else{
-                $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
-            }*/
+        $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
+        }*/
         }
-
-        
-        
 
         return view('agreements.index', compact('agreements'));
     }
@@ -68,16 +65,16 @@ class AgreementController extends Controller
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
-        $reception=$request->get('reception');
+        $reception = $request->get('reception');
         if ($request->get('people_id')) {
             $splitName = explode(' - ', $request->get('people_id'));
-            $agreements=Person::find($splitName[0])->agreements()
-            ->where('name', 'LIKE', "%$name%")
-            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-            ->where('instrumentType', 'LIKE', "%$instrumentType%")
-            ->where('objective', 'LIKE', "%$objective%")
-            ->where('reception', 'LIKE', "%$reception%")
-            ->paginate();
+            $agreements = Person::find($splitName[0])->agreements()
+                ->where('name', 'LIKE', "%$name%")
+                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                ->where('objective', 'LIKE', "%$objective%")
+                ->where('reception', 'LIKE', "%$reception%")
+                ->paginate();
         } else {
             /*if($request->get('id')||
             $request->get('name')||
@@ -91,13 +88,13 @@ class AgreementController extends Controller
                 ->name($name)
                 ->legalInstrument($legalInstrument)
                 ->instrumentType($instrumentType)
-                /*->people_id($people)*/
+            /*->people_id($people)*/
                 ->objective($objective)
                 ->reception($reception)
                 ->paginate();
             /*}else{
-                $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
-            }*/
+        $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
+        }*/
         }
 
         return view('agreements.index2', compact('agreements'));
@@ -168,10 +165,10 @@ class AgreementController extends Controller
         $agreement->instrumentType = $request->instrumentType;
         $agreement->scope = $request->scope;
         if ($request->end_date) {
-            $agreement->end_date=new Carbon($request->end_date);
+            $agreement->end_date = new Carbon($request->end_date);
         } else {
-            $pre=new Carbon($request->reception);
-            $final=$pre->addWeekDays(4);
+            $pre = new Carbon($request->reception);
+            $final = $pre->addWeekDays(4);
             $agreement->end_date = $final;
         }
         $agreement->liable_user = $request->liable_user;
@@ -183,7 +180,7 @@ class AgreementController extends Controller
         } else {
         $agreement->hide = false;
         }*/
-        
+
         $agreement->update();
         $agreement->users()->detach();
         foreach ($users as $user) {
@@ -205,9 +202,9 @@ class AgreementController extends Controller
         if ($request->people_id) {
             $splitName = explode(' - ', $request->people_id);
             $agreement->people()
-            ->attach(Person::where('id', $splitName[0])->first());
+                ->attach(Person::where('id', $splitName[0])->first());
         }
-        
+
         return redirect()->route('Agreement.index')->with('info', 'El Convenio ' . $agreement->name . ' ha sido actualizado');
     }
     public function store(AgreementRequest $request)
@@ -239,13 +236,13 @@ class AgreementController extends Controller
         //$agreement->start_date = Carbon::now();
         $agreement->start_date = new Carbon($request->reception);
         if ($request->end_date) {
-            $agreement->end_date=new Carbon($request->end_date);
+            $agreement->end_date = new Carbon($request->end_date);
         } else {
-            $pre=new Carbon($request->reception);
-            $final=$pre->addWeekDays(4);
+            $pre = new Carbon($request->reception);
+            $final = $pre->addWeekDays(4);
             $agreement->end_date = $final;
         }
-        
+
         /*if ($request->hide == "visible") {
         $agreement->hide = true;
         } else {
@@ -272,7 +269,7 @@ class AgreementController extends Controller
         }
         $acturl = urldecode($request->ListaPro); //decodifico el JSON
         $people = json_decode($acturl);
-        foreach ($people  as $peopleSelected) {
+        foreach ($people as $peopleSelected) {
             $splitPerson = explode(' - ', $peopleSelected->id_pro);
             $agreement->people()
                 ->attach(Person::where('id', $splitPerson[0])->first());

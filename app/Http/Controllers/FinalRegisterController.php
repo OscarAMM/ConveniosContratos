@@ -7,9 +7,9 @@ use App\FinalRegister;
 use App\Http\Requests\FinalRegisterRequest;
 use App\LegalInstrument;
 use App\Person;
-use Redirect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Redirect;
 
 class FinalRegisterController extends Controller
 {
@@ -21,16 +21,25 @@ class FinalRegisterController extends Controller
         $instrumentType = $request->get('instrumentType');
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
-        $splitName = explode(' - ', $request->get('people_id'));
-        $people = $splitName[0];
-        $documents = FinalRegister::orderBy('id', 'ASC')
-            ->id($id)
-            ->name($name)
-            ->legalInstrument($legalInstrument)
-            ->signature($signature)
-            ->end_date($end_date)
-            ->people_id($people)
-            ->paginate();
+        if ($request->get('people_id')) {
+            $splitName = explode(' - ', $request->get('people_id'));
+            $agreements = Person::find($splitName[0])->agreements()
+                ->where('name', 'LIKE', "%$name%")
+                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                ->where('signature', 'LIKE', "%$signature%")
+                ->where('end_date', 'LIKE', "%$end_date%")
+                ->paginate();
+        } else {
+            $documents = FinalRegister::orderBy('id', 'ASC')
+                ->id($id)
+                ->name($name)
+                ->legalInstrument($legalInstrument)
+                ->signature($signature)
+                ->end_date($end_date)
+                ->paginate();
+        }
+
         return view('finalregister.index', compact('documents'));
     }
     public function create()
@@ -47,7 +56,18 @@ class FinalRegisterController extends Controller
         $person = Person::find($person_id);
         $files = $documents->getFiles;
 
-        return view('finalregister.show',compact('documents','person'));
+        return view('finalregister.show', compact('documents', 'person'));
+    }
+    public function edit($id)
+    {
+        $document = FinalRegister::find($id);
+        return view('finalregister.edit', compact('document'));
+    }
+    public function destroy($id)
+    {
+        $document = FinalRegister::find($id);
+        $document->delete();
+        return back()->with('info', "El documento '.$document->name.' ha sido eliminado");
     }
     public function store(FinalRegisterRequest $request)
     {
@@ -65,7 +85,6 @@ class FinalRegisterController extends Controller
 
         $document = new FinalRegister();
         $document->name = $request->input('name');
-        $document->reception = $request->reception;
         $document->objective = $request->objective;
         $document->legalInstrument = $request->legalInstrument;
         $document->registerNumber = $request->registerNumber;
@@ -92,20 +111,48 @@ class FinalRegisterController extends Controller
             $document->save();
             $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
         }
-
+        $acturl = urldecode($request->ListaPro); //decodifico el JSON
+        $people = json_decode($acturl);
+        foreach ($people as $peopleSelected) {
+            $splitPerson = explode(' - ', $peopleSelected->id_pro);
+            $agreement->people()
+                ->attach(Person::where('id', $splitPerson[0])->first());
+        }
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido guardado');
     }
-    public function fetchUsers(Request $request)
+    public function showFile($id)
+    {
+        $file = FileAgreement::find($id);
+        return storage::download('/finalFiles/' . $file->name);
+    }
+    public function fetch(Request $request)
     {
         if ($request->get('query')) {
-            $query = $request->get('query2');
-            $data = DB::table('users')
+            $query = $request->get('query');
+            $data = DB::table('people')
                 ->where('name', 'LIKE', "%{$query}%")
                 ->get();
             $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
             foreach ($data as $row) {
                 $output .= '
-         <li class="dropdown-item">' . $row->id . ' - ' . $row->name . ' - ' . $row->email . '</li>
+         <li class="dropdown-item">' . $row->id . ' - ' . $row->name . '</li>
+         ';
+            }
+            $output .= '</ul>';
+            echo $output;
+        }
+    }
+    public function fetchInstruments(Request $request)
+    {
+        if ($request->get('query')) {
+            $query = $request->get('query');
+            $data = DB::table('legal_instruments')
+                ->where('name', 'LIKE', "%{$query}%")
+                ->get();
+            $output = '<ul class="dropdown-menu" style="display:block; position:relative">';
+            foreach ($data as $row) {
+                $output .= '
+         <li class="dropdown-item">' . $row->name . '</li>
          ';
             }
             $output .= '</ul>';

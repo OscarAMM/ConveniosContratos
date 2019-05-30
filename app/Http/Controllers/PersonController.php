@@ -80,6 +80,23 @@ class PersonController extends Controller
 
         return redirect()->route('Agreement.create')->with('info', 'La persona ' . $person->name . ' ha sido agregado(a)');
     }
+    public function storeModalFinal(PersonRequest $request)
+    {
+        $person = new Person();
+        $person->name = $request->name;
+        $person->personType = $request->personType;
+        $person->country = $request->country;
+        $person->acronym = $request->acronym;
+        $person->email = $request->email;
+        //The function checks if a person with the same name alredy exists
+        if (Person::where('name', $person->name)->exists()) {
+            return back()->with('info', 'La persona ' . $person->name . ' ya existe.');
+        } else {
+            $person->save();
+        }
+
+        return redirect()->route('FinalRegister.create')->with('info', 'La persona ' . $person->name . ' ha sido agregado(a)');
+    }
     public function update(PersonRequest $request, $id)
     {
         $person = Person::find($id);

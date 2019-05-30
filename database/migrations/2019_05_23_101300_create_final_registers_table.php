@@ -16,7 +16,7 @@ class CreateFinalRegistersTable extends Migration
         Schema::create('final_registers', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->date('reception');
+            //$table->date('reception');
             $table->text('objective');
             $table->string('legalInstrument');
             $table->integer('registerNumber')->nullable();
@@ -29,10 +29,10 @@ class CreateFinalRegistersTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('status');
-            $table->integer('people_id')->unsigned();
+            //$table->integer('people_id')->unsigned();
 
             $table->timestamps();
-            $table->foreign('people_id')->references('id')->on('people')->onUpdate('cascade')->onDelete('cascade');
+            //$table->foreign('people_id')->references('id')->on('people')->onUpdate('cascade')->onDelete('cascade');
 
 
         });

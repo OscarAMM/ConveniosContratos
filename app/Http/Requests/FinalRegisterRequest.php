@@ -26,7 +26,6 @@ class FinalRegisterRequest extends FormRequest
         return [
             'name' => 'required',
             'legalInstrument' => 'required',
-            'reception' => 'required',
             'objective' => 'required',
             'registerNumber' => 'required',
             'signature' => 'required',
@@ -36,7 +35,6 @@ class FinalRegisterRequest extends FormRequest
             'scope' => 'required',
             'hide' => 'required',
             'instrumentType' => 'required',
-            'people_id' => 'required',
         ];
     }
 }

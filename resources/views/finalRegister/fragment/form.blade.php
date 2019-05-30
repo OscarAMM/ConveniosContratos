@@ -195,7 +195,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="{{route('PersonModal')}}">
+                <form action="{{route('FinalModal')}}">
                     <div class="form-group mb-2">
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del suscrito">
