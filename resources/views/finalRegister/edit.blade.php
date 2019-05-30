@@ -11,7 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="{{asset('js\disable.js')}}" defer></script>
 </head>
-
 <div class="container">
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
@@ -164,7 +163,7 @@
                         <option>Mostrar</option>
                     </select>
                 </div>
-                
+
 
             </form>
             {!!Form::close()!!}
