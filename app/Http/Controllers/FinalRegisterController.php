@@ -23,6 +23,7 @@ class FinalRegisterController extends Controller
         $objective = $request->get('objective');
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
+        $session = $request->get('session');
         $people=$request->get('people_id');
         if ($people) {
             if (str_contains($people, ' - ')) {
@@ -62,6 +63,7 @@ class FinalRegisterController extends Controller
                 ->objective($objective)
                 ->signature($signature)
                 ->end_date($end_date)
+                ->session($session)
                 ->paginate();
         }
 

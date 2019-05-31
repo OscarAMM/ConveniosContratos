@@ -3,18 +3,17 @@
 Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 
-//Ruta Institute
-Route::resource('Institute', 'InstituteController');
+
 //RUTA Persona
 Route::resource('Person', 'PersonController');
-//Ruta DEPENDENCIA
-Route::resource('Dependence', 'DependenceController');
+
 
 //Ruta contrato
+/*
 Route::resource('Contract', 'ContractController');
 Route::get('/ContractDownloadFile/{id}', ['as' => 'contract.download', 'uses' => 'ContractController@showfile']);
 Route::get('/AgreementDownloadFile/{id}', ['as' => 'agreement.download', 'uses' => 'AgreementController@showfile']);
-Route::get('/contract/users', ['uses' => 'ContractController@getUsers', 'as' => 'getusers']);
+Route::get('/contract/users', ['uses' => 'ContractController@getUsers', 'as' => 'getusers']);*/
 
 
 
@@ -79,3 +78,7 @@ Route::resource('FinalRegister','FinalRegisterController');
 Route::get('/FinalPersonModal',['uses' => 'PersonController@storeModalFinal','as' =>'FinalModal']);
 Route::post('/FinalDocs', ['uses'=> 'FinalRegisterController@storeDocs', 'as' =>'FinalDocs']);
 Route::get('/FinalDownloadFile/{id}', ['as' => 'document.download', 'uses' => 'FinalRegisterController@showfile']);
+//DOCUMENT ROUTE
+Route::get('/IndexReports', ['uses' => 'DocumentController@index', 'as' =>'Index']);
+Route::get('/createDoc', ['uses' =>'DocumentController@create', 'as' =>'CreateDocs']);
+Route::post('/storeDoc',['uses' =>'DocumentController@store', 'as' =>'StoreDocs']);

@@ -54,6 +54,11 @@ class FinalRegister extends Model
             return $query->where('people_id', 'LIKE', "%$people_id%");
         }
     }
+    public function scopeSession($query, $session){
+        if($session){
+            return $query->where('session', 'LIKE', "%$session%");
+        }
+    }
     public function scopeEnd_date($query, $end_date)
     {
         if ($end_date) {

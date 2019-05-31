@@ -90,7 +90,7 @@
                 <div class="col-md-6">
                     <h4>Reporte</h4>
                     <p>El sistema arrojará los reportes correspondientes según la fecha especificada.</p>
-                    <p><a href="{{route('PrePDF')}}" class="btn btn-primary">Reporte</a></p>
+                    <p><a href="{{route('Index')}}" class="btn btn-primary">Reporte</a></p>
                 </div>
                 <div class="col-md-6">
                     <h4>Registro</h4>
