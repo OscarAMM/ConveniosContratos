@@ -38,7 +38,7 @@ class AgreementController extends Controller
                 ->where('reception', 'LIKE', "%$reception%")
                 ->orderBy('id', 'DESC')
                 ->paginate();
-            }else{
+            } else {
                 $person=Person::where('name', 'LIKE', "%$people%")->first();
                 if (!empty($person)) {
                     $agreements = $person->agreements()
@@ -49,10 +49,9 @@ class AgreementController extends Controller
                 ->where('reception', 'LIKE', "%$reception%")
                 ->orderBy('id', 'DESC')
                 ->paginate();
-                }else {
-                    $agreements = Agreements::where('id','0')->orderBy('id', 'DESC')->paginate();
+                } else {
+                    $agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
                 }
-
             }
         } else {
             /*if($request->get('id')||
@@ -99,7 +98,7 @@ class AgreementController extends Controller
                 ->where('reception', 'LIKE', "%$reception%")
                 ->orderBy('id', 'DESC')
                 ->paginate();
-            }else{
+            } else {
                 $person=Person::where('name', 'LIKE', "%$people%")->first();
                 if (!empty($person)) {
                     $agreements = $person->agreements()
@@ -110,10 +109,9 @@ class AgreementController extends Controller
                 ->where('reception', 'LIKE', "%$reception%")
                 ->orderBy('id', 'DESC')
                 ->paginate();
-                }else {
-                    $agreements = Agreements::where('id','0')->orderBy('id', 'DESC')->paginate();
+                } else {
+                    $agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
                 }
-
             }
         } else {
             /*if($request->get('id')||
