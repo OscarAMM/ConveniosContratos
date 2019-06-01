@@ -34,7 +34,7 @@
                             <form action="{{route('LegalInstrument.destroy', $instrument->id)}}" method="POST">
                                 
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar este instrumento?');">Eliminar</button>
                             </form>
                         </td>
                     </tr>
