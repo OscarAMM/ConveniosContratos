@@ -14,6 +14,7 @@ Route::resource('Contract', 'ContractController');
 Route::get('/ContractDownloadFile/{id}', ['as' => 'contract.download', 'uses' => 'ContractController@showfile']);
 Route::get('/AgreementDownloadFile/{id}', ['as' => 'agreement.download', 'uses' => 'AgreementController@showfile']);
 Route::get('/contract/users', ['uses' => 'ContractController@getUsers', 'as' => 'getusers']);*/
+Route::get('/AgreementDownloadFile/{id}', ['as' => 'agreement.download', 'uses' => 'AgreementController@showfile']);
 
 
 
