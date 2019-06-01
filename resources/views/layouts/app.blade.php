@@ -55,6 +55,9 @@
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link">Usuarios</a>
                         </li>
+                        <li class="nav-item">
+                            <a href="{{route('Index')}}" class="nav-link">Reportes</a>
+                        </li>
                         @endif
                     </ul>
                     @endif
