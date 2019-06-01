@@ -89,7 +89,7 @@
                         <form action="{{route('Person.destroy', $person->id)}}" method="POST">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger">Eliminar</button>
+                            <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
                         </form>
                     </td>
                 </tr>

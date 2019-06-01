@@ -26,11 +26,7 @@
                         {{$rol}}
                     </li>
                     <li class="list-group-item"> 
-                    <h5 class="card-title font-weight-bold">Contratos asignados</h5>
-                  
-                    </li>
-                    <li class="list-group-item"> 
-                    <h5 class="card-title font-weight-bold">Convenios asignados</h5>
+                    <h5 class="card-title font-weight-bold">Documentos asignados</h5>
                     @foreach($user->getAgreements as $agreement)       
                         {{$agreement->name}}
                         <br>
