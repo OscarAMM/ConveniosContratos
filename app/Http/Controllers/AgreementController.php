@@ -189,7 +189,7 @@ class AgreementController extends Controller
         $agreement = Agreement::find($id);
         $agreement->delete();
 
-        return back()->with('info', "El convenio '.$agreement->name.' ha sido eliminado.");
+        return back()->with('info', "El documento '.$agreement->name.' ha sido eliminado.");
     }
     public function update(AgreementRequest $request, $id)
     {
@@ -224,8 +224,8 @@ class AgreementController extends Controller
             $activeUser = User::where('id', $user)->first();
             if (!$agreement->hasUser($activeUser->email)) {
                 $email = $activeUser->email;
-                $subject = "Asignación de convenios";
-                $message = "Se le ha asignado el convenio " . $request->name . " para revisión";
+                $subject = "Asignación de documentos";
+                $message = "Se le ha asignado el documento " . $request->name . " para revisión";
                 Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->users()
@@ -242,7 +242,7 @@ class AgreementController extends Controller
                 ->attach(Person::where('id', $splitName[0])->first());
         }
 
-        return redirect()->route('Agreement.index')->with('info', 'El Convenio ' . $agreement->name . ' ha sido actualizado');
+        return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido actualizado');
     }
     public function store(AgreementRequest $request)
     {
@@ -289,7 +289,7 @@ class AgreementController extends Controller
         $agreement->people_id = $splitName[0];*/
         $users = $request->users;
         if (Agreement::where('name', $agreement->name)->exists()) {
-            return back()->with('info', 'El convenio ' . $agreement->name . ' ya existe.');
+            return back()->with('info', 'El Documento ' . $agreement->name . ' ya existe.');
         } else {
             $agreement->save();
             foreach ($users as $user) {
@@ -297,8 +297,8 @@ class AgreementController extends Controller
                 $agreement->users()
                     ->attach(User::where('id', $user)->first());
                 $email = $activeUser->email;
-                $subject = "Asignación de convenios";
-                $message = " Se le ha asignado el convenio " . $request->name . ", cuenta con 5 días para su revisión, desde " . $agreement->start_date->format('d-m-y') . " hasta " . $agreement->end_date->format('d-m-y');
+                $subject = "Asignación de documentos";
+                $message = " Se le ha asignado el documento " . $request->name . ", cuenta con 5 días para su revisión, desde " . $agreement->start_date->format('d-m-y') . " hasta " . $agreement->end_date->format('d-m-y');
                 Mail::to($email)->send(new SendEmail($subject, $message));
             }
             $agreement->files()
@@ -311,7 +311,7 @@ class AgreementController extends Controller
             $agreement->people()
                 ->attach(Person::where('id', $splitPerson[0])->first());
         }
-        return redirect()->route('Agreement.index')->with('info', 'El Convenio ' . $agreement->name . ' ha sido agregado');
+        return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido agregado');
     }
     public function showFile($id)
     {
