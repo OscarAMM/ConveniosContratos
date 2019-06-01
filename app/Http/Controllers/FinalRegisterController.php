@@ -50,9 +50,8 @@ class FinalRegisterController extends Controller
                     ->orderBy('id', 'DESC')
                     ->paginate();
                 } else {
-                    $documents = FinalRegister::where('id','0')->orderBy('id', 'DESC')->paginate();
+                    $documents = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
                 }
-                
             }
         } else {
             $documents = FinalRegister::orderBy('id', 'DESC')
@@ -66,7 +65,6 @@ class FinalRegisterController extends Controller
                 ->session($session)
                 ->paginate();
         }
-
         return view('finalregister.index', compact('documents'));
     }
     public function create()
@@ -105,23 +103,16 @@ class FinalRegisterController extends Controller
         $document->session = $request->session;
         $document->observation = $request->observation;
         $document->scope = $request->scope;
-        $document->hide = $request->hide;
         $document->status = 'Finalizado';
-
         $document->instrumentType = $request->instrumentType;
         $document->end_date = $request->signature;
-
         if ($request->hide == "Mostrar") {
             $document->hide = true;
         } else {
             $document->hide = false;
         }
-        /*  $splitPeopleName = explode(' - ', $request->people_id);
-        $document->people_id = $splitPeopleName[0];*/
-
         $document->update();
         $people = $request->people;
-
         $document->people()->detach();
         foreach ($people as $person) {
             $document->people()
@@ -132,7 +123,6 @@ class FinalRegisterController extends Controller
             $document->people()
                 ->attach(Person::where('id', $splitName[0])->first());
         }
-
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido actualizado');
     }
     public function store(FinalRegisterRequest $request)
@@ -141,51 +131,47 @@ class FinalRegisterController extends Controller
         if ($file) {
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('finalFiles/' . $file_path, \File::get($file));
+            $file_Name = new FileAgreement();
+            $file_Name->name = $file_path;
+            $file_Name->save();
+
+            $document = new FinalRegister();
+            $document->name = $request->input('name');
+            $document->objective = $request->objective;
+            $document->legalInstrument = $request->legalInstrument;
+            $document->registerNumber = $request->registerNumber;
+            $document->signature = $request->signature;
+            $document->start_date = $request->start_date;
+            $document->end_date = $request->end_date;
+            $document->session = $request->session;
+            $document->observation = $request->observation;
+            $document->scope = $request->scope;
+            $document->status = 'Finalizado';
+            $document->instrumentType = $request->instrumentType;
+            $document->end_date = $request->signature;
+            if ($request->hide == "Mostrar") {
+                $document->hide = true;
+            } else {
+                $document->hide = false;
+            }
+            if (FinalRegister::where('name', $document->name)->exists()) {
+                return back()->with('info', 'El documento ' . $document->name . ' ya existe.');
+            } else {
+                $document->save();
+                $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
+                //agregando partes
+            $acturl = urldecode($request->ListaPro); //decodifico el JSON
+            $people = json_decode($acturl);
+                foreach ($people as $peopleSelected) {
+                    $splitPerson = explode(' - ', $peopleSelected->id_pro);
+                    $document->people()
+                ->attach(Person::where('id', $splitPerson[0])->first());
+                }
+            }
         } else {
             return back()->with('info', 'No seleccionó un archivo.');
         }
-        $file_Name = new FileAgreement();
-        $file_Name->name = $file_path;
-        $file_Name->save();
-
-        $document = new FinalRegister();
-        $document->name = $request->input('name');
-        $document->objective = $request->objective;
-        $document->legalInstrument = $request->legalInstrument;
-        $document->registerNumber = $request->registerNumber;
-        $document->signature = $request->signature;
-        $document->start_date = $request->start_date;
-        $document->end_date = $request->end_date;
-        $document->session = $request->session;
-        $document->observation = $request->observation;
-
-        $document->scope = $request->scope;
-        $document->hide = $request->hide;
-        $document->status = 'Finalizado';
-
-        $document->instrumentType = $request->instrumentType;
-        $document->end_date = $request->signature;
-
-        if ($request->hide == "Mostrar") {
-            $document->hide = true;
-        } else {
-            $document->hide = false;
-        }
-        /*  $splitPeopleName = explode(' - ', $request->people_id);
-        $document->people_id = $splitPeopleName[0];*/
-        if (FinalRegister::where('name', $document->name)->exists()) {
-            return back()->with('info', 'El documento ' . $document->name . ' ya existe.');
-        } else {
-            $document->save();
-            $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
-        }
-        $acturl = urldecode($request->ListaPro); //decodifico el JSON
-        $people = json_decode($acturl);
-        foreach ($people as $peopleSelected) {
-            $splitPerson = explode(' - ', $peopleSelected->id_pro);
-            $document->people()
-                ->attach(Person::where('id', $splitPerson[0])->first());
-        }
+        
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido guardado');
     }
     public function showFile($id)
@@ -200,62 +186,56 @@ class FinalRegisterController extends Controller
         if ($file) {
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('finalFiles/' . $file_path, \File::get($file));
+            $file_Name = new FileAgreement();
+            $file_Name->name = $file_path;
+            $file_Name->save();
+
+            $document = new FinalRegister();
+            $document->name = $request->input('name');
+            $document->objective = $request->objective;
+            $document->legalInstrument = $request->legalInstrument;
+            $document->registerNumber = $request->registerNumber;
+            $document->signature = $request->signature;
+            $document->start_date = $request->start_date;
+            $document->end_date = $request->end_date;
+            $document->session = $request->session;
+            $document->observation = $request->observation;
+            $document->scope = $request->scope;
+            $document->status = 'Finalizado';
+            $document->instrumentType = $request->instrumentType;
+            $document->end_date = $request->signature;
+            if ($request->hide == "Mostrar") {
+                $document->hide = true;
+            } else {
+                $document->hide = false;
+            }
+            if (FinalRegister::where('name', $document->name)->exists()) {
+                return back()->with('info', 'El documento ' . $document->name . ' ya existe.');
+            } else {
+                $document->save();
+                $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
+                $people = $request->people;
+                $document->people()->detach();
+                foreach ($people as $person) {
+                    $document->people()
+                ->attach(Person::where('id', $person)->first());
+                }
+                if ($request->people_id) {
+                    $splitName = explode(' - ', $request->people_id);
+                    $document->people()
+                ->attach(Person::where('id', $splitName[0])->first());
+                }
+                /*$acturl = urldecode($request->ListaPro); //decodifico el JSON
+                $people = json_decode($acturl);
+                foreach ($people as $peopleSelected) {
+                    $splitPerson = explode(' - ', $peopleSelected->id_pro);
+                    $document->people()
+                        ->attach(Person::where('id', $splitPerson[0])->first());
+                }*/
+            }
         } else {
             return back()->with('info', 'No seleccionó un archivo.');
         }
-        $file_Name = new FileAgreement();
-        $file_Name->name = $file_path;
-        $file_Name->save();
-
-        $document = new FinalRegister();
-        $document->name = $request->input('name');
-        $document->objective = $request->objective;
-        $document->legalInstrument = $request->legalInstrument;
-        $document->registerNumber = $request->registerNumber;
-        $document->signature = $request->signature;
-        $document->start_date = $request->start_date;
-        $document->end_date = $request->end_date;
-        $document->session = $request->session;
-        $document->observation = $request->observation;
-        $document->scope = $request->scope;
-        $document->hide = $request->hide;
-        $document->status = 'Finalizado';
-
-        $document->instrumentType = $request->instrumentType;
-        $document->end_date = $request->signature;
-
-        if ($request->hide == "Mostrar") {
-            $document->hide = true;
-        } else {
-            $document->hide = false;
-        }
-        /*  $splitPeopleName = explode(' - ', $request->people_id);
-        $document->people_id = $splitPeopleName[0];*/
-        if (FinalRegister::where('name', $document->name)->exists()) {
-            return back()->with('info', 'El documento ' . $document->name . ' ya existe.');
-        } else {
-            $document->save();
-            $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
-        }
-        $people = $request->people;
-
-        $document->people()->detach();
-        foreach ($people as $person) {
-            $document->people()
-                ->attach(Person::where('id', $person)->first());
-        }
-        if ($request->people_id) {
-            $splitName = explode(' - ', $request->people_id);
-            $document->people()
-                ->attach(Person::where('id', $splitName[0])->first());
-        }
-        /*$acturl = urldecode($request->ListaPro); //decodifico el JSON
-        $people = json_decode($acturl);
-        foreach ($people as $peopleSelected) {
-            $splitPerson = explode(' - ', $peopleSelected->id_pro);
-            $document->people()
-                ->attach(Person::where('id', $splitPerson[0])->first());
-        }*/
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido guardado');
     }
     public function fetch(Request $request)
