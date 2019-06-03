@@ -40,7 +40,6 @@
                     <div class="form-inline ">
                         <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
                             placeholder="Ingrese instrumento">
-
                     </div>
                     <div id="instrumentList">
                     </div>
