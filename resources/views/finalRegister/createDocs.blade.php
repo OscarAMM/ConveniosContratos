@@ -145,7 +145,7 @@
                 @foreach($agreements->getPeople as $person)
                 <br>
                 <input type="checkbox" name="people[]" value="{{$person->id}}"
-                    {{ $person ->hasFinal($agreements->id)?'checked':'' }}> <label>{{$person->name}}</label>
+                    {{ $person ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$person->name}}</label>
 
                 @endforeach
             </div>
