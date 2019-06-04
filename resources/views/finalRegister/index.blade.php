@@ -68,6 +68,10 @@
                         <label for="end_date" class="col-form-label text-muted">Fecha Fin</label>
                         {{Form::text('end_date',null,['class' => 'form-control', 'placeholder'=>'Fecha fin'])}}
                     </div>
+                    <div class="col-label-form" style="margin-right:5px;">
+                        <label for="session" class="col-form-label text-muted">Fecha Sesión</label>
+                        {{Form::text('session',null,['class' => 'form-control', 'placeholder'=>'Fecha sesión'])}}
+                    </div>
                     <div class="col-label-form">
                             <label for="people_id" class=" text-muted">Parte</label>
                             <input type="text" id="people_id" name="people_id" class="form-control"
@@ -91,13 +95,14 @@
         <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
-                    <th>id</th>
+                    <th>Num. Registro</th>
                     <th>Nombre completo</th>
                     <th>Instrumento jurídico</th>
                     <th>Tipo de instrumento</th>
                     <th>Objetivo</th>
                     <th>Fecha de firma</th>
                     <th>Fecha de fin</th>
+                    <th>Fecha de sesión</th>
                     <th>Partes</th>
                     <th colspan="3">&nbsp; Opciones</th>
                 </tr>
@@ -106,13 +111,15 @@
                 <!-----------------------------FOREACH SEARCH ------------------------------->
                 @foreach($documents as $document)
                 <tr>
-                    <td>{{$document->id}}</td>
+                    <td>{{$document->registerNumber}}</td>
                     <td>{{$document->name}}</td>
                     <td>{{$document->legalInstrument}}</td>
                     <td>{{$document->instrumentType}}</td>
                     <td>{{$document->objective}}</td>
                     <td>{{$document->signature}}</td>
                     <td>{{$document->end_date}}</td>
+                    <td>{{$document->session}}</td>
+
                     <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
                     <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
                     </td>

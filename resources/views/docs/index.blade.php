@@ -10,7 +10,7 @@
             introducir la fecha de <strong>SESIÓN</strong> para filtrar y recuperar toda la información correspondiente
             a la fecha asignada.</p>
 
-        {{Form::open(['route'=>'FinalRegister.index','method'=>'GET','class'=>'form-inline'])}}
+        {{Form::open(['route'=>'Index','method'=>'GET','class'=>'form-inline'])}}
         @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
         <p class="text-item-center"><a href="{{route('FinalRegister.create')}}" class="btn boton"
                 style="margin-right:5px">Nuevo</a>
@@ -50,6 +50,10 @@
             </tr>
         <tbody>
             <tr>
+            <td>@foreach($docs as $doc)
+            <td>{{$doc->scope}}</td>
+            @endforeach
+            </td>
                 <td>Convenios</td>
                 <td>{{$scopeE}}</td>
                 <td>{{$scopeN}}</td>

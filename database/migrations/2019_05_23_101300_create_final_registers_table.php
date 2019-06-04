@@ -19,7 +19,7 @@ class CreateFinalRegistersTable extends Migration
             //$table->date('reception');
             $table->text('objective');
             $table->string('legalInstrument');
-            $table->integer('registerNumber')->nullable();
+            $table->string('registerNumber')->nullable();
             $table->date('signature')->nullable();
             $table->date('session')->nullable();
             $table->text('observation')->nullable();

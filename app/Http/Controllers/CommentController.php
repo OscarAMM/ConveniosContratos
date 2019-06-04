@@ -43,7 +43,7 @@ class CommentController extends Controller
         }
         $agreement->comments()
             ->attach(Comment::where('id', $comment->id)->first());
-        foreach ($agreement->getUser as $users) {
+        /*foreach ($agreement->getUser as $users) {
             if ($users->email == $user->email) {
                 $email = $user->email;
                 $subject = "Nuevo comentario";
@@ -55,7 +55,7 @@ class CommentController extends Controller
                 $message = "Se ha realizado un nuevo comentario al documento: " . $agreement->name . " por el usuario: " . $user->name . " - " . $user->email;
                 Mail::to($email)->send(new SendEmail($subject, $message));
             }
-        }
+        }*/
         return redirect()->route('Forum.Agreement', $id)->with('info', 'Tu comentario ha sido generado con éxito');
     }
     //Delete comments

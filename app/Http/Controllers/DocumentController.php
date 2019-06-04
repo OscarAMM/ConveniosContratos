@@ -22,7 +22,7 @@ class DocumentController extends Controller
             ->paginate();
 
         //We call FinalRegister model to verify the scope and count it
-        $custom_data = FinalRegister::all();
+        $custom_data = $docs;
         $scopeE = FinalRegister::where('scope', 'Estatal')->count();
         $scopeN = FinalRegister::where('scope', 'Nacional')->count();
         $scopeI = FinalRegister::where('scope', 'Internacional')->count();
