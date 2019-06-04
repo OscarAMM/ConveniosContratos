@@ -16,6 +16,7 @@ class RevisionController extends Controller
     {
         return redirect()->back();
     }    
+    
     public function ForumAgreement($id){
         $agreements = Agreement::find($id);
         return view('agreements.forum', compact('agreements'));

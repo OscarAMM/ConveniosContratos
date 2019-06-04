@@ -25,30 +25,30 @@ class AgreementController extends Controller
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
         $reception = $request->get('reception');
-        $people=$request->get('people_id');
+        $people = $request->get('people_id');
 
         if ($people) {
             if (str_contains($people, ' - ')) {
                 $splitName = explode(' - ', $request->get('people_id'));
                 $agreements = Person::find($splitName[0])->agreements()
-                ->where('name', 'LIKE', "%$name%")
-                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                ->where('objective', 'LIKE', "%$objective%")
-                ->where('reception', 'LIKE', "%$reception%")
-                ->orderBy('id', 'DESC')
-                ->paginate();
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('reception', 'LIKE', "%$reception%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
             } else {
-                $person=Person::where('name', 'LIKE', "%$people%")->first();
+                $person = Person::where('name', 'LIKE', "%$people%")->first();
                 if (!empty($person)) {
                     $agreements = $person->agreements()
-                ->where('name', 'LIKE', "%$name%")
-                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                ->where('objective', 'LIKE', "%$objective%")
-                ->where('reception', 'LIKE', "%$reception%")
-                ->orderBy('id', 'DESC')
-                ->paginate();
+                        ->where('name', 'LIKE', "%$name%")
+                        ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                        ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                        ->where('objective', 'LIKE', "%$objective%")
+                        ->where('reception', 'LIKE', "%$reception%")
+                        ->orderBy('id', 'DESC')
+                        ->paginate();
                 } else {
                     $agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
                 }
@@ -85,30 +85,30 @@ class AgreementController extends Controller
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
         $reception = $request->get('reception');
-        $people=$request->get('people_id');
+        $people = $request->get('people_id');
 
         if ($people) {
             if (str_contains($people, ' - ')) {
                 $splitName = explode(' - ', $request->get('people_id'));
                 $agreements = Person::find($splitName[0])->agreements()
-                ->where('name', 'LIKE', "%$name%")
-                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                ->where('objective', 'LIKE', "%$objective%")
-                ->where('reception', 'LIKE', "%$reception%")
-                ->orderBy('id', 'DESC')
-                ->paginate();
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('reception', 'LIKE', "%$reception%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
             } else {
-                $person=Person::where('name', 'LIKE', "%$people%")->first();
+                $person = Person::where('name', 'LIKE', "%$people%")->first();
                 if (!empty($person)) {
                     $agreements = $person->agreements()
-                ->where('name', 'LIKE', "%$name%")
-                ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                ->where('objective', 'LIKE', "%$objective%")
-                ->where('reception', 'LIKE', "%$reception%")
-                ->orderBy('id', 'DESC')
-                ->paginate();
+                        ->where('name', 'LIKE', "%$name%")
+                        ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                        ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                        ->where('objective', 'LIKE', "%$objective%")
+                        ->where('reception', 'LIKE', "%$reception%")
+                        ->orderBy('id', 'DESC')
+                        ->paginate();
                 } else {
                     $agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
                 }
@@ -233,12 +233,65 @@ class AgreementController extends Controller
             $splitName = explode(' - ', $request->people_id);
             $agreement->people()
                 ->attach(Person::where('id', $splitName[0])->first());
-        }
+        }$file = $request->file('file');
+        if ($file) {
+            $file_path = $file->getClientOriginalName();
+            \Storage::disk('public')->put('filesAgreements/' . $file_path, \File::get($file));
+            //Archivo
+            $file_Name = new FileAgreement();
+            $file_Name->name = $file_path;
+            $file_Name->save();
+            //Convenio
+            $agreement->files()
+            ->attach(FileAgreement::where('id', $file_Name->id)->first());
+        } 
+        
 
         return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido actualizado');
     }
     public function store(AgreementRequest $request)
     {
+        $agreement = new Agreement();
+        $agreement->name = $request->name;
+        $agreement->reception = $request->reception;
+        $agreement->objective = $request->objective;
+        $agreement->legalInstrument = $request->legalInstrument;
+        $agreement->instrumentType = $request->instrumentType;
+        $agreement->scope = $request->scope;
+        $agreement->status = "Revisión";
+        $agreement->liable_user = $request->liable_user;
+        $agreement->start_date = new Carbon($request->reception);
+        if ($request->end_date) {
+            $agreement->end_date = new Carbon($request->end_date);
+        } else {
+            $pre = new Carbon($request->reception);
+            $final = $pre->addWeekDays(4);
+            $agreement->end_date = $final;
+        }
+        $users = $request->users;
+        if (Agreement::where('name', $agreement->name)->exists()) {
+            return back()->with('info', 'El Documento ' . $agreement->name . ' ya existe.');
+        } else {
+            $agreement->save();
+            foreach ($users as $user) {
+                $activeUser = User::where('id', $user)->first();
+                $agreement->users()
+                    ->attach(User::where('id', $user)->first());
+                $email = $activeUser->email;
+                $subject = "Asignación de documentos";
+                $message = " Se le ha asignado el documento " . $request->name . ", cuenta con 5 días para su revisión, desde " . $agreement->start_date->format('d-m-y') . " hasta " . $agreement->end_date->format('d-m-y');
+                Mail::to($email)->send(new SendEmail($subject, $message));
+            }
+           
+            //agregando partes
+            $acturl = urldecode($request->ListaPro); //decodifico el JSON
+            $people = json_decode($acturl);
+            foreach ($people as $peopleSelected) {
+                $splitPerson = explode(' - ', $peopleSelected->id_pro);
+                $agreement->people()
+                    ->attach(Person::where('id', $splitPerson[0])->first());
+            }
+        }
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
@@ -248,51 +301,9 @@ class AgreementController extends Controller
             $file_Name->name = $file_path;
             $file_Name->save();
             //Convenio
-            $agreement = new Agreement();
-            $agreement->name = $request->name;
-            $agreement->reception = $request->reception;
-            $agreement->objective = $request->objective;
-            $agreement->legalInstrument = $request->legalInstrument;
-            $agreement->instrumentType = $request->instrumentType;
-            $agreement->scope = $request->scope;
-            $agreement->status = "Revisión";
-            $agreement->liable_user = $request->liable_user;
-            $agreement->start_date = new Carbon($request->reception);
-            if ($request->end_date) {
-                $agreement->end_date = new Carbon($request->end_date);
-            } else {
-                $pre = new Carbon($request->reception);
-                $final = $pre->addWeekDays(4);
-                $agreement->end_date = $final;
-            }
-            $users = $request->users;
-            if (Agreement::where('name', $agreement->name)->exists()) {
-                return back()->with('info', 'El Documento ' . $agreement->name . ' ya existe.');
-            } else {
-                $agreement->save();
-                foreach ($users as $user) {
-                    $activeUser = User::where('id', $user)->first();
-                    $agreement->users()
-                    ->attach(User::where('id', $user)->first());
-                    $email = $activeUser->email;
-                    $subject = "Asignación de documentos";
-                    $message = " Se le ha asignado el documento " . $request->name . ", cuenta con 5 días para su revisión, desde " . $agreement->start_date->format('d-m-y') . " hasta " . $agreement->end_date->format('d-m-y');
-                    Mail::to($email)->send(new SendEmail($subject, $message));
-                }
-                $agreement->files()
-                ->attach(FileAgreement::where('id', $file_Name->id)->first());
-                //agregando partes
-            $acturl = urldecode($request->ListaPro); //decodifico el JSON
-            $people = json_decode($acturl);
-                foreach ($people as $peopleSelected) {
-                    $splitPerson = explode(' - ', $peopleSelected->id_pro);
-                    $agreement->people()
-                        ->attach(Person::where('id', $splitPerson[0])->first());
-                }
-            }
-        } else {
-            return back()->with('info', 'No seleccionó un archivo.');
-        }
+            $agreement->files()
+            ->attach(FileAgreement::where('id', $file_Name->id)->first());
+        } 
         return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido agregado');
     }
     public function showFile($id)

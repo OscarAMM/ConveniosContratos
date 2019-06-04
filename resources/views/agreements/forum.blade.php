@@ -86,6 +86,12 @@
                 <div>
                     <div class="card-header">
                         <h5 style="color:white">Asunto:{!!$comment->topic!!}</h5>
+                        <form action="{{route('Comment.destroy', $comment->id)}}" method="POST">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button class="btn btn-danger"
+                                onClick="return confirm('¿Seguro que desea eliminar este comentario? No se deshacer la acción.'">X</button>
+                        </form>
                     </div>
                     <div class="card card-body">
                         <p>{!!$comment->comment!!}</p>
@@ -102,10 +108,10 @@
         <div class="col-md-8 order-md-1">
             @foreach($agreements->getFiles as $file)
             @if(count($file->getComments) == 0)
-                <div class="card-header text-muted">Documento original</div>
-                <div class="card card-body">Documento original.
-                    <p><a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a></p>
-                </div>
+            <div class="card-header text-muted">Documento original</div>
+            <div class="card card-body">Documento original.
+                <p><a href="{{route('agreement.download',$file->id)}}">{{$file->name}}</a></p>
+            </div>
             @endif
             @endforeach
         </div>

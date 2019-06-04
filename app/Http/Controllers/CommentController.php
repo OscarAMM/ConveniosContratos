@@ -58,6 +58,13 @@ class CommentController extends Controller
         }
         return redirect()->route('Forum.Agreement', $id)->with('info', 'Tu comentario ha sido generado con éxito');
     }
+    //Delete comments
+    public function destroy($id){
+        $comment = Comment::find($id);
+        $comment->delete();
+        return back()->with('info',"El comentario".$comment->topic." ha sido eliminado con éxito.");
+    }
+    
     public function finallyAgreement($id)
     {
         $agreement = Agreement::find($id);

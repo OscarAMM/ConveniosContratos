@@ -29,6 +29,7 @@ Route::post('/usersUpdate/{id}', ['as' => 'users.update', 'uses' => 'UserControl
 Route::get('/mail', ['uses'=> 'EmailController@index' , 'as' => 'mail.index']);
 Route::post('send/sendmail', ['uses'=> 'EmailController@sendEmail' , 'as' => 'SendMail.index']);
 //RUTA REVISION FORUM
+Route::resource('revision', 'RevisionController');
 Route::get('/RevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@ForumAgreement' , 'as' => 'Forum.Agreement']);
 Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'Revision']);
 Route::get('/Back', ['uses' => 'RevisionController@back', 'as' => 'Back']);

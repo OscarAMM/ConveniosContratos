@@ -119,7 +119,7 @@
                         </table>
                     </from>
                     <div class="form-group">
-                        <small style="color:#D90101;">*</small>
+                        <small >*</small>
                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
                         <label for="file" class="col-form-label">Seleccione el archivo</label>
                         <input type="file" class="form-control-file" name="file" id="file">
