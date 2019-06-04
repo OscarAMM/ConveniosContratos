@@ -110,6 +110,7 @@
 
                 <!-----------------------------FOREACH SEARCH ------------------------------->
                 @foreach($documents as $document)
+                @if($document->end_date<=Carbon\Carbon::now())
                 <tr>
                     <td>{{$document->registerNumber}}</td>
                     <td>{{$document->name}}</td>
@@ -135,7 +136,7 @@
                     </td>
                     @endif
                 </tr>
-
+                @endif
                 @endforeach
             </tbody>
             </thead>
