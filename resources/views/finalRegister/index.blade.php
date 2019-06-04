@@ -2,6 +2,7 @@
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -57,9 +58,9 @@
                         </select>
                     </div>
                     <div class="col-label-form" style="margin-right:5px;">
-                            <label for="name" class="col-form-label text-muted">Objetivo</label>
-                            {{Form::text('objective', null, ['class'=>'form-control', 'placeholder'=>'Objetivo'])}}
-                        </div>
+                        <label for="name" class="col-form-label text-muted">Objetivo</label>
+                        {{Form::text('objective', null, ['class'=>'form-control', 'placeholder'=>'Objetivo'])}}
+                    </div>
                     <div class="col-label-form" style="margin-right:5px;">
                         <label for="signature" class="col-form-label text-muted">Fecha Firma</label>
                         {{Form::text('signature',null,['class' => 'form-control', 'placeholder'=>'Fecha firma'])}}
@@ -72,13 +73,13 @@
                         <label for="session" class="col-form-label text-muted">Fecha Sesión</label>
                         {{Form::text('session',null,['class' => 'form-control', 'placeholder'=>'Fecha sesión'])}}
                     </div>
-                    <div class="col-label-form">
-                            <label for="people_id" class=" text-muted">Parte</label>
-                            <input type="text" id="people_id" name="people_id" class="form-control"
-                                placeholder="ingrese las partes">
-                            <div id="peopleList">
-                            </div>
+                    <div class="col-label-form" style="margin-right:5px;">
+                        <label for="people_id" class=" col-form-label text-muted">Partes</label>
+                        <input type="text" id="people_id" name="people_id" class="form-control"
+                            placeholder="ingrese las partes">
+                        <div id="peopleList">
                         </div>
+                    </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">
                             <span class="glyphicon glyphicon-search">Buscar</span>
@@ -92,7 +93,129 @@
 <!-------------------------------------------- DOCUMENTS TABLE --------------------------------------------->
 <div class="row d-flex justify-content-center">
     <div class="col-md-10">
-        <table class="table table-striped table-bordered">
+        <nav>
+            <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                    aria-controls="nav-home" aria-selected="true">Todos</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                    aria-controls="nav-profile" aria-selected="false">Vigentes</a>
+                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                    aria-controls="nav-contact" aria-selected="false">No vigentes</a>
+            </div>
+        </nav>
+
+        <!--TODOS---------------->
+        <div class="tab-content" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Num. Registro</th>
+                            <th>Nombre completo</th>
+                            <th>Instrumento jurídico</th>
+                            <th>Tipo de instrumento</th>
+                            <th>Objetivo</th>
+                            <th>Fecha de firma</th>
+                            <th>Fecha de fin</th>
+                            <th>Fecha de sesión</th>
+                            <th>Partes</th>
+                            <th colspan="3">&nbsp; Opciones</th>
+                        </tr>
+                    <tbody>
+
+                        <!-----------------------------FOREACH SEARCH ------------------------------->
+                        @foreach($documents as $document)
+                         <tr>
+                            <td>{{$document->registerNumber}}</td>
+                            <td>{{$document->name}}</td>
+                            <td>{{$document->legalInstrument}}</td>
+                            <td>{{$document->instrumentType}}</td>
+                            <td>{{$document->objective}}</td>
+                            <td>{{$document->signature}}</td>
+                            <td>{{$document->end_date}}</td>
+                            <td>{{$document->session}}</td>
+
+                            <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
+                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            </td>
+                            </td>
+                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                                    class="btn botonAmarillo">Editar</a>
+                            </td>
+                            <td>
+                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger"
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                </form>
+                            </td>
+                            @endif
+                            </tr>
+                            @endforeach
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                <!---------------VIGENTES------------------------>
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Num. Registro</th>
+                            <th>Nombre completo</th>
+                            <th>Instrumento jurídico</th>
+                            <th>Tipo de instrumento</th>
+                            <th>Objetivo</th>
+                            <th>Fecha de firma</th>
+                            <th>Fecha de fin</th>
+                            <th>Fecha de sesión</th>
+                            <th>Partes</th>
+                            <th colspan="3">&nbsp; Opciones</th>
+                        </tr>
+                    <tbody>
+
+                        <!-----------------------------FOREACH SEARCH ------------------------------->
+                        @foreach($documents as $document)
+                        @if($document->end_date<=Carbon\Carbon::now()) <tr>
+                            <td>{{$document->registerNumber}}</td>
+                            <td>{{$document->name}}</td>
+                            <td>{{$document->legalInstrument}}</td>
+                            <td>{{$document->instrumentType}}</td>
+                            <td>{{$document->objective}}</td>
+                            <td>{{$document->signature}}</td>
+                            <td>{{$document->end_date}}</td>
+                            <td>{{$document->session}}</td>
+
+                            <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
+                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            </td>
+                            </td>
+                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                                    class="btn botonAmarillo">Editar</a>
+                            </td>
+                            <td>
+                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger"
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                </form>
+                            </td>
+                            @endif
+                            </tr>
+                            @endif
+                            @endforeach
+                    </tbody>
+                    </thead>
+                </table>
+
+            </div>
+            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+                <!------------------ NO VIGENTES --------------------->
+                <table class="table table-striped table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>Num. Registro</th>
@@ -110,8 +233,7 @@
 
                 <!-----------------------------FOREACH SEARCH ------------------------------->
                 @foreach($documents as $document)
-                @if($document->end_date<=Carbon\Carbon::now())
-                <tr>
+                @if($document->end_date>=Carbon\Carbon::now()) <tr>
                     <td>{{$document->registerNumber}}</td>
                     <td>{{$document->name}}</td>
                     <td>{{$document->legalInstrument}}</td>
@@ -131,16 +253,20 @@
                         <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                            <button class="btn btn-danger"
+                                onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
                         </form>
                     </td>
                     @endif
-                </tr>
-                @endif
-                @endforeach
+                    </tr>
+                    @endif
+                    @endforeach
             </tbody>
             </thead>
         </table>
+            </div>
+        </div>
+
     </div>
 </div>
 </div>
@@ -188,6 +314,3 @@ jQuery(document).ready(function() {
 </html>
 {!!$documents->render()!!}
 @endsection
-
-
-
