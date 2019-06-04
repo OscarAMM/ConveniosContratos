@@ -47,6 +47,11 @@
                         <li class="nav-item">
                             <a href="{{route('FinalRegister.index')}}" class="nav-link">Registros</a>
                         </li>
+                        @if(count (Auth::user()->getAgreements))
+                        <li class="nav-item">
+                            <a href="{{route('Revision')}}" class="nav-link">Asignados</a>
+                        </li>
+                        @endif
 
                         @if(Auth::user()->hasRole('admin'))
                         <li class="nav-item">
