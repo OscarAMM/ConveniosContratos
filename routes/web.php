@@ -59,4 +59,5 @@ Route::get('/FinalDownloadFile/{id}', ['as' => 'document.download', 'uses' => 'F
 //DOCUMENT ROUTE
 Route::get('/IndexReports', ['uses' => 'DocumentController@index', 'as' =>'Index']);
 Route::get('/createDoc', ['uses' =>'DocumentController@create', 'as' =>'CreateDocs']);
-Route::post('/storeDoc',['uses' =>'DocumentController@store', 'as' =>'StoreDocs']);
+Route::post('/storeDoc/{id}',['uses' =>'DocumentController@store', 'as' =>'StoreDocs']);
+Route::post('/storeFinal/{id}',['uses' =>'DocumentController@storeFinal', 'as' =>'StoreFinal']);
