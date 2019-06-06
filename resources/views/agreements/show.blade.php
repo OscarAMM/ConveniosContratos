@@ -74,8 +74,17 @@
                         {{$agreements->status}}
                     </li>
                     <li class="list-group-item text-center">
+                        <ul>
                         <a href="{{route('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
                         </ul>
+                        <ul>
+                        <form action="{{route('StoreDocs', $agreements->id)}}" method="post">
+                                {{csrf_field()}}
+                                <button type="submit" class="btn btn-success">Imprimir</button>
+                        </form>
+                        </ul>
+                    </li>
+                    
                 </div>
                 <div>
                 </div>
