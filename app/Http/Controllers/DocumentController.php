@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\FinalRegister;
 use App\Agreement;
-
+use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Http\Request;
 
 class DocumentController extends Controller
@@ -69,7 +69,31 @@ class DocumentController extends Controller
      */
     public function store(Request $request,$id)
     {
-        //
+        $template = new TemplateProcessor('plantillaDocument.docx');
+        $document=Agreement::find($id);
+        $template->setValue('name',$document->name);
+        $template->setValue('reception',$document->reception);
+        $template->setValue('end_date',$document->end_date);
+        $template->setValue('objective',$document->objective);
+        $template->setValue('scope',$document->scope);
+        $template->setValue('liable_user',$document->liable_user);
+        $template->setValue('status',$document->status);
+        $people = '';
+        $users = '';
+        foreach($document->getUser as $user){
+            $users.=$user->name.' - '.$user->email.', ';
+
+        }
+        foreach($document->getPeople as $person){
+            $people.=$person->name.', ';
+        }
+        $template->setValue('users',$users);
+        $template->setValue('people',$people);
+
+        $template->saveAs('documentsWord/'.$document->name.'.docx');
+        return response()->download(public_path('documentsWord/'.$document->name.'.docx'));
+
+        /*
         $document=Agreement::find($id);
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $phpWord->addTitleStyle(null, array('size' => 20, 'bold' => true));
@@ -94,19 +118,48 @@ class DocumentController extends Controller
             $text = $section->addText($user->name.' - '. $user->email);        
         }
         /*Secciones de archivos, aun por confirmar si se agrega
-        */
+        
         $text = $section->addText('Estado:',array('name' => 'Arial', 'size' => 14, 'bold' => false));         
         $text = $section->addText($document->status);  
         //ejemplo de como poner imagenes      
         //$section->addImage("./images/Krunal.jpg");
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save('documentsWord/'.$document->name.'.docx');
-        return response()->download(public_path('documentsWord/'.$document->name.'.docx'));
+        return response()->download(public_path('documentsWord/'.$document->name.'.docx'));*/
     }
     public function storeFinal(Request $request,$id)
     {
         //
+        $template = new TemplateProcessor('plantillaSICC.docx');
         $document=FinalRegister::find($id);
+        $template->setValue('name',$document->name);
+        $template->setValue('registerNumber',$document->registerNumber);
+        $template->setValue('legalInstrument',$document->legalInstrument);
+        $template->setValue('instrumentType',$document->instrumentType);
+        $template->setValue('end_date',$document->end_date);
+        $template->setValue('objective',$document->objective);
+        $template->setValue('scope',$document->scope);
+        $template->setValue('status',$document->status);
+        $template->setValue('signature',$document->signature);
+        $template->setValue('start_date',$document->start_date);
+        $template->setValue('session',$document->session);
+        $people = '';
+        foreach($document->getPeople as $person){
+            $people.=$person->name.', ';
+        }
+        $template->setValue('people',$people);
+
+        if($document->hide){
+            $template->setValue('hide','Visible');
+        }else{
+            $template->setValue('hide','No visible');
+        }
+        
+
+        $template->saveAs('finalWord/'.$document->name.'.docx');
+        return response()->download(public_path('finalWord/'.$document->name.'.docx'));
+        
+        /*
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $phpWord->addTitleStyle(null, array('size' => 20, 'bold' => true));
         $section = $phpWord->addSection();
@@ -142,14 +195,14 @@ class DocumentController extends Controller
             $text = $section->addText($person->name);        
         }
         /*Secciones de archivos, aun por confirmar si se agrega
-        */
+        
         $text = $section->addText('Estado:',array('name' => 'Arial', 'size' => 14, 'bold' => false));         
         $text = $section->addText($document->status);  
         //ejemplo de como poner imagenes      
         //$section->addImage("./images/Krunal.jpg");
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save('finalWord/'.$document->name.'.docx');
-        return response()->download(public_path('finalWord/'.$document->name.'.docx'));
+        return response()->download(public_path('finalWord/'.$document->name.'.docx'));*/
     }
 
     /**
