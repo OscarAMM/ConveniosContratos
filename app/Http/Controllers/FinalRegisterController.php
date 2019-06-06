@@ -278,4 +278,64 @@ class FinalRegisterController extends Controller
             echo $output;
         }
     }
+    //PUBLIC SECTION
+    public function indexPublic(Request $request)
+    {
+        $id = $request->get('id');
+        $name = $request->get('name');
+        $legalInstrument = $request->get('legalInstrument');
+        $instrumentType = $request->get('instrumentType');
+        $objective = $request->get('objective');
+        $signature = $request->get('signature');
+        $end_date = $request->get('end_date');
+        $session = $request->get('session');
+        $people=$request->get('people_id');
+        if ($people) {
+            if (str_contains($people, ' - ')) {
+                $splitName = explode(' - ', $people);
+                $documents = Person::find($splitName[0])->final()
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+            } else {
+                $person=Person::where('name', 'LIKE', "%$people%")->first();
+                if (!empty($person)) {
+                    $documents = $person->final()
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+                } else {
+                    $documents = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
+                }
+            }
+        } else {
+            $documents = FinalRegister::orderBy('id', 'DESC')
+                ->id($id)
+                ->name($name)
+                ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
+                ->signature($signature)
+                ->end_date($end_date)
+                ->session($session)
+                ->paginate();
+        }
+        return view ('index', compact('documents'));
+    }
+    public function PublicShow($id){
+        $documents = FinalRegister::find($id);
+        $files = $documents->getFiles;
+        $file = FileAgreement::find(last($list)[$cont - 1]->id);
+        return view('publicfinal.show', compact('documents', 'files'));
+    }
 }

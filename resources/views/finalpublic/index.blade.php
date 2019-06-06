@@ -11,9 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
     <title>Index</title>
 </head>
-@if(!Auth::guest() && (Auth::user()->hasRole('admin') || Auth::user()->hasRole('revisor')))
-@include('auth.fragment.info')
-@include('auth.fragment.error')
 <!-----------------------------------------WELCOME MESSAGE WITH FUNCTIONS----------------------------------------->
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
@@ -21,10 +18,8 @@
         <hr style="border:2px solid #BF942D">
         <h3 class="text-muted">Bievenido a la búsqueda de convenios.</h3>
         <p class="text-muted">Realiza búsqueda del convenio utilizando los criterios de búsqueda.
-        <i>Nota:Podrás realizar una búsqueda más precisa si se llenan todos los campos posibles. </i></p>
-        <p class="text-muted"></p>
+        <i>Nota:Podrás realizar una búsqueda más precisa si se llenan todos los campos. </i></p>
         {{Form::open(['route'=>'FinalRegister.index','method'=>'GET','class'=>'form-inline'])}}
-        @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
         
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                 aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
@@ -121,7 +116,7 @@
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
                         @foreach($documents as $document)
-                        
+                        @if($document->hide&&$document->status=='Finalizado')
                          <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
@@ -133,23 +128,12 @@
                             <td>{{$document->session}}</td>
 
                             <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
-                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            <td><a href="{{route('finalpublic.show', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
-                            </td>
-                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
-                                    class="btn botonAmarillo">Editar</a>
-                            </td>
-                            <td>
-                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
-                                </form>
                             </td>
                             @endif
                             </tr>
+                            @endif
                             @endforeach
                     </tbody>
                     </thead>
@@ -175,6 +159,7 @@
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
                         @foreach($documents as $document)
+                        @if($document->hide&&$document->status=='Finalizado')
                         @if($document->end_date<=Carbon\Carbon::now()) <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
@@ -186,23 +171,11 @@
                             <td>{{$document->session}}</td>
 
                             <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
-                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            <td><a href="{{route('finalpublic.show', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
-                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
-                                    class="btn botonAmarillo">Editar</a>
-                            </td>
-                            <td>
-                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
-                                </form>
-                            </td>
-                            @endif
                             </tr>
+                            @endif
                             @endif
                             @endforeach
                     </tbody>
@@ -230,6 +203,7 @@
 
                 <!-----------------------------FOREACH SEARCH ------------------------------->
                 @foreach($documents as $document)
+                @if($document->hide&&$document->status=='Finalizado')
                 @if($document->end_date>=Carbon\Carbon::now()) <tr>
                     <td>{{$document->registerNumber}}</td>
                     <td>{{$document->name}}</td>
@@ -243,19 +217,9 @@
                     <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
                     <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
                     </td>
-                    @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                    <td><a href="{{route('FinalRegister.edit', $document->id)}}" class="btn botonAmarillo">Editar</a>
-                    </td>
-                    <td>
-                        <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                            {{csrf_field()}}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger"
-                                onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
-                        </form>
-                    </td>
-                    @endif
+                   
                     </tr>
+                    @endif
                     @endif
                     @endforeach
             </tbody>
@@ -267,18 +231,7 @@
     </div>
 </div>
 </div>
-@else
-<!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
-<div class="container">
-    <div class="jumbotron" style="background-color:#0F3558;">
-        <h1 class="text-muted"><strong>¡ACCESO RESTRINGIDO!</strong> </h1>
-        <hr style="border:2px solid #BF942D">
-        <h4 class="text-muted">¡El usuario {{Auth::user()->name}} NO tiene permiso! Si desea realizar algo,
-            contacte a
-            su administrador.</h4>
-    </div>
-</div>
-@endif
+<!--------------------------------SCRIPTS FOR THE SEARCH --------------------------->
 <script>
 $.noConflict();
 jQuery(document).ready(function() {
