@@ -91,7 +91,7 @@ class DocumentController extends Controller
         $template->setValue('people',$people);
 
         $template->saveAs('documentsWord/'.$document->name.'.docx');
-        return response()->download(public_path('documentsWord/'.$document->name.'.docx'));
+        return response()->download(public_path('documentsWord/'.$document->name.'.docx'))->deleteFileAfterSend(true);
 
         /*
         $document=Agreement::find($id);
@@ -157,7 +157,7 @@ class DocumentController extends Controller
         
 
         $template->saveAs('finalWord/'.$document->name.'.docx');
-        return response()->download(public_path('finalWord/'.$document->name.'.docx'));
+        return response()->download(public_path('finalWord/'.$document->name.'.docx'))->deleteFileAfterSend(true);
         
         /*
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
@@ -203,6 +203,22 @@ class DocumentController extends Controller
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save('finalWord/'.$document->name.'.docx');
         return response()->download(public_path('finalWord/'.$document->name.'.docx'));*/
+    }
+    public function storeComments(Request $request,$id)
+    {
+        $template = new TemplateProcessor('plantillaComments.docx');
+        $document=Agreement::find($id);
+        $template->setValue('name',$document->name);
+        $comments = '';
+        foreach ($document->getComments as $comment) {
+            $comments.='<w:br />'.'Asunto: '.$comment->topic
+            .'<w:br />'.'Comentario: '.$comment->comment
+            .'<w:br />'.'Realizado por: '.$comment->user
+            .'<w:br />'.'Fecha: '.$comment->created_at.'<w:br />';
+        }
+        $template->setValue('comments', $comments);
+        $template->saveAs('commentsWord/'.'Comments'.$document->name.'.docx');
+        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'))->deleteFileAfterSend(true);
     }
 
     /**

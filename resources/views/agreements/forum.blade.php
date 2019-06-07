@@ -64,6 +64,10 @@
                     </div>
                 </div>
                 {!!Form::close()!!}
+                <!--<form action="{{route('StoreComments', $agreements->id)}}" method="post">
+                    {{csrf_field()}}
+                    <button type="submit" class="btn btn-success">Historial</button>
+                </form>-->
                 {!!Form::open( ['route' =>array('FinallyAgreement.notify', $agreements->id)]) !!}
                 <div class="collapse" id="collapseOptions">
                     <div class="card card-body">
