@@ -81,11 +81,11 @@ class DocumentController extends Controller
         $people = '';
         $users = '';
         foreach($document->getUser as $user){
-            $users.=$user->name.' - '.$user->email.', ';
+            $users.='<w:br />'.$user->name.' - '.$user->email;
 
         }
         foreach($document->getPeople as $person){
-            $people.=$person->name.', ';
+            $people.='<w:br />'.$person->name;
         }
         $template->setValue('users',$users);
         $template->setValue('people',$people);
@@ -145,7 +145,7 @@ class DocumentController extends Controller
         $template->setValue('session',$document->session);
         $people = '';
         foreach($document->getPeople as $person){
-            $people.=$person->name.', ';
+            $people.='<w:br />'.$person->name;
         }
         $template->setValue('people',$people);
 

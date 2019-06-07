@@ -233,7 +233,8 @@ class AgreementController extends Controller
             $splitName = explode(' - ', $request->people_id);
             $agreement->people()
                 ->attach(Person::where('id', $splitName[0])->first());
-        }$file = $request->file('file');
+        }
+        $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
             \Storage::disk('public')->put('filesAgreements/' . $file_path, \File::get($file));

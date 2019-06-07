@@ -92,7 +92,7 @@ class Agreement extends Model
     }
     public function getComments()
     {
-        return $this->belongsToMany(Comment::class, 'agreement_comment');
+        return $this->belongsToMany(Comment::class, 'agreement_comment')->orderBy('id', 'DESC');;
     }
     public function getUser()
     {
