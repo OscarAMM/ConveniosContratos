@@ -208,7 +208,7 @@ class DocumentController extends Controller
     {
         
         //Comentarios sin plantilla
-        /*$document=Agreement::find($id);
+        $document=Agreement::find($id);
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $phpWord->addTitleStyle(null, array('size' => 20, 'bold' => true));
         $section = $phpWord->addSection();
@@ -221,10 +221,10 @@ class DocumentController extends Controller
         }
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save('commentsWord/'.'Comments'.$document->name.'.docx');
-        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'));*/
+        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'));
 
         //Comentarios con plantilla
-        $document=Agreement::find($id);
+       /* $document=Agreement::find($id);
         $template = new TemplateProcessor('plantillaComments.docx');
         $template->setValue('name',$document->name);
         $comments = '';
@@ -236,7 +236,7 @@ class DocumentController extends Controller
         }
         $template->setValue('comments', $comments);
         $template->saveAs('commentsWord/'.'Comments'.$document->name.'.docx');
-        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'))->deleteFileAfterSend(true);
+        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'))->deleteFileAfterSend(true);*/
     }
 
     /**
