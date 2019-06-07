@@ -208,17 +208,27 @@ class DocumentController extends Controller
     {
         $template = new TemplateProcessor('plantillaComments.docx');
         $document=Agreement::find($id);
-        $template->setValue('name',$document->name);
+        $phpWord = new \PhpOffice\PhpWord\PhpWord();
+        $phpWord->addTitleStyle(null, array('size' => 20, 'bold' => true));
+        $section = $phpWord->addSection();
+        $text = $section->addTitle($document->name,0);
+        foreach($document->getComments as $comment){
+            $text = $section->addText($comment->topic);
+            $text = $section->addText($comment->comment);
+            $text = $section->addText($comment->user);
+            $text = $section->addText($comment->created_at);
+        }
+       /* $template->setValue('name',$document->name);
         $comments = '';
         foreach ($document->getComments as $comment) {
             $comments.='<w:br />'.'Asunto: '.$comment->topic
-            .'<w:br />'.'Comentario: '.$comment->comment
+            //.'<w:br />'.'Comentario '.$comment->comment
             .'<w:br />'.'Realizado por: '.$comment->user
             .'<w:br />'.'Fecha: '.$comment->created_at.'<w:br />';
         }
         $template->setValue('comments', $comments);
         $template->saveAs('commentsWord/'.'Comments'.$document->name.'.docx');
-        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'))->deleteFileAfterSend(true);
+        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'))->deleteFileAfterSend(true);*/
     }
 
     /**
