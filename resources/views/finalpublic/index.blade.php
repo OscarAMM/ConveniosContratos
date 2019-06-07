@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.public')
 @section('content')
 <!DOCTYPE html>
 <html lang="en">
@@ -103,8 +103,6 @@
                         <tr>
                             <th>Num. Registro</th>
                             <th>Nombre completo</th>
-                            <th>Instrumento jurídico</th>
-                            <th>Tipo de instrumento</th>
                             <th>Objetivo</th>
                             <th>Fecha de firma</th>
                             <th>Fecha de fin</th>
@@ -120,20 +118,18 @@
                          <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
-                            <td>{{$document->legalInstrument}}</td>
-                            <td>{{$document->instrumentType}}</td>
                             <td>{{$document->objective}}</td>
                             <td>{{$document->signature}}</td>
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
 
                             <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
-                            <td><a href="{{route('finalpublic.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            <td><a href="{{route('publicShow', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
                             @endif
                             </tr>
-                            @endif
+                            
                             @endforeach
                     </tbody>
                     </thead>
@@ -171,7 +167,7 @@
                             <td>{{$document->session}}</td>
 
                             <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
-                            <td><a href="{{route('finalpublic.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            <td><a href="{{route('publicShow', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
                             </tr>
@@ -215,7 +211,7 @@
                     <td>{{$document->session}}</td>
 
                     <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
-                    <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
+                    <td><a href="{{route('publicShow', $document->id)}}" class="btn botonAzul">Ver</a></td>
                     </td>
                    
                     </tr>

@@ -66,15 +66,17 @@
                         @endif
                     </ul>
                     @endif
-
-
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         @guest
                         <li class="nav-item">
+                            <a href="{{route ('public')}}" class="nav-link">Inicio</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="{{ route('login') }}">{{ __('Iniciar sesión') }}</a>
                         </li>
+                       
                         @if (Route::has('register'))
                         <li class="nav-item">
                             <a class="nav-link" href="{{ route('register') }}">{{ __('Registrarse') }}</a>
@@ -112,7 +114,6 @@
     </div>
     <main class="pb-4 mb-5">
         @yield('content')
-
     </main>
     @yield('scripts')
     <script src="{{asset('vendors\ckeditor\ckeditor.js')}}"></script>

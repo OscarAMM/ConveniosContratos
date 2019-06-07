@@ -33,7 +33,6 @@ Route::resource('revision', 'RevisionController');
 Route::get('/RevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@ForumAgreement' , 'as' => 'Forum.Agreement']);
 Route::get('/Revision', ['uses' => 'RevisionController@showRevision', 'as' => 'Revision']);
 Route::get('/Back', ['uses' => 'RevisionController@back', 'as' => 'Back']);
-
 Route::get('/UserRevision',['uses' => 'RevisionController@UserRevision', 'as' => 'UserRevision']);
 Route::get('/PublicRevisionAgreementForum/{id}',  ['uses'=> 'RevisionController@PublicForumAgreement' , 'as' => 'PublicForum.Agreement']);
 //Ruta COMMENT
@@ -56,6 +55,8 @@ Route::resource('FinalRegister','FinalRegisterController');
 Route::get('/FinalPersonModal',['uses' => 'PersonController@storeModalFinal','as' =>'FinalModal']);
 Route::post('/FinalDocs', ['uses'=> 'FinalRegisterController@storeDocs', 'as' =>'FinalDocs']);
 Route::get('/FinalDownloadFile/{id}', ['as' => 'document.download', 'uses' => 'FinalRegisterController@showfile']);
+Route::get('/PublicIndex', ['uses' => 'FinalRegisterController@indexPublic', 'as' => 'public']);
+Route::get('/PublicShow/{id}', ['uses' =>'FinalRegisterController@PublicShow','as' =>'publicShow']);
 //DOCUMENT ROUTE
 Route::get('/IndexReports', ['uses' => 'DocumentController@index', 'as' =>'Index']);
 Route::get('/createDoc', ['uses' =>'DocumentController@create', 'as' =>'CreateDocs']);

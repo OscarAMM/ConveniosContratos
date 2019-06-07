@@ -330,12 +330,14 @@ class FinalRegisterController extends Controller
                 ->session($session)
                 ->paginate();
         }
-        return view ('index', compact('documents'));
+        return view ('finalpublic.index', compact('documents'));
     }
     public function PublicShow($id){
         $documents = FinalRegister::find($id);
         $files = $documents->getFiles;
+        $list = array($files);
+        $cont = count($files);
         $file = FileAgreement::find(last($list)[$cont - 1]->id);
-        return view('publicfinal.show', compact('documents', 'files'));
+        return view('finalpublic.show', compact('documents', 'file'));
     }
 }
