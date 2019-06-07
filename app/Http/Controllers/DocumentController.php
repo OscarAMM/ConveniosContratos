@@ -206,19 +206,24 @@ class DocumentController extends Controller
     }
     public function storeComments(Request $request,$id)
     {
-        $template = new TemplateProcessor('plantillaComments.docx');
+        
         $document=Agreement::find($id);
         $phpWord = new \PhpOffice\PhpWord\PhpWord();
         $phpWord->addTitleStyle(null, array('size' => 20, 'bold' => true));
         $section = $phpWord->addSection();
-        $text = $section->addTitle($document->name,0);
+        $text = $section->addTitle('Historial de: '.$document->name,0);
         foreach($document->getComments as $comment){
-            $text = $section->addText($comment->topic);
-            $text = $section->addText($comment->comment);
-            $text = $section->addText($comment->user);
-            $text = $section->addText($comment->created_at);
+            $text = $section->addText('Asunto: '.$comment->topic);
+            $text=\PhpOffice\PhpWord\Shared\Html::addHtml($section, 'Comentario: '.$comment->comment);
+            $text = $section->addText('Realizado por: '.$comment->user);
+            $text = $section->addText('Fecha: '.$comment->created_at.'<w:br />');
         }
-       /* $template->setValue('name',$document->name);
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter->save('commentsWord/'.'Comments'.$document->name.'.docx');
+        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'));
+       /* 
+        $template = new TemplateProcessor('plantillaComments.docx');
+        $template->setValue('name',$document->name);
         $comments = '';
         foreach ($document->getComments as $comment) {
             $comments.='<w:br />'.'Asunto: '.$comment->topic
