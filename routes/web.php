@@ -55,8 +55,8 @@ Route::resource('FinalRegister','FinalRegisterController');
 Route::get('/FinalPersonModal',['uses' => 'PersonController@storeModalFinal','as' =>'FinalModal']);
 Route::post('/FinalDocs', ['uses'=> 'FinalRegisterController@storeDocs', 'as' =>'FinalDocs']);
 Route::get('/FinalDownloadFile/{id}', ['as' => 'document.download', 'uses' => 'FinalRegisterController@showfile']);
-Route::get('/PublicIndex', ['uses' => 'FinalRegisterController@indexPublic', 'as' => 'public']);
-Route::get('/PublicShow/{id}', ['uses' =>'FinalRegisterController@PublicShow','as' =>'publicShow']);
+Route::get('/Convenios', ['uses' => 'FinalRegisterController@indexPublic', 'as' => 'public']);
+Route::get('/Convenio/{id}', ['uses' =>'FinalRegisterController@PublicShow','as' =>'publicShow']);
 //DOCUMENT ROUTE
 Route::get('/IndexReports', ['uses' => 'DocumentController@index', 'as' =>'Index']);
 Route::get('/createDoc', ['uses' =>'DocumentController@create', 'as' =>'CreateDocs']);
