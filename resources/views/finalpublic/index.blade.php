@@ -19,7 +19,7 @@
         <h3 class="text-muted">Bievenido a la búsqueda de convenios.</h3>
         <p class="text-muted">Realiza búsqueda del convenio utilizando los criterios de búsqueda.
         <i>Nota:Podrás realizar una búsqueda más precisa si se llenan todos los campos. </i></p>
-        {{Form::open(['route'=>'FinalRegister.index','method'=>'GET','class'=>'form-inline'])}}
+        {{Form::open(['route'=>'public','method'=>'GET','class'=>'form-inline'])}}
         
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
                 aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
