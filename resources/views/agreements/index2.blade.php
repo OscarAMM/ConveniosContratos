@@ -67,7 +67,7 @@
                         <div class="col" style="margin-right:5px;">
                             <label for="name" class="col-form-label text-muted">Suscrito</label>
                             <input type="text" id="people_id" name="people_id" class="form-control "
-                                placeholder="ingrese suscrito">
+                                placeholder="ingrese suscrito" autocomplete="off">
                             <div id="peopleList">
                             </div>
                         </div>

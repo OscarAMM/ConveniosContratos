@@ -48,8 +48,7 @@
                     <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
                     <div class="form-inline ">
                         <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
-                            placeholder="Ingrese instrumento" value="{{$documents->legalInstrument}}">
-
+                            placeholder="Ingrese instrumento" value="{{$documents->legalInstrument}}" autocomplete="off">
                     </div>
                     <div id="instrumentList">
                     </div>
@@ -151,7 +150,7 @@
                     <div class="form-group">
                         <label for="people_id" class="col-md-8 col-form-label">Añadir Parte</label>
                         <input type="text" id="people_id" name="people_id" class="form-control "
-                            placeholder="ingrese suscrito">
+                            placeholder="ingrese suscrito" autocomplete="off">
 
                         <div id="peopleList">
                         </div>

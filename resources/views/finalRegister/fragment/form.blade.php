@@ -39,7 +39,7 @@
                     <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
                     <div class="form-inline ">
                         <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
-                            placeholder="Ingrese instrumento">
+                            placeholder="Ingrese instrumento" autocomplete="off">
                     </div>
                     <div id="instrumentList">
                     </div>
