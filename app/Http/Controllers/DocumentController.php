@@ -68,7 +68,7 @@ class DocumentController extends Controller
             $ISpecific = (string) $ISpecific;
             $IOthers = (string) $IOthers;
         }
-        return view('docs.index', compact('scopeE', 'scopeN', 'scopeI', 'docs', 'IGeneral', 'ISpecific', 'IOthers'));
+        return view('docs.index', compact('session', 'start_signature', 'end_signature', 'scopeE', 'scopeN', 'scopeI', 'docs', 'IGeneral', 'ISpecific', 'IOthers'));
     }
 
     /**
@@ -267,26 +267,75 @@ class DocumentController extends Controller
     }
     public function storeReports(Request $request)
     {
-        /*
-        $template = new TemplateProcessor('plantillaComments.docx');
-        $template->setValue('title','Reporte');
-        $template->setValue('scopeE', $request->get('scopeE'));
-        $template->setValue('scopeN', $request->get('scopeN'));
-        $template->setValue('scopeI', $request->get('scopeI'));
-        $template->setValue('IGeneral', $request->get('IGeneral'));
-        $template->setValue('ISpecific', $request->get('ISpecific'));
-        $template->setValue('IOthers', $request->get('IOthers'));
+        $session = $request->get('session');
+        $start_signature = $request->get('start_signature');
+        $end_signature = $request->get('end_signature');
+        if ($start_signature||$end_signature||$session) {
+            $docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
+            //We call FinalRegister model to verify the scope and count it
+            $scopeE=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->count();
+            $scopeN=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->count();
+            $scopeI=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->count();
+            //We make a parse String to print into the view
+            $scopeE = (string) $scopeE;
+            $scopeN = (string) $scopeN;
+            $scopeI = (string) $scopeI;
+            //We call Final Register model to verify the instrumentType and count it
+            $IGeneral=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'General')->count();
+            $ISpecific=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'Específico')->count();
+            $IOthers=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'Otros')->count();
+            //PARSE STRING
+            $IGeneral = (string) $IGeneral;
+            $ISpecific = (string) $ISpecific;
+            $IOthers = (string) $IOthers;
+        } else {
+            $docs = FinalRegister::orderBy('id', 'ASC')
+            ->session($session)
+            ->paginate();
+            //We call FinalRegister model to verify the scope and count it
+            $scopeE=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->count();
+            $scopeN=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->count();
+            $scopeI=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->count();
+            //We make a parse String to print into the view
+            $scopeE = (string) $scopeE;
+            $scopeN = (string) $scopeN;
+            $scopeI = (string) $scopeI;
+            //We call Final Register model to verify the instrumentType and count it
+            $IGeneral=FinalRegister::where('session', 'LIKE', "%$session%")->where('instrumentType', 'General')->count();
+            $ISpecific=FinalRegister::where('session', 'LIKE', "%$session%")->where('instrumentType', 'Específico')->count();
+            $IOthers=FinalRegister::where('session', 'LIKE', "%$session%")->where('instrumentType', 'Otros')->count();
+            //PARSE STRING
+            $IGeneral = (string) $IGeneral;
+            $ISpecific = (string) $ISpecific;
+            $IOthers = (string) $IOthers;
+        }
+
+        /*foreach ($docs as $doc) {
+            //campos de los documentos, faltan por añadir
+            echo $doc->name.'-';
+        }*/
+        $template = new TemplateProcessor('plantillaReports.docx');
+        $template->setValue('title', 'Reporte');
+        $template->setValue('scopeE', $scopeE);
+        $template->setValue('scopeN', $scopeN);
+        $template->setValue('scopeI', $scopeI);
+        $template->setValue('IGeneral', $IGeneral);
+        $template->setValue('ISpecific', $ISpecific);
+        $template->setValue('IOthers', $IOthers);
 
         $documents = '';
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
+             .'<w:br />'.'Objetivo: '.$doc->objective
+             .'<w:br />'.'Fecha de firma: '.$doc->signature
+             .'<w:br />'.'Fecha de fin: '.$doc->end_date
             .'<w:br />';
         }
         $template->setValue('documents', $documents);
         $template->saveAs('reportsWord/'.'Reporte.docx');
-        return response()->download(public_path('reportsWord/'.'Reporte.docx'))->deleteFileAfterSend(true);*/
+        return response()->download(public_path('reportsWord/'.'Reporte.docx'))->deleteFileAfterSend(true);
     }
 
 

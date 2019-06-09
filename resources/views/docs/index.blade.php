@@ -10,7 +10,11 @@
             introducir la fecha de <strong>SESIÓN</strong> para filtrar y recuperar toda la información correspondiente
             a la fecha asignada.</p>
         @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
-        <!--<form action="{{route('StoreReports', $docs)}}" method="post">
+        <form action="{{route('StoreReports')}}" method="post">
+        <input type="hidden" id="session" name="session" value="{{$session}}">
+        <input type="hidden" id="start_signature" name="start_signature" value="{{$start_signature}}">
+        <input type="hidden" id="end_signature" name="end_signature" value="{{$end_signature}}">
+
         <input type="hidden" id="scopeE" name="scopeE" value="{{$scopeE}}">
         <input type="hidden" id="scopeN" name="scopeN" value="{{$scopeN}}">
         <input type="hidden" id="scopeI" name="scopeI" value="{{$scopeI}}">
@@ -20,8 +24,9 @@
 
             {{csrf_field()}}
             <button type="submit" class="btn btn-success">Imprimir</button>
-        </form>-->
+        </form>
         @endif
+        <br>
         {{Form::open(['route'=>'Index','method'=>'GET','class'=>'form-inline'])}}
         <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
