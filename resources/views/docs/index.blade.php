@@ -9,16 +9,24 @@
         <p class="text-muted">Esta sección se genera los reportes para las sesiones, cabe resaltar que se debe
             introducir la fecha de <strong>SESIÓN</strong> para filtrar y recuperar toda la información correspondiente
             a la fecha asignada.</p>
-
-        {{Form::open(['route'=>'Index','method'=>'GET','class'=>'form-inline'])}}
         @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
-        <p class="text-item-center"><a href="{{route('FinalRegister.create')}}" class="btn boton"
-                style="margin-right:5px">Nuevo</a>
-            @endif
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
-                Búsqueda
-            </button>
+        <!--<form action="{{route('StoreReports', $docs)}}" method="post">
+        <input type="hidden" id="scopeE" name="scopeE" value="{{$scopeE}}">
+        <input type="hidden" id="scopeN" name="scopeN" value="{{$scopeN}}">
+        <input type="hidden" id="scopeI" name="scopeI" value="{{$scopeI}}">
+        <input type="hidden" id="IGeneral" name="IGeneral" value="{{$IGeneral}}">
+        <input type="hidden" id="ISpecific" name="ISpecific" value="{{$ISpecific}}">
+        <input type="hidden" id="IOthers" name="IOthers" value="{{$IOthers}}">
+
+            {{csrf_field()}}
+            <button type="submit" class="btn btn-success">Imprimir</button>
+        </form>-->
+        @endif
+        {{Form::open(['route'=>'Index','method'=>'GET','class'=>'form-inline'])}}
+        <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+            aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
+            Búsqueda
+        </button>
         </p>
         <!------------------------------------- SEARCH FORM ---------------------------------------------------->
         <div class="collapse" id="collapseExample">
@@ -26,8 +34,16 @@
                 <!-- inicio form busqueda-->
                 <div class="form-row">
                     <div class="col-label-form" style="margin-right:5px">
-                        <label for="name" class="col-form-label text-muted">Nombre</label>
+                        <label for="session" class="col-form-label text-muted">Sesión</label>
                         {{Form::text('session',null,['class'=>'form-control','placeholder'=>'Fecha de sesión'])}}
+                    </div>
+                    <div class="col-label-form" style="margin-right:5px">
+                        <label for="start_signature" class="col-form-label text-muted">Desde</label>
+                        {{Form::date('start_signature',null,['class'=>'form-control','placeholder'=>'Fecha de firma'])}}
+                    </div>
+                    <div class="col-label-form" style="margin-right:5px">
+                        <label for="end_signature" class="col-form-label text-muted">Hasta</label>
+                        {{Form::date('end_signature',null,['class'=>'form-control','placeholder'=>'Fecha de firma'])}}
                     </div>
 
                     <div class="card-footer">
@@ -42,19 +58,16 @@
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th>Documento</th>
                 <th> Estatales</th>
                 <th> Nacionales</th>
                 <th> Internacionales</th>
-
             </tr>
         <tbody>
             <tr>
-            <td>@foreach($docs as $doc)
+                <!--<td>@foreach($docs as $doc)
             <td>{{$doc->scope}}</td>
             @endforeach
-            </td>
-                <td>Convenios</td>
+            </td>-->
                 <td>{{$scopeE}}</td>
                 <td>{{$scopeN}}</td>
                 <td>{{$scopeI}}</td>
@@ -65,16 +78,45 @@
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th>Convenios</th>
                 <th>Generales</th>
                 <th>Especificos</th>
+                <th>Otros</th>
+
             </tr>
         <tbody>
             <tr>
-                <td>Convenios</td>
                 <td>{{$IGeneral}}</td>
                 <td>{{$ISpecific}}</td>
+                <td>{{$IOthers}}</td>
+
             </tr>
+        </tbody>
+        </thead>
+    </table>
+
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th> Número de registro</th>
+                <th> Nombre</th>
+                <th> Fecha Firma</th>
+                <th> Fecha Sesión</th>
+                <th> Ámbito</th>
+                <th> Tipo de instrumento</th>
+
+            </tr>
+        <tbody>
+            @foreach($docs as $doc)
+            <tr>
+                <td>{{$doc->registerNumber}}</td>
+                <td>{{$doc->name}}</td>
+                <td>{{$doc->signature}}</td>
+                <td>{{$doc->session}}</td>
+                <td>{{$doc->scope}}</td>
+                <td>{{$doc->instrumentType}}</td>
+
+            </tr>
+            @endforeach
         </tbody>
         </thead>
     </table>

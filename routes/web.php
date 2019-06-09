@@ -63,3 +63,4 @@ Route::get('/createDoc', ['uses' =>'DocumentController@create', 'as' =>'CreateDo
 Route::post('/storeDoc/{id}',['uses' =>'DocumentController@store', 'as' =>'StoreDocs']);
 Route::post('/storeFinal/{id}',['uses' =>'DocumentController@storeFinal', 'as' =>'StoreFinal']);
 Route::post('/storeComments/{id}',['uses' =>'DocumentController@storeComments', 'as' =>'StoreComments']);
+Route::post('/storeReports',['uses' =>'DocumentController@storeReports', 'as' =>'StoreReports']);
