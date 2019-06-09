@@ -10,21 +10,55 @@
             introducir la fecha de <strong>SESIÓN</strong> para filtrar y recuperar toda la información correspondiente
             a la fecha asignada.</p>
         @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
-        <form action="{{route('StoreReports')}}" method="post">
-        <input type="hidden" id="session" name="session" value="{{$session}}">
-        <input type="hidden" id="start_signature" name="start_signature" value="{{$start_signature}}">
-        <input type="hidden" id="end_signature" name="end_signature" value="{{$end_signature}}">
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
 
-        <input type="hidden" id="scopeE" name="scopeE" value="{{$scopeE}}">
-        <input type="hidden" id="scopeN" name="scopeN" value="{{$scopeN}}">
-        <input type="hidden" id="scopeI" name="scopeI" value="{{$scopeI}}">
-        <input type="hidden" id="IGeneral" name="IGeneral" value="{{$IGeneral}}">
-        <input type="hidden" id="ISpecific" name="ISpecific" value="{{$ISpecific}}">
-        <input type="hidden" id="IOthers" name="IOthers" value="{{$IOthers}}">
+            <form action="{{route('StoreReports')}}" method="post">
+                <input type="hidden" id="session" name="session" value="{{$session}}">
+                <input type="hidden" id="start_signature" name="start_signature" value="{{$start_signature}}">
+                <input type="hidden" id="end_signature" name="end_signature" value="{{$end_signature}}">
 
-            {{csrf_field()}}
-            <button type="submit" class="btn btn-success">Imprimir</button>
-        </form>
+                <input type="hidden" id="scopeE" name="scopeE" value="{{$scopeE}}">
+                <input type="hidden" id="scopeN" name="scopeN" value="{{$scopeN}}">
+                <input type="hidden" id="scopeI" name="scopeI" value="{{$scopeI}}">
+                <input type="hidden" id="IGeneral" name="IGeneral" value="{{$IGeneral}}">
+                <input type="hidden" id="ISpecific" name="ISpecific" value="{{$ISpecific}}">
+                <input type="hidden" id="IOthers" name="IOthers" value="{{$IOthers}}">
+                <input type="hidden" id="ITotal" name="ITotal" value="{{$ITotal}}">
+
+                {{csrf_field()}}
+                <button type="submit" class="btn btn-secondary">Imprimir Conteo</button>
+            </form>
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Documentos
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+
+                    <form action="{{route('StoreReportsGeneral')}}" method="post">
+                        <input type="hidden" id="session" name="session" value="{{$session}}">
+                        <input type="hidden" id="start_signature" name="start_signature" value="{{$start_signature}}">
+                        <input type="hidden" id="end_signature" name="end_signature" value="{{$end_signature}}">
+                        {{csrf_field()}}
+                        <button type="submit" class="dropdown-item">Documentos Generales</button>
+                    </form>
+                    <form action="{{route('StoreReportsSpecific')}}" method="post">
+                        <input type="hidden" id="session" name="session" value="{{$session}}">
+                        <input type="hidden" id="start_signature" name="start_signature" value="{{$start_signature}}">
+                        <input type="hidden" id="end_signature" name="end_signature" value="{{$end_signature}}">
+                        {{csrf_field()}}
+                        <button type="submit" class="dropdown-item">Documentos Específicos</button>
+                    </form>
+                    <form action="{{route('StoreReportsOthers')}}" method="post">
+                        <input type="hidden" id="session" name="session" value="{{$session}}">
+                        <input type="hidden" id="start_signature" name="start_signature" value="{{$start_signature}}">
+                        <input type="hidden" id="end_signature" name="end_signature" value="{{$end_signature}}">
+                        {{csrf_field()}}
+                        <button type="submit" class="dropdown-item">Otros Documentos</button>
+                    </form>
+                </div>
+            </div>
+        </div>
         @endif
         <br>
         {{Form::open(['route'=>'Index','method'=>'GET','class'=>'form-inline'])}}

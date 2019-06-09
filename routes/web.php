@@ -64,3 +64,6 @@ Route::post('/storeDoc/{id}',['uses' =>'DocumentController@store', 'as' =>'Store
 Route::post('/storeFinal/{id}',['uses' =>'DocumentController@storeFinal', 'as' =>'StoreFinal']);
 Route::post('/storeComments/{id}',['uses' =>'DocumentController@storeComments', 'as' =>'StoreComments']);
 Route::post('/storeReports',['uses' =>'DocumentController@storeReports', 'as' =>'StoreReports']);
+Route::post('/storeReportsGeneral',['uses' =>'DocumentController@storeReportsGeneral', 'as' =>'StoreReportsGeneral']);
+Route::post('/storeReportsSpecific',['uses' =>'DocumentController@storeReportsSpecific', 'as' =>'StoreReportsSpecific']);
+Route::post('/storeReportsOthers',['uses' =>'DocumentController@storeReportsOthers', 'as' =>'StoreReportsOthers']);
