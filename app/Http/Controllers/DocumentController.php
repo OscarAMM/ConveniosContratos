@@ -21,26 +21,42 @@ class DocumentController extends Controller
         $session = $request->get('session');
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
-        /*$scopeE= count(DB::table('final_registers')
-            ->whereBetween('signature', [$start_signature, $end_signature])->where('signature', 'Estatal'));
-        $scopeN = DB::table('final_registers')
-            ->whereBetween('signature', [$start_signature, $end_signature])->where('signature', 'Nacional')->count();
-        $scopeI = DB::table('final_registers')
-            ->whereBetween('signature', [$start_signature, $end_signature])->where('signature', 'Internacional')->count();*/
         if ($start_signature||$end_signature||$session) {
-            /*$docs = DB::table('final_registers')
-            ->whereBetween('signature', [$start_signature, $end_signature])->paginate(15);*/
             $docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
+            //General
             //We call FinalRegister model to verify the scope and count it
-            $scopeE=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->count();
-            $scopeN=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->count();
-            $scopeI=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->count();
+            $scopeE=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'General')->count();
+            $scopeN=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->where('instrumentType', 'General')->count();
+            $scopeI=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->where('instrumentType', 'General')->count();
             //We make a parse String to print into the view
             $scopeE = (string) $scopeE;
             $scopeN = (string) $scopeN;
             $scopeI = (string) $scopeI;
             $scopeT=$scopeE+$scopeN+$scopeI;
             $scopeT=(string)$scopeT;
+            //Specific
+            //We call FinalRegister model to verify the scope and count it
+            $scopeES=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'Específico')->count();
+            $scopeNS=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->where('instrumentType', 'Específico')->count();
+            $scopeIS=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->where('instrumentType', 'Específico')->count();
+            //We make a parse String to print into the view
+            $scopeES = (string) $scopeES;
+            $scopeNS = (string) $scopeNS;
+            $scopeIS = (string) $scopeIS;
+            $scopeTS=$scopeES+$scopeNS+$scopeIS;
+            $scopeTS=(string)$scopeTS;
+            //Others
+            //We call FinalRegister model to verify the scope and count it
+            $scopeEO=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'Otros')->count();
+            $scopeNO=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->where('instrumentType', 'Otros')->count();
+            $scopeIO=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->where('instrumentType', 'Otros')->count();
+            //We make a parse String to print into the view
+            $scopeEO = (string) $scopeEO;
+            $scopeNO = (string) $scopeNO;
+            $scopeIO = (string) $scopeIO;
+            $scopeTO=$scopeEO+$scopeNO+$scopeIO;
+            $scopeTO=(string)$scopeTO;
+
             //We call Final Register model to verify the instrumentType and count it
             $IGeneral=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'General')->count();
             $ISpecific=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'Específico')->count();
@@ -55,16 +71,40 @@ class DocumentController extends Controller
             $docs = FinalRegister::orderBy('id', 'ASC')
             ->session($session)
             ->paginate();
+            //General
             //We call FinalRegister model to verify the scope and count it
-            $scopeE=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->count();
-            $scopeN=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->count();
-            $scopeI=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->count();
+            $scopeE=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'General')->count();
+            $scopeN=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->where('instrumentType', 'General')->count();
+            $scopeI=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->where('instrumentType', 'General')->count();
             //We make a parse String to print into the view
             $scopeE = (string) $scopeE;
             $scopeN = (string) $scopeN;
             $scopeI = (string) $scopeI;
             $scopeT=$scopeE+$scopeN+$scopeI;
             $scopeT=(string)$scopeT;
+            
+            //Specific
+            //We call FinalRegister model to verify the scope and count it
+            $scopeES=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'Específico')->count();
+            $scopeNS=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->where('instrumentType', 'Específico')->count();
+            $scopeIS=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->where('instrumentType', 'Específico')->count();
+            //We make a parse String to print into the view
+            $scopeES = (string) $scopeES;
+            $scopeNS = (string) $scopeNS;
+            $scopeIS = (string) $scopeIS;
+            $scopeTS=$scopeES+$scopeNS+$scopeIS;
+            $scopeTS=(string)$scopeTS;
+            //Others
+            //We call FinalRegister model to verify the scope and count it
+            $scopeEO=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'Otros')->count();
+            $scopeNO=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Nacional')->where('instrumentType', 'Otros')->count();
+            $scopeIO=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Internacional')->where('instrumentType', 'Otros')->count();
+            //We make a parse String to print into the view
+            $scopeEO = (string) $scopeEO;
+            $scopeNO = (string) $scopeNO;
+            $scopeIO = (string) $scopeIO;
+            $scopeTO=$scopeEO+$scopeNO+$scopeIO;
+            $scopeTO=(string)$scopeTO;
             //We call Final Register model to verify the instrumentType and count it
             $IGeneral=FinalRegister::where('session', 'LIKE', "%$session%")->where('instrumentType', 'General')->count();
             $ISpecific=FinalRegister::where('session', 'LIKE', "%$session%")->where('instrumentType', 'Específico')->count();
@@ -76,7 +116,8 @@ class DocumentController extends Controller
             $ITotal=$IGeneral+$ISpecific+$IOthers;
             $ITotal=(string)$ITotal;
         }
-        return view('docs.index', compact('ITotal','session', 'start_signature', 'end_signature', 'scopeE', 'scopeN', 'scopeI', 'docs', 'IGeneral', 'ISpecific', 'IOthers'));
+
+        return view('docs.index', compact('session', 'start_signature', 'end_signature', 'scopeE', 'scopeN', 'scopeI','scopeT', 'scopeES', 'scopeNS', 'scopeIS','scopeTS', 'scopeEO', 'scopeNO', 'scopeIO','scopeTO', 'docs', 'IGeneral', 'ISpecific', 'IOthers','ITotal'));
     }
 
     /**

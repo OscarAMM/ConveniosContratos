@@ -16,15 +16,6 @@
                 <input type="hidden" id="session" name="session" value="{{$session}}">
                 <input type="hidden" id="start_signature" name="start_signature" value="{{$start_signature}}">
                 <input type="hidden" id="end_signature" name="end_signature" value="{{$end_signature}}">
-
-                <input type="hidden" id="scopeE" name="scopeE" value="{{$scopeE}}">
-                <input type="hidden" id="scopeN" name="scopeN" value="{{$scopeN}}">
-                <input type="hidden" id="scopeI" name="scopeI" value="{{$scopeI}}">
-                <input type="hidden" id="IGeneral" name="IGeneral" value="{{$IGeneral}}">
-                <input type="hidden" id="ISpecific" name="ISpecific" value="{{$ISpecific}}">
-                <input type="hidden" id="IOthers" name="IOthers" value="{{$IOthers}}">
-                <input type="hidden" id="ITotal" name="ITotal" value="{{$ITotal}}">
-
                 {{csrf_field()}}
                 <button type="submit" class="btn btn-secondary">Imprimir Conteo</button>
             </form>
@@ -97,29 +88,11 @@
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
-                <th> Estatales</th>
-                <th> Nacionales</th>
-                <th> Internacionales</th>
-            </tr>
-        <tbody>
-            <tr>
-                <!--<td>@foreach($docs as $doc)
-            <td>{{$doc->scope}}</td>
-            @endforeach
-            </td>-->
-                <td>{{$scopeE}}</td>
-                <td>{{$scopeN}}</td>
-                <td>{{$scopeI}}</td>
-            </tr>
-        </tbody>
-        </thead>
-    </table>
-    <table class="table table-striped table-bordered">
-        <thead class="thead-dark">
-            <tr>
                 <th>Generales</th>
                 <th>Especificos</th>
                 <th>Otros</th>
+                <th>Total</th>
+
 
             </tr>
         <tbody>
@@ -127,12 +100,47 @@
                 <td>{{$IGeneral}}</td>
                 <td>{{$ISpecific}}</td>
                 <td>{{$IOthers}}</td>
-
+                <td>{{$ITotal}}</td>
             </tr>
         </tbody>
         </thead>
     </table>
-
+    <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">Ámbito</th>
+                <th scope="col">General</th>
+                <th scope="col">Específico</th>
+                <th scope="col">Otros</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <th scope="row">Estatal</th>
+                <td>{{$scopeE}}</td>
+                <td>{{$scopeES}}</td>
+                <td>{{$scopeEO}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Nacional</th>
+                <td>{{$scopeN}}</td>
+                <td>{{$scopeNS}}</td>
+                <td>{{$scopeNO}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Internacional</th>
+                <td>{{$scopeI}}</td>
+                <td>{{$scopeIS}}</td>
+                <td>{{$scopeIO}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Total:</th>
+                <td>{{$scopeT}}</td>
+                <td>{{$scopeTS}}</td>
+                <td>{{$scopeTO}}</td>
+            </tr>
+        </tbody>
+    </table>
     <table class="table table-striped table-bordered">
         <thead class="thead-dark">
             <tr>
