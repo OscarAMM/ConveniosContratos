@@ -127,15 +127,7 @@ class DocumentController extends Controller
      */
     public function create(Request $request)
     {
-        /*$phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $section = $phpWord->addSection();
-        $text = $section->addText($request->get('name'));
-        $text = $section->addText($request->get('email'));
-        $text = $section->addText($request->get('number'), array('name' => 'Arial', 'size' => 20, 'bold' => true));
-        //$section->addImage("./images/Krunal.jpg");
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        $objWriter->save($document->name.'.docx');
-        return response()->download(public_path($document->name.'.docx'));*/
+      //
     }
 
     /**
@@ -169,39 +161,6 @@ class DocumentController extends Controller
         $template->saveAs('documentsWord/'.$document->name.'.docx');
         return response()->download(public_path('documentsWord/'.$document->name.'.docx'))->deleteFileAfterSend(true);
 
-        /*
-        $document=Agreement::find($id);
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $phpWord->addTitleStyle(null, array('size' => 20, 'bold' => true));
-        $section = $phpWord->addSection();
-        $text = $section->addTitle($document->name,0);
-        $text = $section->addText('Recepción:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->reception);
-        $text = $section->addText('Fecha final de revisión:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->end_date);
-        $text = $section->addText('Objetivo:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->objective);
-        $text = $section->addText('Ámbito:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->scope);
-        $text = $section->addText('Partes:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        foreach($document->getPeople as $person){
-            $text = $section->addText($person->name);
-        }
-        $text = $section->addText('Responsable externo:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->liable_user);
-        $text = $section->addText('Responsable(s) interno(s):',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        foreach($document->getUser as $user){
-            $text = $section->addText($user->name.' - '. $user->email);
-        }
-        /*Secciones de archivos, aun por confirmar si se agrega
-
-        $text = $section->addText('Estado:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->status);
-        //ejemplo de como poner imagenes
-        //$section->addImage("./images/Krunal.jpg");
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        $objWriter->save('documentsWord/'.$document->name.'.docx');
-        return response()->download(public_path('documentsWord/'.$document->name.'.docx'));*/
     }
     public function storeFinal(Request $request, $id)
     {
@@ -235,50 +194,7 @@ class DocumentController extends Controller
         $template->saveAs('finalWord/'.$document->name.'.docx');
         return response()->download(public_path('finalWord/'.$document->name.'.docx'))->deleteFileAfterSend(true);
         
-        /*
-        $phpWord = new \PhpOffice\PhpWord\PhpWord();
-        $phpWord->addTitleStyle(null, array('size' => 20, 'bold' => true));
-        $section = $phpWord->addSection();
-        $text = $section->addTitle($document->name,0);
-        $text = $section->addText('Número de registro:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->registerNumber);
-        $text = $section->addText('Instrumento jurídico:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->legalInstrument);
-        $text = $section->addText('Objetivo:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->objective);
-        $text = $section->addText('Tipo de instrumento:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->instrumentType);
-        $text = $section->addText('Observación:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->observation);
-        $text = $section->addText('Fecha de firma:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->signature);
-        $text = $section->addText('Fecha de inicio:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->start_date);
-        $text = $section->addText('Fecha de fin:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->end_date);
-        $text = $section->addText('Fecha de sesión:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->session);
-        $text = $section->addText('Ámbito:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->scope);
-        $text = $section->addText('Visibilidad del documento:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        if($document->hide){
-            $text = $section->addText('Visible');
-        }else{
-            $text = $section->addText('No Visible');
-        }
-        $text = $section->addText('Partes:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        foreach($document->getPeople as $person){
-            $text = $section->addText($person->name);
-        }
-        /*Secciones de archivos, aun por confirmar si se agrega
-
-        $text = $section->addText('Estado:',array('name' => 'Arial', 'size' => 14, 'bold' => false));
-        $text = $section->addText($document->status);
-        //ejemplo de como poner imagenes
-        //$section->addImage("./images/Krunal.jpg");
-        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        $objWriter->save('finalWord/'.$document->name.'.docx');
-        return response()->download(public_path('finalWord/'.$document->name.'.docx'));*/
+       
     }
     public function storeComments(Request $request, $id)
     {
@@ -299,20 +215,6 @@ class DocumentController extends Controller
         $objWriter->save('commentsWord/'.'Comments'.$document->name.'.docx');
         return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'));
 
-        //Comentarios con plantilla
-       /* $document=Agreement::find($id);
-        $template = new TemplateProcessor('plantillaComments.docx');
-        $template->setValue('name',$document->name);
-        $comments = '';
-        foreach ($document->getComments as $comment) {
-            $comments.='<w:br />'.'Asunto: '.$comment->topic
-            .'<w:br />'.'Comentario: '.strip_tags($comment->comment)
-            .'<w:br />'.'Realizado por: '.$comment->user
-            .'<w:br />'.'Fecha: '.$comment->created_at.'<w:br />';
-        }
-        $template->setValue('comments', $comments);
-        $template->saveAs('commentsWord/'.'Comments'.$document->name.'.docx');
-        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'))->deleteFileAfterSend(true);*/
     }
     public function storeReports(Request $request)
     {
@@ -415,10 +317,6 @@ class DocumentController extends Controller
             $ITotal=(string)$ITotal;
         }
 
-        /*foreach ($docs as $doc) {
-            //campos de los documentos, faltan por añadir
-            echo $doc->name.'-';
-        }*/
         $template = new TemplateProcessor('plantillaReports.docx');
         $template->setValue('title', 'Reporte');
         //General
