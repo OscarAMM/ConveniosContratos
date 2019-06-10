@@ -19,6 +19,7 @@
         <h3 class="text-muted">Bievenido a la búsqueda de convenios.</h3>
         <p class="text-muted">Realiza búsqueda del convenio utilizando los criterios de búsqueda.
         <i>Nota:Podrás realizar una búsqueda más precisa si se llenan todos los campos. </i></p>
+        
         {{Form::open(['route'=>'public','method'=>'GET','class'=>'form-inline'])}}
         
             <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
@@ -35,7 +36,7 @@
                         <label for="name" class="col-form-label text-muted">Nombre</label>
                         {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre  del documento'])}}
                     </div>
-                    <div class="col-label-form" style="margin-right:5px">
+                  <div class="col-label-form" style="margin-right:5px">
                         <label for="name" class="col-form-label text-muted">Instrumento jurídico</label>
                         {{Form::text('legalInstrument',null,['class'=>'form-control','placeholder'=>'Instrumento jurídico'])}}
                     </div>
@@ -77,6 +78,7 @@
                         </button></div>
                 </div>
                 {{Form::close()}}
+                
             </div>
         </div>
     </div>
@@ -113,8 +115,9 @@
                     <tbody>
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
+                        
                         @foreach($documents as $document)
-                        @if($document->hide&&$document->status=='Finalizado')
+                        @if($document->hide&&$document->status=='Finalizado' &&$document->legalInstrument =='Convenio')
                          <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
@@ -122,12 +125,12 @@
                             <td>{{$document->signature}}</td>
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
-
                             <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
                             <td><a href="{{route('publicShow', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
                             @endif
+                            
                             </tr>
                             
                             @endforeach
@@ -155,7 +158,7 @@
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
                         @foreach($documents as $document)
-                        @if($document->hide&&$document->status=='Finalizado')
+                        @if($document->hide&&$document->status=='Finalizado' &&$document->legalInstrument =='Convenio')
                         @if($document->end_date<=Carbon\Carbon::now()) <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
@@ -199,7 +202,7 @@
 
                 <!-----------------------------FOREACH SEARCH ------------------------------->
                 @foreach($documents as $document)
-                @if($document->hide&&$document->status=='Finalizado')
+                @if($document->hide&&$document->status=='Finalizado' &&$document->legalInstrument =='Convenio')
                 @if($document->end_date>=Carbon\Carbon::now()) <tr>
                     <td>{{$document->registerNumber}}</td>
                     <td>{{$document->name}}</td>
