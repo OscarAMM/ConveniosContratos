@@ -340,17 +340,6 @@ class DocumentController extends Controller
         $template->setValue('IOthers', $IOthers);
         $template->setValue('ITotal', $ITotal);
 
-        $documents = '';
-        foreach ($docs as $doc) {
-            //campos de los documentos, faltan por añadir
-            $documents.=
-             '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.$doc->objective
-             .'<w:br />'.'Fecha de firma: '.$doc->signature
-             .'<w:br />'.'Fecha de fin: '.$doc->end_date
-            .'<w:br />';
-        }
-        $template->setValue('documents', $documents);
         $template->saveAs('reportsWord/'.'Reporte.docx');
         return response()->download(public_path('reportsWord/'.'Reporte.docx'))->deleteFileAfterSend(true);
     }
@@ -368,7 +357,7 @@ class DocumentController extends Controller
             ->paginate();
         }
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
-        $template->setValue('title', 'Documentos Generales');
+        $template->setValue('title', 'Convenios Generales');
         $documents = '';
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
@@ -397,7 +386,7 @@ class DocumentController extends Controller
             ->paginate();
         }
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
-        $template->setValue('title', 'Documentos Específicos');
+        $template->setValue('title', 'Convenios Específicos');
         $documents = '';
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir

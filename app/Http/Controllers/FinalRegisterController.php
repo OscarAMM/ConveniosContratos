@@ -288,9 +288,8 @@ class FinalRegisterController extends Controller
         $objective = $request->get('objective');
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
-        $session = $request->get('session');
         $people=$request->get('people_id');
-        if ($id||$name||$legalInstrument||$instrumentType||$objective||$signature||$end_date||$session||$people) {
+        if ($id||$name||$legalInstrument||$instrumentType||$objective||$signature||$end_date||$people) {
             if ($people) {
                 if (str_contains($people, ' - ')) {
                     $splitName = explode(' - ', $people);
@@ -328,7 +327,6 @@ class FinalRegisterController extends Controller
                     ->objective($objective)
                     ->signature($signature)
                     ->end_date($end_date)
-                    ->session($session)
                     ->paginate();
             }
         } else {

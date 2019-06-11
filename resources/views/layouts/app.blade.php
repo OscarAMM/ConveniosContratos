@@ -52,15 +52,11 @@
                         @endif
 
                         @if(Auth::user()->hasRole('admin'))
-                        <li class="nav-item">
-                            <a href="{{route('Person.index')}}" class="nav-link">Partes</a>
-                        </li>
+                        
                         <li class="nav-item">
                             <a href="{{route('users.index')}}" class="nav-link">Usuarios</a>
                         </li>
-                        <li class="nav-item">
-                            <a href="{{route('Index')}}" class="nav-link">Reportes</a>
-                        </li>
+                       
                         @endif
                     </ul>
                     @endif
