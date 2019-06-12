@@ -59,14 +59,15 @@
             <div class="row">
                 <div class="col-md-6">
                     <h4>Partes</h4>
-                    <p>Se hace la administración de instituciones, dependencias y personas. Se puede agregar, editar,
-                        eliminar y examinar
-                        los que suscriben.</p>
+                    <p>Se realiza la administración de las partes que estarán suscribiendo en a los documentos. Se puede
+                        agregar, ver, editar y eliminar las partes según sea el caso.</p>
                     <p><a href="{{route('Person.index')}}" class="btn btn-primary">Administrar</a></p>
                 </div>
                 <div class="col-md-6">
                     <h4>Instrumentos jurídicos</h4>
-                    <p>Instrumentos jurídicos... [Descripción pendiente]</p>
+                    <p>Se administra los instrumentos jurídicos que serán utilizados. Se puede agregar, ver, editar y
+                        eliminar los instrumentos jurídicos. </p>
+                    <p><i>Nota: Una vez agregados no se podrá agregar otro con el mismo nombre.</i></p>
 
                     <p><a href="{{route('LegalInstrument.index')}}" class="btn btn-primary">Administrar</a></p>
                 </div>
@@ -79,8 +80,10 @@
                 </div>
                 <div class="col-md-6">
                     <h4>Consultar usuario</h4>
-                    <p>Se consulta todos los usuarios registrados en el sistema, tanto usuarios normales como
-                        administradores.</p>
+                    <p>Se consulta todos los usuarios registrados en el sistema, tanto usuarios revisores como
+                        administradores.Se podrá agregar, editar, ver y eliminar los usuarios.</p>
+                    <p><i>Nota:Los usuarios registrados serán los que tengan acceso al sistema. Existe solo un
+                            admin.</i></p>
                     <p><a href="{{route('users.index')}}" class="btn btn-primary">Consultar</a></p>
                 </div>
             </div>
@@ -89,13 +92,18 @@
             <div class="row">
                 <div class="col-md-6">
                     <h4>Reporte</h4>
-                    <p>El sistema arrojará los reportes correspondientes según la fecha especificada.</p>
+                    <p>El sistema recupera los documentos almacenados y se podrá realizar los reportes correspondientes
+                        según la fecha especificada.</p>
                     <p><a href="{{route('Index')}}" class="btn btn-primary">Reporte</a></p>
                 </div>
                 <div class="col-md-6">
                     <h4>Registro</h4>
-                    <p>Se realiza el registro final que contará con todo lo solicitado para almacenar en el sistema.
+                    <p>Se podrá administrar los documentos que podrán ser o no vistos para el público en general o en
+                        caso de solicitudes.
+                        Se podrá agregar, editar, ver y eliminar los documentos.
                     </p>
+                    <p><i>Nota: estos documentos finales son aquellos que son autorizados y firmados por todas las
+                            partes. </i></p>
                     <p><a href="{{route('FinalRegister.index')}}" class="btn btn-primary">Registro</a></p>
                 </div>
             </div>
@@ -149,12 +157,13 @@
             @elseif(Auth::user()->hasRole('user'))
             <!--{{(Auth::user()->name)}}-->
             <div class="container">
-            <div class="jumbotron" style="background-color:#0F3558;">
-                <h1 style="color:#BF942D">Sistema de Convenios y Contratos</h1>
-                <hr style="border:2px solid #BF942D">
-                <p class="lead" style="color:white;">¡Bienvenido a SICC {{Auth::user()->name}}!</p>
-                <p style="color:white">En SICC podrás hacer la consulta de los documentos asignados y los publicados. </p>
-            </div>
+                <div class="jumbotron" style="background-color:#0F3558;">
+                    <h1 style="color:#BF942D">Sistema de Convenios y Contratos</h1>
+                    <hr style="border:2px solid #BF942D">
+                    <p class="lead" style="color:white;">¡Bienvenido a SICC {{Auth::user()->name}}!</p>
+                    <p style="color:white">En SICC podrás hacer la consulta de los documentos asignados y los
+                        publicados. </p>
+                </div>
                 <h1>Vistas Públicas</h1>
                 <hr style="border:2px solid #BF942D;">
                 <div class="row">
