@@ -15,20 +15,20 @@ class CreateFinalRegistersTable extends Migration
     {
         Schema::create('final_registers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->string('name',500);
             //$table->date('reception');
-            $table->text('objective');
-            $table->string('legalInstrument');
+            $table->text('objective')->nullable();
+            $table->string('legalInstrument')->nullable();
             $table->string('registerNumber')->nullable();
             $table->date('signature')->nullable();
             $table->date('session')->nullable();
             $table->text('observation')->nullable();
-            $table->string('scope');
+            $table->string('scope')->nullable();
             $table->boolean('hide')->nullable();
-            $table->string('instrumentType');
-            $table->date('start_date');
+            $table->string('instrumentType')->nullable();
+            $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
-            $table->string('status');
+            $table->string('status')->nullable();
             $table->String('countries')->nullable();
 
             //$table->integer('people_id')->unsigned();

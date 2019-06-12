@@ -190,8 +190,8 @@
                     <tbody>
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
-                        @foreach($documents as $document)
-                        @if($document->end_date<=Carbon\Carbon::now()&&$document->observation=='') <tr>
+                        @foreach($documents2 as $document)
+                        @if($document->observation=='') <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
                             <td>{{$document->legalInstrument}}</td>
@@ -247,8 +247,8 @@
                     <tbody>
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
-                        @foreach($documents as $document)
-                        @if($document->end_date>=Carbon\Carbon::now()&&$document->observation=='') <tr>
+                        @foreach($documents3 as $document)
+                        @if($document->observation=='') <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
                             <td>{{$document->legalInstrument}}</td>
@@ -303,7 +303,7 @@
                     <tbody>
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
-                        @foreach($documents as $document)
+                        @foreach($documents4 as $document)
                         @if(!empty($document->observation)) <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>

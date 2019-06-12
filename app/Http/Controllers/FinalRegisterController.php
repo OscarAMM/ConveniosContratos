@@ -11,6 +11,7 @@ use App\Agreement;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Redirect;
+use Carbon\Carbon;
 
 class FinalRegisterController extends Controller
 {
@@ -41,6 +42,42 @@ class FinalRegisterController extends Controller
                     ->where('end_date', 'LIKE', "%$end_date%")
                     ->orderBy('id', 'DESC')
                     ->paginate();
+                $documents2 = Person::find($splitName[0])->final()
+                    ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+                $documents3 = Person::find($splitName[0])->final()
+                    ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+                $documents4 = Person::find($splitName[0])->final()
+                    ->where('observation', '!=','')
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
             } else {
                 $person=Person::where('name', 'LIKE', "%$people%")->first();
                 if (!empty($person)) {
@@ -55,8 +92,47 @@ class FinalRegisterController extends Controller
                     ->where('end_date', 'LIKE', "%$end_date%")
                     ->orderBy('id', 'DESC')
                     ->paginate();
+                    $documents2 = $person->final()
+                    ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+                    $documents3 = $person->final()
+                    ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
+                    $documents4 = $person->final()
+                    ->where('observation', '!=','')
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC')
+                    ->paginate();
                 } else {
                     $documents = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
+                    $documents2 = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
+                    $documents3 = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
+                    $documents4 = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
                 }
             }
         } else {
@@ -72,8 +148,47 @@ class FinalRegisterController extends Controller
                 ->end_date($end_date)
                 ->session($session)
                 ->paginate();
+            $documents2 = FinalRegister::orderBy('id', 'DESC')
+                ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
+                ->id($id)
+                ->name($name)
+                ->countries($countries)
+                ->scope($scope)
+                ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
+                ->signature($signature)
+                ->end_date($end_date)
+                ->session($session)
+                ->paginate();
+            $documents3 = FinalRegister::orderBy('id', 'DESC')
+                ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
+                ->id($id)
+                ->name($name)
+                ->countries($countries)
+                ->scope($scope)
+                ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
+                ->signature($signature)
+                ->end_date($end_date)
+                ->session($session)
+                ->paginate();
+            $documents4 = FinalRegister::orderBy('id', 'DESC')
+                ->where('observation', '!=','')
+                ->id($id)
+                ->name($name)
+                ->countries($countries)
+                ->scope($scope)
+                ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
+                ->signature($signature)
+                ->end_date($end_date)
+                ->session($session)
+                ->paginate();
         }
-        return view('finalregister.index', compact('documents'));
+        return view('finalregister.index', compact('documents','documents2','documents3','documents4'));
     }
     public function create()
     {
