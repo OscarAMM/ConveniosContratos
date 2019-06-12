@@ -45,6 +45,14 @@
                         {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre  del documento'])}}
                     </div>
                     <div class="col-label-form" style="margin-right:5px">
+                        <label for="countries" class="col-form-label text-muted">País</label>
+                        {{Form::text('countries',null,['class'=>'form-control','placeholder'=>'Nombre  del país'])}}
+                    </div>
+                    <div class="col-label-form" style="margin-right:5px">
+                        <label for="scope" class="col-form-label text-muted">Ámbito</label>
+                        {{Form::text('scope',null,['class'=>'form-control','placeholder'=>'Ámbito'])}}
+                    </div>
+                    <div class="col-label-form" style="margin-right:5px">
                         <label for="name" class="col-form-label text-muted">Instrumento jurídico</label>
                         {{Form::text('legalInstrument',null,['class'=>'form-control','placeholder'=>'Instrumento jurídico'])}}
                     </div>
@@ -63,15 +71,15 @@
                     </div>
                     <div class="col-label-form" style="margin-right:5px;">
                         <label for="signature" class="col-form-label text-muted">Fecha Firma</label>
-                        {{Form::text('signature',null,['class' => 'form-control', 'placeholder'=>'Fecha firma'])}}
+                        {{Form::text('signature',null,['class' => 'form-control', 'placeholder'=>'aaaa-mm-dd'])}}
                     </div>
                     <div class="col-label-form" style="margin-right:5px;">
                         <label for="end_date" class="col-form-label text-muted">Fecha Fin</label>
-                        {{Form::text('end_date',null,['class' => 'form-control', 'placeholder'=>'Fecha fin'])}}
+                        {{Form::text('end_date',null,['class' => 'form-control', 'placeholder'=>'aaaa-mm-dd'])}}
                     </div>
                     <div class="col-label-form" style="margin-right:5px;">
                         <label for="session" class="col-form-label text-muted">Fecha Sesión</label>
-                        {{Form::text('session',null,['class' => 'form-control', 'placeholder'=>'Fecha sesión'])}}
+                        {{Form::text('session',null,['class' => 'form-control', 'placeholder'=>'aaaa-mm-dd'])}}
                     </div>
                     <div class="col-label-form" style="margin-right:5px;">
                         <label for="people_id" class=" col-form-label text-muted">Partes</label>
@@ -101,6 +109,8 @@
                     aria-controls="nav-profile" aria-selected="false">Vigentes</a>
                 <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
                     aria-controls="nav-contact" aria-selected="false">No vigentes</a>
+                <a class="nav-item nav-link" id="nav-others-tab" data-toggle="tab" href="#nav-others" role="tab"
+                    aria-controls="nav-others" aria-selected="false">Otros</a>
             </div>
         </nav>
 
@@ -115,6 +125,7 @@
                             <th>Instrumento jurídico</th>
                             <th>Tipo de instrumento</th>
                             <th>Objetivo</th>
+                            <th>Ámbito</th>
                             <th>Fecha de firma</th>
                             <th>Fecha de fin</th>
                             <th>Fecha de sesión</th>
@@ -125,17 +136,18 @@
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
                         @foreach($documents as $document)
-                         <tr>
+                        <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
                             <td>{{$document->legalInstrument}}</td>
                             <td>{{$document->instrumentType}}</td>
                             <td>{{$document->objective}}</td>
+                            <td>{{$document->scope}}</td>
                             <td>{{$document->signature}}</td>
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
 
-                            <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
+                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                             <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
@@ -152,8 +164,8 @@
                                 </form>
                             </td>
                             @endif
-                            </tr>
-                            @endforeach
+                        </tr>
+                        @endforeach
                     </tbody>
                     </thead>
                 </table>
@@ -168,6 +180,7 @@
                             <th>Instrumento jurídico</th>
                             <th>Tipo de instrumento</th>
                             <th>Objetivo</th>
+                            <th>Ámbito</th>
                             <th>Fecha de firma</th>
                             <th>Fecha de fin</th>
                             <th>Fecha de sesión</th>
@@ -178,17 +191,18 @@
 
                         <!-----------------------------FOREACH SEARCH ------------------------------->
                         @foreach($documents as $document)
-                        @if($document->end_date<=Carbon\Carbon::now()) <tr>
+                        @if($document->end_date<=Carbon\Carbon::now()&&$document->observation=='') <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
                             <td>{{$document->legalInstrument}}</td>
                             <td>{{$document->instrumentType}}</td>
                             <td>{{$document->objective}}</td>
+                            <td>{{$document->scope}}</td>
                             <td>{{$document->signature}}</td>
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
 
-                            <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
+                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                             <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
@@ -216,54 +230,114 @@
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <!------------------ NO VIGENTES --------------------->
                 <table class="table table-striped table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th>Num. Registro</th>
-                    <th>Nombre completo</th>
-                    <th>Instrumento jurídico</th>
-                    <th>Tipo de instrumento</th>
-                    <th>Objetivo</th>
-                    <th>Fecha de firma</th>
-                    <th>Fecha de fin</th>
-                    <th>Fecha de sesión</th>
-                    <th>Partes</th>
-                    <th colspan="3">&nbsp; Opciones</th>
-                </tr>
-            <tbody>
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Num. Registro</th>
+                            <th>Nombre completo</th>
+                            <th>Instrumento jurídico</th>
+                            <th>Tipo de instrumento</th>
+                            <th>Objetivo</th>
+                            <th>Ámbito</th>
+                            <th>Fecha de firma</th>
+                            <th>Fecha de fin</th>
+                            <th>Fecha de sesión</th>
+                            <th>Partes</th>
+                            <th colspan="3">&nbsp; Opciones</th>
+                        </tr>
+                    <tbody>
 
-                <!-----------------------------FOREACH SEARCH ------------------------------->
-                @foreach($documents as $document)
-                @if($document->end_date>=Carbon\Carbon::now()) <tr>
-                    <td>{{$document->registerNumber}}</td>
-                    <td>{{$document->name}}</td>
-                    <td>{{$document->legalInstrument}}</td>
-                    <td>{{$document->instrumentType}}</td>
-                    <td>{{$document->objective}}</td>
-                    <td>{{$document->signature}}</td>
-                    <td>{{$document->end_date}}</td>
-                    <td>{{$document->session}}</td>
+                        <!-----------------------------FOREACH SEARCH ------------------------------->
+                        @foreach($documents as $document)
+                        @if($document->end_date>=Carbon\Carbon::now()&&$document->observation=='') <tr>
+                            <td>{{$document->registerNumber}}</td>
+                            <td>{{$document->name}}</td>
+                            <td>{{$document->legalInstrument}}</td>
+                            <td>{{$document->instrumentType}}</td>
+                            <td>{{$document->objective}}</td>
+                            <td>{{$document->scope}}</td>
+                            <td>{{$document->signature}}</td>
+                            <td>{{$document->end_date}}</td>
+                            <td>{{$document->session}}</td>
 
-                    <td>@foreach($document->getPeople as $person){{$person->name.'; '}}@endforeach</td>
-                    <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a></td>
-                    </td>
-                    @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                    <td><a href="{{route('FinalRegister.edit', $document->id)}}" class="btn botonAmarillo">Editar</a>
-                    </td>
-                    <td>
-                        <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                            {{csrf_field()}}
-                            <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger"
-                                onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
-                        </form>
-                    </td>
-                    @endif
-                    </tr>
-                    @endif
-                    @endforeach
-            </tbody>
-            </thead>
-        </table>
+                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            </td>
+                            </td>
+                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                                    class="btn botonAmarillo">Editar</a>
+                            </td>
+                            <td>
+                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger"
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                </form>
+                            </td>
+                            @endif
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                    </thead>
+                </table>
+            </div>
+            <div class="tab-pane fade" id="nav-others" role="tabpanel" aria-labelledby="nav-others-tab">
+                <!------------------ NO VIGENTES --------------------->
+                <table class="table table-striped table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Num. Registro</th>
+                            <th>Nombre completo</th>
+                            <th>Instrumento jurídico</th>
+                            <th>Tipo de instrumento</th>
+                            <th>Objetivo</th>
+                            <th>Ámbito</th>
+                            <th>Fecha de firma</th>
+                            <th>Fecha de fin</th>
+                            <th>Fecha de sesión</th>
+                            <th>Partes</th>
+                            <th colspan="3">&nbsp; Opciones</th>
+                        </tr>
+                    <tbody>
+
+                        <!-----------------------------FOREACH SEARCH ------------------------------->
+                        @foreach($documents as $document)
+                        @if(!empty($document->observation)) <tr>
+                            <td>{{$document->registerNumber}}</td>
+                            <td>{{$document->name}}</td>
+                            <td>{{$document->legalInstrument}}</td>
+                            <td>{{$document->instrumentType}}</td>
+                            <td>{{$document->objective}}</td>
+                            <td>{{$document->scope}}</td>
+                            <td>{{$document->signature}}</td>
+                            <td>{{$document->end_date}}</td>
+                            <td>{{$document->session}}</td>
+
+                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                            </td>
+                            </td>
+                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                                    class="btn botonAmarillo">Editar</a>
+                            </td>
+                            <td>
+                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                    {{csrf_field()}}
+                                    <input type="hidden" name="_method" value="DELETE">
+                                    <button class="btn btn-danger"
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                </form>
+                            </td>
+                            @endif
+                        </tr>
+                        @endif
+                        @endforeach
+                    </tbody>
+                    </thead>
+                </table>
             </div>
         </div>
 

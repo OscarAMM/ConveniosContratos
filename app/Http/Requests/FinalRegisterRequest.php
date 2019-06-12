@@ -30,7 +30,7 @@ class FinalRegisterRequest extends FormRequest
             'registerNumber' => 'required',
             'signature' => 'required',
             'start_date' => 'required',
-            'end_date' => 'required',
+            'end_date' => 'nullable',
             'session' => 'required',
             'scope' => 'required',
             'hide' => 'required',

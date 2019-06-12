@@ -38,7 +38,10 @@
                         aria-expanded="false" aria-controls="collapseForm">
                         Comentar
                     </button>
-                    <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn boton">Notificar</a>
+                    @if(Auth::user()->hasRole('admin'))
+                    <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn btn-info">Recordatorio</a>
+                    @endif
+                    <a href="{{Route('NotifyAgreement2.users', $agreements->id)}}" class="btn btn-warning">Notificar</a>
                     <input type="button" value="Finalizar" data-toggle="collapse" data-target="#collapseOptions"
                         aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
                     @endif
@@ -90,12 +93,14 @@
                 <div>
                     <div class="card-header">
                         <h5 style="color:white">Asunto:{!!$comment->topic!!}</h5>
+                        @if(Auth::user()->hasRole('admin')||(Auth::user()->hasDocument($agreements->id)&&ends_with($comment->user, Auth::user()->email)))
                         <form action="{{route('Comment.destroy', $comment->id)}}" method="POST">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
                             <button class="btn btn-danger"
                                 onClick="return confirm('¿Seguro que desea eliminar este comentario? No se deshacer la acción.'">X</button>
                         </form>
+                        @endif
                     </div>
                     <div class="card card-body">
                         <p>{!!$comment->comment!!}</p>

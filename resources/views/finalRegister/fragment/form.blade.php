@@ -71,7 +71,7 @@
                     <input type="date" id="start_date" name="start_date" class="form-control">
                 </div>
                 <div class="form-group">
-                    <small style="color:#D90101;">*</small>
+                    <small>*</small>
                     <label for="end_date">Fecha de fin</label>
                     <input type="date" id="end_date" name="end_date" class="form-control">
                 </div>

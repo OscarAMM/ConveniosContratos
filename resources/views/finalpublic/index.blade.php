@@ -46,6 +46,10 @@
                         <div id="peopleList">
                         </div>
                     </div>
+                    <div class="col-label-form" style="margin-right:5px">
+                        <label for="countries" class="col-form-label text-muted">País</label>
+                        {{Form::text('countries',null,['class'=>'form-control','placeholder'=>'Nombre  del país'])}}
+                    </div>
 
                     <div class="card-footer">
                         <button type="submit" class="btn btn-primary">

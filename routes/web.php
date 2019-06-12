@@ -40,6 +40,7 @@ Route::resource('Comment', 'CommentController');
 Route::post('/CommentAgreement/{id}',  ['uses'=> 'CommentController@commentAgreement' , 'as' => 'CommentAgreement.make']);
 Route::post('/FinallyAgreement/{id}',  ['uses'=> 'CommentController@finallyAgreement' , 'as' => 'FinallyAgreement.notify']);
 Route::get('/NotifyAgreement/{id}',  ['uses'=> 'CommentController@notifyAgreement' , 'as' => 'NotifyAgreement.users']);
+Route::get('/NotifyAgreement2/{id}',  ['uses'=> 'CommentController@notifyAgreement2' , 'as' => 'NotifyAgreement2.users']);
 //PDF ROUTE
 Route::get('/dynamic_pdf', ['uses' => 'PDFController@index', 'as' => 'PrePDF']);
 Route::get('/PDF', ['uses' => 'PDFController@downloadPDF', 'as' => 'PDFDownload'] );
