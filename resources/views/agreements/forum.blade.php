@@ -23,6 +23,13 @@
             <h3>¡Bienvenido al foro {{Auth::user()->name}}!</h3>
             <p>Aquí podrás estar comentando revisiones con los otros usuarios. Recuerda que puedes agregar archivos de
                 tipo: <i>Foto, PDF, DOCX, EXCEL, PPT</i></p>
+            <div class="btn-group">
+                <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                <form action="{{route('StoreComments', $agreements->id)}}" method="post">
+                    {{csrf_field()}}
+                    <button type="submit" class="btn btn-primary">Imprimir historial</button>
+                </form>
+            </div>
         </div>
     </div>
     <div class="container">
@@ -31,19 +38,20 @@
                 <h3>Opciones</h3>
                 <hr style="border:2px solid #BF942D">
                 {!!Form::open( ['route' =>array('CommentAgreement.make', $agreements->id), 'files' =>true]) !!}
-                <div class="form-group">
-                    <a href="{{Route('Revision')}}" class="btn btn-secondary">Regresar</a>
+                <div class="btn-group" role="group" aria-label="btns">
+
                     @if(Auth::user()->hasDocument($agreements->id))
                     <button class="btn boton" type="button" data-toggle="collapse" data-target="#collapseForm"
                         aria-expanded="false" aria-controls="collapseForm">
                         Comentar
                     </button>
                     @if(Auth::user()->hasRole('admin'))
-                    <a href="{{Route('NotifyAgreement.users', $agreements->id)}}" class="btn btn-info">Recordatorio</a>
+                    <a href="{{Route('NotifyAgreement.users', $agreements->id)}}"
+                        class="btn btn-primary">Recordatorio</a>
                     @endif
-                    <a href="{{Route('NotifyAgreement2.users', $agreements->id)}}" class="btn btn-warning">Notificar</a>
+                    <a href="{{Route('NotifyAgreement2.users', $agreements->id)}}" class="btn btn-success">Notificar</a>
                     <input type="button" value="Finalizar" data-toggle="collapse" data-target="#collapseOptions"
-                        aria-expanded="false" aria-controls="collapseOptions" class="btn btn-primary">
+                        aria-expanded="false" aria-controls="collapseOptions" class="btn btn-danger">
                     @endif
                 </div>
                 <div class="collapse" id="collapseForm">
@@ -67,17 +75,14 @@
                     </div>
                 </div>
                 {!!Form::close()!!}
-                <form action="{{route('StoreComments', $agreements->id)}}" method="post">
-                    {{csrf_field()}}
-                    <button type="submit" class="btn btn-success">Historial</button>
-                </form>
+
                 {!!Form::open( ['route' =>array('FinallyAgreement.notify', $agreements->id)]) !!}
                 <div class="collapse" id="collapseOptions">
                     <div class="card card-body">
                         <h3>¡Atención!</h3>
-                        <p>Al seleccionar la opción finalizar, se estará mandando un mensaje al usuario
-                            correspondiente para notificar que está listo para que revise el último documento
-                            agregado</p>
+                        <p>Al seleccionar la opción finalizar, estará eliminando de la vista de <i>Asignados</i> el
+                            documento "{{$agreements->name}}" pero se mantendrá en la sección de "Mis documentos" y
+                            "Documentos"</p>
                         <p>Si no está seguro de haber finalizado, no seleccione "Finalizar"</p>
                         <input type="submit" class="btn btn-primary" value="Finalizar"
                             onClick="return confirm('¿Seguro que quiere finalizar?');">
@@ -93,7 +98,8 @@
                 <div>
                     <div class="card-header">
                         <h5 style="color:white">Asunto:{!!$comment->topic!!}</h5>
-                        @if(Auth::user()->hasRole('admin')||(Auth::user()->hasDocument($agreements->id)&&ends_with($comment->user, Auth::user()->email)))
+                        @if(Auth::user()->hasRole('admin')||(Auth::user()->hasDocument($agreements->id)&&ends_with($comment->user,
+                        Auth::user()->email)))
                         <form action="{{route('Comment.destroy', $comment->id)}}" method="POST">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">

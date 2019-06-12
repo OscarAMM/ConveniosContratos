@@ -69,7 +69,7 @@
                             </select>
                         </div>
                         <div class="col-label-form">
-                            <label for="people_id" class=" text-muted">Parte</label>
+                            <label for="people_id" class="col-form-label text-muted">Parte</label>
                             <input type="text" id="people_id" name="people_id" class="form-control"
                                 placeholder="ingrese las partes" autocomplete="off">
                             <div id="peopleList">
