@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 class Agreement extends Model
 {
     protected $fillable = [
-        'id', 'name', 'reception', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status', 'liable_user', 'people_id',
+        'id', 'name', 'reception', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status', 'liable_user', 'people_id','countries',
     ];
     public function scopeName($query, $name)
     {
@@ -56,6 +56,12 @@ class Agreement extends Model
     {
         if ($reception) {
             return $query->where('reception', 'LIKE', "%$reception%");
+        }
+    }
+    public function scopeCountries($query, $countries)
+    {
+        if ($countries) {
+            return $query->where('countries', 'LIKE', "%$countries%");
         }
     }
     public function files()

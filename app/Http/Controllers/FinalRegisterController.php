@@ -18,6 +18,8 @@ class FinalRegisterController extends Controller
     {
         $id = $request->get('id');
         $name = $request->get('name');
+        $countries = $request->get('countries');
+        $scope = $request->get('scope');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
@@ -30,6 +32,8 @@ class FinalRegisterController extends Controller
                 $splitName = explode(' - ', $people);
                 $documents = Person::find($splitName[0])->final()
                     ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
                     ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                     ->where('instrumentType', 'LIKE', "%$instrumentType%")
                     ->where('objective', 'LIKE', "%$objective%")
@@ -42,6 +46,8 @@ class FinalRegisterController extends Controller
                 if (!empty($person)) {
                     $documents = $person->final()
                     ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
                     ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                     ->where('instrumentType', 'LIKE', "%$instrumentType%")
                     ->where('objective', 'LIKE', "%$objective%")
@@ -57,6 +63,8 @@ class FinalRegisterController extends Controller
             $documents = FinalRegister::orderBy('id', 'DESC')
                 ->id($id)
                 ->name($name)
+                ->countries($countries)
+                ->scope($scope)
                 ->legalInstrument($legalInstrument)
                 ->instrumentType($instrumentType)
                 ->objective($objective)
@@ -114,15 +122,20 @@ class FinalRegisterController extends Controller
         $document->update();
         $people = $request->people;
         $document->people()->detach();
+        $countries='';
         foreach ($people as $person) {
             $document->people()
                 ->attach(Person::where('id', $person)->first());
+            $countries.=Person::find($person)->country.' ; ';
         }
         if ($request->people_id) {
             $splitName = explode(' - ', $request->people_id);
             $document->people()
                 ->attach(Person::where('id', $splitName[0])->first());
+            $countries.=Person::find($splitName[0])->country.' ; ';
         }
+        $document->countries=$countries;
+        $document->update();
         return redirect()->route('FinalRegister.index')->with('info', 'El documento ' . $document->name . ' ha sido actualizado');
     }
     public function store(FinalRegisterRequest $request)
@@ -162,11 +175,15 @@ class FinalRegisterController extends Controller
                 //agregando partes
             $acturl = urldecode($request->ListaPro); //decodifico el JSON
             $people = json_decode($acturl);
+                $countries='';
                 foreach ($people as $peopleSelected) {
                     $splitPerson = explode(' - ', $peopleSelected->id_pro);
                     $document->people()
                 ->attach(Person::where('id', $splitPerson[0])->first());
+                    $countries.=Person::find($splitPerson[0])->country.' ; ';
                 }
+                $document->countries=$countries;
+                $document->update();
             }
         } else {
             return back()->with('info', 'No seleccionó un archivo.');
@@ -216,15 +233,20 @@ class FinalRegisterController extends Controller
                 $document->files()->attach(FileAgreement::where('id', $file_Name->id)->first());
                 $people = $request->people;
                 $document->people()->detach();
+                $countries='';
                 foreach ($people as $person) {
                     $document->people()
                 ->attach(Person::where('id', $person)->first());
+                    $countries.=Person::find($person)->country.' ; ';
                 }
                 if ($request->people_id) {
                     $splitName = explode(' - ', $request->people_id);
                     $document->people()
                 ->attach(Person::where('id', $splitName[0])->first());
+                    $countries.=Person::find($splitName[0])->country.' ; ';
                 }
+                $document->countries=$countries;
+                $document->update();
                 /*$acturl = urldecode($request->ListaPro); //decodifico el JSON
                 $people = json_decode($acturl);
                 foreach ($people as $peopleSelected) {
@@ -283,19 +305,21 @@ class FinalRegisterController extends Controller
     {
         $id = $request->get('id');
         $name = $request->get('name');
+        $countries = $request->get('countries');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
         $people=$request->get('people_id');
-        if ($id||$name||$legalInstrument||$instrumentType||$objective||$signature||$end_date||$people) {
+        if ($id||$name||$legalInstrument||$instrumentType||$objective||$signature||$end_date||$countries||$people) {
             if ($people) {
                 if (str_contains($people, ' - ')) {
                     $splitName = explode(' - ', $people);
                     $documents = Person::find($splitName[0])->final()
-                        ->where('name', 'LIKE', "%$name%")
-                        ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                         ->where('instrumentType', 'LIKE', "%$instrumentType%")
                         ->where('objective', 'LIKE', "%$objective%")
                         ->where('signature', 'LIKE', "%$signature%")
@@ -307,6 +331,7 @@ class FinalRegisterController extends Controller
                     if (!empty($person)) {
                         $documents = $person->final()
                         ->where('name', 'LIKE', "%$name%")
+                        ->where('countries', 'LIKE', "%$countries%")
                         ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                         ->where('instrumentType', 'LIKE', "%$instrumentType%")
                         ->where('objective', 'LIKE', "%$objective%")
@@ -322,6 +347,7 @@ class FinalRegisterController extends Controller
                 $documents = FinalRegister::orderBy('id', 'DESC')
                     ->id($id)
                     ->name($name)
+                    ->countries($countries)
                     ->legalInstrument($legalInstrument)
                     ->instrumentType($instrumentType)
                     ->objective($objective)

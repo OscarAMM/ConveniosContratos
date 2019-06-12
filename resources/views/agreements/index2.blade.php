@@ -43,6 +43,10 @@
                             <label for="name" class="col-form-label text-muted">Nombre</label>
                             {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre  del documento'])}}
                         </div>
+                        <div class="col-label-form" style="margin-right:5px">
+                            <label for="countries" class="col-form-label text-muted">País</label>
+                            {{Form::text('countries',null,['class'=>'form-control','placeholder'=>'Nombre  del país'])}}
+                        </div>
                         <div class="col" style="margin-right:5px">
                             <label for="name" class="col-form-label text-muted">Instrumento jurídico</label>
                             {{Form::text('legalInstrument',null,['class'=>'form-control','placeholder'=>'Instrumento jurídico'])}}
@@ -53,7 +57,7 @@
                         </div>
                         <div class="col" style="margin-right:5px;">
                             <label for="name" class="col-form-label text-muted">Fecha Recepción</label>
-                            {{Form::text('reception', null, ['class'=>'form-control', 'placeholder'=>'Año-Mes-Dia'])}}
+                            {{Form::text('reception', null, ['class'=>'form-control', 'placeholder'=>'aaaa-mm-dd'])}}
                         </div>
                         <div class="col" style="margin-right:5px">
                             <label for="name" class="col-form-label text-muted">Tipo de instrumento</label>
@@ -96,7 +100,7 @@
                         <th>Tipo de instrumento</th>
                         <th>Recepción</th>
                         <th>Objetivo</th>
-                        <th>Suscrito</th>
+                        <th>Partes</th>
                         <th colspan="6">&nbsp;Opciones</th>
                     </tr>
                 <tbody>
@@ -109,7 +113,7 @@
                         <td>{{$agreement->instrumentType}}</td>
                         <td>{{$agreement->reception}}</td>
                         <td>{{$agreement->objective}}</td>
-                        <td>@foreach($agreement->getPeople as $person){{$person->name.'; '}}@endforeach</td>
+                        <td>@foreach($agreement->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                         <td>
                         <td><a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a></td>
                         <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>

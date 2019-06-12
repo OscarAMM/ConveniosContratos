@@ -25,6 +25,8 @@ class CreateAgreementsTable extends Migration
             $table->date('end_date');
             $table->string('status');
             $table->String('liable_user');
+            $table->String('countries')->nullable();
+
             /*$table->integer('people_id')->unsigned();*/
 
             $table->timestamps();

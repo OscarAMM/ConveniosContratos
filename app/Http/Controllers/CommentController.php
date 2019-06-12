@@ -116,4 +116,18 @@ class CommentController extends Controller
         }   
         return redirect()->route('Forum.Agreement', $id)->with('info', 'Haz notificado a los usuarios con éxito');
     }
+    public function notifyAgreement2($id)
+    {
+        $activeUser = \Auth::user();
+        $agreement = Agreement::find($id);
+        foreach ($agreement->getUser as $user) {
+            if($activeUser->email!=$user->email){
+                $email = $user->email;
+                $subject = "Notificación del documento: ".$agreement->name;
+                $message= "El usuario: ".$activeUser->name." - ".$activeUser->email." ha enviado una alerta, por favor revise el foro para consultar los ultimos movimientos.";
+                Mail::to($email)->send(new SendEmail($subject, $message));
+            }
+        }   
+        return redirect()->route('Forum.Agreement', $id)->with('info', 'Haz notificado a los usuarios con éxito');
+    }
 }

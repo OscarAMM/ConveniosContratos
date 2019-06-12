@@ -27,8 +27,10 @@ class CreateFinalRegistersTable extends Migration
             $table->boolean('hide')->nullable();
             $table->string('instrumentType');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->string('status');
+            $table->String('countries')->nullable();
+
             //$table->integer('people_id')->unsigned();
 
             $table->timestamps();

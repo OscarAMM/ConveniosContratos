@@ -21,6 +21,7 @@ class AgreementController extends Controller
     {
         $id = $request->get('id');
         $name = $request->get('name');
+        $countries = $request->get('countries');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
@@ -32,6 +33,7 @@ class AgreementController extends Controller
                 $splitName = explode(' - ', $request->get('people_id'));
                 $agreements = Person::find($splitName[0])->agreements()
                     ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
                     ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                     ->where('instrumentType', 'LIKE', "%$instrumentType%")
                     ->where('objective', 'LIKE', "%$objective%")
@@ -43,6 +45,7 @@ class AgreementController extends Controller
                 if (!empty($person)) {
                     $agreements = $person->agreements()
                         ->where('name', 'LIKE', "%$name%")
+                        ->where('countries', 'LIKE', "%$countries%")
                         ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                         ->where('instrumentType', 'LIKE', "%$instrumentType%")
                         ->where('objective', 'LIKE', "%$objective%")
@@ -64,6 +67,7 @@ class AgreementController extends Controller
             $agreements = Agreement::orderBy('id', 'DESC')
                 ->id($id)
                 ->name($name)
+                ->countries($countries)
                 ->legalInstrument($legalInstrument)
                 ->instrumentType($instrumentType)
             /*->people_id($people)*/
@@ -81,6 +85,7 @@ class AgreementController extends Controller
     {
         $id = $request->get('id');
         $name = $request->get('name');
+        $countries = $request->get('countries');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
         $objective = $request->get('objective');
@@ -92,6 +97,7 @@ class AgreementController extends Controller
                 $splitName = explode(' - ', $request->get('people_id'));
                 $agreements = Person::find($splitName[0])->agreements()
                     ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
                     ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                     ->where('instrumentType', 'LIKE', "%$instrumentType%")
                     ->where('objective', 'LIKE', "%$objective%")
@@ -103,6 +109,7 @@ class AgreementController extends Controller
                 if (!empty($person)) {
                     $agreements = $person->agreements()
                         ->where('name', 'LIKE', "%$name%")
+                        ->where('countries', 'LIKE', "%$countries%")
                         ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
                         ->where('instrumentType', 'LIKE', "%$instrumentType%")
                         ->where('objective', 'LIKE', "%$objective%")
@@ -124,6 +131,7 @@ class AgreementController extends Controller
             $agreements = Agreement::orderBy('id', 'DESC')
                 ->id($id)
                 ->name($name)
+                ->countries($countries)
                 ->legalInstrument($legalInstrument)
                 ->instrumentType($instrumentType)
             /*->people_id($people)*/
@@ -225,15 +233,21 @@ class AgreementController extends Controller
                 ->attach(User::where('id', $user)->first());
         }
         $agreement->people()->detach();
+        $countries='';
+        
         foreach ($people as $person) {
             $agreement->people()
                 ->attach(Person::where('id', $person)->first());
+            $countries.=Person::find($person)->country.' ; ';
         }
         if ($request->people_id) {
             $splitName = explode(' - ', $request->people_id);
             $agreement->people()
                 ->attach(Person::where('id', $splitName[0])->first());
+            $countries.=Person::find($splitName[0])->country.' ; ';
         }
+        $agreement->countries=$countries;
+        $agreement->update();
         $file = $request->file('file');
         if ($file) {
             $file_path = $file->getClientOriginalName();
@@ -245,7 +259,7 @@ class AgreementController extends Controller
             //Convenio
             $agreement->files()
             ->attach(FileAgreement::where('id', $file_Name->id)->first());
-        } 
+        }
         
 
         return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido actualizado');
@@ -287,11 +301,17 @@ class AgreementController extends Controller
             //agregando partes
             $acturl = urldecode($request->ListaPro); //decodifico el JSON
             $people = json_decode($acturl);
+            $countries='';
+            $agreement->countries=$countries;
+            $agreement->update();
             foreach ($people as $peopleSelected) {
                 $splitPerson = explode(' - ', $peopleSelected->id_pro);
                 $agreement->people()
                     ->attach(Person::where('id', $splitPerson[0])->first());
+                $countries.=Person::find($splitPerson[0])->country.' ; ';
             }
+            $agreement->countries=$countries;
+            $agreement->update();
         }
         $file = $request->file('file');
         if ($file) {
@@ -304,7 +324,7 @@ class AgreementController extends Controller
             //Convenio
             $agreement->files()
             ->attach(FileAgreement::where('id', $file_Name->id)->first());
-        } 
+        }
         return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido agregado');
     }
     public function showFile($id)

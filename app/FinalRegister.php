@@ -10,7 +10,7 @@ use Illuminate\Database\Eloquent\Model;
 class FinalRegister extends Model
 {
     protected $fillable = [
-        'id', 'name', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status',
+        'id', 'name', 'objective', 'legalInstrument', 'registerNumber', 'scope', 'hide', 'start_date', 'end_date', 'status','countries',
     ];
     public function scopeName($query, $name)
     {
@@ -63,6 +63,18 @@ class FinalRegister extends Model
     {
         if ($end_date) {
             return $query->where('end_date', 'LIKE', "%$end_date%");
+        }
+    }
+    public function scopeCountries($query, $countries)
+    {
+        if ($countries) {
+            return $query->where('countries', 'LIKE', "%$countries%");
+        }
+    }
+    public function scopeScope($query, $scope)
+    {
+        if ($scope) {
+            return $query->where('scope', 'LIKE', "%$scope%");
         }
     }
     public function people()
