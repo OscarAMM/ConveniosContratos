@@ -25,6 +25,77 @@
         <p class="text-muted"> <i> <strong>NOTA:</strong> Esta sección tendrá relación con el apartado de vistas
                 públicas, por lo que se pide que verifiquen el
                 documento que será visible para el público general. </i></p>
+                @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
+        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+            <div class="btn-group" role="group">
+                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Documentos
+                </button>
+                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+
+                    <form action="{{route('StoreAll')}}" method="post">
+                        <input type="hidden" id="name" name="name" value="{{$name}}">
+                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
+                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                        <input type="hidden" id="session" name="session" value="{{$session}}">
+                        <input type="hidden" id="people" name="people" value="{{$people}}">
+
+                        {{csrf_field()}}
+                        <button type="submit" class="dropdown-item">Todos</button>
+                    </form>
+                    <form action="{{route('StoreV')}}" method="post">
+                        <input type="hidden" id="name" name="name" value="{{$name}}">
+                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
+                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                        <input type="hidden" id="session" name="session" value="{{$session}}">
+                        <input type="hidden" id="people" name="people" value="{{$people}}">
+                        {{csrf_field()}}
+                        <button type="submit" class="dropdown-item">Vigentes</button>
+                    </form>
+                    <form action="{{route('StoreNV')}}" method="post">
+                        <input type="hidden" id="name" name="name" value="{{$name}}">
+                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
+                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                        <input type="hidden" id="session" name="session" value="{{$session}}">
+                        <input type="hidden" id="people" name="people" value="{{$people}}">
+                        {{csrf_field()}}
+                        <button type="submit" class="dropdown-item">No vigentes</button>
+                    </form>
+                    <form action="{{route('StoreOthers')}}" method="post">
+                        <input type="hidden" id="name" name="name" value="{{$name}}">
+                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
+                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                        <input type="hidden" id="session" name="session" value="{{$session}}">
+                        <input type="hidden" id="people" name="people" value="{{$people}}">
+                        {{csrf_field()}}
+                        <button type="submit" class="dropdown-item">Otros</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        @endif
+        <br>
         {{Form::open(['route'=>'FinalRegister.index','method'=>'GET','class'=>'form-inline'])}}
         @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
         <p class="text-item-center"><a href="{{route('FinalRegister.create')}}" class="btn boton"

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Redirect;
 use Carbon\Carbon;
+use PhpOffice\PhpWord\TemplateProcessor;
 
 class FinalRegisterController extends Controller
 {
@@ -188,7 +189,8 @@ class FinalRegisterController extends Controller
                 ->session($session)
                 ->paginate();
         }
-        return view('finalregister.index', compact('documents','documents2','documents3','documents4'));
+        return view('finalregister.index', 
+        compact('name','countries','scope','legalInstrument','instrumentType','objective','signature','end_date','session','people','documents','documents2','documents3','documents4'));
     }
     public function create()
     {
@@ -483,5 +485,78 @@ class FinalRegisterController extends Controller
         $cont = count($files);
         $file = FileAgreement::find(last($list)[$cont - 1]->id);
         return view('finalpublic.show', compact('documents', 'file'));
+    }
+    public function storeAll(Request $request)
+    {
+        $name = $request->get('name');
+        $countries = $request->get('countries');
+        $scope = $request->get('scope');
+        $legalInstrument = $request->get('legalInstrument');
+        $instrumentType = $request->get('instrumentType');
+        $objective = $request->get('objective');
+        $signature = $request->get('signature');
+        $end_date = $request->get('end_date');
+        $session = $request->get('session');
+        $people=$request->get('people_id');
+        if ($people) {
+            if (str_contains($people, ' - ')) {
+                $splitName = explode(' - ', $people);
+                $documents = Person::find($splitName[0])->final()
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC');
+            } else {
+                $person=Person::where('name', 'LIKE', "%$people%")->first();
+                if (!empty($person)) {
+                    $documents = $person->final()
+                    ->where('name', 'LIKE', "%$name%")
+                    ->where('countries', 'LIKE', "%$countries%")
+                    ->where('scope', 'LIKE', "%$scope%")
+                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
+                    ->where('objective', 'LIKE', "%$objective%")
+                    ->where('signature', 'LIKE', "%$signature%")
+                    ->where('end_date', 'LIKE', "%$end_date%")
+                    ->orderBy('id', 'DESC');
+                } else {
+                    $documents = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
+                }
+            }
+        } else {
+            $documents = FinalRegister::orderBy('id', 'DESC')
+                ->name($name)
+                ->countries($countries)
+                ->scope($scope)
+                ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
+                ->signature($signature)
+                ->end_date($end_date)
+                ->session($session)->paginate();
+                
+        }
+        
+        $template = new TemplateProcessor('plantillaReportsDocuments.docx');
+        $template->setValue('title', 'Registros Finales');
+        $docs = '';
+        foreach ($documents as $doc) {
+            //campos de los documentos, faltan por añadir
+            $docs.=
+             '<w:br />'.'Nombre: '.$doc->name
+             .'<w:br />'.'Objetivo: '.$doc->objective
+             .'<w:br />'.'Fecha de firma: '.$doc->signature
+             .'<w:br />'.'Fecha de inicio: '.$doc->start_date
+             .'<w:br />'.'Fecha de fin: '.$doc->end_date
+            .'<w:br />';
+        }
+        $template->setValue('documents', $docs);
+        $template->saveAs('reportsWord/'.'Registros Finales.docx');
+        return response()->download(public_path('reportsWord/'.'Registros Finales.docx'))->deleteFileAfterSend(true);
     }
 }
