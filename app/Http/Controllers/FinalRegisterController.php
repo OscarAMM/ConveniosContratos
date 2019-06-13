@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use DB;
 
 use App\FileAgreement;
 use App\FinalRegister;
@@ -529,7 +530,9 @@ class FinalRegisterController extends Controller
                 }
             }
         } else {
-            $documents = FinalRegister::orderBy('id', 'DESC')
+            $documents = DB::select('select * from final_registers where name = ?', [$name]);
+
+            /*$documents = FinalRegister::orderBy('id', 'DESC')
                 ->name($name)
                 ->countries($countries)
                 ->scope($scope)
@@ -538,7 +541,7 @@ class FinalRegisterController extends Controller
                 ->objective($objective)
                 ->signature($signature)
                 ->end_date($end_date)
-                ->session($session)->paginate();
+                ->session($session)->paginate();*/
                 
         }
         
