@@ -48,7 +48,8 @@
                     <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
                     <div class="form-inline ">
                         <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
-                            placeholder="Ingrese instrumento" value="{{$documents->legalInstrument}}" autocomplete="off">
+                            placeholder="Ingrese instrumento" value="{{$documents->legalInstrument}}"
+                            autocomplete="off">
                     </div>
                     <div id="instrumentList">
                     </div>
@@ -64,7 +65,11 @@
                     <small style="color:#D90101;">*</small>
                     <label for="instrumentType" class=" col-form-label">Tipo de instrumento</label>
                     <select name="instrumentType" id="instrumentType" class="form-control">
-                        @if($documents->instrumentType === "General")
+                        @if($documents->instrumentType === "")
+                        <option>General</option>
+                        <option>Específico</option>
+                        <option>Otros</option>
+                        @elseif($documents->instrumentType === "General")
                         <option>General</option>
                         <option>Específico</option>
                         <option>Otros</option>
@@ -113,7 +118,11 @@
                     <small style="color:#D90101;">*</small>
                     <label for="scope" class="col-form-label">Ámbito</label>
                     <select name="scope" id="scope" class="form-control">
-                        @if($documents->scope === "Estatal")
+                        @if($documents->scope === "")
+                        <option>Estatal</option>
+                        <option>Nacional</option>
+                        <option>Internacional</option>
+                        @elseif($documents->scope === "Estatal")
                         <option>Estatal</option>
                         <option>Nacional</option>
                         <option>Internacional</option>
@@ -130,7 +139,7 @@
 
                     </select>
                 </div>
-                
+
                 <div class="form-group">
                     <label for="hide" class="col-form-label">Vista pública</label>
                     <select name="hide" id="hide" class="form-control">
@@ -139,32 +148,32 @@
                     </select>
                 </div>
                 <div class="col-md-4">
-                        <label for="person_id" class=" col-form-label">Partes</label>
-                        @foreach($documents->getPeople as $person)
-                        <br>
-                        <input type="checkbox" name="people[]" value="{{$person->id}}"
-                            {{ $person ->hasFinal($documents->id)?'checked':'' }}> <label>{{$person->name}}</label>
+                    <label for="person_id" class=" col-form-label">Partes</label>
+                    @foreach($documents->getPeople as $person)
+                    <br>
+                    <input type="checkbox" name="people[]" value="{{$person->id}}"
+                        {{ $person ->hasFinal($documents->id)?'checked':'' }}> <label>{{$person->name}}</label>
 
-                        @endforeach
+                    @endforeach
+                </div>
+                <div class="form-group">
+                    <label for="people_id" class="col-md-8 col-form-label">Añadir Parte</label>
+                    <input type="text" id="people_id" name="people_id" class="form-control "
+                        placeholder="ingrese suscrito" autocomplete="off">
+
+                    <div id="peopleList">
                     </div>
-                    <div class="form-group">
-                        <label for="people_id" class="col-md-8 col-form-label">Añadir Parte</label>
-                        <input type="text" id="people_id" name="people_id" class="form-control "
-                            placeholder="ingrese suscrito" autocomplete="off">
-
-                        <div id="peopleList">
-                        </div>
-                    </div>
+                </div>
 
 
-            <div class="form-group text-center" style="margin-top:5px">
+                <div class="form-group text-center" style="margin-top:5px">
                     <a href="{{route ('FinalRegister.index')}}" class="btn btn-secondary">Regresar</a>
                     <input type="submit" value="Guardar" class="btn btn-primary">
-            </div>
-            {{csrf_field()}}
+                </div>
+                {{csrf_field()}}
 
-            {!!Form::close()!!}
-            
+                {!!Form::close()!!}
+
         </div>
 
     </div>

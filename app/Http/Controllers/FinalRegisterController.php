@@ -43,7 +43,7 @@ class FinalRegisterController extends Controller
                     ->orderBy('id', 'DESC')
                     ->paginate();
                 $documents2 = Person::find($splitName[0])->final()
-                    ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
+                ->whereBetween('end_date', [Carbon::now(),'4000-01-01']) //CAMBIE AQUÍ DAVID este era docs3
                     ->where('name', 'LIKE', "%$name%")
                     ->where('countries', 'LIKE', "%$countries%")
                     ->where('scope', 'LIKE', "%$scope%")
@@ -55,7 +55,7 @@ class FinalRegisterController extends Controller
                     ->orderBy('id', 'DESC')
                     ->paginate();
                 $documents3 = Person::find($splitName[0])->final()
-                    ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
+                ->whereBetween('end_date', ['1000-01-01', Carbon::now()])//CAMBIE AQUÍ DAVID este era dcos2
                     ->where('name', 'LIKE', "%$name%")
                     ->where('countries', 'LIKE', "%$countries%")
                     ->where('scope', 'LIKE', "%$scope%")
@@ -93,7 +93,7 @@ class FinalRegisterController extends Controller
                     ->orderBy('id', 'DESC')
                     ->paginate();
                     $documents2 = $person->final()
-                    ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
+                    ->whereBetween('end_date', [Carbon::now(),'4000-01-01']) //CAMBIE AQUÍ DAVID este era Docs3
                     ->where('name', 'LIKE', "%$name%")
                     ->where('countries', 'LIKE', "%$countries%")
                     ->where('scope', 'LIKE', "%$scope%")
@@ -105,7 +105,7 @@ class FinalRegisterController extends Controller
                     ->orderBy('id', 'DESC')
                     ->paginate();
                     $documents3 = $person->final()
-                    ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
+                    ->whereBetween('end_date', ['1000-01-01', Carbon::now()]) //CAMBIE AQUÍ DAVID este era Docs2
                     ->where('name', 'LIKE', "%$name%")
                     ->where('countries', 'LIKE', "%$countries%")
                     ->where('scope', 'LIKE', "%$scope%")
@@ -228,7 +228,6 @@ class FinalRegisterController extends Controller
         $document->scope = $request->scope;
         $document->status = 'Finalizado';
         $document->instrumentType = $request->instrumentType;
-        $document->end_date = $request->signature;
         if ($request->hide == "Mostrar") {
             $document->hide = true;
         } else {
@@ -276,7 +275,7 @@ class FinalRegisterController extends Controller
             $document->scope = $request->scope;
             $document->status = 'Finalizado';
             $document->instrumentType = $request->instrumentType;
-            $document->end_date = $request->signature;
+        
             if ($request->hide == "Mostrar") {
                 $document->hide = true;
             } else {
@@ -335,7 +334,7 @@ class FinalRegisterController extends Controller
             $document->scope = $request->scope;
             $document->status = 'Finalizado';
             $document->instrumentType = $request->instrumentType;
-            $document->end_date = $request->signature;
+
             if ($request->hide == "Mostrar") {
                 $document->hide = true;
             } else {
