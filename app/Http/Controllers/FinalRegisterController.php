@@ -542,6 +542,7 @@ class FinalRegisterController extends Controller
             ->where('instrumentType', 'LIKE', "%$instrumentType%")
             ->where('objective', 'LIKE', "%$objective%")
             ->where('signature', 'LIKE', "%$signature%")
+            ->where('session', 'LIKE', "%$session%")
             ->where('end_date', 'LIKE', "%$end_date%")
             ->get();
             /*$documents = FinalRegister::orderBy('id', 'DESC')
@@ -570,6 +571,7 @@ class FinalRegisterController extends Controller
             . '<w:br />'.'instrumentType: '.$doc->instrumentType
             . '<w:br />'.'objective: '.$doc->objective
             . '<w:br />'.'signature: '.$doc->signature
+            . '<w:br />'.'sesión: '.$doc->session
             . '<w:br />'.'end_date: '.$doc->end_date
             .'<w:br />';
         }
