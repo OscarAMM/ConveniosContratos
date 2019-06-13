@@ -65,7 +65,7 @@
                     <small style="color:#D90101;">*</small>
                     <label for="instrumentType" class=" col-form-label">Tipo de instrumento</label>
                     <select name="instrumentType" id="instrumentType" class="form-control">
-                        @if($documents->instrumentType === "")
+                        @if(empty($documents->instrumentType))
                         <option>General</option>
                         <option>Específico</option>
                         <option>Otros</option>
@@ -118,7 +118,7 @@
                     <small style="color:#D90101;">*</small>
                     <label for="scope" class="col-form-label">Ámbito</label>
                     <select name="scope" id="scope" class="form-control">
-                        @if($documents->scope === "")
+                        @if(empty($documents->scope))
                         <option>Estatal</option>
                         <option>Nacional</option>
                         <option>Internacional</option>
