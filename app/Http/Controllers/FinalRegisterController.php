@@ -240,10 +240,12 @@ class FinalRegisterController extends Controller
         $people = $request->people;
         $document->people()->detach();
         $countries='';
-        foreach ($people as $person) {
-            $document->people()
+        if ($request->people) {
+            foreach ($people as $person) {
+                $document->people()
                 ->attach(Person::where('id', $person)->first());
-            $countries.=Person::find($person)->country.' ; ';
+                $countries.=Person::find($person)->country.' ; ';
+            }
         }
         if ($request->people_id) {
             $splitName = explode(' - ', $request->people_id);
@@ -351,10 +353,12 @@ class FinalRegisterController extends Controller
                 $people = $request->people;
                 $document->people()->detach();
                 $countries='';
-                foreach ($people as $person) {
-                    $document->people()
+                if ($request->people) {
+                    foreach ($people as $person) {
+                        $document->people()
                 ->attach(Person::where('id', $person)->first());
-                    $countries.=Person::find($person)->country.' ; ';
+                        $countries.=Person::find($person)->country.' ; ';
+                    }
                 }
                 if ($request->people_id) {
                     $splitName = explode(' - ', $request->people_id);
