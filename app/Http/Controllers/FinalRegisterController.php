@@ -556,8 +556,7 @@ class FinalRegisterController extends Controller
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
             $docs.=
-             '<w:br />'.'Nombre: '.$doc->name
-             
+             '<w:br />'.'Nombre: '.$doc->name             
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
