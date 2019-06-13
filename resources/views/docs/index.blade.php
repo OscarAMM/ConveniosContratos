@@ -168,6 +168,7 @@
         </thead>
     </table>
 </div>
+{{$docs->render()}}
 @else
 @endif
 @endsection
