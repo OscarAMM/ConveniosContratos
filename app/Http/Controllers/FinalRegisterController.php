@@ -536,6 +536,13 @@ class FinalRegisterController extends Controller
         } else {
             $documents = DB::table('final_registers')
             ->where('name', 'LIKE', "%{$name}%")
+            ->where('countries', 'LIKE', "%$countries%")
+            ->where('scope', 'LIKE', "%$scope%")
+            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+            ->where('instrumentType', 'LIKE', "%$instrumentType%")
+            ->where('objective', 'LIKE', "%$objective%")
+            ->where('signature', 'LIKE', "%$signature%")
+            ->where('end_date', 'LIKE', "%$end_date%")
             ->get();
             /*$documents = FinalRegister::orderBy('id', 'DESC')
                 ->name($name)
@@ -556,7 +563,14 @@ class FinalRegisterController extends Controller
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
             $docs.=
-             '<w:br />'.'Nombre: '.$doc->name             
+             '<w:br />'.'Nombre: '.$doc->name
+            . '<w:br />'.'countries: '.$doc->countries
+            . '<w:br />'.'Scope: '.$doc->scope
+            . '<w:br />'.'legalInstrument: '.$doc->legalInstrument
+            . '<w:br />'.'instrumentType: '.$doc->instrumentType
+            . '<w:br />'.'objective: '.$doc->objective
+            . '<w:br />'.'signature: '.$doc->signature
+            . '<w:br />'.'end_date: '.$doc->end_date
             .'<w:br />';
         }
         $template->setValue('documents', $docs);

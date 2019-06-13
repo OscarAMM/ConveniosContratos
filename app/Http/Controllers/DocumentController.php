@@ -70,7 +70,7 @@ class DocumentController extends Controller
         } else {
             $docs = FinalRegister::orderBy('id', 'ASC')
             ->session($session)
-            ->paginate();
+            ->paginate(30);
             //General
             //We call FinalRegister model to verify the scope and count it
             $scopeE=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'General')->count();
