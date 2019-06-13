@@ -22,7 +22,7 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
+            $docs=FinalRegister::orderBy('id', 'DESC')->whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
             //General
             //We call FinalRegister model to verify the scope and count it
             $scopeE=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'General')->count();
@@ -68,7 +68,7 @@ class DocumentController extends Controller
             $ITotal=$IGeneral+$ISpecific+$IOthers;
             $ITotal=(string)$ITotal;
         } else {
-            $docs = FinalRegister::orderBy('id', 'ASC')
+            $docs = FinalRegister::orderBy('id', 'DESC')
             ->session($session)
             ->paginate(30);
             //General
@@ -222,7 +222,7 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
+            //$docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
             //General
             //We call FinalRegister model to verify the scope and count it
             $scopeE=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'General')->count();
@@ -268,9 +268,9 @@ class DocumentController extends Controller
             $ITotal=$IGeneral+$ISpecific+$IOthers;
             $ITotal=(string)$ITotal;
         } else {
-            $docs = FinalRegister::orderBy('id', 'ASC')
+            /*$docs = FinalRegister::orderBy('id', 'ASC')
             ->session($session)
-            ->paginate();
+            ->paginate();*/
             //General
             //We call FinalRegister model to verify the scope and count it
             $scopeE=FinalRegister::where('session', 'LIKE', "%$session%")->where('scope', 'Estatal')->where('instrumentType', 'General')->count();
@@ -349,12 +349,17 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'General')->paginate();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')->whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'General')->get();
         } else {
-            $docs = FinalRegister::orderBy('id', 'ASC')
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->where('session', 'LIKE', "%{$session}%")
+            ->where('instrumentType', 'General')
+            ->get();
+
+            /*$docs = FinalRegister::orderBy('id', 'DESC')
             ->session($session)
             ->instrumentType('General')
-            ->paginate();
+            ->paginate();*/
         }
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Convenios Generales');
@@ -378,12 +383,12 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')->whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->get();
         } else {
-            $docs = FinalRegister::orderBy('id', 'ASC')
-            ->session($session)
-            ->instrumentType('Específico')
-            ->paginate();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->where('session', 'LIKE', "%{$session}%")
+            ->where('instrumentType', 'Específico')
+            ->get();
         }
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Convenios Específicos');
@@ -407,12 +412,12 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs=FinalRegister::whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')->whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
         } else {
-            $docs = FinalRegister::orderBy('id', 'ASC')
-            ->session($session)
-            ->instrumentType('Otros')
-            ->paginate();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->where('session', 'LIKE', "%{$session}%")
+            ->where('instrumentType', 'Otros')
+            ->get();
         }
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Otros Documentos');
