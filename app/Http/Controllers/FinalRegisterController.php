@@ -534,8 +534,9 @@ class FinalRegisterController extends Controller
                 }
             }
         } else {
-            $documents = DB::select('select * from final_registers where name = ?', [$name]);
-
+            $documents = DB::table('final_registers')
+            ->where('name', 'LIKE', "%{$name}%")
+            ->get();
             /*$documents = FinalRegister::orderBy('id', 'DESC')
                 ->name($name)
                 ->countries($countries)
@@ -556,10 +557,7 @@ class FinalRegisterController extends Controller
             //campos de los documentos, faltan por añadir
             $docs.=
              '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.$doc->objective
-             .'<w:br />'.'Fecha de firma: '.$doc->signature
-             .'<w:br />'.'Fecha de inicio: '.$doc->start_date
-             .'<w:br />'.'Fecha de fin: '.$doc->end_date
+             
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
