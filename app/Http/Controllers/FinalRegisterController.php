@@ -149,7 +149,7 @@ class FinalRegisterController extends Controller
                 ->session($session)
                 ->paginate();
             $documents2 = FinalRegister::orderBy('id', 'DESC')
-                ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
+                ->whereBetween('end_date', [Carbon::now(),'4000-01-01']) //CAMBIE AQUÍ DAVID este era Docs3
                 ->id($id)
                 ->name($name)
                 ->countries($countries)
@@ -162,7 +162,7 @@ class FinalRegisterController extends Controller
                 ->session($session)
                 ->paginate();
             $documents3 = FinalRegister::orderBy('id', 'DESC')
-                ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
+                ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
                 ->id($id)
                 ->name($name)
                 ->countries($countries)
