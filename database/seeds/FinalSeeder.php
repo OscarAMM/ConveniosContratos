@@ -96,7 +96,7 @@ class FinalSeeder extends Seeder
                             $resultado = substr($splitName[0], 21);
 
                             $date=explode(' ',$resultado);
-                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])){
+                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])&&empty($date[5])&&empty($date[6])){
                                 $mes='';
                                 if($date[2]=='enero'){
                                     $mes='01';
@@ -123,7 +123,17 @@ class FinalSeeder extends Seeder
                                 }if($date[2]=='diciembre'){
                                     $mes='12';
                                 }
-                                $document->end_date=substr($date[4],0,4).'-'.$mes.'-'.$date[0]; 
+                                $fecha=$mes.'-'.$date[0].'-'.substr($date[4],0,4);
+                                $fecha_array = explode('-', $fecha);
+                                $fechaA      = strtotime($fecha_array[1]."-".$fecha_array[0]."-".$fecha_array[2]);
+                                if($fechaA != "" AND  checkdate(date("m",$fechaA), date("d",$fechaA), date("Y",$fechaA)) === true){
+                                    //coNtinuas tu codigo
+                                    $document->end_date=date("Y-m-d",$fechaA);
+                                }else{
+                                    $document->observation=$resultado;
+                                }  
+//                                echo "<br> ".date("Y-m-d",$fechaA);
+//                                $document->end_date=substr($date[4],0,4).'-'.$mes.'-'.$date[0]; 
                                 break;
                             }else{
                                 $document->observation=$resultado;
@@ -217,7 +227,7 @@ class FinalSeeder extends Seeder
                             $resultado = substr($splitName[1], 21);
 
                             $date=explode(' ',$resultado);
-                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])){
+                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])&&empty($date[5])&&empty($date[6])){
                                 $mes='';
                                 if($date[2]=='enero'){
                                     $mes='01';
@@ -244,8 +254,15 @@ class FinalSeeder extends Seeder
                                 }if($date[2]=='diciembre'){
                                     $mes='12';
                                 }
-                                $document->end_date=substr($date[4],0,4).'-'.$mes.'-'.$date[0]; 
-                                break;
+                                $fecha=$mes.'-'.$date[0].'-'.substr($date[4],0,4);
+                                $fecha_array = explode('-', $fecha);
+                                $fechaA      = strtotime($fecha_array[1]."-".$fecha_array[0]."-".$fecha_array[2]);
+                                if($fechaA != "" AND  checkdate(date("m",$fechaA), date("d",$fechaA), date("Y",$fechaA)) === true){
+                                    //coNtinuas tu codigo
+                                    $document->end_date=date("Y-m-d",$fechaA);
+                                }else{
+                                    $document->observation=$resultado;
+                                }                                  break;
                             }else{
                                 $document->observation=$resultado;
                                 break;
@@ -336,7 +353,7 @@ class FinalSeeder extends Seeder
                             $resultado = substr($splitName[2], 21);
 
                             $date=explode(' ',$resultado);
-                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])){
+                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])&&empty($date[5])&&empty($date[6])){
                                 $mes='';
                                 if($date[2]=='enero'){
                                     $mes='01';
@@ -363,8 +380,15 @@ class FinalSeeder extends Seeder
                                 }if($date[2]=='diciembre'){
                                     $mes='12';
                                 }
-                                $document->end_date=substr($date[4],0,4).'-'.$mes.'-'.$date[0]; 
-                                break;
+                                $fecha=$mes.'-'.$date[0].'-'.substr($date[4],0,4);
+                                $fecha_array = explode('-', $fecha);
+                                $fechaA      = strtotime($fecha_array[1]."-".$fecha_array[0]."-".$fecha_array[2]);
+                                if($fechaA != "" AND  checkdate(date("m",$fechaA), date("d",$fechaA), date("Y",$fechaA)) === true){
+                                    //coNtinuas tu codigo
+                                    $document->end_date=date("Y-m-d",$fechaA);
+                                }else{
+                                    $document->observation=$resultado;
+                                }                                break;
                             }else{
                                 $document->observation=$resultado;
                                 break;
@@ -456,7 +480,7 @@ class FinalSeeder extends Seeder
 
                             $date=explode(' ',$resultado);
                             //if(!empty($date[0])&&ctype_digit($date[0])&&!empty($date[2])&&ctype_digit($date[2])&&!empty($date[4])&&ctype_digit($date[4])){
-                                if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])){
+                                if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])&&empty($date[5])&&empty($date[6])){
 
                                 $mes='';
                                 if($date[2]=='enero'){
@@ -484,8 +508,15 @@ class FinalSeeder extends Seeder
                                 }if($date[2]=='diciembre'){
                                     $mes='12';
                                 }
-                                $document->end_date=substr($date[4],0,4).'-'.$mes.'-'.$date[0]; 
-                                break;
+                                $fecha=$mes.'-'.$date[0].'-'.substr($date[4],0,4);
+                                $fecha_array = explode('-', $fecha);
+                                $fechaA      = strtotime($fecha_array[1]."-".$fecha_array[0]."-".$fecha_array[2]);
+                                if($fechaA != "" AND  checkdate(date("m",$fechaA), date("d",$fechaA), date("Y",$fechaA)) === true){
+                                    //coNtinuas tu codigo
+                                    $document->end_date=date("Y-m-d",$fechaA);
+                                }else{
+                                    $document->observation=$resultado;
+                                }                                  break;
                             }else{
                                 $document->observation=$resultado;
                                 break;
@@ -575,7 +606,7 @@ class FinalSeeder extends Seeder
                             $resultado = substr($splitName[4], 21);
 
                             $date=explode(' ',$resultado);
-                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])){
+                            if(!empty($date[0])&&!empty($date[2])&&!empty($date[4])&&empty($date[5])&&empty($date[6])){
                                 $mes='';
                                 if($date[2]=='enero'){
                                     $mes='01';
@@ -602,8 +633,15 @@ class FinalSeeder extends Seeder
                                 }if($date[2]=='diciembre'){
                                     $mes='12';
                                 }
-                                $document->end_date=substr($date[4],0,4).'-'.$mes.'-'.$date[0]; 
-                                break;
+                                $fecha=$mes.'-'.$date[0].'-'.substr($date[4],0,4);
+                                $fecha_array = explode('-', $fecha);
+                                $fechaA      = strtotime($fecha_array[1]."-".$fecha_array[0]."-".$fecha_array[2]);
+                                if($fechaA != "" AND  checkdate(date("m",$fechaA), date("d",$fechaA), date("Y",$fechaA)) === true){
+                                    //coNtinuas tu codigo
+                                    $document->end_date=date("Y-m-d",$fechaA);
+                                }else{
+                                    $document->observation=$resultado;
+                                }                                break;
                             }else{
                                 $document->observation=$resultado;
                                 break;

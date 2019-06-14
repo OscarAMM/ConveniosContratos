@@ -15,7 +15,7 @@ class CreateFinalRegistersTable extends Migration
     {
         Schema::create('final_registers', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',500);
+            $table->text('name');
             //$table->date('reception');
             $table->text('objective')->nullable();
             $table->string('legalInstrument')->nullable();
@@ -30,6 +30,8 @@ class CreateFinalRegistersTable extends Migration
             $table->date('end_date')->nullable();
             $table->string('status')->nullable();
             $table->String('countries')->nullable();
+            $table->string('person')->nullable();
+
 
             //$table->integer('people_id')->unsigned();
 
