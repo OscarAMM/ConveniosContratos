@@ -550,8 +550,12 @@ class FinalRegisterController extends Controller
         } else {
             $documents = FinalRegister::where('id', '0')->orderBy('id', 'DESC')->paginate();
         }*/
+        //lo que va en vista<!--@if($document->hide&&$document->status=='Finalizado' &&$document->legalInstrument =='Convenio')-->
+
         if ($id||$name||$legalInstrument||$instrumentType||$objective||$signature||$end_date||$countries||$people) {
             $documents = FinalRegister::orderBy('id', 'DESC')
+            //->where('name', 'LIKE', "%Convenio%")
+            ->where('legalInstrument', 'LIKE', "%Convenio%")
             ->id($id)
             ->name($name)
             ->countries($countries)

@@ -39,10 +39,14 @@
                     <div class="col-label-form"  style="margin-right:5px;">
                     
                     </div>
+                    <div class="col-label-form" style="margin-right:5px">
+                        <label for="countries" class="col-form-label text-muted">Nombre</label>
+                        {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
+                    </div>
                     <div class="col-label-form" style="margin-right:5px;">
                         <label for="people_id" class=" col-form-label text-muted">Partes</label>
                         <input type="text" id="people_id" name="people_id" class="form-control"
-                            placeholder="ingrese las partes">
+                            placeholder="ingrese la parte" autocomplete="off">
                         <div id="peopleList">
                         </div>
                     </div>
@@ -91,7 +95,7 @@
                         <!-----------------------------FOREACH SEARCH ------------------------------->
 
                         @foreach($documents as $document)
-                        @if($document->hide&&$document->status=='Finalizado' &&$document->legalInstrument =='Convenio')
+                        @if($document->hide)
                         <tr>
                             <td>{{$document->registerNumber}}</td>
                             <td>{{$document->name}}</td>
@@ -102,8 +106,9 @@
                             <td><a href="{{route('publicShow', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
-                            @endif
                         </tr>
+                        @endif
+
                         @endforeach
                     </tbody>
                     </thead>
