@@ -18,7 +18,13 @@ class FinalRegister extends Model
             return $query->where('name', 'LIKE', "%$name%");
         }
     }
-    public function scopesignature($query, $signature)
+    public function scopePerson($query, $person)
+    {
+        if ($person) {
+            return $query->where('person', 'LIKE', "%$person%");
+        }
+    }
+    public function scopeSignature($query, $signature)
     {
         if ($signature) {
             return $query->where('signature', 'LIKE', "%$signature%");
