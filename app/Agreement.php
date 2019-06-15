@@ -64,6 +64,12 @@ class Agreement extends Model
             return $query->where('countries', 'LIKE', "%$countries%");
         }
     }
+    public function scopePerson($query, $person)
+    {
+        if ($person) {
+            return $query->where('person', 'LIKE', "%$person%");
+        }
+    }
     public function files()
     {
         return $this->belongsToMany(FileAgreement::class)

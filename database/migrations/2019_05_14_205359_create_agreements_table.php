@@ -15,7 +15,7 @@ class CreateAgreementsTable extends Migration
     {
         Schema::create('agreements', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
+            $table->text('name');
             $table->date('reception');
             $table->text('objective');
             $table->string('legalInstrument');
@@ -25,7 +25,8 @@ class CreateAgreementsTable extends Migration
             $table->date('end_date');
             $table->string('status');
             $table->String('liable_user');
-            $table->String('countries')->nullable();
+            $table->text('countries')->nullable();
+            $table->text('person')->nullable();
 
             /*$table->integer('people_id')->unsigned();*/
 

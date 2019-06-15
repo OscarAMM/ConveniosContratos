@@ -29,8 +29,8 @@ class CreateFinalRegistersTable extends Migration
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->string('status')->nullable();
-            $table->String('countries')->nullable();
-            $table->string('person')->nullable();
+            $table->text('countries')->nullable();
+            $table->text('person')->nullable();
 
 
             //$table->integer('people_id')->unsigned();

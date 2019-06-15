@@ -27,7 +27,7 @@ class AgreementController extends Controller
         $objective = $request->get('objective');
         $reception = $request->get('reception');
         $people = $request->get('people_id');
-
+/*
         if ($people) {
             if (str_contains($people, ' - ')) {
                 $splitName = explode(' - ', $request->get('people_id'));
@@ -57,28 +57,28 @@ class AgreementController extends Controller
                 }
             }
         } else {
-            /*if($request->get('id')||
-            $request->get('name')||
-            $request->get('legalInstrument')||
-            $request->get('instrumentType')||
-            $request->get('people_id')||
-            $request->get('objective')
-            ){*/
+            
             $agreements = Agreement::orderBy('id', 'DESC')
                 ->id($id)
                 ->name($name)
                 ->countries($countries)
                 ->legalInstrument($legalInstrument)
                 ->instrumentType($instrumentType)
-            /*->people_id($people)*/
                 ->objective($objective)
                 ->reception($reception)
                 ->paginate();
-            /*}else{
-        $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
-        }*/
         }
-
+*/
+                $agreements = Agreement::orderBy('id', 'DESC')
+                ->id($id)
+                ->name($name)
+                ->countries($countries)
+                ->person($people)
+                ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
+                ->reception($reception)
+                ->paginate();
         return view('agreements.index', compact('agreements'));
     }
     public function index2(Request $request)
@@ -92,7 +92,7 @@ class AgreementController extends Controller
         $reception = $request->get('reception');
         $people = $request->get('people_id');
 
-        if ($people) {
+        /*if ($people) {
             if (str_contains($people, ' - ')) {
                 $splitName = explode(' - ', $request->get('people_id'));
                 $agreements = Person::find($splitName[0])->agreements()
@@ -121,27 +121,27 @@ class AgreementController extends Controller
                 }
             }
         } else {
-            /*if($request->get('id')||
-            $request->get('name')||
-            $request->get('legalInstrument')||
-            $request->get('instrumentType')||
-            $request->get('people_id')||
-            $request->get('objective')
-            ){*/
+
             $agreements = Agreement::orderBy('id', 'DESC')
                 ->id($id)
                 ->name($name)
                 ->countries($countries)
                 ->legalInstrument($legalInstrument)
                 ->instrumentType($instrumentType)
-            /*->people_id($people)*/
                 ->objective($objective)
                 ->reception($reception)
                 ->paginate();
-            /*}else{
-        $agreements = Agreement::where('id','0')->orderBy('id', 'ASC')->paginate();
         }*/
-        }
+        $agreements = Agreement::orderBy('id', 'DESC')
+                ->id($id)
+                ->name($name)
+                ->countries($countries)
+                ->person($people)
+                ->legalInstrument($legalInstrument)
+                ->instrumentType($instrumentType)
+                ->objective($objective)
+                ->reception($reception)
+                ->paginate();
         return view('agreements.index2', compact('agreements'));
     }
     public function indexPublic(Request $request)
@@ -234,19 +234,28 @@ class AgreementController extends Controller
         }
         $agreement->people()->detach();
         $countries='';
-        
-        foreach ($people as $person) {
-            $agreement->people()
-                ->attach(Person::where('id', $person)->first());
-            $countries.=Person::find($person)->country.' ; ';
+        $personString='';
+        if($request->people){
+            foreach ($people as $person) {
+                $agreement->people()
+                    ->attach(Person::where('id', $person)->first());
+                $personActive=Person::find($person);
+                $countries.=$personActive->country.' ; ';
+                $personString.=$personActive->id.' - '.$personActive->name.' ; ';
+            }
         }
+        
         if ($request->people_id) {
             $splitName = explode(' - ', $request->people_id);
             $agreement->people()
                 ->attach(Person::where('id', $splitName[0])->first());
-            $countries.=Person::find($splitName[0])->country.' ; ';
+            $personActive=Person::find($splitName[0]);
+            $countries.=$personActive->country.' ; ';
+            $personString.=$personActive->id.' - '.$personActive->name.' ; ';
+
         }
         $agreement->countries=$countries;
+        $agreement->person=$personString;
         $agreement->update();
         $file = $request->file('file');
         if ($file) {
@@ -302,15 +311,20 @@ class AgreementController extends Controller
             $acturl = urldecode($request->ListaPro); //decodifico el JSON
             $people = json_decode($acturl);
             $countries='';
+            $personString='';
             $agreement->countries=$countries;
+            $agreement->person=$personString;
             $agreement->update();
             foreach ($people as $peopleSelected) {
                 $splitPerson = explode(' - ', $peopleSelected->id_pro);
                 $agreement->people()
                     ->attach(Person::where('id', $splitPerson[0])->first());
-                $countries.=Person::find($splitPerson[0])->country.' ; ';
+                    $personActive=Person::find($splitPerson[0]);
+                $countries.=$personActive->country.' ; ';
+                $personString.=$personActive->id.' - '.$personActive->name.' ; ';
             }
             $agreement->countries=$countries;
+            $agreement->person=$personString;
             $agreement->update();
         }
         $file = $request->file('file');
