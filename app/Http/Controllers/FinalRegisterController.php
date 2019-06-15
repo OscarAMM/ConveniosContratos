@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Storage;
 use Redirect;
 use Carbon\Carbon;
 use PhpOffice\PhpWord\TemplateProcessor;
+use PhpOffice\PhpWord\Element\Text;
 
 class FinalRegisterController extends Controller
 {
@@ -612,9 +613,10 @@ class FinalRegisterController extends Controller
         $docs = '';
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
+
             $docs.=
-             '<w:br />'.'Nombre: '.$doc->name
-            . '<w:br />'.'Objetivo: '.$doc->objective
+            '<w:br />'.'Nombre: '.$doc->name
+            .'<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType

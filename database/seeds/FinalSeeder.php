@@ -141,18 +141,17 @@ class FinalSeeder extends Seeder
                             }
                             
                         default:  
-                            $splitName2=explode('.', $splitName[0]);
-                            $str='';
-                            $cont=0;
-                            foreach($splitName2 as $string){
-                                if($cont>0){
-                                    $str.=$string;
-                                }
-                                $cont++;
+                        $splitName2=explode('.', $splitName[0]);
+                        $str='';
+                        $cont=0;
+                        foreach($splitName2 as $string){
+                            if($cont>0){
+                                $str.=$string;
                             }
-                            $document->name=$str;
-                            echo $str.'-';
-
+                            $cont++;
+                        }
+                        $document->name=$str;
+                        echo $str.' - ';
                     }
                 }
                 if(!empty($splitName[1])){
@@ -660,7 +659,19 @@ class FinalSeeder extends Seeder
 
                     }
                 }
-                $document->save();
+
+            /*$document->legalInstrument='Indefinido';
+            $document->registerNumber='Indefinido';
+            $fecha_array = explode('-','01-01-2000' );
+            $fechaA      = strtotime($fecha_array[1]."-".$fecha_array[0]."-".$fecha_array[2]);
+            $document->session=date("Y-m-d",$fechaA);
+            $document->scope='Indefinido';
+            $document->instrumentType='Indefinido';
+            $document->countries='Indefinido';
+            $document->person='Indefinido';*/
+            $document->hide=false;
+            $document->status='Finalizado';
+            $document->save();
 
             }
         }
