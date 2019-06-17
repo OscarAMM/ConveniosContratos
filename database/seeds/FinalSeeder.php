@@ -18,7 +18,8 @@ class FinalSeeder extends Seeder
         {
             $filename = 'Lista.txt';
             $contents = Storage::get($filename);
-            //dd($contents);
+            //dd($contents);//
+            
             
             foreach (explode("\r\n", $contents) as $key=>$line){
                 
