@@ -213,7 +213,7 @@ class DocumentController extends Controller
         }
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save('commentsWord/'.'Comments'.$document->name.'.docx');
-        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'));
+        return response()->download(public_path('commentsWord/'.'Comments'.$document->name.'.docx'))->deleteFileAfterSend(true);
 
     }
     public function storeReports(Request $request)
