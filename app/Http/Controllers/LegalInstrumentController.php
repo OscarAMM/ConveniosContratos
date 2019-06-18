@@ -34,7 +34,7 @@ class LegalInstrumentController extends Controller
         } else {
             $instrument->save();
         }
-        return redirect()->route('LegalInstrument.index')->with('Info', 'El instrumento jurídico '.$instrument->name. 'ha sido guardado');
+        return redirect()->route('LegalInstrument.index')->with('Info', 'El instrumento jurídico '.$instrument->name. 'ha sido agregado(a) con éxito.');
     }
     public function storeModal(InstrumentRequest $request)
     {
