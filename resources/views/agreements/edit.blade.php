@@ -12,148 +12,157 @@
 </head>
 
 <div class="container">
-    <div class="row">
-        <div class="col-md-4 order-md-2 mb-4">
-            <h3>Agregar</h3>
-            <hr style="border:2px solid #BF942D">
-            <div class="form-group">
-                <p>Se recomienda agregar <i>Nuevo instrumento</i> y <i>Partes</i> antes de llenar el formulario, para
-                    evitar pérdidas de información al momento de llenar el formulario.</p>
-                <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModal"
-                    data-whatever="@fat">Nuevo Instrumento</button>
-                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#suscrito"
-                    data-whatever="@fat">Agregar partes</button>
-            </div>
+    <div class="card-header">
+        <h3 class="text-muted text-center"> Edición "{{$agreements->name}}"</h3>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h3>Agregar nuevo</h3>
+                <hr style="border:2px solid #BF942D">
+                <div class="form-group">
+                    <p>Se recomienda agregar <i>Nuevo instrumento</i> y <i>Nuevas Partes</i> antes de llenar el
+                        formulario,
+                        para
+                        evitar pérdidas de información al momento de llenar el formulario.</p>
+                    <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModal"
+                        data-whatever="@fat">Nuevo Instrumento</button>
+                    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#suscrito"
+                        data-whatever="@fat">Nuevas partes</button>
+                </div>
 
-        </div>
-        <div class="col-md-8 order-md-1">
-            <h3>Formulario</h3>
-            {!!Form::model($agreements, ['route' =>['Agreement.update', $agreements->id],'method' =>'PUT']) !!}
-
-            <hr style="border:2px solid #BF942D">
-            <div class="form-group">
-                <small style="color:#D90101;">*</small>
-                <label for="name" class="col-form-label">Nombre completo del documento </label>
-                <input type="text" name="name" id="name" class="form-control" placeholder="Nombre del documento"
-                    value="{{$agreements->name}}">
             </div>
-            <div class="form-group">
-                <small style="color:#D90101;">*</small>
-                <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
+            <div class="col-md-8 order-md-1">
+                <h3>Formulario</h3>
+                {!!Form::model($agreements, ['route' =>['Agreement.update', $agreements->id],'method' =>'PUT']) !!}
+
+                <hr style="border:2px solid #BF942D">
+                <div class="form-group">
+                    <small style="color:#D90101;">*</small>
+                    <label for="name" class="col-form-label">Nombre completo del documento </label>
+                    <input type="text" name="name" id="name" class="form-control" placeholder="Nombre del documento"
+                        value="{{$agreements->name}}">
+                </div>
+                <div class="form-group">
+                    <small style="color:#D90101;">*</small>
+                    <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
+                    <div class="form-group ">
+                        <input type="text" id="legalInstrument" name="legalInstrument" class="form-control"
+                            placeholder="Ingrese instrumento" value="{{$agreements->legalInstrument}}"
+                            autocomplete="off">
+
+                    </div>
+                    <div id="instrumentList">
+                    </div>
+                </div>
                 <div class="form-group ">
-                    <input type="text" id="legalInstrument" name="legalInstrument" class="form-control"
-                        placeholder="Ingrese instrumento" value="{{$agreements->legalInstrument}}" autocomplete="off">
+                    <small style="color:#D90101;">*</small>
+                    <label for="reception" class="col-form-label">Recepción</label>
+                    <input type="date" id="reception" name="reception" class="form-control"
+                        value={{Carbon\Carbon::now()}}>
+                </div>
+                <div class="form-group ">
+                    <small style="color:#D90101;">*</small>
+                    <label for="end_date" class="col-form-label">Fecha final de revisión</label>
+                    <input type="date" id="end_date" name="end_date" class="form-control"
+                        value={{Carbon\Carbon::now()->addWeekDays(5)}}>
+                </div>
+                <div class="form-group">
+                    <small style="color:#D90101;">*</small>
+                    <label for="objective" class=" col-form-label">Objetivo</label>
+                    <textarea name="objective" id="objective" cols="30" rows="5" class="form-control"
+                        placeholder="Describe el objetivo">{{$agreements->objective}}</textarea>
+                </div>
+                <div class="form-group">
+                    <small style="color:#D90101;">*</small>
+                    <label for="instrumentType" class=" col-form-label">Tipo de instrumento</label>
+                    <select name="instrumentType" id="instrumentType" class="form-control">
+                        @if($agreements->instrumentType === "General")
+                        <option>General</option>
+                        <option>Específico</option>
+                        <option>Otros</option>
+                        @elseif($agreements->instrumentType === "Específico")
+                        <option>Específico</option>
+                        <option>General</option>
+                        <option>Otros</option>
+                        @elseif($agreements->instrumentType === "Otros")
+                        <option>Otros</option>
+                        <option>Específico</option>
+                        <option>General</option>
 
+                        @endif
+                    </select>
                 </div>
-                <div id="instrumentList">
+
+                <div class="form-group">
+                    <small style="color:#D90101;">*</small>
+                    <label for="scope" class="col-form-label">Ámbito</label>
+                    <select name="scope" id="scope" class="form-control" value="{{$agreements->scope}}">
+                        <option>Estatal</option>
+                        <option>Nacional</option>
+                        <option>Internacional</option>
+                    </select>
                 </div>
-            </div>
-            <div class="form-group ">
-                <small style="color:#D90101;">*</small>
-                <label for="reception" class="col-form-label">Recepción</label>
-                <input type="date" id="reception" name="reception" class="form-control" value={{Carbon\Carbon::now()}}>
-            </div>
-            <div class="form-group ">
-                <small style="color:#D90101;">*</small>
-                <label for="end_date" class="col-form-label">Fecha final de revisión</label>
-                <input type="date" id="end_date" name="end_date" class="form-control"
-                    value={{Carbon\Carbon::now()->addWeekDays(5)}}>
-            </div>
-            <div class="form-group">
-                <small style="color:#D90101;">*</small>
-                <label for="objective" class=" col-form-label">Objetivo</label>
-                <textarea name="objective" id="objective" cols="30" rows="5" class="form-control"
-                    placeholder="Describe el objetivo">{{$agreements->objective}}</textarea>
-            </div>
-            <div class="form-group">
-                <small style="color:#D90101;">*</small>
-                <label for="instrumentType" class=" col-form-label">Tipo de instrumento</label>
-                <select name="instrumentType" id="instrumentType" class="form-control">
-                    @if($agreements->instrumentType === "General")
-                    <option>General</option>
-                    <option>Específico</option>
-                    <option>Otros</option>
-                    @elseif($agreements->instrumentType === "Específico")
-                    <option>Específico</option>
-                    <option>General</option>
-                    <option>Otros</option>
-                    @elseif($agreements->instrumentType === "Otros")
-                    <option>Otros</option>
-                    <option>Específico</option>
-                    <option>General</option>
+
+                <div class="form-group">
+                    <small style="color:#D90101;">*</small>
+                    <label for="liable_user" class="col-form-label">Asigne Externos</label>
+                    <input type="text" id="liable_user" name="liable_user" class="form-control "
+                        placeholder="ingrese responsable externo" value="{{$agreements->liable_user}}">
+                </div>
+                <div class="form-check">
+                    <small style="color:#D90101;">*</small>
+                    <label for="user_id" class="col-form-label">Asigne Internos</label>
+                    @foreach($users as $user)
+                    @if($user->hasRole('admin')||$user->hasRole('revisor'))
+                    <br>
+                    <input type="checkbox" name="users[]" value="{{$user->id}}"
+                        {{ $user ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$user->name}}</label>
 
                     @endif
-                </select>
-            </div>
-
-            <div class="form-group">
-                <small style="color:#D90101;">*</small>
-                <label for="scope" class="col-form-label">Ámbito</label>
-                <select name="scope" id="scope" class="form-control" value="{{$agreements->scope}}">
-                    <option>Estatal</option>
-                    <option>Nacional</option>
-                    <option>Internacional</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <small style="color:#D90101;">*</small>
-                <label for="liable_user" class="col-form-label">Asigne Externos</label>
-                <input type="text" id="liable_user" name="liable_user" class="form-control "
-                    placeholder="ingrese responsable externo" value="{{$agreements->liable_user}}">
-            </div>
-            <div class="form-check">
-                <small style="color:#D90101;">*</small>
-                <label for="user_id" class="col-form-label">Asigne Internos</label>
-                @foreach($users as $user)
-                @if($user->hasRole('admin')||$user->hasRole('revisor'))
-                <br>
-                <input type="checkbox" name="users[]" value="{{$user->id}}"
-                    {{ $user ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$user->name}}</label>
-
-                @endif
-                @endforeach
-            </div>
-            <div class="form-check">
-                <small style="color:#D90101;">*</small>
-                <label for="ListaPro" class="col-form-label">Asigne Partes</label>
-                @foreach($agreements->getPeople as $person)
-                <br>
-                <input type="checkbox" name="people[]" value="{{$person->id}}"
-                    {{ $person ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$person->name}}</label>
-
-                @endforeach
-            </div>
-            <div class="form-group">
-                <label for="people_id" class="col-md-8 col-form-label">Añadir Parte</label>
-                <input type="text" id="people_id" name="people_id" class="form-control " placeholder="ingrese suscrito" autocomplete="off">
-
-                <div id="peopleList">
+                    @endforeach
                 </div>
-            </div>
-            <div class="form-group">
-                <small>*</small>
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <label for="file" class="col-form-label">Seleccione el archivo</label>
-                <input type="file" class="form-control-file" name="file" id="file">
-            </div>
-            {{csrf_field()}}
-            <div class="form-group text-center" style="margin-top:5px">
-                <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
-                {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
+                <div class="form-check">
+                    <small style="color:#D90101;">*</small>
+                    <label for="ListaPro" class="col-form-label">Asigne Partes</label>
+                    @foreach($agreements->getPeople as $person)
+                    <br>
+                    <input type="checkbox" name="people[]" value="{{$person->id}}"
+                        {{ $person ->hasDocument($agreements->id)?'checked':'' }}> <label>{{$person->name}}</label>
 
+                    @endforeach
+                </div>
+                <div class="form-group">
+                    <label for="people_id" class="col-md-8 col-form-label">Añadir Parte</label>
+                    <input type="text" id="people_id" name="people_id" class="form-control "
+                        placeholder="ingrese suscrito" autocomplete="off">
+
+                    <div id="peopleList">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <small>*</small>
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                    <label for="file" class="col-form-label">Seleccione el archivo</label>
+                    <input type="file" class="form-control-file" name="file" id="file">
+                </div>
+                {{csrf_field()}}
+                <div class="form-group text-center" style="margin-top:5px">
+                    <a href="{{route ('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
+                    {!!Form::submit('Guardar',['class' => 'btn btn-primary'])!!}
+
+                </div>
+                {!!Form::close()!!}
             </div>
-            {!!Form::close()!!}
+        </div>
+        <div class="row">
+            <div class="col">
+                <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col">
-            <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
-        </div>
-    </div>
 </div>
-</div>
-</div>
+
 <!-- Modal for people-->
 <div class="modal fade" id="myModal" role="dialog">
 
@@ -198,16 +207,21 @@
             <div class="modal-body">
                 <form action="{{route('newInstrument')}}">
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="legalInstrument">Instrumento jurídico</label>
                         <input type="text" class="form-control" id="name" name="name"
                             placeholder="Instrumento jurídico">
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
+                <div class="row">
+                    <div class="col">
+                        <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -226,11 +240,12 @@
             <div class="modal-body">
                 <form action="{{route('PersonModal')}}">
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del suscrito">
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="personType">Tipo</label>
                         <select name="personType" id="personType" class="form-control">
                             <option>Persona física</option>
@@ -239,30 +254,34 @@
                             <option>Dependencia</option>
                             <option>Otros</option>
                         </select>
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="country">País</label>
                         <input type="text" class="form-control" id="country" name="country" placeholder="País">
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#897979">*</small>
                         <label for="acronym">Siglas</label>
                         <input type="text" class="form-control" id="acronym" name="acronym" placeholder="Siglas">
-                        <small style="color:#897979">Opcional</small>
+
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#897979">*</small>
                         <label for="email">correo</label>
-
                         <input type="text" class="form-control" id="email" name="email"
                             placeholder="email del suscrito">
-                        <small style="color:#897979">Opcional</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
+                <div class="row">
+                    <div class="col">
+                        <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

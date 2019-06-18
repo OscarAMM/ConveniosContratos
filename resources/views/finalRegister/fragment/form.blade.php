@@ -7,15 +7,16 @@
 <div class="container">
     <div class="row">
         <div class="col-md-4 order-md-2 mb-4">
-            <h3>Agregar</h3>
+            <h3>Agregar nuevo</h3>
             <hr style="border:2px solid #BF942D">
             <div class="form-group">
-                <p>Se recomienda agregar <i>Nuevo instrumento</i> y <i>Partes</i> antes de llenar el formulario, para
+                <p>Se recomienda agregar <i>Nuevo instrumento</i> y <i>Nuevas Partes</i> antes de llenar el formulario,
+                    para
                     evitar pérdidas de información al momento de llenar el formulario.</p>
                 <button type="button" class="btn btn-secondary " data-toggle="modal" data-target="#exampleModal"
                     data-whatever="@fat">Nuevo Instrumento</button>
                 <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#suscrito"
-                    data-whatever="@fat">Agregar partes</button>
+                    data-whatever="@fat">Nuevas partes</button>
             </div>
 
         </div>
@@ -37,10 +38,9 @@
                 <div class="form-group">
                     <small style="color:#D90101;">*</small>
                     <label for="legalInstrument" class="col-form-label ">Instrumento jurídico</label>
-                    <div class="form-inline ">
-                        <input type="text" id="legalInstrument" name="legalInstrument" class="form-control col-md-11"
+        
+                        <input type="text" id="legalInstrument" name="legalInstrument" class="form-control"
                             placeholder="Ingrese instrumento" autocomplete="off">
-                    </div>
                     <div id="instrumentList">
                     </div>
                 </div>
@@ -168,16 +168,21 @@
             <div class="modal-body">
                 <form action="{{route('newInstrument')}}">
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="legalInstrument">Instrumento jurídico</label>
                         <input type="text" class="form-control" id="name" name="name"
                             placeholder="Instrumento jurídico">
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
+                <div class="row">
+                    <div class="col">
+                        <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -196,11 +201,12 @@
             <div class="modal-body">
                 <form action="{{route('FinalModal')}}">
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="name">Nombre</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Nombre del suscrito">
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="personType">Tipo</label>
                         <select name="personType" id="personType" class="form-control">
                             <option>Persona física</option>
@@ -209,30 +215,34 @@
                             <option>Dependencia</option>
                             <option>Otros</option>
                         </select>
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#D90101;">*</small>
                         <label for="country">País</label>
                         <input type="text" class="form-control" id="country" name="country" placeholder="País">
-                        <small style="color:#D90101;">Obligatorio</small>
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#897979">*</small>
                         <label for="acronym">Siglas</label>
                         <input type="text" class="form-control" id="acronym" name="acronym" placeholder="Siglas">
-                        <small style="color:#897979">Opcional</small>
+
                     </div>
                     <div class="form-group mb-2">
+                        <small style="color:#897979">*</small>
                         <label for="email">correo</label>
-
                         <input type="text" class="form-control" id="email" name="email"
                             placeholder="email del suscrito">
-                        <small style="color:#897979">Opcional</small>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
                         <button type="submit" class="btn btn-primary">Guardar</button>
                     </div>
                 </form>
+                <div class="row">
+                    <div class="col">
+                        <small style="color:#D90101;">* Obligatorio</small> <small>*Opcional</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -307,7 +317,7 @@ jQuery(document).ready(function() {
         $('#pro_id').val($(this).text());
         $('#proList').fadeOut();
     });
-    
+
     $('#legalInstrument').keyup(function() {
         var query = $(this).val();
         if (query != '') {

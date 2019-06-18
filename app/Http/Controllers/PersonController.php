@@ -54,14 +54,17 @@ class PersonController extends Controller
         $person->country = $request->country;
         $person->acronym = $request->acronym;
         $person->email = $request->email;
+
         //The function checks if a person with the same name alredy exists
-        if (Person::where('name', $person->name)->exists()) {
-            return back()->with('info', 'La persona ' . $person->name . ' ya existe.');
-        } else {
+
+        if (Person::where('name', 'LIKE', "%{$person->name}%")->exists()) {
+            return back()->with('info', "El nombre: " . $person->name . ' ya se encuentra registrado.');
+        } /*else if(Person::where('acronym', 'LIKE', "%{$person->acronym}%")->exists()) {
+        return back()->with('info', "La". $person->personType." con las siglas ".$person->acronym . ' ya existe.');
+        }*/else {
             $person->save();
         }
-
-        return redirect()->route('Person.index')->with('info', 'La persona ' . $person->name . ' ha sido agregado(a)');
+        return redirect()->route('Person.index')->with('info', 'La '.$person->personType. 'con el nombre: ' . $person->name . ' ha sido agregado(a)');
     }
     public function storeModal(PersonRequest $request)
     {
@@ -72,13 +75,13 @@ class PersonController extends Controller
         $person->acronym = $request->acronym;
         $person->email = $request->email;
         //The function checks if a person with the same name alredy exists
-        if (Person::where('name', $person->name)->exists()) {
-            return back()->with('info', 'La persona ' . $person->name . ' ya existe.');
+        if (Person::where('name', 'LIKE', "%{$person->name}%")->exists()) {
+            return back()->with('info', "El nombre: " . $person->name . ' ya se encuentra registrado.');
         } else {
             $person->save();
         }
 
-        return redirect()->route('Agreement.create')->with('info', 'La persona ' . $person->name . ' ha sido agregado(a)');
+        return back()->with('info', 'La '.$person->personType. 'con el nombre: ' . $person->name . ' ha sido agregado(a)');
     }
     public function storeModalFinal(PersonRequest $request)
     {
@@ -89,13 +92,13 @@ class PersonController extends Controller
         $person->acronym = $request->acronym;
         $person->email = $request->email;
         //The function checks if a person with the same name alredy exists
-        if (Person::where('name', $person->name)->exists()) {
-            return back()->with('info', 'La persona ' . $person->name . ' ya existe.');
+        if (Person::where('name', 'LIKE', "%{$person->name}%")->exists()) {
+            return back()->with('info', "El nombre: " . $person->name . ' ya se encuentra registrado.');
         } else {
             $person->save();
         }
 
-        return redirect()->route('FinalRegister.create')->with('info', 'La persona ' . $person->name . ' ha sido agregado(a)');
+        return redirect()->with('info', 'La '.$person->personType. 'con el nombre: ' . $person->name . ' ha sido agregado(a)');
     }
     public function update(PersonRequest $request, $id)
     {
@@ -107,7 +110,7 @@ class PersonController extends Controller
         $person->acronym = $request->acronym;
         $person->save();
 
-        return redirect()->route('Person.index')->with('info', 'La persona ' . $person->name . ' ha sido actualizado');
+        return redirect()->route('Person.index')->with('info', 'La '.$person->personType. 'con el nombre: ' . $person->name . ' ha sido actualizado(a)');
     }
     public function edit($id)
     {

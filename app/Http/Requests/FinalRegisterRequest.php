@@ -38,4 +38,18 @@ class FinalRegisterRequest extends FormRequest
             'observation' => 'nullable',
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nombre del documento requerido.',
+            'legalInstrument.required' => 'Instrumento jurídico requerido.',
+            'objective.required' => 'Objetivo requerido.',
+            'registerNumber.required' => 'Número de registro requerido.',
+            'instrumentType.required' => 'Tipo de instrumento requerido.',
+            'scope.required' => 'Ámbito del documento requerido.',
+            'signature.required' => 'Fecha de firma requerido.',
+            'start_date.required' => 'Fecha de inicio requerido.',
+            'session.required' => 'Fecha de sesión requerido.',
+        ];
+    }
 }

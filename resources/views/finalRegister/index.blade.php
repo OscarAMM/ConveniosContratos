@@ -180,20 +180,20 @@
     </div>
 </div>
 <!-------------------------------------------- DOCUMENTS TABLE --------------------------------------------->
-<div class="row d-flex justify-content-center">
-    <div class="col-md-10">
-        <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                    aria-controls="nav-home" aria-selected="true">Todos</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                    aria-controls="nav-profile" aria-selected="false">Vigentes</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                    aria-controls="nav-contact" aria-selected="false">No vigentes</a>
-                <a class="nav-item nav-link" id="nav-others-tab" data-toggle="tab" href="#nav-others" role="tab"
-                    aria-controls="nav-others" aria-selected="false">Otros</a>
-            </div>
-        </nav>
+<div class="container">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                aria-controls="nav-home" aria-selected="true">Todos</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                aria-controls="nav-profile" aria-selected="false">Vigentes</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                aria-controls="nav-contact" aria-selected="false">No vigentes</a>
+            <a class="nav-item nav-link" id="nav-others-tab" data-toggle="tab" href="#nav-others" role="tab"
+                aria-controls="nav-others" aria-selected="false">Otros</a>
+        </div>
+    </nav>
+    <div class="table responsive ">
 
         <!--TODOS---------------->
         <div class="tab-content" id="nav-tabContent">
@@ -201,17 +201,17 @@
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Num. Registro</th>
-                            <th>Nombre completo</th>
-                            <th>Instrumento jurídico</th>
-                            <th>Tipo de instrumento</th>
-                            <th>Objetivo</th>
-                            <th>Ámbito</th>
-                            <th>Fecha de firma</th>
-                            <th>Fecha de fin</th>
-                            <th>Fecha de sesión</th>
-                            <th>Partes</th>
-                            <th colspan="3">&nbsp; Opciones</th>
+                            <th scope="col">Num. Registro</th>
+                            <th scope="col">Nombre completo</th>
+                            <th scope="col">Instrumento jurídico</th>
+                            <th scope="col">Tipo de instrumento</th>
+                            <th scope="col">Objetivo</th>
+                            <th scope="col">Ámbito</th>
+                            <th scope="col">Fecha de firma</th>
+                            <th scope="col">Fecha de fin</th>
+                            <th scope="col">Fecha de sesión</th>
+                            <th scope="col">Partes</th>
+                            <th colspan="3" scope="col">&nbsp; Opciones</th>
                         </tr>
                     <tbody>
 
@@ -231,21 +231,24 @@
                             <td>@foreach($document->getPeople as
                                 $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                             <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+
                             </td>
-                            </td>
-                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                            <td> @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+
+                                <a href="{{route('FinalRegister.edit', $document->id)}}"
                                     class="btn botonAmarillo">Editar</a>
+
                             </td>
+
                             <td>
                                 <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
                                 </form>
+                                @endif
                             </td>
-                            @endif
                         </tr>
                         @endforeach
                     </tbody>
@@ -298,7 +301,7 @@
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">x</button>
                                 </form>
                             </td>
                             @endif
@@ -356,7 +359,7 @@
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
                                 </form>
                             </td>
                             @endif
@@ -413,7 +416,7 @@
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
                                 </form>
                             </td>
                             @endif
@@ -427,7 +430,6 @@
         </div>
 
     </div>
-</div>
 </div>
 @else
 <!------------SECOND PAGE - DENIED PAGE ---------------------------------------->

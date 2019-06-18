@@ -115,20 +115,22 @@
                         <td>{{$agreement->instrumentType}}</td>
                         <td>{{$agreement->reception}}</td>
                         <td>{{$agreement->objective}}</td>
-                        <td>@foreach($agreement->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
-                        <td>
+                        <td>@foreach($agreement->getPeople as
+                            $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+
                         <td><a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a></td>
-                        <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>
-                        </td>
+
                         @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
                         <td><a href="{{route('Agreement.edit', $agreement ->id)}}" class="btn botonAmarillo">Editar</a>
                         </td>
+                        <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>
                         <td><a href="{{route('Register',$agreement->id)}}" class="btn btn-success">Registrar</a></td>
                         <td>
                             <form action="{{route('Agreement.destroy', $agreement->id)}}" method="POST">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                <button class="btn btn-danger"
+                                    onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
                             </form>
                         </td>
                         @endif

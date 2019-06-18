@@ -29,7 +29,7 @@ class LegalInstrumentController extends Controller
     {
         $instrument = new LegalInstrument();
         $instrument->name = $request->name;
-        if (LegalInstrument::where('name', $instrument->name)->exists()) {
+        if (LegalInstrument::where('name', 'LIKE', "%{$instrument->name}%")->exists()) {
             return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya existe');
         } else {
             $instrument->save();
@@ -40,12 +40,13 @@ class LegalInstrumentController extends Controller
     {
         $instrument = new LegalInstrument();
         $instrument->name = $request->name;
-        if (LegalInstrument::where('name', $instrument->name)->exists()) {
-            return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya existe');
+        if (LegalInstrument::where('name', 'LIKE', "%{$instrument->name}%")->exists()) {
+            return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya  ha sido registrado(a)');
         } else {
             $instrument->save();
         }
-        return Redirect::back()->withInput(Input::all());
+        //return Redirect::back()->withInput(Input::all());
+        return back()->with('info', 'El instrumento jurídico: '.$instrument->name. 'ha sido agregado(a) con éxito.');
     }
 
     public function update(InstrumentRequest $request, $id)
