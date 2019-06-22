@@ -557,6 +557,7 @@ class FinalRegisterController extends Controller
             $documents = FinalRegister::orderBy('id', 'DESC')
             //->where('name', 'LIKE', "%Convenio%")
             ->where('legalInstrument', 'LIKE', "%Convenio%")
+            ->where('hide', "1")
             ->id($id)
             ->name($name)
             ->countries($countries)
