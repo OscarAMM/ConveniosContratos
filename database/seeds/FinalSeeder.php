@@ -2,6 +2,9 @@
 
 use Illuminate\Database\Seeder;
 use App\FinalRegister;
+use App\LegalInstrument;
+use App\Person;
+
 use Carbon\Carbon;
 
 
@@ -16,11 +19,139 @@ class FinalSeeder extends Seeder
     {
         try
         {
-            $filename = 'Lista.txt';
+            /*Inicio
+            |Número|
+            ID interno|
+            Fecha firma|
+            Fecha informa|
+            Vigencia de|
+            Vigencia hasta|
+            Año|
+            Mes|
+            Tipo vigencia|
+            Instrumento jurídico|
+            Instrumento jurídico bis|
+            Tipo|
+            Publicar|
+            Nacional|
+            Nombre|
+            Objetivos|
+            Instituciones y dependencias|
+            Paises|
+            Compromisos|
+            Observación|
+            Fecha final|
+            Motivo|
+            Fin
+            $table->text('name'); 15
+            $table->text('objective')->nullable(); 16
+            $table->string('legalInstrument')->nullable(); 10
+            $table->string('registerNumber')->nullable(); 1
+            $table->date('signature')->nullable(); 3
+            $table->date('session')->nullable(); 4
+            $table->text('observation')->nullable(); 20
+            $table->string('scope')->nullable(); 14
+            $table->boolean('hide')->nullable(); 13
+            $table->string('instrumentType')->nullable(); 12
+            $table->date('start_date')->nullable(); 5
+            $table->date('end_date')->nullable(); 6
+            $table->string('status')->nullable(); Finalizado
+            $table->text('countries')->nullable(); 18 
+            $table->text('person')->nullable(); 17
+
+            
+            */
+            $filename = 'juridico.txt';
             $contents = Storage::get($filename);
-            //dd($contents);//
+            //dd($contents);
+            foreach (explode("<FIN>", $contents) as $line){
+                $document=New FinalRegister();
+                $splitName = explode('|', $line);
+                if (!empty($splitName[15])) {
+                    $document->name=$splitName[15];
+                    echo $splitName[15];
+                }
+                if (!empty($splitName[16])) {
+                    $document->objective=$splitName[16];
+                }
+                if (!empty($splitName[10])) {
+                    //verificacion de instrumento
+                    $instrument = new LegalInstrument();
+                    $instrument->name=$splitName[10];
+                    if (LegalInstrument::where('name', 'LIKE', "%{$instrument->name}%")->exists()) {
+                        $document->legalInstrument=$splitName[16];
+                    } else {
+                        $document->legalInstrument=$splitName[16];
+                        $instrument->save();
+                    }
+                }
+                
+                if (!empty($splitName[1])) {
+                    $document->registerNumber=$splitName[1];
+                }
+                if (!empty($splitName[3])) {
+                    $document->signature=$splitName[3];
+                }
+                if (!empty($splitName[4])) {
+                    $document->session=$splitName[4];
+                }
+                if (!empty($splitName[20])) {
+                    $document->observation=$splitName[20];
+                }
+                if (!empty($splitName[14])) {
+                    $document->scope=$splitName[14];
+                }
+                if (!empty($splitName[13])) {
+                    if($splitName[13]=='yes'){
+                        $document->hide=true;
+                    }else{
+                        $document->hide=false;
+                    }
+                }
+                if (!empty($splitName[12])) {
+                    $document->instrumentType=$splitName[12];
+                }
+                if (!empty($splitName[5])) {
+                    $document->start_date=$splitName[5];
+                }
+                if (!empty($splitName[6])) {
+                    $document->end_date=$splitName[6];
+                }
+                $document->status='Finalizado';
+
+                if (!empty($splitName[17])) {
+                    $countries='';
+                    $personString='';
+                    $arrayPerson=explode("^", $splitName[17]);
+                    $arrayCountries=explode("^", $splitName[18]);
+                    $cont=count($arrayCountries);
+                    foreach ($arrayPerson as $line2) {
+                        //verificacion de person
+                        $person = new Person();
+                        $person->name=$line2;
+                        $person->country=$arrayCountries[$cont-1];
+                        $person->personType='Indefinido';
+                        if (Person::where('name', 'LIKE', "%{$person->name}%")->exists()) {
+                            $personActive=Person::where('name', $person->name)->first();
+                            $document->people()->attach(Person::where('id', $personActive->id)->first());
+                            $countries.=$personActive->country.' ; ';
+                            $personString.=$personActive->id.' - '.$person->name.' ; ';
+                        } else {
+                            $person->save();
+                            $personActive=Person::where('name', $person->name)->first();
+                            $document->people()->attach(Person::where('id', $personActive->id)->first());
+                            $countries.=$personActive->country.' ; ';
+                            $personString.=$personActive->id.' - '.$personActive->name.' ; ';
+                        }
+                    }
+                    $document->person=$personString;  
+                    $document->countries=$countries;  
+                }
+                $document->save();
+                
+            }
             
-            
+            /*
             foreach (explode("\r\n", $contents) as $key=>$line){
                 
                 $splitName = explode('##', $line);
@@ -669,12 +800,12 @@ class FinalSeeder extends Seeder
             $document->scope='Indefinido';
             $document->instrumentType='Indefinido';
             $document->countries='Indefinido';
-            $document->person='Indefinido';*/
+            $document->person='Indefinido';---
             $document->hide=false;
             $document->status='Finalizado';
             $document->save();
 
-            }
+            }*/
         }
         catch (Illuminate\Filesystem\FileNotFoundException $exception)
         {
