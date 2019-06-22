@@ -41,7 +41,7 @@
                     @guest
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a href="{{route('public')}}" class="nav-link">Inicio</a>
+                            <a href="http://www.abogadogeneral.uady.mx/" class="nav-link">Inicio</a>
                         </li>
                     </ul>
                     @endguest

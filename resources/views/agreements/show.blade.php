@@ -7,31 +7,31 @@
         <div class="col-md-10">
             <div class="card">
                 <div class="card-header">
-                    <h4 class=" text-center font-weight-bold text-muted">Documento</h4>
+                    <h2 class=" text-center font-weight-bold text-muted">Datos de "{{$agreements->name}}"</h2>
                 </div>
                 <div class="card-body">
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Nombre</h5>
+                        <h4 class="card-title font-weight-bold">Nombre</h4>
                         {{$agreements->name}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Recepción</h5>
+                        <h4 class="card-title font-weight-bold">Recepción</h4>
                         {{$agreements->reception}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Fecha final de revisión</h5>
+                        <h4 class="card-title font-weight-bold">Fecha final de revisión</h4>
                         {{$agreements->end_date}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Objetivo</h5>
+                        <h4 class="card-title font-weight-bold">Objetivo</h4>
                         {{$agreements->objective}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Ámbito</h5>
+                        <h4 class="card-title font-weight-bold">Ámbito</h4>
                         {{$agreements->scope}}
                     </li>
                     <li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Partes</h5>
+                        <h4 class="card-title font-weight-bold">Partes</h4>
                         @foreach($agreements->getPeople as $person)
                         <ul> {{$person->name}}</ul>
                         @endforeach
@@ -61,28 +61,18 @@
                         @endforeach
                     </li>
                     @endif
-                    <!--<li class="list-group-item">
-                        <h5 class="card-title font-weight-bold">Visibilidad del documento</h5>
-                        @if($agreements->hide)
-                        <label for="visible">Visible</label>
-                        @else
-                        <label for="NoVisible">No Visible</label>
-                        @endif
-                    </li>-->
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Estado</h5>
                         {{$agreements->status}}
                     </li>
                     <li class="list-group-item text-center">
-                        <ul>
+                       <div class="btn-group">
                         <a href="{{route('Agreement.index')}}" class="btn btn-secondary">Regresar</a>
-                        </ul>
-                        <ul>
                         <form action="{{route('StoreDocs', $agreements->id)}}" method="post">
                                 {{csrf_field()}}
                                 <button type="submit" class="btn btn-success">Imprimir</button>
                         </form>
-                        </ul>
+                        </div>
                     </li>
                     
                 </div>

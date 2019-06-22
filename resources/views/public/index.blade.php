@@ -10,10 +10,6 @@
 <div class="row-10 d-flex justify-content-center">
     {{Form::open(['route'=>'Agreement.index','method'=>'GET','class'=>'form-inline'])}}
     <p class="text-item-center">
-        <!--<a href="{{route('Agreement.create')}}" class="btn btn-success"
-{{Form::open(['route'=>'public.index','method'=>'GET','class'=>'form-inline'])}}
-<p class="text-item-center"><<a href="{{route('Agreement.create')}}" class="btn btn-success"
-        style="margin-right:5px">Nuevo</a>-->
         <button class="btn boton" type="button" data-toggle="collapse" data-target="#collapseExample"
             aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
             Búsqueda

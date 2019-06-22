@@ -29,23 +29,24 @@ class LegalInstrumentController extends Controller
     {
         $instrument = new LegalInstrument();
         $instrument->name = $request->name;
-        if (LegalInstrument::where('name', $instrument->name)->exists()) {
-            return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya existe');
+        if (LegalInstrument::where('name', 'LIKE', "%{$instrument->name}%")->exists()) {
+            return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya se encuentra registrado(a)');
         } else {
             $instrument->save();
         }
-        return redirect()->route('LegalInstrument.index')->with('Info', 'El instrumento jurídico '.$instrument->name. 'ha sido guardado');
+        return redirect()->route('LegalInstrument.index')->with('Info', 'El instrumento jurídico '.$instrument->name. 'ha sido agregado(a) con éxito.');
     }
     public function storeModal(InstrumentRequest $request)
     {
         $instrument = new LegalInstrument();
         $instrument->name = $request->name;
-        if (LegalInstrument::where('name', $instrument->name)->exists()) {
-            return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya existe');
+        if (LegalInstrument::where('name', 'LIKE', "%{$instrument->name}%")->exists()) {
+            return back()->with('info', ' El instrumento jurídico ' . $instrument->name . ' ya  se encuentra registrado(a)');
         } else {
             $instrument->save();
         }
-        return Redirect::back()->withInput(Input::all());
+        //return Redirect::back()->withInput(Input::all());
+        return back()->with('info', 'El instrumento jurídico: '.$instrument->name. 'ha sido agregado(a) con éxito.');
     }
 
     public function update(InstrumentRequest $request, $id)

@@ -25,87 +25,97 @@
         <p class="text-muted"> <i> <strong>NOTA:</strong> Esta sección tendrá relación con el apartado de vistas
                 públicas, por lo que se pide que verifiquen el
                 documento que será visible para el público general. </i></p>
-                @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
-        <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
-            <div class="btn-group" role="group">
-                <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
-                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Documentos
-                </button>
-                <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+        @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
+        <p>
+            <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+                <div class="btn-group" role="group">
 
-                    <form action="{{route('StoreAll')}}" method="post">
-                        <input type="hidden" id="name" name="name" value="{{$name}}">
-                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
-                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
-                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
-                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
-                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
-                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
-                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
-                        <input type="hidden" id="session" name="session" value="{{$session}}">
-                        <input type="hidden" id="people" name="people" value="{{$people}}">
+                    <button id="btnGroupDrop1" type="button" class="btn btn-secondary dropdown-toggle"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Documentos
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
 
-                        {{csrf_field()}}
-                        <button type="submit" class="dropdown-item">Todos</button>
-                    </form>
-                    <form action="{{route('StoreV')}}" method="post">
-                        <input type="hidden" id="name" name="name" value="{{$name}}">
-                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
-                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
-                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
-                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
-                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
-                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
-                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
-                        <input type="hidden" id="session" name="session" value="{{$session}}">
-                        <input type="hidden" id="people" name="people" value="{{$people}}">
-                        {{csrf_field()}}
-                        <button type="submit" class="dropdown-item">Vigentes</button>
-                    </form>
-                    <form action="{{route('StoreNV')}}" method="post">
-                        <input type="hidden" id="name" name="name" value="{{$name}}">
-                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
-                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
-                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
-                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
-                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
-                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
-                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
-                        <input type="hidden" id="session" name="session" value="{{$session}}">
-                        <input type="hidden" id="people" name="people" value="{{$people}}">
-                        {{csrf_field()}}
-                        <button type="submit" class="dropdown-item">No vigentes</button>
-                    </form>
-                    <form action="{{route('StoreOthers')}}" method="post">
-                        <input type="hidden" id="name" name="name" value="{{$name}}">
-                        <input type="hidden" id="countries" name="countries" value="{{$countries}}">
-                        <input type="hidden" id="scope" name="scope" value="{{$scope}}">
-                        <input type="hidden" id="legalInstrument" name="legalInstrument" value="{{$legalInstrument}}">
-                        <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
-                        <input type="hidden" id="objective" name="objective" value="{{$objective}}">
-                        <input type="hidden" id="signature" name="signature" value="{{$signature}}">
-                        <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
-                        <input type="hidden" id="session" name="session" value="{{$session}}">
-                        <input type="hidden" id="people" name="people" value="{{$people}}">
-                        {{csrf_field()}}
-                        <button type="submit" class="dropdown-item">Otros</button>
-                    </form>
+                        <form action="{{route('StoreAll')}}" method="post">
+                            <input type="hidden" id="name" name="name" value="{{$name}}">
+                            <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                            <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                            <input type="hidden" id="legalInstrument" name="legalInstrument"
+                                value="{{$legalInstrument}}">
+                            <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                            <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                            <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                            <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                            <input type="hidden" id="session" name="session" value="{{$session}}">
+                            <input type="hidden" id="people" name="people" value="{{$people}}">
+
+                            {{csrf_field()}}
+                            <button type="submit" class="dropdown-item">Todos</button>
+                        </form>
+                        <form action="{{route('StoreV')}}" method="post">
+                            <input type="hidden" id="name" name="name" value="{{$name}}">
+                            <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                            <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                            <input type="hidden" id="legalInstrument" name="legalInstrument"
+                                value="{{$legalInstrument}}">
+                            <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                            <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                            <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                            <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                            <input type="hidden" id="session" name="session" value="{{$session}}">
+                            <input type="hidden" id="people" name="people" value="{{$people}}">
+                            {{csrf_field()}}
+                            <button type="submit" class="dropdown-item">Vigentes</button>
+                        </form>
+                        <form action="{{route('StoreNV')}}" method="post">
+                            <input type="hidden" id="name" name="name" value="{{$name}}">
+                            <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                            <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                            <input type="hidden" id="legalInstrument" name="legalInstrument"
+                                value="{{$legalInstrument}}">
+                            <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                            <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                            <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                            <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                            <input type="hidden" id="session" name="session" value="{{$session}}">
+                            <input type="hidden" id="people" name="people" value="{{$people}}">
+                            {{csrf_field()}}
+                            <button type="submit" class="dropdown-item">No vigentes</button>
+                        </form>
+                        <form action="{{route('StoreOthers')}}" method="post">
+                            <input type="hidden" id="name" name="name" value="{{$name}}">
+                            <input type="hidden" id="countries" name="countries" value="{{$countries}}">
+                            <input type="hidden" id="scope" name="scope" value="{{$scope}}">
+                            <input type="hidden" id="legalInstrument" name="legalInstrument"
+                                value="{{$legalInstrument}}">
+                            <input type="hidden" id="instrumentType" name="instrumentType" value="{{$instrumentType}}">
+                            <input type="hidden" id="objective" name="objective" value="{{$objective}}">
+                            <input type="hidden" id="signature" name="signature" value="{{$signature}}">
+                            <input type="hidden" id="end_date" name="end_date" value="{{$end_date}}">
+                            <input type="hidden" id="session" name="session" value="{{$session}}">
+                            <input type="hidden" id="people" name="people" value="{{$people}}">
+                            {{csrf_field()}}
+                            <button type="submit" class="dropdown-item">Otros</button>
+                        </form>
+                    </div>
+
                 </div>
+
             </div>
-        </div>
+        </p>
         @endif
-        <br>
         {{Form::open(['route'=>'FinalRegister.index','method'=>'GET','class'=>'form-inline'])}}
         @if(!Auth::guest() && (Auth::user()->hasRole('admin') ))
-        <p class="text-item-center"><a href="{{route('FinalRegister.create')}}" class="btn boton"
-                style="margin-right:5px">Nuevo</a>
-            @endif
-            <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
-                aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
-                Búsqueda
-            </button>
-        </p>
+        <div class="btn-group" role="group">
+            <p class="text-item-center"><a href="{{route('FinalRegister.create')}}" class="btn boton"
+                    style="margin-right:5px">Nuevo</a>
+                @endif
+                <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample"
+                    aria-expanded="false" aria-controls="collapseExample" style="margin-right:15px">
+                    Búsqueda
+                </button>
+            </p>
+        </div>
         <!------------------------------------- SEARCH FORM ---------------------------------------------------->
         <div class="collapse" id="collapseExample">
             <div class="card card-body" style="margin-bottom:5px; background-color:#BF942D;">
@@ -170,20 +180,20 @@
     </div>
 </div>
 <!-------------------------------------------- DOCUMENTS TABLE --------------------------------------------->
-<div class="row d-flex justify-content-center">
-    <div class="col-md-10">
-        <nav>
-            <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                    aria-controls="nav-home" aria-selected="true">Todos</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                    aria-controls="nav-profile" aria-selected="false">Vigentes</a>
-                <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                    aria-controls="nav-contact" aria-selected="false">No vigentes</a>
-                <a class="nav-item nav-link" id="nav-others-tab" data-toggle="tab" href="#nav-others" role="tab"
-                    aria-controls="nav-others" aria-selected="false">Otros</a>
-            </div>
-        </nav>
+<div class="container">
+    <nav>
+        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+                aria-controls="nav-home" aria-selected="true">Todos</a>
+            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+                aria-controls="nav-profile" aria-selected="false">Vigentes</a>
+            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+                aria-controls="nav-contact" aria-selected="false">No vigentes</a>
+            <a class="nav-item nav-link" id="nav-others-tab" data-toggle="tab" href="#nav-others" role="tab"
+                aria-controls="nav-others" aria-selected="false">Otros</a>
+        </div>
+    </nav>
+    <div class="table responsive ">
 
         <!--TODOS---------------->
         <div class="tab-content" id="nav-tabContent">
@@ -191,17 +201,17 @@
                 <table class="table table-striped table-bordered">
                     <thead class="thead-dark">
                         <tr>
-                            <th>Num. Registro</th>
-                            <th>Nombre completo</th>
-                            <th>Instrumento jurídico</th>
-                            <th>Tipo de instrumento</th>
-                            <th>Objetivo</th>
-                            <th>Ámbito</th>
-                            <th>Fecha de firma</th>
-                            <th>Fecha de fin</th>
-                            <th>Fecha de sesión</th>
-                            <th>Partes</th>
-                            <th colspan="3">&nbsp; Opciones</th>
+                            <th scope="col">Num. Registro</th>
+                            <th scope="col">Nombre completo</th>
+                            <th scope="col">Instrumento jurídico</th>
+                            <th scope="col">Tipo de instrumento</th>
+                            <th scope="col">Objetivo</th>
+                            <th scope="col">Ámbito</th>
+                            <th scope="col">Fecha de firma</th>
+                            <th scope="col">Fecha de fin</th>
+                            <th scope="col">Fecha de sesión</th>
+                            <th scope="col">Partes</th>
+                            <th colspan="3" scope="col">&nbsp; Opciones</th>
                         </tr>
                     <tbody>
 
@@ -218,23 +228,27 @@
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
 
-                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                            <td>@foreach($document->getPeople as
+                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                             <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+
                             </td>
-                            </td>
-                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                            <td> @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+
+                                <a href="{{route('FinalRegister.edit', $document->id)}}"
                                     class="btn botonAmarillo">Editar</a>
+
                             </td>
+
                             <td>
                                 <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
                                 </form>
+                                @endif
                             </td>
-                            @endif
                         </tr>
                         @endforeach
                     </tbody>
@@ -273,7 +287,8 @@
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
 
-                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                            <td>@foreach($document->getPeople as
+                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                             <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
@@ -286,13 +301,13 @@
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">x</button>
                                 </form>
                             </td>
                             @endif
-                            </tr>
-                            @endif
-                            @endforeach
+                        </tr>
+                        @endif
+                        @endforeach
                     </tbody>
                     </thead>
                 </table>
@@ -330,7 +345,8 @@
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
 
-                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                            <td>@foreach($document->getPeople as
+                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                             <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
@@ -343,7 +359,7 @@
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
                                 </form>
                             </td>
                             @endif
@@ -386,7 +402,8 @@
                             <td>{{$document->end_date}}</td>
                             <td>{{$document->session}}</td>
 
-                            <td>@foreach($document->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                            <td>@foreach($document->getPeople as
+                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                             <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
                             </td>
                             </td>
@@ -399,7 +416,7 @@
                                     {{csrf_field()}}
                                     <input type="hidden" name="_method" value="DELETE">
                                     <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
                                 </form>
                             </td>
                             @endif
@@ -413,7 +430,6 @@
         </div>
 
     </div>
-</div>
 </div>
 @else
 <!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
