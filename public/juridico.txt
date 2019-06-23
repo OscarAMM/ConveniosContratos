@@ -7777,4 +7777,4 @@ Monto del Contrato: $3,816.00|Lic. Francisco José Hernández y Puente^Universidad
 Monto del Contrato: $67,860.00|M.I. Carlos Alejandro Castillo Manzano^Universidad Autónoma de Yucatán|México^México|En ejecución|2018/06/22|?||<FIN>
 <INICIO>|323|3341|19/12/18|31/05/19|19/12/18|?|0|0|Observación|Contrato de prestación de serv|B|Específico|no|yes|Contrato de Prestación de Servicios|La Universidad Autónoma de Yucatán por medio de su Facultad de Matemáticas impartirá el curso-taller denominado "Uso de Excel", dirigido a personal de la Coordinación Estatal del programa "Escuelas de Tiempo Completo".
 
-Monto del Contrato: $44,000.00 más I.V.A.|Gobierno del Estado de Yucatán-Secretaría de Educación^Universidad Autónoma de Yucatán-Facultad de Matemáticas|México^México|En ejecución|2019/02/21|?||<FIN>
+Monto del Contrato: $44,000.00 más I.V.A.|Gobierno del Estado de Yucatán-Secretaría de Educación^Universidad Autónoma de Yucatán-Facultad de Matemáticas|México^México|En ejecución|2019/02/21|?||

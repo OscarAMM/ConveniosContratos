@@ -614,17 +614,25 @@ class FinalRegisterController extends Controller
         $docs = '';
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
-
+            $personString='';
+            $document=FinalRegister::find($doc->id);
+            foreach($document->getPeople as $person){
+                $personString.=$person->name.' ; ';
+            }
+            
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
-            .'<w:br />'.'Objetivo: '.$doc->objective
+            //.'<w:br />'.'Objetivo: '.iconv('UTF-8','Windows-1252//TRANSLIT',$doc->objective)
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
+            //. '<w:br />'.'Partes: '.$personString
+            //. '<w:br />'.'Países: '.$doc->countries
             . '<w:br />'.'Fecha de firma: '.$doc->signature
             . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
             . '<w:br />'.'Fecha de fin: '.$doc->end_date
+            . '<w:br />'.'Observación: '.$doc->observation
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
@@ -665,7 +673,7 @@ class FinalRegisterController extends Controller
             //campos de los documentos, faltan por añadir
             $docs.=
              '<w:br />'.'Nombre: '.$doc->name
-            . '<w:br />'.'Objetivo: '.$doc->objective
+            //. '<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -673,6 +681,7 @@ class FinalRegisterController extends Controller
             . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
             . '<w:br />'.'Fecha de fin: '.$doc->end_date
+            . '<w:br />'.'Observación: '.$doc->observation
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
@@ -713,7 +722,7 @@ class FinalRegisterController extends Controller
             //campos de los documentos, faltan por añadir
             $docs.=
              '<w:br />'.'Nombre: '.$doc->name
-            . '<w:br />'.'Objetivo: '.$doc->objective
+            //. '<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -721,6 +730,7 @@ class FinalRegisterController extends Controller
             . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
             . '<w:br />'.'Fecha de fin: '.$doc->end_date
+            . '<w:br />'.'Observación: '.$doc->observation
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
@@ -761,7 +771,7 @@ class FinalRegisterController extends Controller
             //campos de los documentos, faltan por añadir
             $docs.=
              '<w:br />'.'Nombre: '.$doc->name
-            . '<w:br />'.'Objetivo: '.$doc->objective
+            //. '<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -769,6 +779,8 @@ class FinalRegisterController extends Controller
             . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
             . '<w:br />'.'Fecha de fin: '.$doc->end_date
+            . '<w:br />'.'Observación: '.$doc->observation
+
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
