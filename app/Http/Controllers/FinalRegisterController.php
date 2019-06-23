@@ -622,7 +622,8 @@ class FinalRegisterController extends Controller
             
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
-            //.'<w:br />'.'Objetivo: '.iconv('UTF-8','Windows-1252//TRANSLIT',$doc->objective)
+            .'<w:br />'.'Nombre: '.$doc->id
+            .'<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType

@@ -72,16 +72,16 @@ class FinalSeeder extends Seeder
                 $splitName = explode('|', $line);
                 if (!empty($splitName[15])) {
                     //'UTF-8','ISO-8859-1//TRANSLIT'
-                    $document->name=iconv('ISO-8859-1','UTF-8',$splitName[15]);
+                    $document->name=iconv('ISO-8859-1','UTF-8//IGNORE',$splitName[15]);
                     echo $splitName[15];
                 }
                 if (!empty($splitName[16])) {
-                    $document->objective=iconv('ISO-8859-1','UTF-8//TRANSLIT',$splitName[16]);
+                    $document->objective=iconv('ISO-8859-1','UTF-8//IGNORE',$splitName[16]);
                 }
                 if (!empty($splitName[10])) {
                     //verificacion de instrumento
                     $instrument = new LegalInstrument();
-                    $instrument->name=iconv('ISO-8859-1','UTF-8',$splitName[10]);
+                    $instrument->name=iconv('ISO-8859-1','UTF-8//IGNORE',$splitName[10]);
                     if (LegalInstrument::where('name',$instrument->name)->exists()) {
                         $document->legalInstrument=$instrument->name;
                     } else {
@@ -105,7 +105,7 @@ class FinalSeeder extends Seeder
                     $document->session=$year->format('Y').'-'.$splitDate[1].'-'.$splitDate[0];
                 }
                 if (!empty($splitName[20])) {
-                    $document->observation=iconv('ISO-8859-1','UTF-8',$splitName[20]);
+                    $document->observation=iconv('ISO-8859-1','UTF-8//IGNORE',$splitName[20]);
                 }
                 if (!empty($splitName[14])) {
                     if ($splitName[13]=='yes') {
@@ -122,7 +122,7 @@ class FinalSeeder extends Seeder
                     }
                 }
                 if (!empty($splitName[12])) {
-                    $document->instrumentType=iconv('ISO-8859-1','UTF-8',$splitName[12]);
+                    $document->instrumentType=iconv('ISO-8859-1','UTF-8//IGNORE',$splitName[12]);
                 }
                 if (!empty($splitName[5])&&$splitName[5]!='0'&&$splitName[5]!='?') {
                     $splitDate=explode('/',$splitName[5]);
@@ -148,8 +148,8 @@ class FinalSeeder extends Seeder
                     foreach ($arrayPerson as $line2) {
                         if($line2!='<ERROR-FIRMAS>'&&!empty($line2)){
                             $person = new Person();
-                            $person->name=iconv('ISO-8859-1','UTF-8',$line2);
-                            $person->country=iconv('ISO-8859-1','UTF-8',$arrayCountries[$cont2]);
+                            $person->name=iconv('ISO-8859-1','UTF-8//IGNORE',$line2);
+                            $person->country=iconv('ISO-8859-1','UTF-8//IGNORE',$arrayCountries[$cont2]);
                             $person->personType='Indefinido';
                             if (!Person::where('name', $person->name)->exists()) {
                                 $person->save();
@@ -161,7 +161,7 @@ class FinalSeeder extends Seeder
                     $document->save();
                     foreach ($arrayPerson as $line2) {
                         if ($line2!='<ERROR-FIRMAS>'&&!empty($line2)) {
-                            $personActive=Person::where('name', iconv('ISO-8859-1', 'UTF-8', $line2))->first();
+                            $personActive=Person::where('name', iconv('ISO-8859-1', 'UTF-8//IGNORE', $line2))->first();
                             $document->people()->attach(Person::where('id', $personActive->id)->first());
                             $countries.=$personActive->country.' ; ';
                             $personString.=$personActive->id.' - '.$personActive->name.' ; ';

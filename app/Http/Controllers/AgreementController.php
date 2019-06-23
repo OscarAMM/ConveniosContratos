@@ -79,7 +79,7 @@ class AgreementController extends Controller
                 ->objective($objective)
                 ->reception($reception)
                 ->paginate();
-        return view('agreements.index', compact('agreements'));
+        return view('agreements.index', compact('name','reception','countries','legalInstrument','instrumentType','objective','people','agreements'));
     }
     public function index2(Request $request)
     {
@@ -142,7 +142,7 @@ class AgreementController extends Controller
                 ->objective($objective)
                 ->reception($reception)
                 ->paginate();
-        return view('agreements.index2', compact('agreements'));
+        return view('agreements.index2', compact('name','reception','countries','legalInstrument','instrumentType','objective','people','agreements'));
     }
     public function indexPublic(Request $request)
     {
