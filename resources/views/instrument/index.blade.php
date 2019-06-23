@@ -23,7 +23,7 @@
                         <th colspan="3">&nbsp;</th>
                     </tr>
                 <tbody>
-                    @foreach($instrument as $instrument)
+                    @foreach($instruments as $instrument)
                     <tr>
                         <td>{{$instrument->id}}</td>
                         <td>{{$instrument->name}}</td>
@@ -42,6 +42,8 @@
                 </tbody>
                 </thead>
             </table>
+            {!!$instruments->render()!!}
+
         </div>
     </div>
 </div>

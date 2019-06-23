@@ -15,11 +15,11 @@ class LegalInstrumentController extends Controller
     {
         $id = $request->get('id');
         $name = $request->get('name');
-        $instrument = LegalInstrument::orderBy('id', 'ASC')
+        $instruments = LegalInstrument::orderBy('id', 'ASC')
         ->id($id)
         ->name($name)
         ->paginate();
-        return view('instrument.index', compact('instrument'));
+        return view('instrument.index', compact('instruments'));
     }
     public function create()
     {

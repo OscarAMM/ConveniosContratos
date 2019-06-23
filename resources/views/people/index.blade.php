@@ -97,6 +97,9 @@
             </tbody>
             </thead>
         </table>
+        {!!$people->appends([
+'name'=>$name,'country'=>$country,'personType'=>$personType,'email'=>$email,'acronym'=>$acronym])->links()!!}
+
     </div>
 </div>
 
@@ -114,6 +117,5 @@
 
     </div>
 </div>
-{!!$people->render()!!}
 @endif
 @endsection

@@ -637,8 +637,10 @@ class FinalRegisterController extends Controller
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
-        $template->saveAs('reportsWord/'.'Registros Finales.docx');
-        return response()->download(public_path('reportsWord/'.'Registros Finales.docx'))->deleteFileAfterSend(true);
+        $template->saveAs('reportsWord/'.'RegistrosFinales.docx');
+        header("Content-Disposition: attachment; filename=RegistrosFinales.docx; charset=ISO-8859-1");
+echo file_get_contents('reportsWord/'.'RegistrosFinales.docx');
+        //return response()->download(public_path('reportsWord/'.'RegistrosFinales.docx'))->deleteFileAfterSend(true);
     }
     public function storeV(Request $request)
     {

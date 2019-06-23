@@ -25,7 +25,7 @@ class PersonController extends Controller
             ->email($email)
             ->acronym($acronym)
             ->paginate();
-        return view('people.index', compact('people'));
+        return view('people.index', compact('name','personType','country','email','acronym','people'));
 
     }
     //The show gets the id from the table and pass to the show view
