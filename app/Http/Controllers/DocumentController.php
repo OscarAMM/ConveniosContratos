@@ -368,7 +368,7 @@ class DocumentController extends Controller
             //campos de los documentos, faltan por añadir
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.$doc->objective
+             //.'<w:br />'.'Objetivo: '.$doc->objective
              .'<w:br />'.'Fecha de firma: '.$doc->signature
              .'<w:br />'.'Fecha de fin: '.$doc->end_date
             .'<w:br />';
@@ -397,7 +397,7 @@ class DocumentController extends Controller
             //campos de los documentos, faltan por añadir
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.$doc->objective
+             //.'<w:br />'.'Objetivo: '.$doc->objective
              .'<w:br />'.'Fecha de firma: '.$doc->signature
              .'<w:br />'.'Fecha de fin: '.$doc->end_date
             .'<w:br />';
@@ -426,7 +426,7 @@ class DocumentController extends Controller
             //campos de los documentos, faltan por añadir
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.$doc->objective
+             //.'<w:br />'.'Objetivo: '.$doc->objective
              .'<w:br />'.'Fecha de firma: '.$doc->signature
              .'<w:br />'.'Fecha de fin: '.$doc->end_date
             .'<w:br />';
