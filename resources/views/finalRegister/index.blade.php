@@ -218,7 +218,7 @@
                         <!-----------------------------FOREACH SEARCH ------------------------------->
                         @foreach($documents as $document)
                         <tr>
-                            <td>{{$document->registerNumber}}</td>
+                            <td>{{$document->id}}</td>
                             <td>{{$document->name}}</td>
                             <td>{{$document->legalInstrument}}</td>
                             <td>{{$document->instrumentType}}</td>
