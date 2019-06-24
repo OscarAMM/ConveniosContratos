@@ -88,6 +88,7 @@ class FinalSeeder extends Seeder
                         $document->legalInstrument=$instrument->name;
                         $instrument->save();
                     }
+                    
                 }
                 
                 if (!empty($splitName[1])) {
