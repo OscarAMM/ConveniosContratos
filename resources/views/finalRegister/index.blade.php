@@ -214,18 +214,18 @@
                     </tr>
                 <tbody>
 
-                    <!-----------------------------FOREACH SEARCH ------------------------------->
-                    @foreach($documents as $document)
-                    <tr>
-                        <td>{{$document->id}}</td>
-                        <td>{{$document->name}}</td>
-                        <td>{{$document->legalInstrument}}</td>
-                        <td>{{$document->instrumentType}}</td>
-                        <td>{{$document->objective}}</td>
-                        <td>{{$document->scope}}</td>
-                        <td>{{$document->signature}}</td>
-                        <td>{{$document->end_date}}</td>
-                        <td>{{$document->session}}</td>
+                        <!-----------------------------FOREACH SEARCH ------------------------------->
+                        @foreach($documents as $document)
+                        <tr>
+                            <td>{{$document->registerNumber}}</td>
+                            <td>{{$document->name}}</td>
+                            <td>{{$document->legalInstrument}}</td>
+                            <td>{{$document->instrumentType}}</td>
+                            <td>{{$document->objective}}</td>
+                            <td>{{$document->scope}}</td>
+                            <td>{{$document->signature}}</td>
+                            <td>{{$document->end_date}}</td>
+                            <td>{{$document->session}}</td>
 
                         <td>@foreach($document->getPeople as
                             $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
