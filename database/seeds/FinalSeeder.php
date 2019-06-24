@@ -99,14 +99,14 @@ class FinalSeeder extends Seeder
                     $year = DateTime::createFromFormat('y', $splitDate[2]);
                     $document->signature=$year->format('Y').'-'.$splitDate[1].'-'.$splitDate[0];
                 }else{
-                    $document->signature=Carbon::parse('0001-01-30');
+                    $document->signature=Carbon::parse('1000-01-30');
                 }
                 if (!empty($splitName[4])&&$splitName[4]!='0'&&$splitName[4]!='?') {
                     $splitDate=explode('/',$splitName[4]);
                     $year = DateTime::createFromFormat('y', $splitDate[2]);
                     $document->session=$year->format('Y').'-'.$splitDate[1].'-'.$splitDate[0];
                 }else{
-                    $document->session=Carbon::parse('0001-01-30');
+                    $document->session=Carbon::parse('1000-01-30');
                 }
                 if (!empty($splitName[20])) {
                     $document->observation=iconv('ISO-8859-1','UTF-8//IGNORE',$splitName[20]);
@@ -133,7 +133,7 @@ class FinalSeeder extends Seeder
                     $year = DateTime::createFromFormat('y', $splitDate[2]);
                     $document->start_date=$year->format('Y').'-'.$splitDate[1].'-'.$splitDate[0];
                 }else{
-                    $document->start_date=Carbon::parse('0001-01-30');
+                    $document->start_date=Carbon::parse('1000-01-30');
                 }
                 if (!empty($splitName[6])&&$splitName[6]!='0'&&$splitName[6]!='?') {
                     echo $splitName[6].'---';

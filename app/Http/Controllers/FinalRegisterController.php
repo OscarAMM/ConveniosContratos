@@ -599,14 +599,14 @@ class FinalRegisterController extends Controller
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('name', 'LIKE', "%{$name}%")
             ->where('countries', 'LIKE', "%$countries%")
-          ->where('person', 'LIKE', "%$people%")
-            ->where('scope', 'LIKE', "%{$scope}%")
-            ->where('legalInstrument', 'LIKE', "%{$legalInstrument}%")
-            ->where('instrumentType', 'LIKE', "%{$instrumentType}%")
-            ->where('objective', 'LIKE', "%{$objective}")
-            ->where('signature', 'LIKE', "%{$signature}%")
-            ->where('session', 'LIKE', "%{$session}%")
-            ->where('end_date', 'LIKE', "%{$end_date}%")
+            ->where('person', 'LIKE', "%$people%")
+            ->where('scope', 'LIKE', "%$scope%")
+            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+            ->where('instrumentType', 'LIKE', "%$instrumentType%")
+            ->where('objective', 'LIKE', "%$objective%")
+            ->where('signature', 'LIKE', "%$signature%")
+            ->where('session', 'LIKE', "%$session%")
+            ->where('end_date', 'LIKE', "%$end_date%")
             ->get();
         }else{
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
@@ -627,8 +627,8 @@ class FinalRegisterController extends Controller
         $template->setValue('title', 'Registros Finales');
         $docs = '';
         foreach ($documents as $doc) {
-            /*//campos de los documentos, faltan por añadir
-            $personString='';
+            //campos de los documentos, faltan por añadir
+            /*$personString='';
             $document=FinalRegister::find($doc->id);
             foreach($document->getPeople as $person){
                 $personString.=$person->name.' ; ';
