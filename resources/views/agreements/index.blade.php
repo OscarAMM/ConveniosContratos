@@ -139,6 +139,11 @@
                 </tbody>
                 </thead>
             </table>
+            {!!$agreements->appends([
+                    'name'=>$name,'countries'=>$countries,'reception'=>$reception,
+                    'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+                    'objective'=>$objective,'people_id'=>$people
+                    ])->links()!!}
         </div>
         @else
         <div class="container">
@@ -187,5 +192,4 @@ jQuery(document).ready(function() {
 </script>
 
 </html>
-{!!$agreements->render()!!}
 @endsection

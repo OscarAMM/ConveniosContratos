@@ -594,8 +594,13 @@ class FinalRegisterController extends Controller
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
         $session = $request->get('session');
+<<<<<<< HEAD
       //  $people=$request->get('people_id');
 
+=======
+        $people=$request->get('people_id');
+        if($end_date){
+>>>>>>> 8943e2091607dae14d38cfda2817d43cec92e68e
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('name', 'LIKE', "%{$name}%")
          //   ->where('countries', 'LIKE', "%$countries%")
@@ -608,6 +613,20 @@ class FinalRegisterController extends Controller
             ->where('session', 'LIKE', "%{$session}%")
             ->where('end_date', 'LIKE', "%{$end_date}%")
             ->get();
+        }else{
+            $documents = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->where('name', 'LIKE', "%{$name}%")
+            ->where('countries', 'LIKE', "%$countries%")
+            ->where('person', 'LIKE', "%$people%")
+            ->where('scope', 'LIKE', "%$scope%")
+            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+            ->where('instrumentType', 'LIKE', "%$instrumentType%")
+            ->where('objective', 'LIKE', "%$objective%")
+            ->where('signature', 'LIKE', "%$signature%")
+            ->where('session', 'LIKE', "%$session%")
+            ->get();
+        }
+            
         
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Registros Finales');
@@ -622,8 +641,13 @@ class FinalRegisterController extends Controller
             
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
+<<<<<<< HEAD
            // .'<w:br />'.'Objetivo: '.iconv('UTF-8','Windows-1252//TRANSLIT',$doc->objective)
           //  .'<w:br />'.'Objetivo: '.$doc->objective
+=======
+            //.'<w:br />'.'Nombre: '.$doc->id
+            //.'<w:br />'.'Objetivo: '.$doc->objective
+>>>>>>> 8943e2091607dae14d38cfda2817d43cec92e68e
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -637,8 +661,10 @@ class FinalRegisterController extends Controller
             .'<w:br />';
         }
         $template->setValue('documents', $docs);
-        $template->saveAs('reportsWord/'.'Registros Finales.docx');
-        return response()->download(public_path('reportsWord/'.'Registros Finales.docx'))->deleteFileAfterSend(true);
+        $template->saveAs('reportsWord/'.'RegistrosFinales.docx');
+        header("Content-Disposition: attachment; filename=RegistrosFinales.docx; charset=ISO-8859-1");
+echo file_get_contents('reportsWord/'.'RegistrosFinales.docx');
+        //return response()->download(public_path('reportsWord/'.'RegistrosFinales.docx'))->deleteFileAfterSend(true);
     }
     public function storeV(Request $request)
     {
@@ -652,7 +678,7 @@ class FinalRegisterController extends Controller
         $end_date = $request->get('end_date');
         $session = $request->get('session');
         $people=$request->get('people_id');
-
+        if ($end_date) {
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
             ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
             ->where('name', 'LIKE', "%{$name}%")
@@ -666,7 +692,20 @@ class FinalRegisterController extends Controller
             ->where('session', 'LIKE', "%$session%")
             ->where('end_date', 'LIKE', "%$end_date%")
             ->get();
-        
+        }else{
+            $documents = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->whereBetween('end_date', [Carbon::now(),'4000-01-01'])
+            ->where('name', 'LIKE', "%{$name}%")
+            ->where('countries', 'LIKE', "%$countries%")
+            ->where('person', 'LIKE', "%$people%")
+            ->where('scope', 'LIKE', "%$scope%")
+            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+            ->where('instrumentType', 'LIKE', "%$instrumentType%")
+            ->where('objective', 'LIKE', "%$objective%")
+            ->where('signature', 'LIKE', "%$signature%")
+            ->where('session', 'LIKE', "%$session%")
+            ->get();
+        }
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Registros Finales Vigentes');
         $docs = '';
@@ -701,7 +740,7 @@ class FinalRegisterController extends Controller
         $end_date = $request->get('end_date');
         $session = $request->get('session');
         $people=$request->get('people_id');
-
+        if ($end_date) {
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
             ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
             ->where('name', 'LIKE', "%{$name}%")
@@ -715,7 +754,20 @@ class FinalRegisterController extends Controller
             ->where('session', 'LIKE', "%$session%")
             ->where('end_date', 'LIKE', "%$end_date%")
             ->get();
-        
+        }else{
+            $documents = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->whereBetween('end_date', ['1000-01-01', Carbon::now()])
+            ->where('name', 'LIKE', "%{$name}%")
+            ->where('countries', 'LIKE', "%$countries%")
+            ->where('person', 'LIKE', "%$people%")
+            ->where('scope', 'LIKE', "%$scope%")
+            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+            ->where('instrumentType', 'LIKE', "%$instrumentType%")
+            ->where('objective', 'LIKE', "%$objective%")
+            ->where('signature', 'LIKE', "%$signature%")
+            ->where('session', 'LIKE', "%$session%")
+            ->get();
+        }
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Registros Finales No Vigentes');
         $docs = '';
@@ -750,7 +802,7 @@ class FinalRegisterController extends Controller
         $end_date = $request->get('end_date');
         $session = $request->get('session');
         $people=$request->get('people_id');
-
+        if($end_date){
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('observation', '!=','')
             ->where('name', 'LIKE', "%{$name}%")
@@ -764,6 +816,21 @@ class FinalRegisterController extends Controller
             ->where('session', 'LIKE', "%$session%")
             ->where('end_date', 'LIKE', "%$end_date%")
             ->get();
+        }else{
+            $documents = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->where('observation', '!=','')
+            ->where('name', 'LIKE', "%{$name}%")
+            ->where('countries', 'LIKE', "%$countries%")
+            ->where('person', 'LIKE', "%$people%")
+            ->where('scope', 'LIKE', "%$scope%")
+            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+            ->where('instrumentType', 'LIKE', "%$instrumentType%")
+            ->where('objective', 'LIKE', "%$objective%")
+            ->where('signature', 'LIKE', "%$signature%")
+            ->where('session', 'LIKE', "%$session%")
+            ->get();
+        }
+            
         
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Otros Registros Finales');

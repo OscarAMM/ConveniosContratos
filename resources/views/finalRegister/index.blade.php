@@ -251,9 +251,17 @@
                             </td>
                         </tr>
                         @endforeach
+                        
                     </tbody>
+                    
                     </thead>
+                    
                 </table>
+                {!!$documents->appends([
+'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+'signature' => $signature,'session'=>$session])->links()!!}
             </div>
             <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                 <!---------------VIGENTES------------------------>
@@ -311,7 +319,11 @@
                     </tbody>
                     </thead>
                 </table>
-
+                {!!$documents2->appends([
+'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+'signature' => $signature,'session'=>$session])->links()!!}
             </div>
             <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
                 <!------------------ NO VIGENTES --------------------->
@@ -369,6 +381,11 @@
                     </tbody>
                     </thead>
                 </table>
+                {!!$documents3->appends([
+'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+'signature' => $signature,'session'=>$session])->links()!!}
             </div>
             <div class="tab-pane fade" id="nav-others" role="tabpanel" aria-labelledby="nav-others-tab">
                 <!------------------ NO VIGENTES --------------------->
@@ -426,6 +443,11 @@
                     </tbody>
                     </thead>
                 </table>
+                {!!$documents4->appends([
+'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+'signature' => $signature,'session'=>$session])->links()!!}
             </div>
         </div>
 
@@ -473,5 +495,5 @@ jQuery(document).ready(function() {
 </script>
 
 </html>
-{!!$documents->render()!!}
+
 @endsection
