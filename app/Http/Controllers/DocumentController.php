@@ -158,8 +158,8 @@ class DocumentController extends Controller
         $template->setValue('users', $users);
         $template->setValue('people', $people);
 
-        $template->saveAs('documentsWord/'.$document->name.'.docx');
-        return response()->download(public_path('documentsWord/'.$document->name.'.docx'))->deleteFileAfterSend(true);
+        $template->saveAs('documentsWord/'.str_replace('"', ' ', $document->name).'.docx');
+        return response()->download(public_path('documentsWord/'.str_replace('"', ' ', $document->name).'.docx'))->deleteFileAfterSend(true);
 
     }
     public function storeFinal(Request $request, $id)
@@ -172,7 +172,7 @@ class DocumentController extends Controller
         $template->setValue('legalInstrument', $document->legalInstrument);
         $template->setValue('instrumentType', $document->instrumentType);
         $template->setValue('end_date', $document->end_date);
-        $template->setValue('objective', $document->objective);
+        $template->setValue('objective', str_replace("&", "Y", $document->objective));
         $template->setValue('scope', $document->scope);
         $template->setValue('status', $document->status);
         $template->setValue('signature', $document->signature);
@@ -182,7 +182,7 @@ class DocumentController extends Controller
         foreach ($document->getPeople as $person) {
             $people.='<w:br />'.$person->name;
         }
-        $template->setValue('people', $people);
+        $template->setValue('people', str_replace("&", "Y", $people));
 
         if ($document->hide) {
             $template->setValue('hide', 'Visible');
@@ -191,8 +191,8 @@ class DocumentController extends Controller
         }
         
 
-        $template->saveAs('finalWord/'.$document->name.'.docx');
-        return response()->download(public_path('finalWord/'.$document->name.'.docx'))->deleteFileAfterSend(true);
+        $template->saveAs('finalWord/'.str_replace('"', ' ', $document->name).'.docx');
+        return response()->download(public_path('finalWord/'.str_replace('"', ' ', $document->name).'.docx'))->deleteFileAfterSend(true);
         
        
     }
@@ -368,7 +368,7 @@ class DocumentController extends Controller
             //campos de los documentos, faltan por añadir
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
-             //.'<w:br />'.'Objetivo: '.$doc->objective
+             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
              .'<w:br />'.'Fecha de firma: '.$doc->signature
              .'<w:br />'.'Fecha de fin: '.$doc->end_date
             .'<w:br />';
@@ -397,7 +397,7 @@ class DocumentController extends Controller
             //campos de los documentos, faltan por añadir
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
-             //.'<w:br />'.'Objetivo: '.$doc->objective
+             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
              .'<w:br />'.'Fecha de firma: '.$doc->signature
              .'<w:br />'.'Fecha de fin: '.$doc->end_date
             .'<w:br />';
@@ -426,7 +426,7 @@ class DocumentController extends Controller
             //campos de los documentos, faltan por añadir
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
-             //.'<w:br />'.'Objetivo: '.$doc->objective
+             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
              .'<w:br />'.'Fecha de firma: '.$doc->signature
              .'<w:br />'.'Fecha de fin: '.$doc->end_date
             .'<w:br />';
