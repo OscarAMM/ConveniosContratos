@@ -586,7 +586,7 @@ class FinalRegisterController extends Controller
     public function storeAll(Request $request)
     {
         $name = $request->get('name');
-        $countries = $request->get('countries');
+       // $countries = $request->get('countries');
         $scope = $request->get('scope');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
@@ -594,35 +594,36 @@ class FinalRegisterController extends Controller
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
         $session = $request->get('session');
-        $people=$request->get('people_id');
+      //  $people=$request->get('people_id');
 
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('name', 'LIKE', "%{$name}%")
-            ->where('countries', 'LIKE', "%$countries%")
-            ->where('person', 'LIKE', "%$people%")
-            ->where('scope', 'LIKE', "%$scope%")
-            ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-            ->where('instrumentType', 'LIKE', "%$instrumentType%")
-            ->where('objective', 'LIKE', "%$objective%")
-            ->where('signature', 'LIKE', "%$signature%")
-            ->where('session', 'LIKE', "%$session%")
-            ->where('end_date', 'LIKE', "%$end_date%")
+         //   ->where('countries', 'LIKE', "%$countries%")
+         //   ->where('person', 'LIKE', "%$people%")
+            ->where('scope', 'LIKE', "%{$scope}%")
+            ->where('legalInstrument', 'LIKE', "%{$legalInstrument}%")
+            ->where('instrumentType', 'LIKE', "%{$instrumentType}%")
+            ->where('objective', 'LIKE', "%{$objective}")
+            ->where('signature', 'LIKE', "%{$signature}%")
+            ->where('session', 'LIKE', "%{$session}%")
+            ->where('end_date', 'LIKE', "%{$end_date}%")
             ->get();
         
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Registros Finales');
         $docs = '';
         foreach ($documents as $doc) {
-            //campos de los documentos, faltan por añadir
+            /*//campos de los documentos, faltan por añadir
             $personString='';
             $document=FinalRegister::find($doc->id);
             foreach($document->getPeople as $person){
                 $personString.=$person->name.' ; ';
-            }
+            }*/
             
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
-            //.'<w:br />'.'Objetivo: '.iconv('UTF-8','Windows-1252//TRANSLIT',$doc->objective)
+           // .'<w:br />'.'Objetivo: '.iconv('UTF-8','Windows-1252//TRANSLIT',$doc->objective)
+          //  .'<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
