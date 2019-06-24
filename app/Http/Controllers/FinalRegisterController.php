@@ -636,8 +636,8 @@ class FinalRegisterController extends Controller
             
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
-            //.'<w:br />'.'Nombre: '.$doc->id
-            //.'<w:br />'.'Objetivo: '.$doc->objective
+            .'<w:br />'.'Nombre: '.$doc->id
+            .'<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -652,9 +652,9 @@ class FinalRegisterController extends Controller
         }
         $template->setValue('documents', $docs);
         $template->saveAs('reportsWord/'.'RegistrosFinales.docx');
-        header("Content-Disposition: attachment; filename=RegistrosFinales.docx; charset=ISO-8859-1");
-echo file_get_contents('reportsWord/'.'RegistrosFinales.docx');
-        //return response()->download(public_path('reportsWord/'.'RegistrosFinales.docx'))->deleteFileAfterSend(true);
+        //header("Content-Disposition: attachment; filename=RegistrosFinales.docx; charset=UTF-8");
+//echo file_get_contents('reportsWord/'.'RegistrosFinales.docx');
+        return response()->download(public_path('reportsWord/'.'RegistrosFinales.docx'))->deleteFileAfterSend(true);
     }
     public function storeV(Request $request)
     {
