@@ -586,7 +586,7 @@ class FinalRegisterController extends Controller
     public function storeAll(Request $request)
     {
         $name = $request->get('name');
-       // $countries = $request->get('countries');
+        $countries = $request->get('countries');
         $scope = $request->get('scope');
         $legalInstrument = $request->get('legalInstrument');
         $instrumentType = $request->get('instrumentType');
@@ -594,17 +594,12 @@ class FinalRegisterController extends Controller
         $signature = $request->get('signature');
         $end_date = $request->get('end_date');
         $session = $request->get('session');
-<<<<<<< HEAD
-      //  $people=$request->get('people_id');
-
-=======
         $people=$request->get('people_id');
         if($end_date){
->>>>>>> 8943e2091607dae14d38cfda2817d43cec92e68e
             $documents = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('name', 'LIKE', "%{$name}%")
-         //   ->where('countries', 'LIKE', "%$countries%")
-         //   ->where('person', 'LIKE', "%$people%")
+            ->where('countries', 'LIKE', "%$countries%")
+          ->where('person', 'LIKE', "%$people%")
             ->where('scope', 'LIKE', "%{$scope}%")
             ->where('legalInstrument', 'LIKE', "%{$legalInstrument}%")
             ->where('instrumentType', 'LIKE', "%{$instrumentType}%")
@@ -641,13 +636,8 @@ class FinalRegisterController extends Controller
             
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
-<<<<<<< HEAD
-           // .'<w:br />'.'Objetivo: '.iconv('UTF-8','Windows-1252//TRANSLIT',$doc->objective)
-          //  .'<w:br />'.'Objetivo: '.$doc->objective
-=======
             //.'<w:br />'.'Nombre: '.$doc->id
-            //.'<w:br />'.'Objetivo: '.$doc->objective
->>>>>>> 8943e2091607dae14d38cfda2817d43cec92e68e
+            .'<w:br />'.'Objetivo: '.$doc->objective
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
