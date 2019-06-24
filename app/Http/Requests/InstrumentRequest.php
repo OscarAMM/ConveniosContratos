@@ -27,4 +27,10 @@ class InstrumentRequest extends FormRequest
             'name' => 'required',
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nombre del instrumento requerido.',
+        ];
+    }
 }

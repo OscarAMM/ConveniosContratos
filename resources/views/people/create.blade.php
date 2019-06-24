@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-@if(Auth::user()->hasRole('admin'))
+@if(!Auth::guest()&&Auth::user()->hasRole('admin'))
 <div class="container">
     <div class="column-sm-8">
         <div class="card">

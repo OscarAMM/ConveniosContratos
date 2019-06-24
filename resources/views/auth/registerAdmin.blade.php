@@ -12,7 +12,7 @@
 
 <body background=>
 
-    @if(Auth::user()->hasRole('admin'))
+@if(!Auth::guest()&&Auth::user()->hasRole('admin'))
     <div class="gradient">
     <img src="{{asset('images\Edificio_Central.jpg')}}" alt="Edificio-Central">
 </div>

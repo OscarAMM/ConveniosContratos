@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-@if(Auth::user()->hasRole('admin'))
+@if(!Auth::guest()&&Auth::user()->hasRole('admin'))
 @include('people.fragment.info')
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
@@ -20,13 +20,15 @@
                 <!-- inicio form busqueda-->
                 <div class="form-row">
                     <div class="col">
-                    <label for="name" class="col-form-label text-muted"><strong>Nombre</strong> </label>
+                        <label for="name" class="col-form-label text-muted"><strong>Nombre</strong> </label>
                         {{Form::text('name',null,['class'=>'form-control','placeholder'=>'Nombre'])}}
                     </div>
                     <div class="col">
-                    <label for="personType" class="col-form-label text-muted"><strong>Tipo de suscrito</strong> </label>
+                        <label for="personType" class="col-form-label text-muted"><strong>Tipo de suscrito</strong>
+                        </label>
                         <select name="personType" id="personType" class="form-control">
-                            <option><option>
+                            <option>
+                            <option>
                             <option>Persona física</option>
                             <option>Persona moral</option>
                             <option>Institución</option>
@@ -35,15 +37,15 @@
                         </select>
                     </div>
                     <div class="col">
-                    <label for="country" class="col-form-label text-muted"><strong>País</strong> </label>
+                        <label for="country" class="col-form-label text-muted"><strong>País</strong> </label>
                         {{Form::text('country',null,['class'=>'form-control','placeholder'=>'País'])}}
                     </div>
                     <div class="col">
-                    <label for="email" class="col-form-label text-muted"><strong>Correo</strong> </label>
+                        <label for="email" class="col-form-label text-muted"><strong>Correo</strong> </label>
                         {{Form::text('email', null, ['class'=>'form-control', 'placeholder'=>'Correo'])}}
                     </div>
                     <div class="col">
-                    <label for="acronym" class="col-form-label text-muted"><strong>Siglas</strong> </label>
+                        <label for="acronym" class="col-form-label text-muted"><strong>Siglas</strong> </label>
                         {{Form::text('acronym', null, ['class'=>'form-control', 'placeholder'=>'Siglas'])}}
                     </div>
 
@@ -89,7 +91,8 @@
                         <form action="{{route('Person.destroy', $person->id)}}" method="POST">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
-                            <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar?');">Eliminar</button>
+                            <button class="btn btn-danger"
+                                onClick="return confirm('¿Seguro que quiere eliminar?');">Eliminar</button>
                         </form>
                     </td>
                 </tr>
@@ -98,23 +101,21 @@
             </thead>
         </table>
         {!!$people->appends([
-'name'=>$name,'country'=>$country,'personType'=>$personType,'email'=>$email,'acronym'=>$acronym])->links()!!}
+        'name'=>$name,'country'=>$country,'personType'=>$personType,'email'=>$email,'acronym'=>$acronym])->links()!!}
 
     </div>
 </div>
 
 </div>
 @else
+<!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h2 class="text-muted">Acceso restringido</h2>
-        </div>
-        <div class="card-body">
-            <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún cambio.
-            </h4>
-        </div>
-
+    <div class="jumbotron" style="background-color:#0F3558;">
+        <h1 class="text-muted"><strong>¡ACCESO RESTRINGIDO!</strong> </h1>
+        <hr style="border:2px solid #BF942D">
+        <h4 class="text-muted">¡El usuario NO tiene permiso! Si desea realizar algo,
+            contacte a
+            su administrador.</h4>
     </div>
 </div>
 @endif

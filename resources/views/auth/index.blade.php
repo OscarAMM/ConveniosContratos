@@ -6,7 +6,7 @@
 <!--  <h2 class="font-weight-bold text-center"> USUARIOS
     <a href="{{ route('admin.index') }}" class ="btn btn-primary pull-right">Nuevo</a>
     </h2> -->
-@if(Auth::user()->hasRole('admin'))
+    @if(!Auth::guest()&&Auth::user()->hasRole('admin'))
 <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
 @include('auth.fragment.info')
 <div class="container">

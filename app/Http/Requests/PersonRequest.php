@@ -29,4 +29,12 @@ class PersonRequest extends FormRequest
             'personType'=>'required'
         ];
     }
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nombre del documento requerido.',
+            'country.required' => 'Nombre del país requerido',
+            'personType.required' => 'Tipo de persona requerido.'
+        ];
+    }
 }

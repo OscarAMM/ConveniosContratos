@@ -180,278 +180,276 @@
     </div>
 </div>
 <!-------------------------------------------- DOCUMENTS TABLE --------------------------------------------->
-<div class="container">
-    <nav>
-        <div class="nav nav-tabs" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
-                aria-controls="nav-home" aria-selected="true">Todos</a>
-            <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
-                aria-controls="nav-profile" aria-selected="false">Vigentes</a>
-            <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
-                aria-controls="nav-contact" aria-selected="false">No vigentes</a>
-            <a class="nav-item nav-link" id="nav-others-tab" data-toggle="tab" href="#nav-others" role="tab"
-                aria-controls="nav-others" aria-selected="false">Otros</a>
-        </div>
-    </nav>
-    <div class="table responsive ">
 
-        <!--TODOS---------------->
-        <div class="tab-content" id="nav-tabContent">
-            <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Num. Registro</th>
-                            <th scope="col">Nombre completo</th>
-                            <th scope="col">Instrumento jurídico</th>
-                            <th scope="col">Tipo de instrumento</th>
-                            <th scope="col">Objetivo</th>
-                            <th scope="col">Ámbito</th>
-                            <th scope="col">Fecha de firma</th>
-                            <th scope="col">Fecha de fin</th>
-                            <th scope="col">Fecha de sesión</th>
-                            <th scope="col">Partes</th>
-                            <th colspan="3" scope="col">&nbsp; Opciones</th>
-                        </tr>
-                    <tbody>
-
-                        <!-----------------------------FOREACH SEARCH ------------------------------->
-                        @foreach($documents as $document)
-                        <tr>
-                            <td>{{$document->id}}</td>
-                            <td>{{$document->name}}</td>
-                            <td>{{$document->legalInstrument}}</td>
-                            <td>{{$document->instrumentType}}</td>
-                            <td>{{$document->objective}}</td>
-                            <td>{{$document->scope}}</td>
-                            <td>{{$document->signature}}</td>
-                            <td>{{$document->end_date}}</td>
-                            <td>{{$document->session}}</td>
-
-                            <td>@foreach($document->getPeople as
-                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
-                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
-
-                            </td>
-                            <td> @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-
-                                <a href="{{route('FinalRegister.edit', $document->id)}}"
-                                    class="btn botonAmarillo">Editar</a>
-
-                            </td>
-
-                            <td>
-                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
-                                </form>
-                                @endif
-                            </td>
-                        </tr>
-                        @endforeach
-                        
-                    </tbody>
-                    
-                    </thead>
-                    
-                </table>
-                {!!$documents->appends([
-'name'=>$name,'countries'=>$countries,'scope'=>$scope,
-'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
-'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
-'signature' => $signature,'session'=>$session])->links()!!}
-            </div>
-            <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
-                <!---------------VIGENTES------------------------>
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Num. Registro</th>
-                            <th>Nombre completo</th>
-                            <th>Instrumento jurídico</th>
-                            <th>Tipo de instrumento</th>
-                            <th>Objetivo</th>
-                            <th>Ámbito</th>
-                            <th>Fecha de firma</th>
-                            <th>Fecha de fin</th>
-                            <th>Fecha de sesión</th>
-                            <th>Partes</th>
-                            <th colspan="3">&nbsp; Opciones</th>
-                        </tr>
-                    <tbody>
-
-                        <!-----------------------------FOREACH SEARCH ------------------------------->
-                        @foreach($documents2 as $document)
-                        @if($document->observation=='') <tr>
-                            <td>{{$document->registerNumber}}</td>
-                            <td>{{$document->name}}</td>
-                            <td>{{$document->legalInstrument}}</td>
-                            <td>{{$document->instrumentType}}</td>
-                            <td>{{$document->objective}}</td>
-                            <td>{{$document->scope}}</td>
-                            <td>{{$document->signature}}</td>
-                            <td>{{$document->end_date}}</td>
-                            <td>{{$document->session}}</td>
-
-                            <td>@foreach($document->getPeople as
-                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
-                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
-                            </td>
-                            </td>
-                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
-                                    class="btn botonAmarillo">Editar</a>
-                            </td>
-                            <td>
-                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">x</button>
-                                </form>
-                            </td>
-                            @endif
-                        </tr>
-                        @endif
-                        @endforeach
-                    </tbody>
-                    </thead>
-                </table>
-                {!!$documents2->appends([
-'name'=>$name,'countries'=>$countries,'scope'=>$scope,
-'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
-'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
-'signature' => $signature,'session'=>$session])->links()!!}
-            </div>
-            <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
-                <!------------------ NO VIGENTES --------------------->
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Num. Registro</th>
-                            <th>Nombre completo</th>
-                            <th>Instrumento jurídico</th>
-                            <th>Tipo de instrumento</th>
-                            <th>Objetivo</th>
-                            <th>Ámbito</th>
-                            <th>Fecha de firma</th>
-                            <th>Fecha de fin</th>
-                            <th>Fecha de sesión</th>
-                            <th>Partes</th>
-                            <th colspan="3">&nbsp; Opciones</th>
-                        </tr>
-                    <tbody>
-
-                        <!-----------------------------FOREACH SEARCH ------------------------------->
-                        @foreach($documents3 as $document)
-                        @if($document->observation=='') <tr>
-                            <td>{{$document->registerNumber}}</td>
-                            <td>{{$document->name}}</td>
-                            <td>{{$document->legalInstrument}}</td>
-                            <td>{{$document->instrumentType}}</td>
-                            <td>{{$document->objective}}</td>
-                            <td>{{$document->scope}}</td>
-                            <td>{{$document->signature}}</td>
-                            <td>{{$document->end_date}}</td>
-                            <td>{{$document->session}}</td>
-
-                            <td>@foreach($document->getPeople as
-                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
-                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
-                            </td>
-                            </td>
-                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
-                                    class="btn botonAmarillo">Editar</a>
-                            </td>
-                            <td>
-                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
-                                </form>
-                            </td>
-                            @endif
-                        </tr>
-                        @endif
-                        @endforeach
-                    </tbody>
-                    </thead>
-                </table>
-                {!!$documents3->appends([
-'name'=>$name,'countries'=>$countries,'scope'=>$scope,
-'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
-'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
-'signature' => $signature,'session'=>$session])->links()!!}
-            </div>
-            <div class="tab-pane fade" id="nav-others" role="tabpanel" aria-labelledby="nav-others-tab">
-                <!------------------ NO VIGENTES --------------------->
-                <table class="table table-striped table-bordered">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th>Num. Registro</th>
-                            <th>Nombre completo</th>
-                            <th>Instrumento jurídico</th>
-                            <th>Tipo de instrumento</th>
-                            <th>Objetivo</th>
-                            <th>Ámbito</th>
-                            <th>Fecha de firma</th>
-                            <th>Fecha de fin</th>
-                            <th>Fecha de sesión</th>
-                            <th>Partes</th>
-                            <th colspan="3">&nbsp; Opciones</th>
-                        </tr>
-                    <tbody>
-
-                        <!-----------------------------FOREACH SEARCH ------------------------------->
-                        @foreach($documents4 as $document)
-                        @if(!empty($document->observation)) <tr>
-                            <td>{{$document->registerNumber}}</td>
-                            <td>{{$document->name}}</td>
-                            <td>{{$document->legalInstrument}}</td>
-                            <td>{{$document->instrumentType}}</td>
-                            <td>{{$document->objective}}</td>
-                            <td>{{$document->scope}}</td>
-                            <td>{{$document->signature}}</td>
-                            <td>{{$document->end_date}}</td>
-                            <td>{{$document->session}}</td>
-
-                            <td>@foreach($document->getPeople as
-                                $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
-                            <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
-                            </td>
-                            </td>
-                            @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
-                            <td><a href="{{route('FinalRegister.edit', $document->id)}}"
-                                    class="btn botonAmarillo">Editar</a>
-                            </td>
-                            <td>
-                                <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
-                                    {{csrf_field()}}
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <button class="btn btn-danger"
-                                        onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
-                                </form>
-                            </td>
-                            @endif
-                        </tr>
-                        @endif
-                        @endforeach
-                    </tbody>
-                    </thead>
-                </table>
-                {!!$documents4->appends([
-'name'=>$name,'countries'=>$countries,'scope'=>$scope,
-'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
-'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
-'signature' => $signature,'session'=>$session])->links()!!}
-            </div>
-        </div>
-
+<nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab"
+            aria-controls="nav-home" aria-selected="true">Todos</a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab"
+            aria-controls="nav-profile" aria-selected="false">Vigentes</a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab"
+            aria-controls="nav-contact" aria-selected="false">No vigentes</a>
+        <a class="nav-item nav-link" id="nav-others-tab" data-toggle="tab" href="#nav-others" role="tab"
+            aria-controls="nav-others" aria-selected="false">Otros</a>
     </div>
+</nav>
+<div class="table responsive ">
+    <!--TODOS---------------->
+    <div class="tab-content" id="nav-tabContent">
+        <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Num. Registro</th>
+                        <th scope="col">Nombre completo</th>
+                        <th scope="col">Instrumento jurídico</th>
+                        <th scope="col">Tipo de instrumento</th>
+                        <th scope="col">Objetivo</th>
+                        <th scope="col">Ámbito</th>
+                        <th scope="col">Fecha de firma</th>
+                        <th scope="col">Fecha de fin</th>
+                        <th scope="col">Fecha de sesión</th>
+                        <th scope="col">Partes</th>
+                        <th colspan="3" scope="col">&nbsp; Opciones</th>
+                    </tr>
+                <tbody>
+
+                    <!-----------------------------FOREACH SEARCH ------------------------------->
+                    @foreach($documents as $document)
+                    <tr>
+                        <td>{{$document->id}}</td>
+                        <td>{{$document->name}}</td>
+                        <td>{{$document->legalInstrument}}</td>
+                        <td>{{$document->instrumentType}}</td>
+                        <td>{{$document->objective}}</td>
+                        <td>{{$document->scope}}</td>
+                        <td>{{$document->signature}}</td>
+                        <td>{{$document->end_date}}</td>
+                        <td>{{$document->session}}</td>
+
+                        <td>@foreach($document->getPeople as
+                            $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                        <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+
+                        </td>
+                        <td> @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+
+                            <a href="{{route('FinalRegister.edit', $document->id)}}"
+                                class="btn botonAmarillo">Editar</a>
+
+                        </td>
+
+                        <td>
+                            <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger"
+                                    onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
+                            </form>
+                            @endif
+                        </td>
+                    </tr>
+                    @endforeach
+
+                </tbody>
+
+                </thead>
+
+            </table>
+            {!!$documents->appends([
+            'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+            'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+            'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+            'signature' => $signature,'session'=>$session])->links()!!}
+        </div>
+        <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+            <!---------------VIGENTES------------------------>
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Num. Registro</th>
+                        <th>Nombre completo</th>
+                        <th>Instrumento jurídico</th>
+                        <th>Tipo de instrumento</th>
+                        <th>Objetivo</th>
+                        <th>Ámbito</th>
+                        <th>Fecha de firma</th>
+                        <th>Fecha de fin</th>
+                        <th>Fecha de sesión</th>
+                        <th>Partes</th>
+                        <th colspan="3">&nbsp; Opciones</th>
+                    </tr>
+                <tbody>
+
+                    <!-----------------------------FOREACH SEARCH ------------------------------->
+                    @foreach($documents2 as $document)
+                    @if($document->observation=='') <tr>
+                        <td>{{$document->registerNumber}}</td>
+                        <td>{{$document->name}}</td>
+                        <td>{{$document->legalInstrument}}</td>
+                        <td>{{$document->instrumentType}}</td>
+                        <td>{{$document->objective}}</td>
+                        <td>{{$document->scope}}</td>
+                        <td>{{$document->signature}}</td>
+                        <td>{{$document->end_date}}</td>
+                        <td>{{$document->session}}</td>
+
+                        <td>@foreach($document->getPeople as
+                            $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                        <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                        </td>
+                        </td>
+                        @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                        <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                                class="btn botonAmarillo">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger"
+                                    onClick="return confirm('¿Seguro que quiere eliminar este documento?');">x</button>
+                            </form>
+                        </td>
+                        @endif
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+                </thead>
+            </table>
+            {!!$documents2->appends([
+            'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+            'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+            'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+            'signature' => $signature,'session'=>$session])->links()!!}
+        </div>
+        <div class="tab-pane fade" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">
+            <!------------------ NO VIGENTES --------------------->
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Num. Registro</th>
+                        <th>Nombre completo</th>
+                        <th>Instrumento jurídico</th>
+                        <th>Tipo de instrumento</th>
+                        <th>Objetivo</th>
+                        <th>Ámbito</th>
+                        <th>Fecha de firma</th>
+                        <th>Fecha de fin</th>
+                        <th>Fecha de sesión</th>
+                        <th>Partes</th>
+                        <th colspan="3">&nbsp; Opciones</th>
+                    </tr>
+                <tbody>
+
+                    <!-----------------------------FOREACH SEARCH ------------------------------->
+                    @foreach($documents3 as $document)
+                    @if($document->observation=='') <tr>
+                        <td>{{$document->registerNumber}}</td>
+                        <td>{{$document->name}}</td>
+                        <td>{{$document->legalInstrument}}</td>
+                        <td>{{$document->instrumentType}}</td>
+                        <td>{{$document->objective}}</td>
+                        <td>{{$document->scope}}</td>
+                        <td>{{$document->signature}}</td>
+                        <td>{{$document->end_date}}</td>
+                        <td>{{$document->session}}</td>
+
+                        <td>@foreach($document->getPeople as
+                            $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                        <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                        </td>
+                        </td>
+                        @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                        <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                                class="btn botonAmarillo">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger"
+                                    onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
+                            </form>
+                        </td>
+                        @endif
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+                </thead>
+            </table>
+            {!!$documents3->appends([
+            'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+            'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+            'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+            'signature' => $signature,'session'=>$session])->links()!!}
+        </div>
+        <div class="tab-pane fade" id="nav-others" role="tabpanel" aria-labelledby="nav-others-tab">
+            <!------------------ NO VIGENTES --------------------->
+            <table class="table table-striped table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Num. Registro</th>
+                        <th>Nombre completo</th>
+                        <th>Instrumento jurídico</th>
+                        <th>Tipo de instrumento</th>
+                        <th>Objetivo</th>
+                        <th>Ámbito</th>
+                        <th>Fecha de firma</th>
+                        <th>Fecha de fin</th>
+                        <th>Fecha de sesión</th>
+                        <th>Partes</th>
+                        <th colspan="3">&nbsp; Opciones</th>
+                    </tr>
+                <tbody>
+
+                    <!-----------------------------FOREACH SEARCH ------------------------------->
+                    @foreach($documents4 as $document)
+                    @if(!empty($document->observation)) <tr>
+                        <td>{{$document->registerNumber}}</td>
+                        <td>{{$document->name}}</td>
+                        <td>{{$document->legalInstrument}}</td>
+                        <td>{{$document->instrumentType}}</td>
+                        <td>{{$document->objective}}</td>
+                        <td>{{$document->scope}}</td>
+                        <td>{{$document->signature}}</td>
+                        <td>{{$document->end_date}}</td>
+                        <td>{{$document->session}}</td>
+
+                        <td>@foreach($document->getPeople as
+                            $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                        <td><a href="{{route('FinalRegister.show', $document->id)}}" class="btn botonAzul">Ver</a>
+                        </td>
+                        </td>
+                        @if(!Auth::guest()&&(Auth::user()->hasRole('admin')))
+                        <td><a href="{{route('FinalRegister.edit', $document->id)}}"
+                                class="btn botonAmarillo">Editar</a>
+                        </td>
+                        <td>
+                            <form action="{{route('FinalRegister.destroy', $document->id)}}" method="POST">
+                                {{csrf_field()}}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <button class="btn btn-danger"
+                                    onClick="return confirm('¿Seguro que quiere eliminar este documento?');">X</button>
+                            </form>
+                        </td>
+                        @endif
+                    </tr>
+                    @endif
+                    @endforeach
+                </tbody>
+                </thead>
+            </table>
+            {!!$documents4->appends([
+            'name'=>$name,'countries'=>$countries,'scope'=>$scope,
+            'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+            'objective'=>$objective,'end_date'=>$end_date,'people_id'=>$people,
+            'signature' => $signature,'session'=>$session])->links()!!}
+        </div>
+    </div>
+
 </div>
 @else
 <!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
@@ -459,7 +457,7 @@
     <div class="jumbotron" style="background-color:#0F3558;">
         <h1 class="text-muted"><strong>¡ACCESO RESTRINGIDO!</strong> </h1>
         <hr style="border:2px solid #BF942D">
-        <h4 class="text-muted">¡El usuario {{Auth::user()->name}} NO tiene permiso! Si desea realizar algo,
+        <h4 class="text-muted">¡El usuario NO tiene permiso! Si desea realizar algo,
             contacte a
             su administrador.</h4>
     </div>

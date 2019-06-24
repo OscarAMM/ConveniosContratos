@@ -184,7 +184,19 @@
         </div>
     </div>
 </div>
+@else
+<!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
+<div class="container">
+    <div class="jumbotron" style="background-color:#0F3558;">
+        <h1 class="text-muted"><strong>¡ACCESO RESTRINGIDO!</strong> </h1>
+        <hr style="border:2px solid #BF942D">
+        <h4 class="text-muted">¡El usuario NO tiene permiso! Si desea realizar algo,
+            contacte a
+            su administrador.</h4>
+    </div>
+</div>
 @endif
+
 @endsection
 
 <!--MODAL FOR THE LEGAL INSTRUMENT -->

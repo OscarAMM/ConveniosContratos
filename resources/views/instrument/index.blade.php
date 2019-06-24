@@ -1,5 +1,6 @@
 @extends('layouts.app')
 @section('content')
+@if(!Auth::guest()&&Auth::user()->hasRole('admin'))
 <script src="{{asset('js/popup.js')}}"></script>
 <div class="container">
     <div class="jumbotron" style="background-color:#0F3558;">
@@ -32,9 +33,10 @@
                                 class="btn botonAmarillo">Editar</a></td>
                         <td>
                             <form action="{{route('LegalInstrument.destroy', $instrument->id)}}" method="POST">
-                                
+
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar este instrumento?');">Eliminar</button>
+                                <button class="btn btn-danger"
+                                    onClick="return confirm('¿Seguro que quiere eliminar este instrumento?');">Eliminar</button>
                             </form>
                         </td>
                     </tr>
@@ -47,5 +49,17 @@
         </div>
     </div>
 </div>
+@else
+<!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
+<div class="container">
+    <div class="jumbotron" style="background-color:#0F3558;">
+        <h1 class="text-muted"><strong>¡ACCESO RESTRINGIDO!</strong> </h1>
+        <hr style="border:2px solid #BF942D">
+        <h4 class="text-muted">¡El usuario NO tiene permiso! Si desea realizar algo,
+            contacte a
+            su administrador.</h4>
+    </div>
+</div>
+@endif
 
 @endsection

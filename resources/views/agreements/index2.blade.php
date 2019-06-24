@@ -113,7 +113,8 @@
                         <td>{{$agreement->instrumentType}}</td>
                         <td>{{$agreement->reception}}</td>
                         <td>{{$agreement->objective}}</td>
-                        <td>@foreach($agreement->getPeople as $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
+                        <td>@foreach($agreement->getPeople as
+                            $person){{$person->name.' - '.$person->country.'; '}}@endforeach</td>
                         <td>
                         <td><a href="{{route('Agreement.show', $agreement ->id)}}" class="btn botonAzul">Ver</a></td>
                         <td><a href="{{route('Forum.Agreement', $agreement->id)}}" class="btn boton ">Revisión</a></td>
@@ -126,7 +127,8 @@
                             <form action="{{route('Agreement.destroy', $agreement->id)}}" method="POST">
                                 {{csrf_field()}}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <button class="btn btn-danger" onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
+                                <button class="btn btn-danger"
+                                    onClick="return confirm('¿Seguro que quiere eliminar este documento?');">Eliminar</button>
                             </form>
                         </td>
                         @endif
@@ -137,23 +139,20 @@
                 </thead>
             </table>
             {!!$agreements->appends([
-                    'name'=>$name,'countries'=>$countries,'reception'=>$reception,
-                    'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
-                    'objective'=>$objective,'people_id'=>$people
-                    ])->links()!!}
+            'name'=>$name,'countries'=>$countries,'reception'=>$reception,
+            'legalInstrument'=>$legalInstrument,'instrumentType'=>$instrumentType,
+            'objective'=>$objective,'people_id'=>$people
+            ])->links()!!}
         </div>
         @else
+        <!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
         <div class="container">
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="text-muted">Acceso restringido</h2>
-                </div>
-                <div class="card-body">
-                    <h4>EL Usuario no tiene acceso a esta área, comuníquese con su administrador si desea realizar algún
-                        cambio.
-                    </h4>
-                </div>
-
+            <div class="jumbotron" style="background-color:#0F3558;">
+                <h1 class="text-muted"><strong>¡ACCESO RESTRINGIDO!</strong> </h1>
+                <hr style="border:2px solid #BF942D">
+                <h4 class="text-muted">¡El usuario NO tiene permiso! Si desea realizar algo,
+                    contacte a
+                    su administrador.</h4>
             </div>
         </div>
         @endif

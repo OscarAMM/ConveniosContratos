@@ -33,10 +33,10 @@ class UserRequest extends FormRequest
     public function messages()
 {
   return [
-    'name.required' => 'Olvidaste el nombre del usuario',
-    'email.required' => 'Olvidaste el email del usuario',
-    'password.min' => 'El password debe tener como mínimo 6 caracteres',
-    'password.required' => 'Ingresa tu contraseña',
+    'name.required' => 'Nombre de usuario requerido.',
+    'email.required' => 'Email requerido o se encuentra registrado.',
+    'password.min' => 'La contraseña debe tener como mínimo 6 caracteres',
+    'password.required' => 'Contraseña requerida. ',
     'password_confirmation.required' => 'Confirma tu contraseña',
     'password_confirmation.min' => 'El password debe tener como mínimo 6 caracteres',
     'password_confirmation.same'=>'Las contraseñas no coinciden'

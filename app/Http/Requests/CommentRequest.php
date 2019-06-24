@@ -31,8 +31,8 @@ class CommentRequest extends FormRequest
     public function messages()
     {
         return [
-            'topic.required' => 'Ingresa el asunto del comentario',
-            'comment.required' => 'Ingresa un comentario',
+            'topic.required' => 'Asunto del comentario requerido.',
+            'comment.required' => 'Comentario requerido.',
          
         ];
     }
