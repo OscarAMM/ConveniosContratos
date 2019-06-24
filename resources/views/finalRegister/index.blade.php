@@ -131,7 +131,12 @@
                     </div>
                     <div class="col-label-form" style="margin-right:5px">
                         <label for="scope" class="col-form-label text-muted">Ámbito</label>
-                        {{Form::text('scope',null,['class'=>'form-control','placeholder'=>'Ámbito'])}}
+                        <select name="scope" id="scope" class="form-control">
+                        <option></option>
+                        <option>Estatal</option>
+                        <option>Nacional</option>
+                        <option>Internacional</option>
+                        </select>
                     </div>
                     <div class="col-label-form" style="margin-right:5px">
                         <label for="name" class="col-form-label text-muted">Instrumento jurídico</label>
