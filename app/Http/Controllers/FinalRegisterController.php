@@ -636,8 +636,8 @@ class FinalRegisterController extends Controller
             
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
-            .'<w:br />'.'Nombre: '.$doc->id
-            .'<w:br />'.'Objetivo: '.$doc->objective
+            //.'<w:br />'.'Nombre: '.$doc->id
+            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -703,7 +703,7 @@ class FinalRegisterController extends Controller
             //campos de los documentos, faltan por añadir
             $docs.=
              '<w:br />'.'Nombre: '.$doc->name
-            //. '<w:br />'.'Objetivo: '.$doc->objective
+            . '<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -765,7 +765,7 @@ class FinalRegisterController extends Controller
             //campos de los documentos, faltan por añadir
             $docs.=
              '<w:br />'.'Nombre: '.$doc->name
-            //. '<w:br />'.'Objetivo: '.$doc->objective
+            . '<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
@@ -829,7 +829,7 @@ class FinalRegisterController extends Controller
             //campos de los documentos, faltan por añadir
             $docs.=
              '<w:br />'.'Nombre: '.$doc->name
-            //. '<w:br />'.'Objetivo: '.$doc->objective
+            . '<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Ámbito: '.$doc->scope
             . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
             . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
