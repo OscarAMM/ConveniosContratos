@@ -168,7 +168,7 @@
         </thead>
     </table>
 </div>
-{{$docs->render()}}
+{!!$docs->appends(['start_signature'=>$start_signature,'end_signature'=>$end_signature,'signature' => $signature,'session'=>$session])->links()!!}
 @else
 <!------------SECOND PAGE - DENIED PAGE ---------------------------------------->
 <div class="container">
