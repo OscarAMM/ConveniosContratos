@@ -28,58 +28,58 @@ class AgreementController extends Controller
         $reception = $request->get('reception');
         $people = $request->get('people_id');
 /*
-        if ($people) {
-            if (str_contains($people, ' - ')) {
-                $splitName = explode(' - ', $request->get('people_id'));
-                $agreements = Person::find($splitName[0])->agreements()
-                    ->where('name', 'LIKE', "%$name%")
-                    ->where('countries', 'LIKE', "%$countries%")
-                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                    ->where('objective', 'LIKE', "%$objective%")
-                    ->where('reception', 'LIKE', "%$reception%")
-                    ->orderBy('id', 'DESC')
-                    ->paginate();
-            } else {
-                $person = Person::where('name', 'LIKE', "%$people%")->first();
-                if (!empty($person)) {
-                    $agreements = $person->agreements()
-                        ->where('name', 'LIKE', "%$name%")
-                        ->where('countries', 'LIKE', "%$countries%")
-                        ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                        ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                        ->where('objective', 'LIKE', "%$objective%")
-                        ->where('reception', 'LIKE', "%$reception%")
-                        ->orderBy('id', 'DESC')
-                        ->paginate();
-                } else {
-                    $agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
-                }
-            }
-        } else {
-            
-            $agreements = Agreement::orderBy('id', 'DESC')
-                ->id($id)
-                ->name($name)
-                ->countries($countries)
-                ->legalInstrument($legalInstrument)
-                ->instrumentType($instrumentType)
-                ->objective($objective)
-                ->reception($reception)
-                ->paginate();
-        }
-*/
-                $agreements = Agreement::orderBy('id', 'DESC')
-                ->id($id)
-                ->name($name)
-                ->countries($countries)
-                ->person($people)
-                ->legalInstrument($legalInstrument)
-                ->instrumentType($instrumentType)
-                ->objective($objective)
-                ->reception($reception)
-                ->paginate();
-        return view('agreements.index', compact('name','reception','countries','legalInstrument','instrumentType','objective','people','agreements'));
+if ($people) {
+if (str_contains($people, ' - ')) {
+$splitName = explode(' - ', $request->get('people_id'));
+$agreements = Person::find($splitName[0])->agreements()
+->where('name', 'LIKE', "%$name%")
+->where('countries', 'LIKE', "%$countries%")
+->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+->where('instrumentType', 'LIKE', "%$instrumentType%")
+->where('objective', 'LIKE', "%$objective%")
+->where('reception', 'LIKE', "%$reception%")
+->orderBy('id', 'DESC')
+->paginate();
+} else {
+$person = Person::where('name', 'LIKE', "%$people%")->first();
+if (!empty($person)) {
+$agreements = $person->agreements()
+->where('name', 'LIKE', "%$name%")
+->where('countries', 'LIKE', "%$countries%")
+->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+->where('instrumentType', 'LIKE', "%$instrumentType%")
+->where('objective', 'LIKE', "%$objective%")
+->where('reception', 'LIKE', "%$reception%")
+->orderBy('id', 'DESC')
+->paginate();
+} else {
+$agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
+}
+}
+} else {
+
+$agreements = Agreement::orderBy('id', 'DESC')
+->id($id)
+->name($name)
+->countries($countries)
+->legalInstrument($legalInstrument)
+->instrumentType($instrumentType)
+->objective($objective)
+->reception($reception)
+->paginate();
+}
+ */
+        $agreements = Agreement::orderBy('id', 'DESC')
+            ->id($id)
+            ->name($name)
+            ->countries($countries)
+            ->person($people)
+            ->legalInstrument($legalInstrument)
+            ->instrumentType($instrumentType)
+            ->objective($objective)
+            ->reception($reception)
+            ->paginate();
+        return view('agreements.index', compact('name', 'reception', 'countries', 'legalInstrument', 'instrumentType', 'objective', 'people', 'agreements'));
     }
     public function index2(Request $request)
     {
@@ -93,56 +93,56 @@ class AgreementController extends Controller
         $people = $request->get('people_id');
 
         /*if ($people) {
-            if (str_contains($people, ' - ')) {
-                $splitName = explode(' - ', $request->get('people_id'));
-                $agreements = Person::find($splitName[0])->agreements()
-                    ->where('name', 'LIKE', "%$name%")
-                    ->where('countries', 'LIKE', "%$countries%")
-                    ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                    ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                    ->where('objective', 'LIKE', "%$objective%")
-                    ->where('reception', 'LIKE', "%$reception%")
-                    ->orderBy('id', 'DESC')
-                    ->paginate();
-            } else {
-                $person = Person::where('name', 'LIKE', "%$people%")->first();
-                if (!empty($person)) {
-                    $agreements = $person->agreements()
-                        ->where('name', 'LIKE', "%$name%")
-                        ->where('countries', 'LIKE', "%$countries%")
-                        ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
-                        ->where('instrumentType', 'LIKE', "%$instrumentType%")
-                        ->where('objective', 'LIKE', "%$objective%")
-                        ->where('reception', 'LIKE', "%$reception%")
-                        ->orderBy('id', 'DESC')
-                        ->paginate();
-                } else {
-                    $agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
-                }
-            }
+        if (str_contains($people, ' - ')) {
+        $splitName = explode(' - ', $request->get('people_id'));
+        $agreements = Person::find($splitName[0])->agreements()
+        ->where('name', 'LIKE', "%$name%")
+        ->where('countries', 'LIKE', "%$countries%")
+        ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+        ->where('instrumentType', 'LIKE', "%$instrumentType%")
+        ->where('objective', 'LIKE', "%$objective%")
+        ->where('reception', 'LIKE', "%$reception%")
+        ->orderBy('id', 'DESC')
+        ->paginate();
+        } else {
+        $person = Person::where('name', 'LIKE', "%$people%")->first();
+        if (!empty($person)) {
+        $agreements = $person->agreements()
+        ->where('name', 'LIKE', "%$name%")
+        ->where('countries', 'LIKE', "%$countries%")
+        ->where('legalInstrument', 'LIKE', "%$legalInstrument%")
+        ->where('instrumentType', 'LIKE', "%$instrumentType%")
+        ->where('objective', 'LIKE', "%$objective%")
+        ->where('reception', 'LIKE', "%$reception%")
+        ->orderBy('id', 'DESC')
+        ->paginate();
+        } else {
+        $agreements = Agreements::where('id', '0')->orderBy('id', 'DESC')->paginate();
+        }
+        }
         } else {
 
-            $agreements = Agreement::orderBy('id', 'DESC')
-                ->id($id)
-                ->name($name)
-                ->countries($countries)
-                ->legalInstrument($legalInstrument)
-                ->instrumentType($instrumentType)
-                ->objective($objective)
-                ->reception($reception)
-                ->paginate();
+        $agreements = Agreement::orderBy('id', 'DESC')
+        ->id($id)
+        ->name($name)
+        ->countries($countries)
+        ->legalInstrument($legalInstrument)
+        ->instrumentType($instrumentType)
+        ->objective($objective)
+        ->reception($reception)
+        ->paginate();
         }*/
         $agreements = Agreement::orderBy('id', 'DESC')
-                ->id($id)
-                ->name($name)
-                ->countries($countries)
-                ->person($people)
-                ->legalInstrument($legalInstrument)
-                ->instrumentType($instrumentType)
-                ->objective($objective)
-                ->reception($reception)
-                ->paginate();
-        return view('agreements.index2', compact('name','reception','countries','legalInstrument','instrumentType','objective','people','agreements'));
+            ->id($id)
+            ->name($name)
+            ->countries($countries)
+            ->person($people)
+            ->legalInstrument($legalInstrument)
+            ->instrumentType($instrumentType)
+            ->objective($objective)
+            ->reception($reception)
+            ->paginate();
+        return view('agreements.index2', compact('name', 'reception', 'countries', 'legalInstrument', 'instrumentType', 'objective', 'people', 'agreements'));
     }
     public function indexPublic(Request $request)
     {
@@ -233,29 +233,29 @@ class AgreementController extends Controller
                 ->attach(User::where('id', $user)->first());
         }
         $agreement->people()->detach();
-        $countries='';
-        $personString='';
-        if($request->people){
+        $countries = '';
+        $personString = '';
+        if ($request->people) {
             foreach ($people as $person) {
                 $agreement->people()
                     ->attach(Person::where('id', $person)->first());
-                $personActive=Person::find($person);
-                $countries.=$personActive->country.' ; ';
-                $personString.=$personActive->id.' - '.$personActive->name.' ; ';
+                $personActive = Person::find($person);
+                $countries .= $personActive->country . ' ; ';
+                $personString .= $personActive->id . ' - ' . $personActive->name . ' ; ';
             }
         }
-        
+
         if ($request->people_id) {
             $splitName = explode(' - ', $request->people_id);
             $agreement->people()
                 ->attach(Person::where('id', $splitName[0])->first());
-            $personActive=Person::find($splitName[0]);
-            $countries.=$personActive->country.' ; ';
-            $personString.=$personActive->id.' - '.$personActive->name.' ; ';
+            $personActive = Person::find($splitName[0]);
+            $countries .= $personActive->country . ' ; ';
+            $personString .= $personActive->id . ' - ' . $personActive->name . ' ; ';
 
         }
-        $agreement->countries=$countries;
-        $agreement->person=$personString;
+        $agreement->countries = $countries;
+        $agreement->person = $personString;
         $agreement->update();
         $file = $request->file('file');
         if ($file) {
@@ -267,9 +267,8 @@ class AgreementController extends Controller
             $file_Name->save();
             //Convenio
             $agreement->files()
-            ->attach(FileAgreement::where('id', $file_Name->id)->first());
+                ->attach(FileAgreement::where('id', $file_Name->id)->first());
         }
-        
 
         return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido actualizado');
     }
@@ -306,25 +305,25 @@ class AgreementController extends Controller
                 $message = " Se le ha asignado el documento " . $request->name . ", cuenta con 5 días para su revisión, desde " . $agreement->start_date->format('d-m-y') . " hasta " . $agreement->end_date->format('d-m-y');
                 Mail::to($email)->send(new SendEmail($subject, $message));
             }
-           
+
             //agregando partes
             $acturl = urldecode($request->ListaPro); //decodifico el JSON
             $people = json_decode($acturl);
-            $countries='';
-            $personString='';
-            $agreement->countries=$countries;
-            $agreement->person=$personString;
+            $countries = '';
+            $personString = '';
+            $agreement->countries = $countries;
+            $agreement->person = $personString;
             $agreement->update();
             foreach ($people as $peopleSelected) {
                 $splitPerson = explode(' - ', $peopleSelected->id_pro);
                 $agreement->people()
                     ->attach(Person::where('id', $splitPerson[0])->first());
-                    $personActive=Person::find($splitPerson[0]);
-                $countries.=$personActive->country.' ; ';
-                $personString.=$personActive->id.' - '.$personActive->name.' ; ';
+                $personActive = Person::find($splitPerson[0]);
+                $countries .= $personActive->country . ' ; ';
+                $personString .= $personActive->id . ' - ' . $personActive->name . ' ; ';
             }
-            $agreement->countries=$countries;
-            $agreement->person=$personString;
+            $agreement->countries = $countries;
+            $agreement->person = $personString;
             $agreement->update();
         }
         $file = $request->file('file');
@@ -337,7 +336,7 @@ class AgreementController extends Controller
             $file_Name->save();
             //Convenio
             $agreement->files()
-            ->attach(FileAgreement::where('id', $file_Name->id)->first());
+                ->attach(FileAgreement::where('id', $file_Name->id)->first());
         }
         return redirect()->route('Agreement.index')->with('info', 'El Documento ' . $agreement->name . ' ha sido agregado');
     }
