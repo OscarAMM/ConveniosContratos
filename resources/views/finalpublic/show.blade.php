@@ -61,10 +61,12 @@
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Archivos</h5>
-
+                        @foreach($files as $file)
                         <ul>
                             <a href="{{route('document.download',$file->id)}}">{{$file->name}}</a>
                         </ul>
+                        @endforeach
+
 
                     </li>
                     <li class="list-group-item">
