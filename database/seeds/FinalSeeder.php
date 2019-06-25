@@ -112,7 +112,7 @@ class FinalSeeder extends Seeder
                     $document->observation=iconv('ISO-8859-1','UTF-8//IGNORE',$splitName[20]);
                 }
                 if (!empty($splitName[14])) {
-                    if ($splitName[13]=='yes') {
+                    if ($splitName[14]=='yes') {
                         $document->scope='Nacional';
                     }else{
                         $document->scope='Internacional';
