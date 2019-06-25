@@ -20,7 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
+    <link rel="stylesheet" href="css\proyect.css">
     <link href="css\app.css" rel="stylesheet">
 </head>
 
