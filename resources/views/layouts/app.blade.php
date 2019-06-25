@@ -20,8 +20,8 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet" type="text/css">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="css\proyect.css">
-    <link href="css\app.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset('css\proyect.css')}}">
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 </head>
 
 <body>
@@ -111,7 +111,7 @@
         @yield('content')
     </main>
     @yield('scripts')
-    <script src="vendors\ckeditor\ckeditor.js"></script>
+    <script src="{{asset('vendors\ckeditor\ckeditor.js')}}"></script>
 
 </body>
 
