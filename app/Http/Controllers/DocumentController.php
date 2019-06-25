@@ -366,11 +366,16 @@ class DocumentController extends Controller
         $documents = '';
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
+            if(empty($doc->end_date)){
+                $cadena='Observación: '.$doc->observation;
+            }else{
+                $cadena='Fecha de fin: '.$doc->end_date;
+            }
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
              .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
              .'<w:br />'.'Fecha de firma: '.$doc->signature
-             .'<w:br />'.'Fecha de fin: '.$doc->end_date
+             .'<w:br />'.$cadena
             .'<w:br />';
         }
         $template->setValue('documents', $documents);
@@ -395,11 +400,17 @@ class DocumentController extends Controller
         $documents = '';
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
+            if(empty($doc->end_date)){
+                $cadena='Observación: '.$doc->observation;
+            }else{
+                $cadena='Fecha de fin: '.$doc->end_date;
+            }
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
              .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
              .'<w:br />'.'Fecha de firma: '.$doc->signature
-             .'<w:br />'.'Fecha de fin: '.$doc->end_date
+             //.'<w:br />'.'Fecha de fin: '.$doc->end_date
+             .'<w:br />'.$cadena
             .'<w:br />';
         }
         $template->setValue('documents', $documents);
@@ -424,11 +435,17 @@ class DocumentController extends Controller
         $documents = '';
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
+            if(empty($doc->end_date)){
+                $cadena='Observación: '.$doc->observation;
+            }else{
+                $cadena='Fecha de fin: '.$doc->end_date;
+            }
             $documents.=
              '<w:br />'.'Nombre: '.$doc->name
              .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
              .'<w:br />'.'Fecha de firma: '.$doc->signature
-             .'<w:br />'.'Fecha de fin: '.$doc->end_date
+             //.'<w:br />'.'Fecha de fin: '.$doc->end_date
+             .'<w:br />'.$cadena
             .'<w:br />';
         }
         $template->setValue('documents', $documents);

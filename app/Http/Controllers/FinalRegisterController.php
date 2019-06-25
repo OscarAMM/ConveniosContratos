@@ -626,30 +626,29 @@ class FinalRegisterController extends Controller
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Registros Finales');
         $docs = '';
+        $cont=1;
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
-            /*$personString='';
+            $personString='';
             $document=FinalRegister::find($doc->id);
             foreach($document->getPeople as $person){
-                $personString.=$person->name.' ; ';
-            }*/
+                $personString.='<w:br />'.$person->name;
+            }
+            if(empty($doc->end_date)){
+                $cadena='Observación: '.$doc->observation;
+            }else{
+                $cadena='Fecha de fin: '.$doc->end_date;
+            }
             
             $docs.=
-            '<w:br />'.'Nombre: '.$doc->name
-            .'<w:br />'.'Nombre: '.$doc->id
-            //.'<w:br />'.'Nombre: '.$doc->id
+            '<w:br />'.$cont.' .- '.$doc->name
+            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Ámbito: '.$doc->scope
-            . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
-            . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
-            //. '<w:br />'.'Partes: '.$personString
-            //. '<w:br />'.'Países: '.$doc->countries
             . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
-            . '<w:br />'.'Fecha de fin: '.$doc->end_date
-            . '<w:br />'.'Observación: '.$doc->observation
+            .'<w:br />'.$cadena
             .'<w:br />';
+            $cont=$cont+1;
         }
         $template->setValue('documents', $docs);
         $template->saveAs('reportsWord/'.'RegistrosFinales.docx');
@@ -700,20 +699,29 @@ class FinalRegisterController extends Controller
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Registros Finales Vigentes');
         $docs = '';
+        $cont=1;
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
+            $personString='';
+            $document=FinalRegister::find($doc->id);
+            foreach($document->getPeople as $person){
+                $personString.='<w:br />'.$person->name;
+            }
+            if(empty($doc->end_date)){
+                $cadena='Observación: '.$doc->observation;
+            }else{
+                $cadena='Fecha de fin: '.$doc->end_date;
+            }
+            
             $docs.=
-             '<w:br />'.'Nombre: '.$doc->name
-            . '<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Ámbito: '.$doc->scope
-            . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
-            . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
+            '<w:br />'.$cont.' .- '.$doc->name
+            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
+            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
-            . '<w:br />'.'Fecha de fin: '.$doc->end_date
-            . '<w:br />'.'Observación: '.$doc->observation
+            .'<w:br />'.$cadena
             .'<w:br />';
+            $cont=$cont+1;
         }
         $template->setValue('documents', $docs);
         $template->saveAs('reportsWord/'.'Registros Finales Vigentes.docx');
@@ -762,20 +770,29 @@ class FinalRegisterController extends Controller
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Registros Finales No Vigentes');
         $docs = '';
+        $cont=1;
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
+            $personString='';
+            $document=FinalRegister::find($doc->id);
+            foreach($document->getPeople as $person){
+                $personString.='<w:br />'.$person->name;
+            }
+            if(empty($doc->end_date)){
+                $cadena='Observación: '.$doc->observation;
+            }else{
+                $cadena='Fecha de fin: '.$doc->end_date;
+            }
+            
             $docs.=
-             '<w:br />'.'Nombre: '.$doc->name
-            . '<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Ámbito: '.$doc->scope
-            . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
-            . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
+            '<w:br />'.$cont.' .- '.$doc->name
+            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
+            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
-            . '<w:br />'.'Fecha de fin: '.$doc->end_date
-            . '<w:br />'.'Observación: '.$doc->observation
+            .'<w:br />'.$cadena
             .'<w:br />';
+            $cont=$cont+1;
         }
         $template->setValue('documents', $docs);
         $template->saveAs('reportsWord/'.'Registros Finales No Vigentes.docx');
@@ -826,21 +843,29 @@ class FinalRegisterController extends Controller
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Otros Registros Finales');
         $docs = '';
+        $cont=1;
         foreach ($documents as $doc) {
             //campos de los documentos, faltan por añadir
+            $personString='';
+            $document=FinalRegister::find($doc->id);
+            foreach($document->getPeople as $person){
+                $personString.='<w:br />'.$person->name;
+            }
+            if(empty($doc->end_date)){
+                $cadena='Observación: '.$doc->observation;
+            }else{
+                $cadena='Fecha de fin: '.$doc->end_date;
+            }
+            
             $docs.=
-             '<w:br />'.'Nombre: '.$doc->name
-            . '<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Ámbito: '.$doc->scope
-            . '<w:br />'.'Instrumento legal: '.$doc->legalInstrument
-            . '<w:br />'.'Tipo de instrumento: '.$doc->instrumentType
+            '<w:br />'.$cont.' .- '.$doc->name
+            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
+            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de sesión: '.$doc->session
             . '<w:br />'.'Fecha de inicio: '.$doc->start_date
-            . '<w:br />'.'Fecha de fin: '.$doc->end_date
-            . '<w:br />'.'Observación: '.$doc->observation
-
+            .'<w:br />'.$cadena
             .'<w:br />';
+            $cont=$cont+1;
         }
         $template->setValue('documents', $docs);
         $template->saveAs('reportsWord/'.'Otros Registros Finales.docx');
