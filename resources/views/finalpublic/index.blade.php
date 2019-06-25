@@ -36,8 +36,8 @@
 
 
 
-                    <div class="col-label-form"  style="margin-right:5px;">
-                    
+                    <div class="col-label-form" style="margin-right:5px;">
+
                     </div>
                     <div class="col-label-form" style="margin-right:5px">
                         <label for="countries" class="col-form-label text-muted">Nombre</label>
@@ -108,21 +108,16 @@
                             </td>
                         </tr>
                         @endif
-
                         @endforeach
                     </tbody>
                     </thead>
                 </table>
             </div>
-            </tbody>
-            </thead>
-            </table>
         </div>
     </div>
 
 </div>
-</div>
-</div>
+
 <!--------------------------------SCRIPTS FOR THE SEARCH --------------------------->
 <script>
 $.noConflict();
@@ -152,7 +147,6 @@ jQuery(document).ready(function() {
     });
 });
 </script>
-
 </html>
 {!!$documents->render()!!}
 @endsection

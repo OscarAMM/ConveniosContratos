@@ -56,6 +56,7 @@ Route::resource('FinalRegister','FinalRegisterController');
 Route::get('/FinalPersonModal',['uses' => 'PersonController@storeModalFinal','as' =>'FinalModal']);
 Route::post('/FinalDocs', ['uses'=> 'FinalRegisterController@storeDocs', 'as' =>'FinalDocs']);
 Route::get('/FinalDownloadFile/{id}', ['as' => 'document.download', 'uses' => 'FinalRegisterController@showfile']);
+//PUBLIC SECTION
 Route::get('/PublicAgreements', ['uses' => 'FinalRegisterController@indexPublic', 'as' => 'public']);
 Route::get('/Convenio/{id}', ['uses' =>'FinalRegisterController@PublicShow','as' =>'publicShow']);
 //DOCUMENT ROUTE
