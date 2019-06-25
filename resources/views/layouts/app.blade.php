@@ -111,7 +111,7 @@
         @yield('content')
     </main>
     @yield('scripts')
-    <script src="{{asset('vendors\ckeditor\ckeditor.js')}}"></script>
+    <script src="vendors\ckeditor\ckeditor.js"></script>
 
 </body>
 
