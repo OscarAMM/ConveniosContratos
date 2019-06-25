@@ -636,6 +636,7 @@ class FinalRegisterController extends Controller
             
             $docs.=
             '<w:br />'.'Nombre: '.$doc->name
+            .'<w:br />'.'Nombre: '.$doc->id
             //.'<w:br />'.'Nombre: '.$doc->id
             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
             . '<w:br />'.'Ámbito: '.$doc->scope
