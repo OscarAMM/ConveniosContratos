@@ -578,10 +578,10 @@ class FinalRegisterController extends Controller
     {
         $documents = FinalRegister::find($id);
         $files = $documents->getFiles;
-        $list = array($files);
+       /* $list = array($files);
         $cont = count($files);
-        $file = FileAgreement::find(last($list)[$cont - 1]->id);
-        return view('finalpublic.show', compact('documents', 'file'));
+        $file = FileAgreement::find(last($list)[$cont - 1]->id);*/
+        return view('finalpublic.show', compact('documents', 'files'));
     }
     public function storeAll(Request $request)
     {

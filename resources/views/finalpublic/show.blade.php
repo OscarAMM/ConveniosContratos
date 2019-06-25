@@ -61,13 +61,13 @@
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Archivos</h5>
-                        @if(empty($documents->getFiles))
-                            <p>No hay archivos</p>
-                        @else
+                        @foreach($files as $file)
                         <ul>
                             <a href="{{route('document.download',$file->id)}}">{{$file->name}}</a>
                         </ul>
-                        @endif
+                        @endforeach
+
+
                     </li>
                     <li class="list-group-item">
                         <h5 class="card-title font-weight-bold">Estado</h5>
