@@ -635,17 +635,18 @@ class FinalRegisterController extends Controller
                 $personString.='<w:br />'.$person->name;
             }
             if(empty($doc->end_date)){
-                $cadena='Observación: '.$doc->observation;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Observación: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->observation.'</w:t></w:r><w:r><w:t>';
             }else{
-                $cadena='Fecha de fin: '.$doc->end_date;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de fin: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->end_date.'</w:t></w:r><w:r><w:t>';
             }
             
             $docs.=
-            '<w:br />'.$cont.' .- '.$doc->name
-            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
-            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de inicio: '.$doc->start_date
+            '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.$cont.' .- '.
+            $doc->name.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Partes: '.'</w:t></w:r><w:r><w:t>'.str_replace("&", "Y",$personString)
+            .'<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Objetivo: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.str_replace("&", "Y", $doc->objective).'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de firma: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->signature.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de inicio: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->start_date.'</w:t></w:r><w:r><w:t>'
             .'<w:br />'.$cadena
             .'<w:br />';
             $cont=$cont+1;
@@ -708,17 +709,18 @@ class FinalRegisterController extends Controller
                 $personString.='<w:br />'.$person->name;
             }
             if(empty($doc->end_date)){
-                $cadena='Observación: '.$doc->observation;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Observación: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->observation.'</w:t></w:r><w:r><w:t>';
             }else{
-                $cadena='Fecha de fin: '.$doc->end_date;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de fin: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->end_date.'</w:t></w:r><w:r><w:t>';
             }
             
             $docs.=
-            '<w:br />'.$cont.' .- '.$doc->name
-            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
-            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de inicio: '.$doc->start_date
+            '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.$cont.' .- '.
+            $doc->name.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Partes: '.'</w:t></w:r><w:r><w:t>'.str_replace("&", "Y",$personString)
+            .'<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Objetivo: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.str_replace("&", "Y", $doc->objective).'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de firma: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->signature.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de inicio: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->start_date.'</w:t></w:r><w:r><w:t>'
             .'<w:br />'.$cadena
             .'<w:br />';
             $cont=$cont+1;
@@ -779,17 +781,18 @@ class FinalRegisterController extends Controller
                 $personString.='<w:br />'.$person->name;
             }
             if(empty($doc->end_date)){
-                $cadena='Observación: '.$doc->observation;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Observación: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->observation.'</w:t></w:r><w:r><w:t>';
             }else{
-                $cadena='Fecha de fin: '.$doc->end_date;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de fin: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->end_date.'</w:t></w:r><w:r><w:t>';
             }
             
             $docs.=
-            '<w:br />'.$cont.' .- '.$doc->name
-            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
-            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de inicio: '.$doc->start_date
+            '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.$cont.' .- '.
+            $doc->name.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Partes: '.'</w:t></w:r><w:r><w:t>'.str_replace("&", "Y",$personString)
+            .'<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Objetivo: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.str_replace("&", "Y", $doc->objective).'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de firma: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->signature.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de inicio: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->start_date.'</w:t></w:r><w:r><w:t>'
             .'<w:br />'.$cadena
             .'<w:br />';
             $cont=$cont+1;
@@ -852,17 +855,17 @@ class FinalRegisterController extends Controller
                 $personString.='<w:br />'.$person->name;
             }
             if(empty($doc->end_date)){
-                $cadena='Observación: '.$doc->observation;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Observación: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->observation.'</w:t></w:r><w:r><w:t>';
             }else{
-                $cadena='Fecha de fin: '.$doc->end_date;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de fin: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->end_date.'</w:t></w:r><w:r><w:t>';
             }
             
             $docs.=
-            '<w:br />'.$cont.' .- '.$doc->name
-            . '<w:br />'.'Partes: '.str_replace("&", "Y",$personString)
-            .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-            . '<w:br />'.'Fecha de firma: '.$doc->signature
-            . '<w:br />'.'Fecha de inicio: '.$doc->start_date
+            '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.$cont.' .- '.$doc->name.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Partes: '.'</w:t></w:r><w:r><w:t>'.str_replace("&", "Y",$personString)
+            .'<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Objetivo: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.str_replace("&", "Y", $doc->objective).'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de firma: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->signature.'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de inicio: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->start_date.'</w:t></w:r><w:r><w:t>'
             .'<w:br />'.$cadena
             .'<w:br />';
             $cont=$cont+1;

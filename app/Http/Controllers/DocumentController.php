@@ -349,7 +349,11 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs = DB::table('final_registers')->orderBy('id', 'DESC')->whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->where('instrumentType', 'General')->get();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->whereBetween('signature', [$start_signature, $end_signature])
+            ->where('session', 'LIKE', "%$session%")
+            ->where('instrumentType', 'General')
+            ->get();
         } else {
             $docs = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('session', 'LIKE', "%{$session}%")
@@ -364,19 +368,22 @@ class DocumentController extends Controller
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Convenios Generales');
         $documents = '';
+        $cont=1;
+
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
             if(empty($doc->end_date)){
-                $cadena='Observación: '.$doc->observation;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Observación: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->observation.'</w:t></w:r><w:r><w:t>';
             }else{
-                $cadena='Fecha de fin: '.$doc->end_date;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de fin: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->end_date.'</w:t></w:r><w:r><w:t>';
             }
             $documents.=
-             '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-             .'<w:br />'.'Fecha de firma: '.$doc->signature
+            '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.$cont.' .- '.$doc->name.'</w:t></w:r><w:r><w:t>'
+            .'<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Objetivo: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.str_replace("&", "Y", $doc->objective).'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de firma: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->signature.'</w:t></w:r><w:r><w:t>'
              .'<w:br />'.$cadena
             .'<w:br />';
+            $cont=$cont+1;
         }
         $template->setValue('documents', $documents);
         $template->saveAs('reportsWord/'.'Reporte de documentos generales.docx');
@@ -388,7 +395,11 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs = DB::table('final_registers')->orderBy('id', 'DESC')->whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->get();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->whereBetween('signature', [$start_signature, $end_signature])
+            ->where('session', 'LIKE', "%$session%")
+            ->where('instrumentType', 'Específico')
+            ->get();
         } else {
             $docs = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('session', 'LIKE', "%{$session}%")
@@ -398,20 +409,22 @@ class DocumentController extends Controller
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Convenios Específicos');
         $documents = '';
+        $cont=1;
+
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
             if(empty($doc->end_date)){
-                $cadena='Observación: '.$doc->observation;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Observación: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->observation.'</w:t></w:r><w:r><w:t>';
             }else{
-                $cadena='Fecha de fin: '.$doc->end_date;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de fin: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->end_date.'</w:t></w:r><w:r><w:t>';
             }
             $documents.=
-             '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-             .'<w:br />'.'Fecha de firma: '.$doc->signature
-             //.'<w:br />'.'Fecha de fin: '.$doc->end_date
+            '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.$cont.' .- '.$doc->name.'</w:t></w:r><w:r><w:t>'
+            .'<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Objetivo: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.str_replace("&", "Y", $doc->objective).'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de firma: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->signature.'</w:t></w:r><w:r><w:t>'
              .'<w:br />'.$cadena
             .'<w:br />';
+            $cont=$cont+1;
         }
         $template->setValue('documents', $documents);
         $template->saveAs('reportsWord/'.'Reporte de documentos especificos.docx');
@@ -423,7 +436,11 @@ class DocumentController extends Controller
         $start_signature = $request->get('start_signature');
         $end_signature = $request->get('end_signature');
         if ($start_signature||$end_signature||$session) {
-            $docs = DB::table('final_registers')->orderBy('id', 'DESC')->whereBetween('signature', [$start_signature, $end_signature])->where('session', 'LIKE', "%$session%")->paginate();
+            $docs = DB::table('final_registers')->orderBy('id', 'DESC')
+            ->whereBetween('signature', [$start_signature, $end_signature])
+            ->where('session', 'LIKE', "%$session%")
+            ->where('instrumentType', 'Otros')
+            ->get();
         } else {
             $docs = DB::table('final_registers')->orderBy('id', 'DESC')
             ->where('session', 'LIKE', "%{$session}%")
@@ -433,20 +450,22 @@ class DocumentController extends Controller
         $template = new TemplateProcessor('plantillaReportsDocuments.docx');
         $template->setValue('title', 'Otros Documentos');
         $documents = '';
+        $cont=1;
+
         foreach ($docs as $doc) {
             //campos de los documentos, faltan por añadir
             if(empty($doc->end_date)){
-                $cadena='Observación: '.$doc->observation;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Observación: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->observation.'</w:t></w:r><w:r><w:t>';
             }else{
-                $cadena='Fecha de fin: '.$doc->end_date;
+                $cadena='</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de fin: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->end_date.'</w:t></w:r><w:r><w:t>';
             }
             $documents.=
-             '<w:br />'.'Nombre: '.$doc->name
-             .'<w:br />'.'Objetivo: '.str_replace("&", "Y", $doc->objective)
-             .'<w:br />'.'Fecha de firma: '.$doc->signature
-             //.'<w:br />'.'Fecha de fin: '.$doc->end_date
+            '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.$cont.' .- '.$doc->name.'</w:t></w:r><w:r><w:t>'
+            .'<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Objetivo: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.str_replace("&", "Y", $doc->objective).'</w:t></w:r><w:r><w:t>'
+            . '<w:br />'.'</w:t></w:r><w:r><w:rPr><w:b/></w:rPr><w:t> '.'Fecha de firma: '.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:t>'.'</w:t></w:r><w:r><w:rPr></w:rPr><w:t xml:space="preserve"> '.$doc->signature.'</w:t></w:r><w:r><w:t>'
              .'<w:br />'.$cadena
             .'<w:br />';
+            $cont=$cont+1;
         }
         $template->setValue('documents', $documents);
         $template->saveAs('reportsWord/'.'Reporte de otros documentos.docx');
